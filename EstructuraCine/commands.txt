@@ -1,3 +1,11 @@
+npm create vite@latest -- EstructuraCine react-ts
+
+npm i -D tailwindcss postcss autoprefixer
+
+npx tailwindcss init -p
+
+npm i flowbite-react
+
 
 
 
