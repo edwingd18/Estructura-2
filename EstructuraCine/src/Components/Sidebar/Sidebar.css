@@ -1,14 +1,17 @@
+
 .sidebar-container {
     position: fixed;
     top: 0;
-    left: -250px; /* Inicialmente, el Sidebar está fuera de la pantalla */
+    left: -244px; 
     width: 250px;
     height: 100%;
-    background-color: #f3f4f6;
-    transition: left 0.3s ease; /* Animación de transición para suavizar la apertura y cierre */
+    background-color: rgb(250, 250, 250);  
+    transition: left 0.5s ease; 
   }
   
   .sidebar-container.open {
-    left: 0; /* Cuando el Sidebar está abierto, lo movemos hacia la izquierda para que sea visible */
+    left: 0 
   }
+
   
+    
