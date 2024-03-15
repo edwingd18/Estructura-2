@@ -1,17 +1,19 @@
 
 .sidebar-container {
+    
     position: fixed;
     top: 0;
     left: -244px; 
     width: 250px;
     height: 100%;
-    background-color: rgb(250, 250, 250);  
     transition: left 0.5s ease; 
   }
   
   .sidebar-container.open {
     left: 0 
   }
+
+  
 
   
     
