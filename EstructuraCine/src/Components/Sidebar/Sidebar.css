@@ -12,6 +12,11 @@
   .sidebar-container.open {
     left: 0 
   }
+  .icon:hover svg {
+    fill: #181725;
+    
+  }
+  
 
   
 

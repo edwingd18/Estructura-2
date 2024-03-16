@@ -1,10 +1,12 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import './index.css'
-import Sidebar from './Components/Sidebar/Sidebar.jsx'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import LoginForm from "./Components/Login/LoginForm.jsx";
+import Sidebar from "./Components/Sidebar/Sidebar.jsx";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Sidebar/>
-  </React.StrictMode>,
-)
+    <LoginForm />
+    <Sidebar />
+  </React.StrictMode>
+);

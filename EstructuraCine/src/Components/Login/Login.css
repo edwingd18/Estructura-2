@@ -1,0 +1,18 @@
+
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Ajusta la altura del contenedor según tu diseño */
+  }
+  
+  .form-container form {
+    max-width: 400px; /* Establece el ancho máximo del formulario */
+  }
+  
+  .form-container form > div {
+    margin-bottom: 1rem; /* Espacio entre elementos del formulario */
+  }
+  
