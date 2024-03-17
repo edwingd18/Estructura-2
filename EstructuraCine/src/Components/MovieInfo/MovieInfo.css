@@ -1,0 +1,94 @@
+
+.movie-info {
+  margin-right: 20px; /* Puedes ajustar este valor según sea necesario */
+  display: flex;
+  align-items: center;
+  color: white; /* Texto blanco */
+  padding: 20px;
+  border-radius: 10px; /* Bordes redondeados */
+  margin-left: 120px; /* Agrega un margen a la izquierda para mover todo a la derecha */
+  font-family: 'Inter', sans-serif;
+
+
+
+
+}
+.movie-poster {
+  width: 600px; /* Ajusta el ancho del póster */
+  height: 900px;
+  margin-right: 90px; /* Asegúrate de que no haya un espacio entre '100' y 'px' */
+  margin-left: auto; /* Empuja el póster hacia la derecha */
+  border-radius: 20px; /* Bordes redondeados para la imagen */
+}
+
+.description{
+  
+  font-weight: 400; /* Aplica el peso extra bold a todo el texto dentro de .movie-info */
+  color: gray;
+  font-size: 24px; /* Puedes ajustar este valor según sea necesario */
+}
+
+.movie-title {
+  font-weight: 800; /* Aplica el peso extra bold a todo el texto dentro de .movie-info */
+  font-size: 48px; /* Puedes ajustar este valor según sea necesario */
+
+}
+
+.trailer-container {
+  margin-top: 100px; /* Ajusta según sea necesario para el espacio que desees */
+}
+
+
+
+.movie {
+  flex-grow: 1;
+
+  
+}
+
+h1 {
+  font-size: 2.5em; /* Tamaño grande para el título */
+  margin-bottom: 0.5em;
+}
+
+p {
+  font-size: 1.2em; /* Tamaño adecuado para la descripción */
+  margin-bottom: 0.5em;
+  max-width: 1000px; /* Limita el ancho del párrafo */
+
+}
+.duration,
+.edadRango {
+  display: inline-block;
+  background-color: #ffffff; /* Fondo rojo para el formato */
+  color: rgb(0, 0, 0);
+  padding: 5px 10px;
+  margin-top: 10px;
+  border-radius: 50px; /* Bordes redondeados */
+  display: inline-block;
+  margin-right: 20px; /* Puedes ajustar este valor según sea necesario */
+}
+
+
+.movie-format {
+  display: inline-block;
+  background-color: #e50914; /* Fondo rojo para el formato */
+  color: white;
+  padding: 5px 10px;
+  margin-top: 10px;
+  border-radius: 5px; /* Bordes redondeados */
+}
+
+.movie-button {
+  display: inline-block;
+  background-color: #e50914; /* Fondo rojo para el botón */
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  margin-top: 20px;
+  border-radius: 5px; /* Bordes redondeados */
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+
