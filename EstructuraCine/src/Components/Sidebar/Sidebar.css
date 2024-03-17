@@ -1,24 +1,75 @@
+/* Sidebar.css */
+.sidebar-container .Sidebar  {
+  position: fixed;
+  top: 0;
+  width: 50px;
+  height: 100%;
 
-.sidebar-container {
-    
-    position: fixed;
-    top: 0;
-    left: -244px; 
-    width: 250px;
-    height: 100%;
-    transition: left 0.5s ease; 
-  }
-  
-  .sidebar-container.open {
-    left: 0 
-  }
-  .icon:hover svg {
-    fill: #181725;
-    
-  }
-  
+
+
+
 
   
+}
 
+
+.slidebar-container .icon{
+  align-items: flex-end;
   
-    
+}
+
+
+.sidebar-container.open .Sidebar {
+  left: 0; /* Muestra la barra lateral cuando está abierta */
+  width: 240px;
+
+
+
+
+}
+
+/* Estilos para los iconos */
+.icon {
+
+  justify-content: flex-end; /* Alinea los íconos a la derecha */
+    margin-right: -27px; /* Ajusta el valor según sea necesario */
+  }
+  
+
+.icon:hover svg{
+  fill:black
+}
+
+/* Estilos para los nombres de los íconos */
+.icon-label {
+  display: none; /* Inicialmente oculta los nombres */
+  font-size: 14px;
+  color: #ffffff; /* Color de los nombres */
+} 
+
+
+.sidebar-container.open .icon-label {
+  display: block; /* Muestra los nombres cuando la barra lateral está abierta */
+}
+
+.icon:hover .icon-label {
+  color: black;
+}
+
+@keyframes openSidebar {
+  from {
+    left: -240px; /* Barra lateral cerrada */
+  }
+  to {
+    left: 0; /* Barra lateral abierta */
+  }
+}
+
+@keyframes closeSidebar {
+  from {
+    left: 0; /* Barra lateral abierta */
+  }
+  to {
+    left: -240px; /* Barra lateral cerrada */
+  }
+}

@@ -1,0 +1,35 @@
+/* Estilos para la componente Carousel */
+.carousel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Estilos para la miniatura principal */
+.thumbnail:first-child {
+  margin-bottom: 20px; /* Ajusta el margen inferior para separar de las miniaturas */
+}
+
+/* Estilos para las miniaturas de películas */
+.thumbnails {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.thumbnail {
+  cursor: pointer;
+  margin: 0 10px 10px 0;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5); /* Sombra para las miniaturas */
+}
+
+.thumbnail img {
+  width: 100px; /* Ancho deseado */
+  height: 150px; /* Alto deseado */
+}
+
+.thumbnail.active {
+  border: 2px solid #007bff;
+}

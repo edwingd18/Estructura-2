@@ -102,50 +102,52 @@ function Sidebar() {
     setIsOpen(false);
   };
 
-  return (
-    <div
-      className={`sidebar-container ${isOpen ? "open" : ""}`}
-      onMouseEnter={openSidebar} // Abrir el Sidebar cuando el mouse entra
-      onMouseLeave={closeSidebar} // Cerrar el Sidebar cuando el mouse sale
-    >
-      <FlowbiteSidebar aria-label="Menu de Cine" theme={customtema}>
-        <FlowbiteSidebar.Items>
-          <FlowbiteSidebar.ItemGroup>
-            <FlowbiteSidebar.Item
-              href="#"
-              icon={HiUser}
-              className="hover:text-black icon"
-            >
-              Perfil
-            </FlowbiteSidebar.Item>
-            <FlowbiteSidebar.Item
-              href="#"
-              icon={HiTicket}
-              className="hover:text-black icon"
-            >
-              Tiquetes
-            </FlowbiteSidebar.Item>
-            <FlowbiteSidebar.Item
-              href="#"
-              icon={HiShoppingCart}
-              className="hover:text-black icon"
-            >
-              Carrito
-            </FlowbiteSidebar.Item>
-          </FlowbiteSidebar.ItemGroup>
-          <FlowbiteSidebar.ItemGroup>
-            <FlowbiteSidebar.Item
-              href="#"
-              icon={HiOutlineChatAlt2}
-              className="hover:text-black icon"
-            >
-              Mensajes
-            </FlowbiteSidebar.Item>
-          </FlowbiteSidebar.ItemGroup>
-        </FlowbiteSidebar.Items>
-      </FlowbiteSidebar>
-    </div>
-  );
+
+
+return (
+  <div
+    className={`sidebar-container ${isOpen ? "open" : "close"}`}
+    onMouseEnter={openSidebar} // Abrir el Sidebar cuando el mouse entra
+    onMouseLeave={closeSidebar} // Cerrar el Sidebar cuando el mouse sale
+  >
+    <FlowbiteSidebar aria-label="Menu de Cine" theme={customtema} className="Sidebar">
+      <FlowbiteSidebar.Items>
+        <FlowbiteSidebar.ItemGroup>
+          
+          <FlowbiteSidebar.Item
+            href="#"
+            icon={HiUser}
+            className="hover:text-black icon"
+          >
+           <span className="icon-label " >Perfil</span>
+
+          </FlowbiteSidebar.Item>
+          <FlowbiteSidebar.Item
+            href="#"
+            icon={HiTicket}
+            className="hover:text-black icon"
+          >
+            <span className="icon-label " >Tiquetes</span>
+          </FlowbiteSidebar.Item>
+          <FlowbiteSidebar.Item
+            href="#"
+            icon={HiShoppingCart}
+            className="hover:text-black icon"
+          >
+            <span className="icon-label " >Carrito</span>
+          </FlowbiteSidebar.Item>
+          <FlowbiteSidebar.Item
+            href="#"
+            icon={HiOutlineChatAlt2}
+            className="hover:text-black icon"
+          >
+            <span className="icon-label " >Chat</span>
+          </FlowbiteSidebar.Item>
+        </FlowbiteSidebar.ItemGroup>
+      </FlowbiteSidebar.Items>
+    </FlowbiteSidebar>
+  </div>
+);
 }
 
 export default Sidebar;
