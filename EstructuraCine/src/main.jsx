@@ -3,11 +3,13 @@ import ReactDOM from 'react-dom';
 import Carousel from './Components/Carousel/Carousel.jsx';
 import './index.css'; // Estilos CSS globales
 import Sidebar from './Components/Sidebar/Sidebar.jsx';
+import LoginForm from './Components/Login/LoginForm.jsx'
+
 
 const movies = [
   {
     title: 'Pelicula 1',
-    imageUrl: 'https://example.com/image1.jpg',
+    imageUrl: "https://i.ibb.co/fYCs6DF/avengers.jpg"
   },
   {
     title: 'Pelicula 2',
@@ -35,7 +37,7 @@ const movies = [
 ReactDOM.render(
   <React.StrictMode>
     <Sidebar/>
-    <Carousel movies={movies} />
+    <LoginForm/>
 
   </React.StrictMode>,
   document.getElementById('root')

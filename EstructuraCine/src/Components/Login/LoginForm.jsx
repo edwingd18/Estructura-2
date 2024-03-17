@@ -7,13 +7,14 @@ function Login() {
       <form className="flex flex-col gap-4">
         <h1 className="text-center text-3xl font-bold tex text-white">Iniciar sesión</h1>
         <Button color="gray" className="w-full rounded-3xl">
-      <img src="gmail.png" alt="Gmail" className="mr-2" />
+        <img src="https://i.ibb.co/8PtwPGS/image-removebg-preview.png" alt="Gmail" className="mr-2" width="20" />
+
 
           Sign in with Google
         </Button>
         <div className="text-center mt-4 text-gray-500">or</div>
         <div>
-          <div className="mb-2 block"></div>
+          <div className="mb-2 block"></div>  
           <TextInput
             id="email1"
             type="email"
