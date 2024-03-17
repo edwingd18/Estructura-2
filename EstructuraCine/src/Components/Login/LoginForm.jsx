@@ -1,26 +1,46 @@
-import { useState } from 'react';
-import { Button, Checkbox, Label, TextInput } from 'flowbite-react';
+import { Button, Checkbox, Label, TextInput } from "flowbite-react";
+
+
 function Login() {
   return (
-    <form className="flex max-w-md flex-col gap-4">
-      <div>
-        <div className="mb-2 block">
-          <Label htmlFor="email1" value="Your email" />
+    <div className="justify-center items-center bg-black mt-8 mx-auto p-4" style={{ maxWidth: '500px', width: '100%' }}>
+      <form className="flex flex-col gap-4">
+        <h1 className="text-center text-3xl font-bold tex text-white">Iniciar sesión</h1>
+        <Button color="gray" className="w-full rounded-3xl">
+      <img src="gmail.png" alt="Gmail" className="mr-2" />
+
+          Sign in with Google
+        </Button>
+        <div className="text-center mt-4 text-gray-500">or</div>
+        <div>
+          <div className="mb-2 block"></div>
+          <TextInput
+            id="email1"
+            type="email"
+            placeholder="Email"
+            required
+            className="w-full"
+          />
         </div>
-        <TextInput id="email1" type="email" placeholder="name@flowbite.com" required />
-      </div>
-      <div>
-        <div className="mb-2 block">
-          <Label htmlFor="password1" value="Your password" />
+        <div>
+          <div className="mb-2 block"></div>
+          <TextInput
+            id="password1"
+            type="password"
+            placeholder="Password"
+            required
+            className="w-full"
+          />
         </div>
-        <TextInput id="password1" type="password" required />
-      </div>
-      <div className="flex items-center gap-2">
-        <Checkbox id="remember" />
-        <Label htmlFor="remember">Remember me</Label>
-      </div>
-      <Button type="submit">Submit</Button>
-    </form>
+
+        <Button type="submit" gradient="tealToLime" className="w-full">
+          Iniciar sesión
+        </Button>
+        <div className="flex justify-between mt-4">
+          <a href="#" className="text-white">¿No tienes una cuenta? Crea una</a>
+        </div>
+      </form>
+    </div>
   );
 }
 
