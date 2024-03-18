@@ -1,75 +1,66 @@
 /* Sidebar.css */
-.sidebar-container .Sidebar  {
+.sidebar-container .Sidebar {
   position: fixed;
   top: 0;
-  width: 50px;
+  width: 100px;
   height: 100%;
+  transition: width 1s ease-in-out;
+  z-index: 199999;
 
-
-
-
-
-  
 }
 
-
-.slidebar-container .icon{
+.slidebar-container .icon {
   align-items: flex-end;
-  
 }
-
 
 .sidebar-container.open .Sidebar {
-  left: 0; /* Muestra la barra lateral cuando está abierta */
-  width: 240px;
-
-
-
-
+  left: 0;
+  /* Muestra la barra lateral cuando está abierta */
+  width: 250px;
 }
+
 
 /* Estilos para los iconos */
 .icon {
-
-  justify-content: flex-end; /* Alinea los íconos a la derecha */
-    margin-right: -27px; /* Ajusta el valor según sea necesario */
-  }
-  
-
-.icon:hover svg{
-  fill:black
+  justify-content: flex-end;
 }
 
+.icon svg{
+  position:fixed;
+  left: 32px;
+}
 /* Estilos para los nombres de los íconos */
 .icon-label {
-  display: none; /* Inicialmente oculta los nombres */
-  font-size: 14px;
-  color: #ffffff; /* Color de los nombres */
-} 
+  transition: opacity 0.5s ease-in-out, visibility 0s ease-in-out 0s;
+  /* Agrega transición para opacidad */
+  opacity: 1;
+  /* Inicialmente establece la opacidad en 0 */
+  visibility: hidden;
+  /* Inicialmente oculta los nombres */
+  font-size: 20px;
+  color: transparent;
+  /* Color de los nombres */
+}
+
 
 
 .sidebar-container.open .icon-label {
-  display: block; /* Muestra los nombres cuando la barra lateral está abierta */
+  visibility: visible;
+  /* Muestra los nombres cuando la barra lateral está abierta */
+  opacity: 1;
+  /* Establece la opacidad en 1 al finalizar la transición */
+  transition-delay: 0.5s;
+  color: #ffffff; 
+  /* Retrasa la transición del label */
 }
+
+
+.icon:hover svg {
+  fill: black;
+}
+
+
 
 .icon:hover .icon-label {
   color: black;
-}
-
-@keyframes openSidebar {
-  from {
-    left: -240px; /* Barra lateral cerrada */
-  }
-  to {
-    left: 0; /* Barra lateral abierta */
-  }
-}
-
-@keyframes closeSidebar {
-  from {
-    left: 0; /* Barra lateral abierta */
-  }
-  to {
-    left: -240px; /* Barra lateral cerrada */
-  }
 }
