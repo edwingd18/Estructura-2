@@ -1,18 +1,15 @@
 
 .movie-info {
-  margin-right: 20px; /* Puedes ajustar este valor según sea necesario */
+  margin-right: 20px;
   display: flex;
-  align-items: center;
-  color: white; /* Texto blanco */
+  align-items: flex-start; /* Changed to flex-start */
+  color: white;
   padding: 20px;
-  border-radius: 10px; /* Bordes redondeados */
-  margin-left: 120px; /* Agrega un margen a la izquierda para mover todo a la derecha */
-  font-family: 'Inter', sans-serif;
-
-
-
-
+  border-radius: 10px;
+  margin-left: 120px;
+  font-family:'Inter', sans-serif;
 }
+.trailer,
 .movie-poster {
   width: 600px; /* Ajusta el ancho del póster */
   height: 900px;
@@ -42,8 +39,6 @@
 
 .movie {
   flex-grow: 1;
-
-  
 }
 
 h1 {
@@ -69,6 +64,11 @@ p {
   margin-right: 20px; /* Puedes ajustar este valor según sea necesario */
 }
 
+.buttons-and-format {
+  display:flex;
+  align-items:center;
+
+}
 
 .movie-format {
   display: inline-block;
@@ -91,4 +91,7 @@ p {
   text-transform: uppercase;
 }
 
-
+.buttonComprar:hover {
+  background-color: white;
+  color: black;
+}
