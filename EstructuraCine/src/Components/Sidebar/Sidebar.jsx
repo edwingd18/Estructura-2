@@ -6,6 +6,7 @@ import {
   HiUser,
   HiTicket,
 } from "react-icons/hi";
+
 import "./Sidebar.css"; // Importa tu archivo de estilos CSS para el Sidebar si lo tienes
 
 function Sidebar() {
@@ -106,42 +107,51 @@ function Sidebar() {
 
 return (
   <div
-    className={`sidebar-container ${isOpen ? "open" : "close"}`}
+    className={`sidebar-container   ${isOpen ? "open" : "close"  }`}
+    
     onMouseEnter={openSidebar} // Abrir el Sidebar cuando el mouse entra
     onMouseLeave={closeSidebar} // Cerrar el Sidebar cuando el mouse sale
+    
   >
     <FlowbiteSidebar aria-label="Menu de Cine" theme={customtema} className="Sidebar">
       <FlowbiteSidebar.Items>
         <FlowbiteSidebar.ItemGroup>
+      
           
           <FlowbiteSidebar.Item
             href="#"
-            icon={HiUser}
             className="hover:text-black icon"
-          >
-           <span className="icon-label " >Perfil</span>
+            style={{fontSize:20}}
+            >
+            <HiUser style={{ fontSize: '30px' }} />
+           <span className="icon-label "style={{ marginLeft: '60px' }} >Perfil</span>
+          </FlowbiteSidebar.Item>
 
-          </FlowbiteSidebar.Item>
           <FlowbiteSidebar.Item
             href="#"
-            icon={HiTicket}
+            style={{fontSize:20 }}
             className="hover:text-black icon"
           >
-            <span className="icon-label " >Tiquetes</span>
+             <HiTicket style={{ fontSize: '30px' }} />
+            <span className="icon-label " style={{ marginLeft: '60px' }}>Boletas</span>
           </FlowbiteSidebar.Item>
+
           <FlowbiteSidebar.Item
             href="#"
-            icon={HiShoppingCart}
+            style={{fontSize:20}}
             className="hover:text-black icon"
           >
-            <span className="icon-label " >Carrito</span>
+            <HiShoppingCart style={{ fontSize: '30px' }} />
+            <span className="icon-label "style={{ marginLeft: '60px' }}>Carrito</span>
           </FlowbiteSidebar.Item>
+
           <FlowbiteSidebar.Item
             href="#"
-            icon={HiOutlineChatAlt2}
+            style={{fontSize:20}}
             className="hover:text-black icon"
           >
-            <span className="icon-label " >Chat</span>
+            <HiOutlineChatAlt2 style={{ fontSize: '30px' }} />
+            <span className="icon-label "style={{ marginLeft: '60px' }} >Chat</span>
           </FlowbiteSidebar.Item>
         </FlowbiteSidebar.ItemGroup>
       </FlowbiteSidebar.Items>

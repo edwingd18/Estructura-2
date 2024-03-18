@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './Carousel.css'; // Estilos CSS para el carrusel
 
 const Carousel = ({ movies }) => {
