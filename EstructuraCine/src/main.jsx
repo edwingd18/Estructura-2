@@ -50,8 +50,12 @@ const movie = {
 ReactDOM.render(
   <React.StrictMode>
     <Sidebar/>
+
+   
+
     <MovieInfo movie={movie}/>
     {/* <Carousel movies={movies}/> */}
+ Edwin-Guerrero
 
   </React.StrictMode>,
   document.getElementById('root')
