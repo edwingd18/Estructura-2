@@ -60,7 +60,6 @@ p {
   padding: 5px 10px;
   margin-top: 10px;
   border-radius: 50px; /* Bordes redondeados */
-  display: inline-block;
   margin-right: 20px; /* Puedes ajustar este valor según sea necesario */
 }
 

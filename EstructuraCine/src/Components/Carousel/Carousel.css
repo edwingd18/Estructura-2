@@ -6,23 +6,24 @@
   width: 100%;
   padding: 20px;
 }
+ 
 
-/* Estilos para la miniatura principal */
-.thumbnail:first-child {
-  margin-bottom: 20px; /* Ajusta el margen inferior para separar de las miniaturas */
-}
+
 
 /* Estilos para las miniaturas de películas */
 .thumbnails {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin: 10px 0px 0px 0;
+
 }
 
 .thumbnail {
   cursor: pointer;
   margin: 0 10px 10px 0;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5); /* Sombra para las miniaturas */
+  
 }
 
 .thumbnail img {
@@ -31,5 +32,77 @@
 }
 
 .thumbnail.active {
-  border: 2px solid #007bff;
+  border: 5px solid #000000;
+}
+
+
+
+
+.main-slide-image {
+  width: 1500px; /* Ancho deseado */
+  height: 800px; /* Alto deseado */
+  overflow: hidden; /* Para recortar la imagen */
+  position: relative;
+  
+}
+
+.main-slide-image img {
+  object-fit: cover; /* Para recortar y cubrir el contenedor */
+  width: 100%;
+  height: 100%;
+}
+
+
+.thumbnails-container {
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap; /* Evita que los thumbnails se dividan en múltiples líneas */
+}
+
+
+
+.prev-button,
+.next-button {
+  width: 50px;
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+
+.prev-button,
+.next-button {
+  position: absolute; /* Posición absoluta para que los botones estén posicionados sobre el carrusel */
+  top: 50%; /* Posiciona los botones verticalmente en el centro del carrusel */
+  transform: translateY(-50%); /* Ajusta la posición vertical de los botones */
+  width: 50px;
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.prev-button {
+  left: 300px; /* Posiciona el botón de retroceso a la izquierda del carrusel */
+bottom: -20px;
+}
+
+.next-button {
+  right: 300px; /* Posiciona el botón de avance a la derecha del carrusel */
+}
+
+.title-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgb(0, 0, 0);
+  text-align: center;
+  z-index: 1;
+  width: 100%; /* Ajusta el ancho del título según sea necesario */
 }

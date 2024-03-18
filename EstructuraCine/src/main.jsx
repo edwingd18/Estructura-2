@@ -9,28 +9,34 @@ import MovieInfo from './Components/MovieInfo/MovieInfo.jsx';
 
 const movies = [
   {
-    title: 'Pelicula 1',
-    imageUrl: "https://i.ibb.co/w4fRksV/peakpx-1.jpg"
+    title: 'Madame Web',
+    imageUrl: "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/8enikn5rdpsVyQd1qnpOqpACZqO.jpg",
+    bannerUrl: "https://image.tmdb.org/t/p/original/pwGmXVKUgKN13psUjlhC9zBcq1o.jpg"
   },
   {
-    title: 'Pelicula 2',
-    imageUrl: 'https://example.com/image2.jpg',
+    title: 'Spider-Man: Cruzando el Multiverso',
+    imageUrl: 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/37WcNMgNOMxdhT87MFl7tq7FM1.jpg',
+    bannerUrl: 'https://image.tmdb.org/t/p/original/9xfDWXAUbFXQK585JvByT5pEAhe.jpg'
   },
   {
-    title: 'Pelicula 3',
-    imageUrl: 'https://example.com/image3.jpg',
+    title: 'Wonka',
+    imageUrl: 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/6eHcR7zwvNSvkOl9jbctU0lvZQ1.jpg',
+    bannerUrl:"https://image.tmdb.org/t/p/original/yyFc8Iclt2jxPmLztbP617xXllT.jpg"
   },
   {
-    title: 'Pelicula 4',
-    imageUrl: 'https://example.com/image3.jpg',
+    title: 'Paddington',
+    imageUrl: 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/mJypxc7GFS98v4GvlS6Z8EcXc9F.jpg',
+    bannerUrl:"https://image.tmdb.org/t/p/original/oMKEjH5LB2igku773vhgVlttdOg.jpg"
   },
   {
-    title: 'Pelicula 5',
-    imageUrl: 'https://example.com/image3.jpg',
+    title: 'Dune',
+    imageUrl: 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/hIEKzq0klqtz1H3S7QxzH4mMbvT.jpg',
+    bannerUrl:"https://image.tmdb.org/t/p/original/lzWHmYdfeFiMIY4JaMmtR7GEli3.jpg"
   },
   {
-    title: 'Pelicula 6',
-    imageUrl: 'https://example.com/image3.jpg',
+    title: 'Oppenheimer',
+    imageUrl: 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/ncKCQVXgk4BcQV6XbvesgZ2zLvZ.jpg',
+    bannerUrl:"https://image.tmdb.org/t/p/original/nb3xI8XI3w4pMVZ38VijbsyBqP4.jpg"
   },
   // Agrega más películas según sea necesario
 ];
@@ -51,11 +57,11 @@ ReactDOM.render(
   <React.StrictMode>
     <Sidebar/>
 
-   
+   {/* <LoginForm/> */}
 
-    <MovieInfo movie={movie}/>
-    {/* <Carousel movies={movies}/> */}
- Edwin-Guerrero
+     {/* <MovieInfo movie={movie}/>  */}
+     <Carousel movies={movies}/> 
+
 
   </React.StrictMode>,
   document.getElementById('root')

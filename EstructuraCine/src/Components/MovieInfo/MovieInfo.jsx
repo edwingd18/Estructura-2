@@ -1,6 +1,6 @@
 import './MovieInfo.css'
 import { Button } from "flowbite-react";
-import { HiOutlineArrowRight, HiShoppingCart } from 'react-icons/hi';
+import { HiShoppingCart } from 'react-icons/hi';
 
 function MovieInfo({ movie }){
 
