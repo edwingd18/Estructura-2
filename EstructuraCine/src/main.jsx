@@ -5,6 +5,7 @@ import './index.css'; // Estilos CSS globales
 import Sidebar from './Components/Sidebar/Sidebar.jsx';
 import LoginForm from './Components/Login/LoginForm.jsx'
 import MovieInfo from './Components/MovieInfo/MovieInfo.jsx';
+import Login from './Components/Login/Login.jsx';
 
 
 const movies = [
@@ -53,9 +54,9 @@ ReactDOM.render(
 
    
 
-    <MovieInfo movie={movie}/>
+    {/* <MovieInfo movie={movie}/> */}
     {/* <Carousel movies={movies}/> */}
- Edwin-Guerrero
+    <LoginForm login={LoginForm}/>
 
   </React.StrictMode>,
   document.getElementById('root')

@@ -3,7 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Login from '../Login/Login';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Carousel from './Components/Carousel/Carousel';
 import Sidebar from './Components/Sidebar/Sidebar';
 
@@ -22,10 +22,10 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <Sidebar />
-        <Routes>
-          <Route path='/' element= { <Carousel /> }></Route>
-          <Route path='/login' element= { <Login /> }></Route>
-        </Routes>
+      <Switch>
+        <Route exact path='/' component={Carousel} />
+        <Route path='/login' element={<Login />} />
+      </Switch>
           <div className="card">
             <button onClick={() => setCount((count) => count + 1)}>
               count is {count}
