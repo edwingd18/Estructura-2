@@ -1,6 +1,7 @@
+import './Login.css';
 function Login(){
     return(
-        <div>
+        <div className='WholeLoginContainer'>
             <h1>Login</h1>
         </div>
     );
