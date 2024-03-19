@@ -5,6 +5,7 @@
   align-items: center;
   width: 100%;
   padding: 20px;
+
 }
  
 
@@ -15,14 +16,14 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 10px 0px 0px 0;
+  margin: 25px 0px 0px 0;
 
 }
 
 .thumbnail {
   cursor: pointer;
-  margin: 0 10px 10px 0;
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5); /* Sombra para las miniaturas */
+  margin: 0 25px 0px 0;
+  box-shadow: 0px 0px px rgba(0, 0, 0, 0.5); /* Sombra para las miniaturas */
   
 }
 
@@ -43,6 +44,7 @@
   height: 800px; /* Alto deseado */
   overflow: hidden; /* Para recortar la imagen */
   position: relative;
+
   
 }
 
@@ -50,6 +52,7 @@
   object-fit: cover; /* Para recortar y cubrir el contenedor */
   width: 100%;
   height: 100%;
+  filter:blur(100%);
 }
 
 
@@ -96,13 +99,35 @@ bottom: -20px;
   right: 300px; /* Posiciona el botón de avance a la derecha del carrusel */
 }
 
+
+.image-container {
+  position: relative;
+}
+
 .title-overlay {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: rgb(0, 0, 0);
-  text-align: center;
-  z-index: 1;
-  width: 100%; /* Ajusta el ancho del título según sea necesario */
+  bottom: 270px; /* Ajusta este valor según sea necesario */
+  left: 60px; /* Ajusta este valor según sea necesario */
+  color: white;
+  font-size: 60px; /* Ajusta este valor según sea necesario */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Añade sombra al texto */
+  font-family:'Hammersmith One',;
+
+}
+.description-overlay {
+  position: absolute;
+  bottom: 40px; /* Ajusta este valor según sea necesario */
+  left: 60px; /* Ajusta este valor según sea necesario */
+  color: white;
+  font-size: 25px; /* Ajusta este valor según sea necesario */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Añade sombra al texto */
+  font-family:'Hammersmith One',;
+}
+
+
+.car{
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  height: 100vh; /* Establece la altura del contenedor para ocupar toda la altura de la ventana */
 }

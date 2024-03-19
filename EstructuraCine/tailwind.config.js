@@ -9,8 +9,10 @@ export default {
       'agua': '#181725',
       'icon': '#E5E5EB'
 
-
     },
+    fontFamily:{
+      'titles': ["Staatliches", "sans-serif"]
+    }
   },
 },
   plugins: [require('flowbite/plugin')],

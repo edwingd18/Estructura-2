@@ -6,7 +6,7 @@
   color: white;
   padding: 20px;
   border-radius: 10px;
-  margin-left: 120px;
+  margin-left: 220px;
   font-family:'Inter', sans-serif;
 }
 .trailer,
@@ -14,8 +14,9 @@
   width: 600px; /* Ajusta el ancho del póster */
   height: 900px;
   margin-right: 90px; /* Asegúrate de que no haya un espacio entre '100' y 'px' */
-  margin-left: auto; /* Empuja el póster hacia la derecha */
+  margin-left: 11px; /* Empuja el póster hacia la derecha */
   border-radius: 20px; /* Bordes redondeados para la imagen */
+  
 }
 
 .description{
@@ -90,7 +91,11 @@ p {
   text-transform: uppercase;
 }
 
-.buttonComprar:hover {
-  background-color: white;
-  color: black;
+.buttonComprar {
+  margin: 35px 0px 0px 0;
+
+
 }
+.trailer{
+  margin: 35px 0px 0px 0;
+  }
