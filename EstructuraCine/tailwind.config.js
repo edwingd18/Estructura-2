@@ -9,8 +9,11 @@ export default {
       'agua': '#181725',
       'icon': '#E5E5EB'
 
-
     },
+    fontFamily:{
+      'titles': ["Quattrocento Sans", "sans-serif"]
+      
+    }
   },
 },
   plugins: [require('flowbite/plugin')],
