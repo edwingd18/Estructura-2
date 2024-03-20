@@ -55,7 +55,7 @@
   font-size: 60px; /* Ajusta este valor según sea necesario */
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Añade sombra al texto */
   margin-bottom: 10px; /* Espaciado entre el título y la descripción */
-  top: calc(50% - 40px); /* La mitad de la altura del texto */
+  top: calc(50% - 90px); /* La mitad de la altura del texto */
 
 }
 .description-overlay {
