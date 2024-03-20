@@ -41,14 +41,19 @@ const Carousel = ({ movies }) => {
 
   return (
     <div className="carousel">
-      <a className="main-slide"
-      href={`/movie/${movies[
-        selectedThumbnailIndex !== null
-          ? selectedThumbnailIndex
-          : currentMovieIndex
-      ].id}`}>
+      <a
+        className="main-slide"
+        href={`/movie/${
+          movies[
+            selectedThumbnailIndex !== null
+              ? selectedThumbnailIndex
+              : currentMovieIndex
+          ].id
+        }`}
+      >
         <div className="image-container">
-          <img className="brightness-50"
+          <img
+            className="brightness-50"
             src={
               movies[
                 selectedThumbnailIndex !== null
@@ -79,7 +84,7 @@ const Carousel = ({ movies }) => {
               ].title
             }
           </h2>
-          <p className="description-overlay font-bold">
+          <p className="description-overlay font">
             {
               movies[
                 selectedThumbnailIndex !== null
@@ -94,7 +99,8 @@ const Carousel = ({ movies }) => {
       {/* Miniaturas de películas */}
       <div className="thumbnails">
         {visibleThumbnails.map((index) => (
-          <a href={`/movie/${movies[index].id}`}
+          <a
+            href={`/movie/${movies[index].id}`}
             key={index}
             className={`thumbnail ${
               index === selectedThumbnailIndex ? "active" : ""

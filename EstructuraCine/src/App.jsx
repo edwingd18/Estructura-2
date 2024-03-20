@@ -33,7 +33,7 @@ const movies = [
     format: "2D, 3D",
     director: "Justin K. Thompson",
     type: "Animación, Acción, Aventura, Ciencia ficción",
-    trailerUrl: "https://youtu.be/oBmazlyP220",
+    trailerUrl: "https://www.youtube.com/embed/oBmazlyP220",
   },
   {
     id: 3,
@@ -49,7 +49,7 @@ const movies = [
     format: "2D, 3D",
     director: "Paul Kingn",
     type: "Comedia, Familia, Fantasía",
-    trailerUrl: "https://youtu.be/-YRw-3dgsjo",
+    trailerUrl: "https://www.youtube.com/embed/-YRw-3dgsjo",
   },
   {
     id: 4,
@@ -65,7 +65,7 @@ const movies = [
     format: "2D, 3D",
     director: "Michael Bond",
     type: "Comedia, Aventura, Familia",
-    trailerUrl: "https://youtu.be/Bt4J4MVuHXE",
+    trailerUrl: "https://www.youtube.com/embed//Bt4J4MVuHXE",
   },
   {
     id: 5,
@@ -81,7 +81,7 @@ const movies = [
     format: "2D, 3D",
     director: "Denis Villeneuve",
     type: "Ciencia ficción, Aventura",
-    trailerUrl: "https://youtu.be/TTgk_iT8Uts",
+    trailerUrl: "https://www.youtube.com/embed/TTgk_iT8Uts",
   },
   {
     id: 6,
@@ -97,7 +97,7 @@ const movies = [
     format: "2D, 3D",
     director: "Christopher Nolan",
     type: "Drama, Historia",
-    trailerUrl: "https://youtu.be/gMPEbJQun68",
+    trailerUrl: "https://www.youtube.com/embed/gMPEbJQun68",
   },
 ];
 const App = () => {

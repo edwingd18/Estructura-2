@@ -11,7 +11,7 @@ export default {
 
     },
     fontFamily:{
-      'titles': ["Staatliches", "sans-serif"]
+      'titles': ["Quattrocento Sans", "sans-serif"]
     }
   },
 },
