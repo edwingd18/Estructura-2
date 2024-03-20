@@ -1,0 +1,125 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    font-size: 18px;
+}
+
+.SeatMapWholeContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.SeatMapContainer {
+    width: 1000px;
+    min-height: 630px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #181725;
+    border-radius: 25px;
+    box-shadow: 0 3px 13px 1px rgb(0, 0, 0, 9%);
+}
+
+.contenedor-tickets {
+    width: 1000px;
+    min-height: 630px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #181725;
+    border-radius: 25px;
+    box-shadow: 0 3px 13px 1px rgb(0, 0, 0, 9%);
+}
+
+.icon-ticket {
+    width: 25px;
+    height: auto;
+    margin-right: 10px;
+    color: #1C64F2;
+}
+
+.icon-chair {
+    width: 25px;
+    height: auto;
+    margin-right: 10px;
+    color: #1C64F2;
+}
+
+.icon-popcorn {
+    width: 25px;
+    height: auto;
+    margin-right: 10px;
+    color: #fff;
+}
+
+.icon-cash {
+    width: 25px;
+    height: auto;
+    margin-right: 10px;
+    color: #fff;
+}
+
+.SeatMap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 25vw;
+    background-color: #474747;
+    border-radius: 25px;
+    box-shadow: 0 3px 13px 1px rgb(0, 0, 0, 9%);
+}
+
+.screen{
+    width: 30%;
+    height: 3vw;
+    background-color: #000000;
+    display: flex;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    font-size: .5vw;
+    color: white;
+    position: absolute;
+    top: 13vw;
+}
+
+.seats {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr); /* Esto crea una grilla con 5 columnas de igual tamaño */
+    gap: 10px; /* Esto añade un espacio de 10px entre cada asiento */
+}
+
+.seat {
+    width: 1.5vw; /* Cambia esto al tamaño que quieras */
+    height: 1.5vw; /* Cambia esto al tamaño que quieras */
+    background-color: white;
+    border-radius: 20px;
+    transition: .5s;
+}
+
+.seat:hover {
+    background-color: #31c50b;
+}
+
+#seat1, #seat2, #seat3, #seat4, #seat5 {
+
+    background-color: rgb(238, 255, 0); /* Ejemplo */
+}
+
+#seat1:hover, #seat2:hover, #seat3:hover, #seat4:hover, #seat5:hover {
+
+    background-color: #31c50b; /* Ejemplo */
+}

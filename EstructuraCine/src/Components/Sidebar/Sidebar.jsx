@@ -6,6 +6,7 @@ import {
   HiUser,
   HiTicket,
 } from "react-icons/hi";
+import { Link } from 'react-router-dom';
 
 import "./Sidebar.css"; // Importa tu archivo de estilos CSS para el Sidebar si lo tienes
 
@@ -118,8 +119,8 @@ return (
         <FlowbiteSidebar.ItemGroup>
       
           
+          
           <FlowbiteSidebar.Item
-            href="#"
             className="hover:text-black icon"
             style={{fontSize:20}}
             >

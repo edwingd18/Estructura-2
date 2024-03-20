@@ -1,39 +1,48 @@
-
 .movie-info {
   margin-right: 20px;
   display: flex;
-  align-items: flex-start; /* Changed to flex-start */
+  align-items: flex-start;
+  /* Changed to flex-start */
   color: white;
   padding: 20px;
   border-radius: 10px;
+
   margin-left: 220px;
   font-family:'Inter', sans-serif;
+
 }
+
 .trailer,
 .movie-poster {
-  width: 600px; /* Ajusta el ancho del póster */
+  width: 600px;
+  /* Ajusta el ancho del póster */
   height: 900px;
   margin-right: 90px; /* Asegúrate de que no haya un espacio entre '100' y 'px' */
   margin-left: 11px; /* Empuja el póster hacia la derecha */
   border-radius: 20px; /* Bordes redondeados para la imagen */
   
-}
 
-.description{
-  
-  font-weight: 400; /* Aplica el peso extra bold a todo el texto dentro de .movie-info */
+
+.description {
+
+  font-weight: 400;
+  /* Aplica el peso extra bold a todo el texto dentro de .movie-info */
   color: gray;
-  font-size: 24px; /* Puedes ajustar este valor según sea necesario */
+  font-size: 24px;
+  /* Puedes ajustar este valor según sea necesario */
 }
 
 .movie-title {
-  font-weight: 800; /* Aplica el peso extra bold a todo el texto dentro de .movie-info */
-  font-size: 48px; /* Puedes ajustar este valor según sea necesario */
+  font-weight: 800;
+  /* Aplica el peso extra bold a todo el texto dentro de .movie-info */
+  font-size: 48px;
+  /* Puedes ajustar este valor según sea necesario */
 
 }
 
 .trailer-container {
-  margin-top: 100px; /* Ajusta según sea necesario para el espacio que desees */
+  margin-top: 100px;
+  /* Ajusta según sea necesario para el espacio que desees */
 }
 
 
@@ -43,54 +52,65 @@
 }
 
 h1 {
-  font-size: 2.5em; /* Tamaño grande para el título */
+  font-size: 2.5em;
+  /* Tamaño grande para el título */
   margin-bottom: 0.5em;
 }
 
 p {
+
   font-size: 1.2em; /* Tamaño adecuado para la descripción */
   margin-bottom: 2em;
   max-width: 1000px; /* Limita el ancho del párrafo */
+
 
 }
 
 .duration,
 .edadRango {
   display: inline-block;
-  background-color: #ffffff; /* Fondo rojo para el formato */
+  background-color: #ffffff;
+  /* Fondo rojo para el formato */
   color: rgb(0, 0, 0);
   padding: 5px 10px;
   margin-top: 10px;
+
   border-radius: 50px; /* Bordes redondeados */
   margin-right: 20px; /* Puedes ajustar este valor según sea necesario */
+
 }
 
 .buttons-and-format {
-  display:flex;
-  align-items:center;
+  display: flex;
+  align-items: center;
 
 }
 
 .movie-format {
   display: inline-block;
-  background-color: #e50914; /* Fondo rojo para el formato */
+  background-color: #e50914;
+  /* Fondo rojo para el formato */
   color: white;
   padding: 5px 10px;
   margin-top: 10px;
-  border-radius: 5px; /* Bordes redondeados */
+  border-radius: 5px;
+  /* Bordes redondeados */
 }
 
 .movie-button {
   display: inline-block;
-  background-color: #e50914; /* Fondo rojo para el botón */
+  background-color: #e50914;
+  /* Fondo rojo para el botón */
   color: white;
   text-decoration: none;
   padding: 10px 20px;
   margin-top: 20px;
-  border-radius: 5px; /* Bordes redondeados */
+  border-radius: 5px;
+  /* Bordes redondeados */
   font-weight: bold;
   text-transform: uppercase;
 }
+
 
 .buttonComprar {
   margin: 35px 0px 0px 0;
@@ -100,3 +120,4 @@ p {
 .trailer{
   margin: 35px 0px 0px 0;
   }
+
