@@ -55,10 +55,11 @@ ReactDOM.createRoot(
   <React.StrictMode>
     <Sidebar />
 
-    {/* <MovieInfo movie={movie}/> */}
+    {/*<MovieInfo movie={movie}/> */}
     {/* <Carousel movies={movies}/> */}
     {/* <LoginForm login={LoginForm}/> */}
     {<SelectTickets />}
+
 
   </React.StrictMode>
 );
