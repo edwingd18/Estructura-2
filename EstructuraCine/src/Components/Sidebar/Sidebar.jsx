@@ -8,7 +8,7 @@ import {
 } from "react-icons/hi";
 import { Link } from 'react-router-dom';
 
-import "./Sidebar.css"; // Importa tu archivo de estilos CSS para el Sidebar si lo tienes
+import "./Sidebar.css";
 
 function Sidebar() {
   const [isOpen, setIsOpen] = useState(false); // Estado para controlar si el Sidebar está abierto o cerrado
@@ -117,9 +117,6 @@ function Sidebar() {
       <FlowbiteSidebar aria-label="Menu de Cine" theme={customtema} className="Sidebar">
         <FlowbiteSidebar.Items>
           <FlowbiteSidebar.ItemGroup>
-
-
-
             <FlowbiteSidebar.Item
               className="hover:text-black icon"
               style={{ fontSize: 20 }}
@@ -133,8 +130,10 @@ function Sidebar() {
               style={{ fontSize: 20 }}
               className="hover:text-black icon"
             >
-              <HiTicket style={{ fontSize: '30px' }} />
-              <span className="icon-label " style={{ marginLeft: '60px' }}>Boletas</span>
+              <Link to='/selecttickets'>
+                <HiTicket style={{ fontSize: '30px' }} />
+                <span className="icon-label " style={{ marginLeft: '60px' }}>Boletas</span>
+              </Link>
             </FlowbiteSidebar.Item>
 
             <FlowbiteSidebar.Item
