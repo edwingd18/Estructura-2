@@ -89,23 +89,6 @@ body {
     margin-bottom: 20px;
 }
 
-.contenedor-fecha input {
-    width: 250px;
-    height: 40px;
-    padding: 0 10px;
-    font-size: 16px;
-    border: none;
-    border-radius: 10px;
-    background-color: #fdfdfd;
-    color: #000;
-    margin: 10px 0;
-    cursor: pointer;
-}
-
-.contenedor-fecha input[type="date"]::-webkit-calendar-picker-indicator {
-    filter: invert(1);
-}
-
 .contenedor-sillas {
     display: inline-flex;
     flex-direction: column;
