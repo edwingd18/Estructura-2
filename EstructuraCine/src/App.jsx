@@ -6,6 +6,7 @@ import Login from '../Login/Login';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Carousel from './Components/Carousel/Carousel';
 import Sidebar from './Components/Sidebar/Sidebar';
+import SeatMap from './Components/SeatSelection/SeatMap';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -25,6 +26,7 @@ function App() {
       <Switch>
         <Route exact path='/' component={Carousel} />
         <Route path='/login' element={<Login />} />
+        <Route exact path='/SeatMap' component={SeatMap} />
       </Switch>
           <div className="card">
             <button onClick={() => setCount((count) => count + 1)}>
