@@ -49,10 +49,11 @@ h1 {
 
 p {
   font-size: 1.2em; /* Tamaño adecuado para la descripción */
-  margin-bottom: 0.5em;
+  margin-bottom: 2em;
   max-width: 1000px; /* Limita el ancho del párrafo */
 
 }
+
 .duration,
 .edadRango {
   display: inline-block;

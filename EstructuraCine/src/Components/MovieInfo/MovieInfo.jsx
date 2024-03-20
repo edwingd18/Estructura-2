@@ -31,10 +31,12 @@ function MovieInfo({ movies }) {
       <div className="movie">
         <h1 className="movie-title ">{movie.title}</h1>
         <p className="description">{movie.description}</p>
+        <div className="info">
         <p className="edadRango">
           Recomendada para Mayores de {movie.ageRange} años
         </p>
         <p className="duration">{movie.duration} Min</p>
+        </div>
         <p className="director">Director: {movie.director}</p>
         <p className="type">Tipo: {movie.type}</p>
 
