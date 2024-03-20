@@ -1,0 +1,132 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    font-size: 18px;
+}
+
+.contenedor-select-tickets {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.contenedor-tickets {
+    width: 1000px;
+    min-height: 630px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #181725;
+    border-radius: 25px;
+    box-shadow: 0 3px 13px 1px rgb(0, 0, 0, 9%);
+}
+
+.icon-ticket {
+    width: 25px;
+    height: auto;
+    margin-right: 10px;
+    color: #1C64F2;
+}
+
+.icon-chair {
+    width: 25px;
+    height: auto;
+    margin-right: 10px;
+    color: #fff;
+}
+
+.icon-popcorn {
+    width: 25px;
+    height: auto;
+    margin-right: 10px;
+    color: #fff;
+}
+
+.icon-cash {
+    width: 25px;
+    height: auto;
+    margin-right: 10px;
+    color: #fff;
+}
+
+.linea-separadora {
+    border-top: 5px solid #979797;
+    width: 164px;
+    height: 5px;
+    margin: 0 10px;
+}
+
+.contenedor-iconos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.contenedor-seleccionar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    /* background-color: #1C64F2; */
+}
+
+.contenedor-fecha {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.contenedor-fecha input {
+    width: 250px;
+    height: 40px;
+    padding: 0 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    background-color: #fdfdfd;
+    color: #000;
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+.contenedor-fecha input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+.contenedor-sillas {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-Siguiente {
+    width: 142px;
+    height: 45px;
+    background-color: #1C64F2;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.3s;
+}
+
+.btn-Siguiente:hover {
+    background-color: #fdfdfd;
+    color: #000;
+}

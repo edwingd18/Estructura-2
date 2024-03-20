@@ -6,6 +6,7 @@ import Sidebar from './Components/Sidebar/Sidebar.jsx';
 import LoginForm from './Components/Login/LoginForm.jsx'
 import MovieInfo from './Components/MovieInfo/MovieInfo.jsx';
 import Login from './Components/Login/Login.jsx';
+import SelectTickets from './Components/SelectTickets - Part one/SelectTickets.jsx';
 
 
 const movies = [
@@ -41,23 +42,23 @@ const movie = {
   edadRango: 12,
   duracion: 160,
   formato: "4D",
-  director:"Matt Reeves",
-  tipo:"Acción",
+  director: "Matt Reeves",
+  tipo: "Acción",
   imagenUrl: "https://image.tmdb.org/t/p/w600_and_h900_bestv2/mo7teil1qH0SxgLijnqeYP1Eb4w.jpg",
-  trailerUrl:"https://www.youtube.com/embed/L6DEcPaNdLs"
+  trailerUrl: "https://www.youtube.com/embed/L6DEcPaNdLs"
 };
 
 
-ReactDOM.render(
+ReactDOM.createRoot(
+  document.getElementById('root')
+).render(
   <React.StrictMode>
-    <Sidebar/>
-
-   
+    <Sidebar />
 
     {/* <MovieInfo movie={movie}/> */}
     {/* <Carousel movies={movies}/> */}
-    <LoginForm login={LoginForm}/>
+    {/* <LoginForm login={LoginForm}/> */}
+    {<SelectTickets />}
 
-  </React.StrictMode>,
-  document.getElementById('root')
+  </React.StrictMode>
 );
