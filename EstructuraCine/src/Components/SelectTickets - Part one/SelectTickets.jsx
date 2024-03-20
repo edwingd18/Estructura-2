@@ -5,6 +5,7 @@ import { GiPopcorn } from "react-icons/gi";
 import { HiCash } from "react-icons/hi";
 import { SelectChair, SelectChairPreferencial } from './SelectChair.jsx';
 
+
 function SelectTickets() {
     return (
         <div className="contenedor-select-tickets">

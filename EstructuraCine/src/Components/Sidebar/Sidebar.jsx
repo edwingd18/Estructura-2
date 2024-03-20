@@ -106,59 +106,59 @@ function Sidebar() {
 
 
 
-return (
-  <div
-    className={`sidebar-container   ${isOpen ? "open" : "close"  }`}
-    
-    onMouseEnter={openSidebar} // Abrir el Sidebar cuando el mouse entra
-    onMouseLeave={closeSidebar} // Cerrar el Sidebar cuando el mouse sale
-    
-  >
-    <FlowbiteSidebar aria-label="Menu de Cine" theme={customtema} className="Sidebar">
-      <FlowbiteSidebar.Items>
-        <FlowbiteSidebar.ItemGroup>
-      
-          
-          
-          <FlowbiteSidebar.Item
-            className="hover:text-black icon"
-            style={{fontSize:20}}
+  return (
+    <div
+      className={`sidebar-container   ${isOpen ? "open" : "close"}`}
+
+      onMouseEnter={openSidebar} // Abrir el Sidebar cuando el mouse entra
+      onMouseLeave={closeSidebar} // Cerrar el Sidebar cuando el mouse sale
+
+    >
+      <FlowbiteSidebar aria-label="Menu de Cine" theme={customtema} className="Sidebar">
+        <FlowbiteSidebar.Items>
+          <FlowbiteSidebar.ItemGroup>
+
+
+
+            <FlowbiteSidebar.Item
+              className="hover:text-black icon"
+              style={{ fontSize: 20 }}
             >
-            <HiUser style={{ fontSize: '30px' }} />
-           <span className="icon-label "style={{ marginLeft: '60px' }} >Perfil</span>
-          </FlowbiteSidebar.Item>
+              <HiUser style={{ fontSize: '30px' }} />
+              <span className="icon-label " style={{ marginLeft: '60px' }} >Perfil</span>
+            </FlowbiteSidebar.Item>
 
-          <FlowbiteSidebar.Item
-            href="#"
-            style={{fontSize:20 }}
-            className="hover:text-black icon"
-          >
-             <HiTicket style={{ fontSize: '30px' }} />
-            <span className="icon-label " style={{ marginLeft: '60px' }}>Boletas</span>
-          </FlowbiteSidebar.Item>
+            <FlowbiteSidebar.Item
+              href="#"
+              style={{ fontSize: 20 }}
+              className="hover:text-black icon"
+            >
+              <HiTicket style={{ fontSize: '30px' }} />
+              <span className="icon-label " style={{ marginLeft: '60px' }}>Boletas</span>
+            </FlowbiteSidebar.Item>
 
-          <FlowbiteSidebar.Item
-            href="#"
-            style={{fontSize:20}}
-            className="hover:text-black icon"
-          >
-            <HiShoppingCart style={{ fontSize: '30px' }} />
-            <span className="icon-label "style={{ marginLeft: '60px' }}>Carrito</span>
-          </FlowbiteSidebar.Item>
+            <FlowbiteSidebar.Item
+              href="#"
+              style={{ fontSize: 20 }}
+              className="hover:text-black icon"
+            >
+              <HiShoppingCart style={{ fontSize: '30px' }} />
+              <span className="icon-label " style={{ marginLeft: '60px' }}>Carrito</span>
+            </FlowbiteSidebar.Item>
 
-          <FlowbiteSidebar.Item
-            href="#"
-            style={{fontSize:20}}
-            className="hover:text-black icon"
-          >
-            <HiOutlineChatAlt2 style={{ fontSize: '30px' }} />
-            <span className="icon-label "style={{ marginLeft: '60px' }} >Chat</span>
-          </FlowbiteSidebar.Item>
-        </FlowbiteSidebar.ItemGroup>
-      </FlowbiteSidebar.Items>
-    </FlowbiteSidebar>
-  </div>
-);
+            <FlowbiteSidebar.Item
+              href="#"
+              style={{ fontSize: 20 }}
+              className="hover:text-black icon"
+            >
+              <HiOutlineChatAlt2 style={{ fontSize: '30px' }} />
+              <span className="icon-label " style={{ marginLeft: '60px' }} >Chat</span>
+            </FlowbiteSidebar.Item>
+          </FlowbiteSidebar.ItemGroup>
+        </FlowbiteSidebar.Items>
+      </FlowbiteSidebar>
+    </div>
+  );
 }
 
 export default Sidebar;

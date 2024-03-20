@@ -1,57 +1,94 @@
-import { useState, useEffect } from 'react';
-import './Carousel.css'; // Estilos CSS para el carrusel
+import React, { useState, useEffect, useMemo } from "react";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
+import "@splidejs/splide/dist/css/themes/splide-default.min.css";
+import "./Carousel.css";
 
 const Carousel = ({ movies }) => {
   const [currentMovieIndex, setCurrentMovieIndex] = useState(0);
+  const [selectedThumbnailIndex, setSelectedThumbnailIndex] = useState(null);
 
-  // Función para avanzar al siguiente índice de película
-  const nextMovie = () => {
-    setCurrentMovieIndex((prevIndex) => (prevIndex + 1) % movies.length);
-  };
-
-  // Efecto para cambiar automáticamente de película cada 5 segundos
   useEffect(() => {
     const interval = setInterval(nextMovie, 5000);
     return () => clearInterval(interval);
   }, []);
 
+  const nextMovie = () => {
+    setCurrentMovieIndex((prevIndex) => (prevIndex + 1) % movies.length);
+  };
+
   const handleMovieClick = (index) => {
-    setCurrentMovieIndex(index);
+    history.push(`/movie/${movies[index].id}`);
+    setSelectedThumbnailIndex(index);
   };
 
   return (
     <div className="carousel">
-      {/* Diapositiva principal grande */}
-      <div className="main-slide">
-        <img
-          src={movies[currentMovieIndex].imageUrl}
-          alt={movies[currentMovieIndex].title}
-          onError={(e) => {
-            e.target.onerror = null;
-            e.target.src = 'https://via.placeholder.com/800x400?text=No+Image';
-          }}
-        />
-        <h2>{movies[currentMovieIndex].title}</h2>
-      </div>
+      <a
+        className="main-slide"
+        href={`/movie/${
+          selectedThumbnailIndex !== null
+            ? movies[selectedThumbnailIndex].id
+            : movies[currentMovieIndex].id
+        }`}
+      >
+        <div className="image-container">
+  <img
+    className="brightness-50"
+    src={movies[selectedThumbnailIndex !== null ? selectedThumbnailIndex : currentMovieIndex].bannerUrl}
+    onError={(e) => {
+      e.target.onerror = null;
+      e.target.src = "https://via.placeholder.com/800x400?text=No+Image";
+    }}
+    alt={movies[selectedThumbnailIndex !== null ? selectedThumbnailIndex : currentMovieIndex].title}
+    style={{ width: "1340px", height: "600px" }}
+  />
+  <div className="overlay-container">
+    <h2 className="title-overlay font-titles uppercase font-bold">
+      {movies[selectedThumbnailIndex !== null ? selectedThumbnailIndex : currentMovieIndex].title}
+    </h2>
+    <p className="description-overlay font-titles font-semibold">
+      {movies[selectedThumbnailIndex !== null ? selectedThumbnailIndex : currentMovieIndex].description}
+    </p>
+  </div>
+</div>
 
-      {/* Miniaturas de películas */}
-      <div className="thumbnails">
-        {movies.map((movie, index) => (
-          <div
-            key={index}
-            className={`thumbnail ${index === currentMovieIndex ? 'active' : ''}`}
-            onClick={() => handleMovieClick(index)}
-          >
-            <img
-              src={movie.imageUrl}
-              alt={movie.title}
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = 'https://via.placeholder.com/100x150?text=No+Image';
-              }}
-            />
-          </div>
-        ))}
+      </a>
+
+      <div className="thumbnails ">
+        <Splide
+          options={{
+            rewind: true,
+            width: "1340px", // Cambia el ancho del carrusel al 80% del contenedor padre
+            height: "327px",
+            gap: "20px",
+            perPage: "4.5",
+            autoplay: true,
+            focus: "center",
+          }}
+        >
+          {movies.map((movie, index) => (
+            <SplideSlide key={index}>
+              <a
+                href={`/movie/${movie.id}`}
+                className={`thumbnail  ${
+                  index === selectedThumbnailIndex ? "active" : ""
+                }`}
+                onClick={() => handleMovieClick(index)}
+              >
+                <img
+                  src={movie.imageUrl}
+                  style={{ width: "268px", height: "327px" }}
+                  alt={movie.title}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src =
+                      "https://via.placeholder.com/100x150?text=No+Image";
+                  }}
+                />
+              </a>
+            </SplideSlide>
+          ))}
+        </Splide>
       </div>
     </div>
   );
