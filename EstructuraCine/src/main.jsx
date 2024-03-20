@@ -54,9 +54,9 @@ ReactDOM.render(
 
    
 
-    {/* <MovieInfo movie={movie}/> */}
+    <MovieInfo movie={movie}/>
     {/* <Carousel movies={movies}/> */}
-    <LoginForm login={LoginForm}/>
+    {/* <LoginForm login={LoginForm}/> */}
 
   </React.StrictMode>,
   document.getElementById('root')
