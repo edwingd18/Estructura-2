@@ -7,6 +7,7 @@ import LoginForm from './Components/Login/LoginForm.jsx'
 import MovieInfo from './Components/MovieInfo/MovieInfo.jsx';
 import Login from './Components/Login/Login.jsx';
 import SelectTickets from './Components/SelectTickets - Part one/SelectTickets.jsx';
+import SeatMap from './Components/SeatSelection/SeatMap.jsx';
 
 
 const movies = [
@@ -58,7 +59,8 @@ ReactDOM.createRoot(
     {/*<MovieInfo movie={movie}/> */}
     {/* <Carousel movies={movies}/> */}
     {/* <LoginForm login={LoginForm}/> */}
-    {<SelectTickets />}
+    {/* {<SelectTickets />} */}
+    <SeatMap />
 
 
   </React.StrictMode>
