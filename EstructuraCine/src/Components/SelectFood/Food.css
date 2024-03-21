@@ -56,28 +56,29 @@ body {
     align-items: center;
     justify-content: center;
     width: 100%;
-    margin-bottom: 20px;
+    margin-top: 35px;
 }
 
 .contenedor-comida {
     width: 1000px;
     min-height: 630px;
     display: flex;
-    flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
+    align-items: center;
     background-color: #181725;
     border-radius: 25px;
     box-shadow: 0 3px 13px 1px rgb(0, 0, 0, 9%);
 }
 
-
-.contenedor-seleccionar {
+.contenedor-seleccionar-combo {
     display: flex;
-    flex-direction: column;
     align-items: center;
+    gap: 20px;
     justify-content: space-around;
     width: 100%;
-    height: 500px;
+    background-color: #212032;
+    margin-bottom: 50px;
+    padding: 120px 0;
 }
