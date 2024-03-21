@@ -103,8 +103,8 @@ body {
 }
 
 .seat {
-    width: 1.5vw; /* Cambia esto al tamaño que quieras */
-    height: 1.5vw; /* Cambia esto al tamaño que quieras */
+    width: 1.5vw; 
+    height: 1.5vw; 
     background-color: white;
     border-radius: 20px;
     transition: .5s;
@@ -116,10 +116,92 @@ body {
 
 #seat1, #seat2, #seat3, #seat4, #seat5 {
 
-    background-color: rgb(238, 255, 0); /* Ejemplo */
+    background-color: rgb(238, 255, 0); 
 }
 
 #seat1:hover, #seat2:hover, #seat3:hover, #seat4:hover, #seat5:hover {
 
-    background-color: #31c50b; /* Ejemplo */
+    background-color: #31c50b; 
+}
+
+#AvailableSeatsText{
+    position: absolute;
+    color: white;
+    font-size: .7vw;
+    margin-top: 10px;
+    left: 30vw;
+    top: 17.5vw;
+}
+
+#availableSeatMark{
+    position: absolute;
+    width: 1.5vw; 
+    height: 1.5vw;
+    background-color: white;
+    border-radius: 20px;
+    top: 19.5vw;
+    left: 30vw;
+
+}
+
+#SpecialSeatsText{
+    position: absolute;
+    color: white;
+    font-size: .7vw;
+    margin-top: 10px;
+    left: 30vw;
+    top: 21vw;
+}
+
+#SpecialSeatsMark{
+    position: absolute;
+    width: 1.5vw; 
+    height: 1.5vw;
+    background-color: rgb(238, 255, 0);;
+    border-radius: 20px;
+    top: 23vw;
+    left: 30vw;
+}
+
+#SelectedSeatsText{
+    position: absolute;
+    color: white;
+    font-size: .7vw;
+    margin-top: 10px;
+    left: 30vw;
+    top: 24.5vw;
+}
+
+#SelectedSeatsMark{
+    position: absolute;
+    width: 1.5vw;
+    height: 1.5vw; 
+    background-color: #31c50b; 
+    border-radius: 20px;
+    top: 26.5vw;
+    left: 30vw;
+}
+
+
+#OcuSeatsText{
+    position: absolute;
+    color: white;
+    font-size: .7vw;
+    margin-top: 10px;
+    left: 30vw;
+    top: 28vw;
+}
+
+#OcuSeatsMark{
+    position: absolute;
+    width: 1.5vw;
+    height: 1.5vw; 
+    background-color: #ff0000; 
+    border-radius: 20px;
+    top: 30vw;
+    left: 30vw;
+}
+
+.seat.selected {
+    background-color: green !important;
 }
