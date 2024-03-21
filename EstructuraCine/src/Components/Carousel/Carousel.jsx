@@ -25,32 +25,31 @@ const Carousel = ({ movies }) => {
     <div className="carousel">
       <a
         className="main-slide"
-        href={`/movie/${
-          selectedThumbnailIndex !== null
+        href={`/movie/${selectedThumbnailIndex !== null
             ? movies[selectedThumbnailIndex].id
             : movies[currentMovieIndex].id
-        }`}
+          }`}
       >
         <div className="image-container">
-  <img
-    className="brightness-50"
-    src={movies[selectedThumbnailIndex !== null ? selectedThumbnailIndex : currentMovieIndex].bannerUrl}
-    onError={(e) => {
-      e.target.onerror = null;
-      e.target.src = "https://via.placeholder.com/800x400?text=No+Image";
-    }}
-    alt={movies[selectedThumbnailIndex !== null ? selectedThumbnailIndex : currentMovieIndex].title}
-    style={{ width: "1340px", height: "600px" }}
-  />
-  <div className="overlay-container">
-    <h2 className="title-overlay font-titles uppercase font-bold">
-      {movies[selectedThumbnailIndex !== null ? selectedThumbnailIndex : currentMovieIndex].title}
-    </h2>
-    <p className="description-overlay font-titles font-semibold">
-      {movies[selectedThumbnailIndex !== null ? selectedThumbnailIndex : currentMovieIndex].description}
-    </p>
-  </div>
-</div>
+          <img
+            className="brightness-50"
+            src={movies[selectedThumbnailIndex !== null ? selectedThumbnailIndex : currentMovieIndex].bannerUrl}
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = "https://via.placeholder.com/800x400?text=No+Image";
+            }}
+            alt={movies[selectedThumbnailIndex !== null ? selectedThumbnailIndex : currentMovieIndex].title}
+            style={{ width: "1340px", height: "600px" }}
+          />
+          <div className="overlay-container">
+            <h2 className="title-overlay font-titles uppercase font-bold">
+              {movies[selectedThumbnailIndex !== null ? selectedThumbnailIndex : currentMovieIndex].title}
+            </h2>
+            <p className="description-overlay font-titles font-semibold">
+              {movies[selectedThumbnailIndex !== null ? selectedThumbnailIndex : currentMovieIndex].description}
+            </p>
+          </div>
+        </div>
 
       </a>
 
@@ -58,7 +57,7 @@ const Carousel = ({ movies }) => {
         <Splide
           options={{
             rewind: true,
-            width: "1340px", // Cambia el ancho del carrusel al 80% del contenedor padre
+            width: "1340px",
             height: "327px",
             gap: "20px",
             perPage: "4.5",
@@ -70,9 +69,8 @@ const Carousel = ({ movies }) => {
             <SplideSlide key={index}>
               <a
                 href={`/movie/${movie.id}`}
-                className={`thumbnail  ${
-                  index === selectedThumbnailIndex ? "active" : ""
-                }`}
+                className={`thumbnail  ${index === selectedThumbnailIndex ? "active" : ""
+                  }`}
                 onClick={() => handleMovieClick(index)}
               >
                 <img
