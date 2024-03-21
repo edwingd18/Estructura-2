@@ -49,7 +49,7 @@
   /* Muestra los nombres cuando la barra lateral está abierta */
   opacity: 1;
   /* Establece la opacidad en 1 al finalizar la transición */
-  transition-delay: 0.5s;
+  transition-delay: 0.6s;
   color: #ffffff; 
   /* Retrasa la transición del label */
 }
@@ -64,3 +64,11 @@
 .icon:hover .icon-label {
   color: black;
 }
+
+.sidebar-container.open{
+  font-family:'Inter', sans-serif;
+  font-style: medium;
+
+  
+}
+

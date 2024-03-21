@@ -4,6 +4,7 @@ import { PiArmchairFill } from "react-icons/pi";
 import { GiPopcorn } from "react-icons/gi";
 import { HiCash } from "react-icons/hi";
 import { SelectChair, SelectChairPreferencial } from './SelectChair.jsx';
+import { Datepicker } from 'flowbite-react';
 
 
 function SelectTickets() {
@@ -21,7 +22,7 @@ function SelectTickets() {
                 </div>
                 <div className="contenedor-seleccionar">
                     <div className="contenedor-fecha">
-                        <input type="date" name="" id="" />
+                        <Datepicker />
                     </div>
                     <div className="contenedor-sillas">
                         <SelectChair

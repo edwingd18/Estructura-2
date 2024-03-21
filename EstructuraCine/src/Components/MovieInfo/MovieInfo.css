@@ -6,8 +6,10 @@
   color: white;
   padding: 20px;
   border-radius: 10px;
-  margin-left: 120px;
-  font-family: 'Inter', sans-serif;
+
+  margin-left: 220px;
+  font-family:'Inter', sans-serif;
+
 }
 
 .trailer,
@@ -15,13 +17,12 @@
   width: 600px;
   /* Ajusta el ancho del póster */
   height: 900px;
-  margin-right: 90px;
-  /* Asegúrate de que no haya un espacio entre '100' y 'px' */
-  margin-left: auto;
-  /* Empuja el póster hacia la derecha */
-  border-radius: 20px;
-  /* Bordes redondeados para la imagen */
+  margin-right: 90px; /* Asegúrate de que no haya un espacio entre '100' y 'px' */
+  margin-left: 11px; /* Empuja el póster hacia la derecha */
+  border-radius: 20px; /* Bordes redondeados para la imagen */
 }
+  
+
 
 .description {
 
@@ -58,11 +59,11 @@ h1 {
 }
 
 p {
-  font-size: 1.2em;
-  /* Tamaño adecuado para la descripción */
-  margin-bottom: 0.5em;
-  max-width: 1000px;
-  /* Limita el ancho del párrafo */
+
+  font-size: 1.2em; /* Tamaño adecuado para la descripción */
+  margin-bottom: 2em;
+  max-width: 1000px; /* Limita el ancho del párrafo */
+
 
 }
 
@@ -74,11 +75,10 @@ p {
   color: rgb(0, 0, 0);
   padding: 5px 10px;
   margin-top: 10px;
-  border-radius: 50px;
-  /* Bordes redondeados */
-  display: inline-block;
-  margin-right: 20px;
-  /* Puedes ajustar este valor según sea necesario */
+
+  border-radius: 50px; /* Bordes redondeados */
+  margin-right: 20px; /* Puedes ajustar este valor según sea necesario */
+
 }
 
 .buttons-and-format {
@@ -112,7 +112,13 @@ p {
   text-transform: uppercase;
 }
 
-.buttonComprar:hover {
-  background-color: white;
-  color: black;
+
+.buttonComprar {
+  margin: 35px 0px 0px 0;
+
+
 }
+.trailer{
+  margin: 35px 0px 0px 0;
+  }
+
