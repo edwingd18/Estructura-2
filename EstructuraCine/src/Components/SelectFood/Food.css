@@ -1,0 +1,83 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    font-size: 18px;
+}
+
+.contenedor-select-comida {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.icon-ticket {
+    width: 25px;
+    height: auto;
+    margin-right: 10px;
+    color: #1C64F2;
+}
+
+.icon-chair {
+    width: 25px;
+    height: auto;
+    margin-right: 10px;
+    color: #1C64F2;
+}
+
+.icon-popcorn {
+    width: 25px;
+    height: auto;
+    margin-right: 10px;
+    color: #1C64F2;
+}
+
+.icon-cash {
+    width: 25px;
+    height: auto;
+    margin-right: 10px;
+    color: #fff;
+}
+
+.linea-separadora {
+    border-top: 5px solid #979797;
+    width: 164px;
+    height: 5px;
+    margin: 0 10px;
+}
+
+.contenedor-iconos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.contenedor-comida {
+    width: 1000px;
+    min-height: 630px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #181725;
+    border-radius: 25px;
+    box-shadow: 0 3px 13px 1px rgb(0, 0, 0, 9%);
+}
+
+
+.contenedor-seleccionar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    height: 500px;
+}
