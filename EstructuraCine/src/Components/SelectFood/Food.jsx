@@ -16,7 +16,7 @@ function Food() {
                 <div className="contenedor-iconos">
                     <FaTicketSimple className="icon-ticket" />
                     <div className="linea-separadora"></div>
-                    <PiArmchairFill className="icon-chair" />
+                    <PiArmchairFill className="icon-chair " />
                     <div className="linea-separadora"></div>
                     <GiPopcorn className="icon-popcorn" />
                     <div className="linea-separadora"></div>
@@ -26,12 +26,13 @@ function Food() {
                     <Splide
                         options={{
                             rewind: true,
-                            width: "1340px",
+                            width: "1000px",
                             height: "327px",
                             gap: "20px",
-                            perPage: "4.5",
+                            perPage: "3.5",
                             autoplay: true,
                             focus: "center",
+                            
                         }}
                     >
                         <SplideSlide>
