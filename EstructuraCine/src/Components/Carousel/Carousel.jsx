@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 import "./Carousel.css";
+import { Link } from "react-router-dom"; 
 
 const Carousel = ({ movies }) => {
   const [currentMovieIndex, setCurrentMovieIndex] = useState(0);
@@ -17,18 +18,17 @@ const Carousel = ({ movies }) => {
   };
 
   const handleMovieClick = (index) => {
-    history.push(`/movie/${movies[index].id}`);
     setSelectedThumbnailIndex(index);
   };
 
   return (
     <div className="carousel">
-      <a
-        className="main-slide"
-        href={`/movie/${selectedThumbnailIndex !== null
+      <Link
+        to={`/movie/${selectedThumbnailIndex !== null
             ? movies[selectedThumbnailIndex].id
             : movies[currentMovieIndex].id
           }`}
+        className="main-slide"
       >
         <div className="image-container">
           <img
@@ -50,8 +50,7 @@ const Carousel = ({ movies }) => {
             </p>
           </div>
         </div>
-
-      </a>
+      </Link>
 
       <div className="thumbnails ">
         <Splide
@@ -67,10 +66,9 @@ const Carousel = ({ movies }) => {
         >
           {movies.map((movie, index) => (
             <SplideSlide key={index}>
-              <a
-                href={`/movie/${movie.id}`}
-                className={`thumbnail  ${index === selectedThumbnailIndex ? "active" : ""
-                  }`}
+              <Link
+                to={`/movie/${movie.id}`}
+                className={`thumbnail  ${index === selectedThumbnailIndex ? "active" : ""}`}
                 onClick={() => handleMovieClick(index)}
               >
                 <img
@@ -83,7 +81,7 @@ const Carousel = ({ movies }) => {
                       "https://via.placeholder.com/100x150?text=No+Image";
                   }}
                 />
-              </a>
+              </Link>
             </SplideSlide>
           ))}
         </Splide>
