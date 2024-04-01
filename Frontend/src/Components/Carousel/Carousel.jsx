@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 import "./Carousel.css";
-import { Link } from "react-router-dom"; 
+import { Link } from "react-router-dom";
 
 const Carousel = ({ movies }) => {
   const [currentMovieIndex, setCurrentMovieIndex] = useState(0);
@@ -25,8 +25,8 @@ const Carousel = ({ movies }) => {
     <div className="carousel">
       <Link
         to={`/movie/${selectedThumbnailIndex !== null
-            ? movies[selectedThumbnailIndex].id
-            : movies[currentMovieIndex].id
+          ? movies[selectedThumbnailIndex].id
+          : movies[currentMovieIndex].id
           }`}
         className="main-slide"
       >

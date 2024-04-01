@@ -3,11 +3,11 @@ import { FaTicketSimple } from "react-icons/fa6";
 import { PiArmchairFill } from "react-icons/pi";
 import { GiPopcorn } from "react-icons/gi";
 import { HiCash } from "react-icons/hi";
-import React, { useState } from "react";
+import { useState } from "react";
 
 function SeatMap() {
   const [selectedSeats, setSelectedSeats] = useState([]);
-  const maxSeats = 5; 
+  const maxSeats = 5;
 
   const handleSeatClick = (seatId) => {
     setSelectedSeats((prevSelectedSeats) => {
@@ -44,9 +44,8 @@ function SeatMap() {
             {Array.from({ length: 90 }, (_, i) => (
               <div
                 key={i}
-                className={`seat ${
-                  selectedSeats.includes(`seat${i + 1}`) ? "selected" : ""
-                }`}
+                className={`seat ${selectedSeats.includes(`seat${i + 1}`) ? "selected" : ""
+                  }`}
                 id={`seat${i + 1}`}
                 onClick={() => handleSeatClick(`seat${i + 1}`)}
               ></div>

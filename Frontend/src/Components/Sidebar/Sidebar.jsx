@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Sidebar as FlowbiteSidebar } from "flowbite-react";
 import {
   HiOutlineChatAlt2,
@@ -7,7 +7,6 @@ import {
   HiTicket,
 } from "react-icons/hi";
 import { FaBars } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
 
 import "./Sidebar.css"; // Importa tu archivo de estilos CSS para el Sidebar si lo tienes
 

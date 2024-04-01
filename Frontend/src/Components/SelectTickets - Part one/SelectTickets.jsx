@@ -5,9 +5,12 @@ import { GiPopcorn } from "react-icons/gi";
 import { HiCash } from "react-icons/hi";
 import { SelectChair, SelectChairPreferencial } from './SelectChair.jsx';
 import { Datepicker } from 'flowbite-react';
-
+import { useNavigate } from 'react-router-dom';
 
 function SelectTickets() {
+
+    const navigate = useNavigate();
+
     return (
         <div className="contenedor-select-tickets">
             <div className="contenedor-tickets">
@@ -37,7 +40,7 @@ function SelectTickets() {
                             nombreTipo="PREFERENCIAL"
                             imagen='preferencial' />
 
-                        <button className='btn-Siguiente'>Siguiente</button>
+                        <button onClick={() => navigate('/selectSeat')} className='btn-Siguiente'>Siguiente</button>
                     </div>
 
                 </div>
