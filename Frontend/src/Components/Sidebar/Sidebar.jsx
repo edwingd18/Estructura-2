@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Sidebar as FlowbiteSidebar } from "flowbite-react";
 import {
   HiOutlineChatAlt2,
@@ -6,9 +6,10 @@ import {
   HiUser,
   HiTicket,
 } from "react-icons/hi";
+import { FaBars } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
-import "./Sidebar.css";
+import "./Sidebar.css"; // Importa tu archivo de estilos CSS para el Sidebar si lo tienes
 
 function Sidebar() {
   const [isOpen, setIsOpen] = useState(false); // Estado para controlar si el Sidebar está abierto o cerrado
@@ -94,27 +95,17 @@ function Sidebar() {
     },
   };
 
-  // Función para abrir el Sidebar
-  const openSidebar = () => {
-    setIsOpen(true);
+  // Función para abrir/cerrar el Sidebar al hacer clic en la hamburguesa
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
   };
-
-  // Función para cerrar el Sidebar
-  const closeSidebar = () => {
-    setIsOpen(false);
-  };
-
-
 
   return (
-    <div
-      className={`sidebar-container   ${isOpen ? "open" : "close"}`}
-
-      onMouseEnter={openSidebar} // Abrir el Sidebar cuando el mouse entra
-      onMouseLeave={closeSidebar} // Cerrar el Sidebar cuando el mouse sale
-
-    >
+    <div className={`sidebar-container ${isOpen ? "open" : "close"}`}>
       <FlowbiteSidebar aria-label="Menu de Cine" theme={customtema} className="Sidebar">
+        <button className="hamburger" onClick={toggleSidebar}>
+          <FaBars />
+        </button>
         <FlowbiteSidebar.Items>
           <FlowbiteSidebar.ItemGroup>
             <FlowbiteSidebar.Item
@@ -124,18 +115,14 @@ function Sidebar() {
               <HiUser style={{ fontSize: '30px' }} />
               <span className="icon-label " style={{ marginLeft: '60px' }} >Perfil</span>
             </FlowbiteSidebar.Item>
-
             <FlowbiteSidebar.Item
               href="#"
               style={{ fontSize: 20 }}
               className="hover:text-black icon"
             >
-              <Link to='/selecttickets'>
-                <HiTicket style={{ fontSize: '30px' }} />
-                <span className="icon-label " style={{ marginLeft: '60px' }}>Boletas</span>
-              </Link>
+              <HiTicket style={{ fontSize: '30px' }} />
+              <span className="icon-label " style={{ marginLeft: '60px' }}>Boletas</span>
             </FlowbiteSidebar.Item>
-
             <FlowbiteSidebar.Item
               href="#"
               style={{ fontSize: 20 }}
@@ -144,7 +131,6 @@ function Sidebar() {
               <HiShoppingCart style={{ fontSize: '30px' }} />
               <span className="icon-label " style={{ marginLeft: '60px' }}>Carrito</span>
             </FlowbiteSidebar.Item>
-
             <FlowbiteSidebar.Item
               href="#"
               style={{ fontSize: 20 }}
@@ -161,3 +147,6 @@ function Sidebar() {
 }
 
 export default Sidebar;
+
+
+
