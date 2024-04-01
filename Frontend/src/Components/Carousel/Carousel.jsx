@@ -10,9 +10,12 @@ const URI = 'http://localhost:8000/api/movies/';
 const Carousel = () => {
   const [carouselItems, setCarouselItems] = useState([]);
   const [selectedThumbnailIndex, setSelectedThumbnailIndex] = useState(null);
+  const [currentMovieIndex, setCurrentMovieIndex] = useState(0);
 
   useEffect(() => {
       fetchCarouselItems();
+      const interval = setInterval(nextMovie, 5000);
+      return () => clearInterval(interval);
   }, []);
 
   const fetchCarouselItems = async () => {
@@ -24,6 +27,11 @@ const Carousel = () => {
       }
   };
 
+  const nextMovie = () => {
+    setCurrentMovieIndex((prevIndex) => (prevIndex + 1) % carouselItems.length);
+};
+
+
   const handleMovieClick = (index) => {
     setSelectedThumbnailIndex(index === selectedThumbnailIndex ? null : index);
   };
@@ -31,26 +39,26 @@ const Carousel = () => {
   return (
     <div className="carousel">
       <Link
-        to={`/movie/${carouselItems[0]?.id}`} // Mostrar la primera película si no hay una miniatura seleccionada
+        to={`/movie/${carouselItems[currentMovieIndex]?.id}`} 
         className="main-slide"
       >
         <div className="image-container">
           <img
             className="brightness-50"
-            src={carouselItems[selectedThumbnailIndex !== null ? selectedThumbnailIndex : 0]?.bannerUrl}
+            src={carouselItems[currentMovieIndex]?.bannerUrl}
             onError={(e) => {
               e.target.onerror = null;
               e.target.src = "https://via.placeholder.com/800x400?text=No+Image";
             }}
-            alt={carouselItems[selectedThumbnailIndex !== null ? selectedThumbnailIndex : 0]?.title}
+            alt={carouselItems[currentMovieIndex]?.title}
             style={{ width: "1340px", height: "600px" }}
           />
           <div className="overlay-container">
             <h2 className="title-overlay font-titles uppercase font-bold">
-              {carouselItems[selectedThumbnailIndex !== null ? selectedThumbnailIndex : 0]?.title}
+              {carouselItems[currentMovieIndex]?.title}
             </h2>
             <p className="description-overlay font-titles font-semibold">
-              {carouselItems[selectedThumbnailIndex !== null ? selectedThumbnailIndex : 0]?.description}
+              {carouselItems[currentMovieIndex]?.description}
             </p>
           </div>
         </div>
@@ -64,7 +72,7 @@ const Carousel = () => {
             height: "327px",
             gap: "20px",
             perPage: "4.5",
-            autoplay: true,
+            autoplay: false, // Desactivar el autoplay del Splide para evitar conflictos
             focus: "center",
           }}
         >
