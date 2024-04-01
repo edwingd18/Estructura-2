@@ -2,51 +2,55 @@ import { useState, useEffect } from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 import "./Carousel.css";
+import axios from 'axios';
 import { Link } from "react-router-dom"; 
 
-const Carousel = ({ movies }) => {
-  const [currentMovieIndex, setCurrentMovieIndex] = useState(0);
+const URI = 'http://localhost:8000/api/movies/';
+
+const Carousel = () => {
+  const [carouselItems, setCarouselItems] = useState([]);
   const [selectedThumbnailIndex, setSelectedThumbnailIndex] = useState(null);
 
   useEffect(() => {
-    const interval = setInterval(nextMovie, 5000);
-    return () => clearInterval(interval);
+      fetchCarouselItems();
   }, []);
 
-  const nextMovie = () => {
-    setCurrentMovieIndex((prevIndex) => (prevIndex + 1) % movies.length);
+  const fetchCarouselItems = async () => {
+      try {
+          const response = await axios.get(URI);
+          setCarouselItems(response.data);
+      } catch (error) {
+          console.error('Error fetching carousel items:', error);
+      }
   };
 
   const handleMovieClick = (index) => {
-    setSelectedThumbnailIndex(index);
+    setSelectedThumbnailIndex(index === selectedThumbnailIndex ? null : index);
   };
 
   return (
     <div className="carousel">
       <Link
-        to={`/movie/${selectedThumbnailIndex !== null
-            ? movies[selectedThumbnailIndex].id
-            : movies[currentMovieIndex].id
-          }`}
+        to={`/movie/${carouselItems[0]?.id}`} // Mostrar la primera película si no hay una miniatura seleccionada
         className="main-slide"
       >
         <div className="image-container">
           <img
             className="brightness-50"
-            src={movies[selectedThumbnailIndex !== null ? selectedThumbnailIndex : currentMovieIndex].bannerUrl}
+            src={carouselItems[selectedThumbnailIndex !== null ? selectedThumbnailIndex : 0]?.bannerUrl}
             onError={(e) => {
               e.target.onerror = null;
               e.target.src = "https://via.placeholder.com/800x400?text=No+Image";
             }}
-            alt={movies[selectedThumbnailIndex !== null ? selectedThumbnailIndex : currentMovieIndex].title}
+            alt={carouselItems[selectedThumbnailIndex !== null ? selectedThumbnailIndex : 0]?.title}
             style={{ width: "1340px", height: "600px" }}
           />
           <div className="overlay-container">
             <h2 className="title-overlay font-titles uppercase font-bold">
-              {movies[selectedThumbnailIndex !== null ? selectedThumbnailIndex : currentMovieIndex].title}
+              {carouselItems[selectedThumbnailIndex !== null ? selectedThumbnailIndex : 0]?.title}
             </h2>
             <p className="description-overlay font-titles font-semibold">
-              {movies[selectedThumbnailIndex !== null ? selectedThumbnailIndex : currentMovieIndex].description}
+              {carouselItems[selectedThumbnailIndex !== null ? selectedThumbnailIndex : 0]?.description}
             </p>
           </div>
         </div>
@@ -64,7 +68,7 @@ const Carousel = ({ movies }) => {
             focus: "center",
           }}
         >
-          {movies.map((movie, index) => (
+          {carouselItems.map((movie, index) => (
             <SplideSlide key={index}>
               <Link
                 to={`/movie/${movie.id}`}
