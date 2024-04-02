@@ -2,8 +2,10 @@ import express from "express"
 import cors from 'cors'
 //importamos la conexión a la DB
 import db from "./database/db.js"
+
 //importamos nuestro enrutador
 import MovieRoutes from './routes/routes.js'
+import PaymentRoutes from './routes/payment.routes.js'
 
 const app = express()
 
@@ -11,6 +13,7 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use('/movies', MovieRoutes)
+app.use('/payment', PaymentRoutes)
 
 //Ruta de bienvenida
 app.listen(8000, () => {

@@ -1,31 +1,44 @@
+import { MercadoPagoConfig, Preference } from "mercadopago"
+
 export const createOrder = async (req, res) => {
+
+    const client = new MercadoPagoConfig({
+        accessToken: 'TEST-7657111617572725-040210-4d168afb539a4921a02aa3649ea03e48-319035764'
+    });
+
     try {
-        let preference = {
+        const body = {
             items: [
                 {
-                    title: 'Numero de silla',
-                    quantity: 1, // Aquí puedes poner el número de sillas
-                    unit_price: 100, // Aquí puedes poner el valor a pagar
-                    description: 'Sala: Sala 1', // Aquí puedes poner la sala
-                    picture_url: 'https://www.example.com/image.jpg', // Aquí puedes poner una imagen de la silla
-                    id: 'silla1', // Aquí puedes poner un identificador único para la silla
-                    category_id: 'general', // Aquí puedes poner una categoría para la silla
-                    currency_id: 'COP', // Aquí puedes poner la moneda en la que se va a realizar el pago
+                    title: req.body.title,
+                    quantity: Number(req.body.quantity),
+                    unit_price: Number(req.body.price),
+                    currency_id: 'COP',
+                    // description: 'Sala: Sala 1',
+                    // picture_url: 'https://www.example.com/image.jpg',
+                    // id: 'silla1',
+                    // category_id: 'general',
                 }
             ],
-            payer: {
-                email: 'comprador@example.com', // Aquí puedes poner el correo del comprador
-            }
+            back_urls: {
+                success: 'https://github.com/mercadopago/checkout-payment-sample/tree/master/client/reactjs',
+                failure: 'https://github.com/mercadopago/checkout-payment-sample/tree/master/client/reactjs',
+                pending: 'https://github.com/mercadopago/checkout-payment-sample/tree/master/client/reactjs'
+            },
+            auto_return: "approved"
         };
 
-        mercadopago.preferences.create(preference)
-            .then(function (response) {
-                res.redirect(response.body.init_point);
-            }).catch(function (error) {
-                console.log(error);
-            });
+        const preference = new Preference(client)
+        const result = await preference.create({ body })
+
+        res.json({
+            preference: result.id
+        })
+
     } catch (error) {
         console.error(error);
-        res.status(500).send('Hubo un error al procesar el pago');
+        res.status(500).json({
+            error: 'Hubo un error al procesar el pago'
+        });
     }
 }
