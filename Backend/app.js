@@ -14,5 +14,5 @@ app.use('/movies', MovieRoutes)
 
 //Ruta de bienvenida
 app.listen(8000, () => {
-    console.log('Server UP running in http://localhost:8000/')
+    console.log('Server UP running in http://localhost:', 8000)
 })
