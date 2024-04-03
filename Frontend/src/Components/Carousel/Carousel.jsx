@@ -37,17 +37,21 @@ const Carousel = () => {
           effect={'coverflow'}
           grabCursor={true}
           centeredSlides={true}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
           slidesPerView={'auto'}
           coverflowEffect={{
-            rotate: 50,
+            rotate: 0, // Reducimos el ángulo de rotación
             stretch: 0,
             depth: 100,
             modifier: 1,
             slideShadows: true,
           }}
-          pagination={true}
-          modules={[EffectCoverflow, Pagination]}
+          modules={[EffectCoverflow, Autoplay]}
           className="mySwiper"
+          style={{ width: '1000px', height: '450px' }} // Reducimos el tamaño del carrusel
         >
           {carouselItems.map((movie, index) => (
             <SwiperSlide key={index}>
@@ -56,10 +60,6 @@ const Carousel = () => {
                 className={`thumbnail ${index === selectedThumbnailIndex ? 'active' : ''}`}
                 onClick={() => handleMovieClick(index)}
               >
-                <div className="movie-info">
-                  <h2>{movie.title}</h2>
-                  <p>{movie.description}</p>
-                </div>
                 <img
                   src={movie.bannerUrl}
                   alt={movie.title}
@@ -77,15 +77,21 @@ const Carousel = () => {
         <Swiper
           spaceBetween={20}
           slidesPerView={4.5}
-          autoplay={{ delay: 3000 }}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
           modules={[Autoplay]}
           className="mySwiper"
+          style={{ width: '1000px', height: '450px' }} // Reducimos el tamaño del carrusel
+
         >
           {carouselItems.map((movie, index) => (
             <SwiperSlide key={index}>
               <Link
                 to={`/movie/${movie.id}`}
                 className={`thumbnail ${index === selectedThumbnailIndex ? 'active' : ''}`}
+                
                 onClick={() => handleMovieClick(index)}
               >
                 <img
