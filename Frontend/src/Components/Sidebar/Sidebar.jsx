@@ -99,7 +99,6 @@ function Sidebar() {
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
-
   return (
     <div className={`sidebar-container ${isOpen ? "open" : "close"}`}>
       <FlowbiteSidebar aria-label="Menu de Cine" theme={customtema} className="Sidebar">
@@ -110,34 +109,34 @@ function Sidebar() {
           <FlowbiteSidebar.ItemGroup>
             <FlowbiteSidebar.Item
               className="hover:text-black icon"
-              style={{ fontSize: 20 }}
+              
             >
-              <HiUser style={{ fontSize: '30px' }} />
-              <span className="icon-label " style={{ marginLeft: '60px' }} >Perfil</span>
+              <HiUser />
+              <span className="icon-label "  >Perfil</span>
             </FlowbiteSidebar.Item>
             <FlowbiteSidebar.Item
               href="#"
-              style={{ fontSize: 20 }}
+              
               className="hover:text-black icon"
             >
-              <HiTicket style={{ fontSize: '30px' }} />
-              <span className="icon-label " style={{ marginLeft: '60px' }}>Boletas</span>
+              <HiTicket  />
+              <span className="icon-label " >Boletas</span>
             </FlowbiteSidebar.Item>
             <FlowbiteSidebar.Item
               href="#"
-              style={{ fontSize: 20 }}
+              
               className="hover:text-black icon"
             >
-              <HiShoppingCart style={{ fontSize: '30px' }} />
-              <span className="icon-label " style={{ marginLeft: '60px' }}>Carrito</span>
+              <HiShoppingCart />
+              <span className="icon-label ">Carrito</span>
             </FlowbiteSidebar.Item>
             <FlowbiteSidebar.Item
               href="#"
-              style={{ fontSize: 20 }}
+              
               className="hover:text-black icon"
             >
-              <HiOutlineChatAlt2 style={{ fontSize: '30px' }} />
-              <span className="icon-label " style={{ marginLeft: '60px' }} >Chat</span>
+              <HiOutlineChatAlt2  />
+              <span className="icon-label "  >Chat</span>
             </FlowbiteSidebar.Item>
           </FlowbiteSidebar.ItemGroup>
         </FlowbiteSidebar.Items>
@@ -147,6 +146,3 @@ function Sidebar() {
 }
 
 export default Sidebar;
-
-
-
