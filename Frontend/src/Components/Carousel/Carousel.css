@@ -1,11 +1,7 @@
-/* Estilos para el carrusel principal */
-.main-swiper .swiper-slide {
-  transition: transform 0.3s ease;
+.carousel{
+  margin-left: 120px;
 }
 
-.main-swiper .swiper-slide:hover {
-  transform: scale(1.05);
-}
 
 .main-slide-image {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -29,20 +25,6 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Estilos para los botones de navegación */
-.swiper-button-prev,
-.swiper-button-next {
-  color: #fff;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 10px;
-  border-radius: 50%;
-  transition: background-color 0.3s ease;
-}
-
-.swiper-button-prev:hover,
-.swiper-button-next:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-}
 
 /* Estilos para los indicadores de diapositivas */
 .swiper-pagination-bullet {

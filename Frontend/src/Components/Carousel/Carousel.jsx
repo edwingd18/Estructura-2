@@ -49,7 +49,7 @@ const Carousel = () => {
           }}
           modules={[EffectCoverflow, Autoplay]}
           className="mySwiper main-swiper"
-          style={{ width: '1100px', height: '618.75px' }}
+          style={{ width: '1200px', height: '675px' }}
         >
           {carouselItems.map((movie, index) => (
             <SwiperSlide key={index}>
@@ -92,7 +92,7 @@ const Carousel = () => {
           autoplay={{ delay: 2500, disableOnInteraction: false }}
           modules={[Autoplay, Navigation]}
           className="mySwiper thumbnail-swiper"
-          style={{ width: '1100px', height: '343.1px' }}
+          style={{ width: '1200px', height: '520px' }}
         >
           {carouselItems.map((movie, index) => (
             <SwiperSlide key={index}>
