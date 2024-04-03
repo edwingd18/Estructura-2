@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
-import { EffectCoverflow, Pagination } from 'swiper/modules';
+import { EffectCoverflow, Pagination, Autoplay } from 'swiper/modules';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
@@ -73,7 +73,34 @@ const Carousel = () => {
           ))}
         </Swiper>
       </div>
-      {/* Aquí puedes agregar el componente de miniaturas si lo necesitas */}
+      <div className="thumbnails">
+        <Swiper
+          spaceBetween={20}
+          slidesPerView={4.5}
+          autoplay={{ delay: 3000 }}
+          modules={[Autoplay]}
+          className="mySwiper"
+        >
+          {carouselItems.map((movie, index) => (
+            <SwiperSlide key={index}>
+              <Link
+                to={`/movie/${movie.id}`}
+                className={`thumbnail ${index === selectedThumbnailIndex ? 'active' : ''}`}
+                onClick={() => handleMovieClick(index)}
+              >
+                <img
+                  src={movie.imageUrl}
+                  alt={movie.title}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = 'https://via.placeholder.com/100x150?text=No+Image';
+                  }}
+                />
+              </Link>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
     </div>
   );
 };
