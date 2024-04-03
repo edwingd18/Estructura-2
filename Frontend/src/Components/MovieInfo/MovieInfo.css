@@ -12,6 +12,10 @@
 
 }
 
+.movie-text{
+  margin-left: 100px;
+}
+
 .trailer,
 .movie-poster {
   width: 600px;

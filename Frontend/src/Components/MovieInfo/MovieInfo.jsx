@@ -51,7 +51,8 @@ function MovieInfo() {
           ></iframe>
         </div>
       </div>
-      <div className="movie">
+      <div>
+      <div className="movie-text">
         <h1 className="movie-title ">{movie.title}</h1>
         <p className="description">{movie.description}</p>
         <div className="info">
@@ -65,6 +66,7 @@ function MovieInfo() {
         <div className="format">
           <div className="movie-format">{movie.format.join(", ")}</div>
         </div>
+        
         <div>
           <Link to='/selecttickets'>
             <Button className="bg-black border border-whiter buttonComprar">
@@ -72,6 +74,7 @@ function MovieInfo() {
               Adquiere tus entradas
             </Button>
           </Link>
+        </div>
         </div>
       </div>
     </div>
