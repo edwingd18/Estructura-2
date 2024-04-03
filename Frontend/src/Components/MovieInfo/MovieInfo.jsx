@@ -41,7 +41,7 @@ function MovieInfo() {
         <img src={movie.imageUrl} alt="Imagen" className="movie-poster" />
         <div className="trailer">
           <iframe
-            width="1600"
+            width="1220"
             height="800"
             src={movie.trailerUrl}
             title="Trailer"
