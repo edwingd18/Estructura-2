@@ -16,24 +16,25 @@
   margin: 25px 0px 0px 0;
 }
 
-.main-slide img,
+
+/* /* .main-slide img,
 .thumbnail img {
   border-radius: 10px;
-}
+} */
 
-.main-slide-image {
+/* /* .main-slide-image {
   width: 1500px; /* Ancho deseado */
-  height: 800px; /* Alto deseado */
-  overflow: hidden; /* Para recortar la imagen */
-  position: relative;
-}
+  /* height: 800px; Alto deseado */
+  /* overflow: hidden; Para recortar la imagen */
+  /* position: relative; */ 
+/* } */
 
-.main-slide-image img {
+/* .main-slide-image img {
   object-fit: cover; /* Para recortar y cubrir el contenedor */
-  width: 100%;
-  height: 100%;
-  filter: blur(100%);
-}
+  /* width: 100%;
+  height: 100%; */
+  /* filter: blur(100%);
+} */  */
 
 .thumbnails-container {
   width: 100%;
@@ -65,5 +66,40 @@
   color: rgb(255, 255, 255);
   font-size: 25px; /* Ajusta este valor según sea necesario */
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Añade sombra al texto */
+}
+
+.movie-info {
+  position: absolute;
+  top: 20px; /* Ajusta según la posición deseada */
+  left: 20px; /* Ajusta según la posición deseada */
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+  padding: 10px;
+  color: white; /* Texto blanco */
+  z-index: 1000; /* Asegura que esté por encima de la imagen */
+  max-width: 90%; /* Ancho máximo para que sea responsive */
+}
+
+.movie-info h2 {
+  margin-bottom: 5px;
+  font-size: 24px;
+}
+
+.movie-info p {
+  margin: 0;
+  font-size: 16px;
+}
+
+/* Estilos adicionales para hacerlo responsive */
+@media screen and (max-width: 768px) {
+  .movie-info {
+    font-size: 14px;
+    max-width: 80%;
+    top: 10px;
+    left: 10px;
+  }
+
+  .movie-info h2 {
+    font-size: 20px;
+  }
 }
 
