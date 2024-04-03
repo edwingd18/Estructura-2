@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
-import { EffectCoverflow, Navigation, Autoplay } from 'swiper/modules';
+import { EffectCoverflow, Navigation, Autoplay} from 'swiper/modules';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import './Carousel.css';
@@ -73,8 +73,8 @@ const Carousel = () => {
       />
     </div>
     <div className="movie-texto">
-      <h2>{movie.title}</h2>
-      <p>{movie.description}</p>
+      <h2 className='title-overlay font-bold text-5xl font-titles uppercase'>{movie.title}</h2>
+      <p className='description-overlay text-2xl font-titles font-medium'>{movie.description}</p>
     </div>
   </Link>
 </div>
