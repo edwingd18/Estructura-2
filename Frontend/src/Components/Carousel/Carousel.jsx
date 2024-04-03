@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
-import { Splide, SplideSlide } from "@splidejs/react-splide";
-import "@splidejs/splide/dist/css/themes/splide-default.min.css";
-import "./Carousel.css";
+import React, { useState, useEffect } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
+import { EffectCoverflow, Pagination } from 'swiper/modules';
 import axios from 'axios';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const URI = 'http://localhost:8000/api/movies/';
 
@@ -31,19 +33,27 @@ const Carousel = () => {
   return (
     <div className="carousel">
       <div className="main-slide">
-        <Splide
-          options={{
-            width: "1340px",
-            height: "600px",
-            arrows: false, // Quitamos las flechas
-            pagination: false, // Quitamos los indicadores de slide
+        <Swiper
+          effect={'coverflow'}
+          grabCursor={true}
+          centeredSlides={true}
+          slidesPerView={'auto'}
+          coverflowEffect={{
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows: true,
           }}
+          pagination={true}
+          modules={[EffectCoverflow, Pagination]}
+          className="mySwiper"
         >
           {carouselItems.map((movie, index) => (
-            <SplideSlide key={index}>
+            <SwiperSlide key={index}>
               <Link
                 to={`/movie/${movie.id}`}
-                className={`thumbnail  ${index === selectedThumbnailIndex ? "active" : ""}`}
+                className={`thumbnail ${index === selectedThumbnailIndex ? 'active' : ''}`}
                 onClick={() => handleMovieClick(index)}
               >
                 <div className="movie-info">
@@ -52,52 +62,18 @@ const Carousel = () => {
                 </div>
                 <img
                   src={movie.bannerUrl}
-                  style={{ width: "1340px", height: "600px" }} // Cambio aquí
                   alt={movie.title}
                   onError={(e) => {
                     e.target.onerror = null;
-                    e.target.src = "https://via.placeholder.com/100x150?text=No+Image";
+                    e.target.src = 'https://via.placeholder.com/100x150?text=No+Image';
                   }}
                 />
               </Link>
-            </SplideSlide>
+            </SwiperSlide>
           ))}
-        </Splide>
+        </Swiper>
       </div>
-
-      <div className="thumbnails ">
-        <Splide
-          options={{
-            rewind: true,
-            width: "1340px",
-            height: "327px",
-            gap: "20px",
-            perPage: "4.5",
-            autoplay: true,
-            focus: "center",
-          }}
-        >
-          {carouselItems.map((movie, index) => (
-            <SplideSlide key={index}>
-              <Link
-                to={`/movie/${movie.id}`}
-                className={`thumbnail  ${index === selectedThumbnailIndex ? "active" : ""}`}
-                onClick={() => handleMovieClick(index)}
-              >
-                <img
-                  src={movie.imageUrl}
-                  style={{ width: "268px", height: "327px" }}
-                  alt={movie.title}
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = "https://via.placeholder.com/100x150?text=No+Image";
-                  }}
-                />
-              </Link>
-            </SplideSlide>
-          ))}
-        </Splide>
-      </div>
+      {/* Aquí puedes agregar el componente de miniaturas si lo necesitas */}
     </div>
   );
 };
