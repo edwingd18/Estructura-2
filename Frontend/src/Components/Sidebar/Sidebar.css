@@ -8,6 +8,13 @@
   z-index: 199999;
 
 }
+.hamburger {
+  /* Estilos para hacerla del mismo color que los otros iconos */
+  color: white;
+  /* Estilos para agrandarla */
+  font-size: 30px;
+  padding: 20px;
+}
 
 .slidebar-container .icon {
   align-items: flex-end;

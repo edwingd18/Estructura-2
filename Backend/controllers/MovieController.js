@@ -1,16 +1,15 @@
 import MovieModel from "../models/MovieModel.js";
 
-//Mostrar todas las peliculas
-
+// Mostrar todas las peliculas
 export const getAllMovies = async (req, res) => {
-
-    try{
-        const movies = await MovieModel. find()
-        res.status(200).json(movies)
+    try {
+        const movies = await MovieModel.find();
+        if (!movies) {
+            return res.status(404).json({ message: "No se encontraron películas." });
+        }
+        res.status(200).json(movies);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: error.message });
     }
-    catch(error){
-        res.json({message: error.message})
-
-    }
-}
-
+};

@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -7,6 +8,7 @@ import { EffectCoverflow, Navigation, Autoplay} from 'swiper/modules';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import './Carousel.css';
+
 
 const URI = 'http://localhost:8000/api/movies/';
 
@@ -33,6 +35,7 @@ const Carousel = () => {
 
   return (
     <div className="carousel">
+
       <div className="main-slide" style={{ marginTop: '20px' }}>
         <Swiper
           effect={'coverflow'}
@@ -94,6 +97,7 @@ const Carousel = () => {
           navigation={{
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
+
           }}
           autoplay={{ delay: 2500, disableOnInteraction: false }}
           modules={[Autoplay, Navigation]}

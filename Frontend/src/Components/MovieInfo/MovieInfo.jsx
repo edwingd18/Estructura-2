@@ -68,7 +68,7 @@ function MovieInfo() {
         </div>
         
         <div>
-          <Link to='/selecttickets'>
+          <Link to='/login'>
             <Button className="bg-black border border-whiter buttonComprar">
               <HiShoppingCart className="mr-2 h-5 w-5" />
               Adquiere tus entradas
