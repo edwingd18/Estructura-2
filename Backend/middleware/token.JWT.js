@@ -1,15 +1,19 @@
-export const verifyToken = (req, res, next) => {
-    const token = req.headers['authorization'];
+import jwt from 'jsonwebtoken';
 
-    if (!token) {
-        return res.status(401).json({ error: 'Token no proporcionado' });
+export function verifyToken(req, res, next) {
+    const accessToken = req.headers['authorization'];
+
+    console.log(accessToken);
+
+    if (!accessToken) {
+        return res.send('Access denied');
     }
 
-    try {
-        const decoded = jwt.verify(token, process.env.SECRET_KEY);
-        req.userId = decoded.userId;
-        next();
-    } catch (error) {
-        res.status(403).json({ error: 'Token inválido' });
-    }
-};
+    jwt.verify(accessToken, process.env.SECRET_KEY, (err, user) => {
+        if (err) {
+            return res.send('Invalid Token');
+        } else {
+            next();
+        }
+    })
+}
