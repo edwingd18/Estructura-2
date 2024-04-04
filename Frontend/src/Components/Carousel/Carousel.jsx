@@ -1,20 +1,32 @@
-import { useState, useEffect } from "react";
-import { Splide, SplideSlide } from "@splidejs/react-splide";
-import "@splidejs/splide/dist/css/themes/splide-default.min.css";
-import "./Carousel.css";
-import { Link } from "react-router-dom";
 
-const Carousel = ({ movies }) => {
-  const [currentMovieIndex, setCurrentMovieIndex] = useState(0);
+import { useState, useEffect } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
+import { EffectCoverflow, Navigation, Autoplay} from 'swiper/modules';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import './Carousel.css';
+
+
+const URI = 'http://localhost:8000/api/movies/';
+
+const Carousel = () => {
+  const [carouselItems, setCarouselItems] = useState([]);
   const [selectedThumbnailIndex, setSelectedThumbnailIndex] = useState(null);
 
   useEffect(() => {
-    const interval = setInterval(nextMovie, 5000);
-    return () => clearInterval(interval);
+    fetchCarouselItems();
   }, []);
 
-  const nextMovie = () => {
-    setCurrentMovieIndex((prevIndex) => (prevIndex + 1) % movies.length);
+  const fetchCarouselItems = async () => {
+    try {
+      const response = await axios.get(URI);
+      setCarouselItems(response.data);
+    } catch (error) {
+      console.error('Error fetching carousel items:', error);
+    }
   };
 
   const handleMovieClick = (index) => {
@@ -23,68 +35,98 @@ const Carousel = ({ movies }) => {
 
   return (
     <div className="carousel">
-      <Link
-        to={`/movie/${selectedThumbnailIndex !== null
-          ? movies[selectedThumbnailIndex].id
-          : movies[currentMovieIndex].id
-          }`}
-        className="main-slide"
-      >
-        <div className="image-container">
-          <img
-            className="brightness-50"
-            src={movies[selectedThumbnailIndex !== null ? selectedThumbnailIndex : currentMovieIndex].bannerUrl}
-            onError={(e) => {
-              e.target.onerror = null;
-              e.target.src = "https://via.placeholder.com/800x400?text=No+Image";
-            }}
-            alt={movies[selectedThumbnailIndex !== null ? selectedThumbnailIndex : currentMovieIndex].title}
-            style={{ width: "1340px", height: "600px" }}
-          />
-          <div className="overlay-container">
-            <h2 className="title-overlay font-titles uppercase font-bold">
-              {movies[selectedThumbnailIndex !== null ? selectedThumbnailIndex : currentMovieIndex].title}
-            </h2>
-            <p className="description-overlay font-titles font-semibold">
-              {movies[selectedThumbnailIndex !== null ? selectedThumbnailIndex : currentMovieIndex].description}
-            </p>
-          </div>
-        </div>
-      </Link>
 
-      <div className="thumbnails ">
-        <Splide
-          options={{
-            rewind: true,
-            width: "1340px",
-            height: "327px",
-            gap: "20px",
-            perPage: "4.5",
-            autoplay: true,
-            focus: "center",
+      <div className="main-slide" style={{ marginTop: '20px' }}>
+        <Swiper
+          effect={'coverflow'}
+          grabCursor={true}
+          loop= {true}
+          centeredSlides={true}
+          autoplay={{ delay: 5000, disableOnInteraction: false }}
+          slidesPerView={'auto'}
+          coverflowEffect={{
+            rotate: 70,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows: true,
           }}
+          modules={[EffectCoverflow, Autoplay]}
+          className="mySwiper main-swiper"
+          style={{ width: '1370px', height: '675px' }}
         >
-          {movies.map((movie, index) => (
-            <SplideSlide key={index}>
+          {carouselItems.map((movie, index) => (
+            <SwiperSlide key={index}>
+<div className="movie-item">
+  <Link
+    to={`/movie/${movie._id}`}
+    className={`thumbnail ${index === selectedThumbnailIndex ? 'active' : ''}`}
+    onClick={() => handleMovieClick(index)}
+  >
+    <div className="image-container">
+      <img
+        src={movie.bannerUrl}
+        alt={movie.title}
+        onError={(e) => {
+          e.target.onerror = null;
+          e.target.src = 'https://via.placeholder.com/100x150?text=No+Image';
+        }}
+        style={{ borderRadius: '10px' }}
+        className="main-slide-image"
+      />
+    </div>
+    <div className="movie-texto">
+      <h2 className='title-overlay font-bold text-5xl font-titles uppercase'>{movie.title}</h2>
+      <p className='description-overlay text-2xl font-titles font-medium'>{movie.description}</p>
+    </div>
+  </Link>
+</div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+      <div className="thumbnails" style={{ marginTop: '20px' }}>
+        <Swiper
+          spaceBetween={20}
+          slidesPerView={5}
+          loop= {true}
+          pagination={{
+            dynamicBullets: true,
+            clickable: true,
+          }}
+          navigation={{
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+
+          }}
+          autoplay={{ delay: 2500, disableOnInteraction: false }}
+          modules={[Autoplay, Navigation]}
+          className="mySwiper thumbnail-swiper"
+          style={{ width: '1370px', height: '420px' }}
+        >
+          {carouselItems.map((movie, index) => (
+            <SwiperSlide key={index}>
               <Link
-                to={`/movie/${movie.id}`}
-                className={`thumbnail  ${index === selectedThumbnailIndex ? "active" : ""}`}
+                to={`/movie/${movie._id}`}
+                className={`thumbnail ${index === selectedThumbnailIndex ? 'active' : ''}`}
                 onClick={() => handleMovieClick(index)}
               >
                 <img
                   src={movie.imageUrl}
-                  style={{ width: "268px", height: "327px" }}
                   alt={movie.title}
                   onError={(e) => {
                     e.target.onerror = null;
-                    e.target.src =
-                      "https://via.placeholder.com/100x150?text=No+Image";
+                    e.target.src = 'https://via.placeholder.com/100x150?text=No+Image';
                   }}
+                  style={{ borderRadius: '10px' }}
+                  className="thumbnail-image"
                 />
               </Link>
-            </SplideSlide>
+            </SwiperSlide>
           ))}
-        </Splide>
+          <div className="swiper-button-prev"></div>
+          <div className="swiper-button-next"></div>
+        </Swiper>
       </div>
     </div>
   );

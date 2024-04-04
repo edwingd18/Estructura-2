@@ -1,69 +1,68 @@
-/* Estilos para la componente Carousel */
 .carousel {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  padding: 20px;
+	margin-left: 100px;
 }
 
-
-/* Estilos para las miniaturas de películas */
-.thumbnails {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 25px 0px 0px 0;
+.movie-item {
+	position: relative;
 }
 
-.main-slide img,
-.thumbnail img {
-  border-radius: 10px;
+.movie-texto {
+	position: absolute;
+	bottom: 150px;
+	left: 120px;
+	color: white;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+.movie-item:hover .movie-texto,
+.movie-texto:hover {
+	opacity: 1;
 }
 
 .main-slide-image {
-  width: 1500px; /* Ancho deseado */
-  height: 800px; /* Alto deseado */
-  overflow: hidden; /* Para recortar la imagen */
-  position: relative;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	opacity: 1;
+	transition: opacity 0.3s ease;
+	width: 100%;
+	height: auto;
 }
-
-.main-slide-image img {
-  object-fit: cover; /* Para recortar y cubrir el contenedor */
-  width: 100%;
-  height: 100%;
-  filter: blur(100%);
-}
-
-.thumbnails-container {
-  width: 100%;
-  overflow-x: auto;
-  white-space: nowrap; /* Evita que los thumbnails se dividan en múltiples líneas */
-}
-
-
 
 .image-container {
-  position: relative;
+	backdrop-filter: blur(10px);
+	border-radius: 10px;
+	overflow: hidden;
 }
 
-.title-overlay {
-  position: absolute;
-  bottom: 270px; /* Ajusta este valor según sea necesario */
-  left: 60px; /* Ajusta este valor según sea necesario */
-  color: white;
-  font-size: 60px; /* Ajusta este valor según sea necesario */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Añade sombra al texto */
-  margin-bottom: 10px; /* Espaciado entre el título y la descripción */
-  top: calc(50% - 90px); /* La mitad de la altura del texto */
-
-}
-.description-overlay {
-  position: absolute;
-  bottom: 20px; /* Ajusta este valor según sea necesario */
-  left: 60px; /* Ajusta este valor según sea necesario */
-  color: rgb(255, 255, 255);
-  font-size: 25px; /* Ajusta este valor según sea necesario */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Añade sombra al texto */
+.movie-item:hover .main-slide-image,
+.movie-texto:hover + .main-slide-image {
+	opacity: 0.5;
 }
 
+.thumbnail-swiper .swiper-slide {
+	opacity: 0.5;
+	transition: opacity 0.3s ease;
+}
+
+.thumbnail-swiper .swiper-slide.active {
+	opacity: 1;
+}
+
+.thumbnail-swiper .swiper-slide:hover {
+	opacity: 1;
+}
+
+.thumbnail-image {
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.swiper-pagination-bullet {
+	background-color: #fff;
+	opacity: 0.5;
+	transition: opacity 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+	opacity: 1;
+}

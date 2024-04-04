@@ -13,7 +13,10 @@ const app = express()
 // Middleware
 app.use(cors())
 app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+
+app.use(express.urlencoded({extended:true}))
+app.use('/api/movies', MovieRoutes)
+
 
 // Rutas
 app.use('/movies', MovieRoutes)

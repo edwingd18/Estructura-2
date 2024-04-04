@@ -1,17 +1,38 @@
-// MovieInfo.js
-import { useParams } from "react-router-dom";
-import "./MovieInfo.css";
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import axios from 'axios';
+import { Link, useParams } from 'react-router-dom';
 import { Button } from "flowbite-react";
 import { HiShoppingCart } from "react-icons/hi";
-import PropTypes from 'prop-types';
+import "./MovieInfo.css";
 
-function MovieInfo({ movies }) {
+const URI = 'http://localhost:8000/api/movies/';
+
+function MovieInfo() {
+  const [movie, setMovie] = useState(null);
   const { id } = useParams();
-  const movie = movies.find((movie) => movie.id === parseInt(id));
+
+  useEffect(() => {
+    fetchMovie();
+  }, [id]);
+
+  const fetchMovie = async () => {
+    try {
+      const response = await axios.get(URI);
+      if (response.data) {
+        const selectedMovie = response.data.find(m => m._id === id);
+        if (selectedMovie) {
+          setMovie(selectedMovie);
+        } else {
+          setMovie(null);
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching movies:', error);
+    }
+  };
 
   if (!movie) {
-    return <div>No se encontró la película.</div>;
+    return <div>Loading...</div>;
   }
 
   return (
@@ -20,7 +41,7 @@ function MovieInfo({ movies }) {
         <img src={movie.imageUrl} alt="Imagen" className="movie-poster" />
         <div className="trailer">
           <iframe
-            width="1600"
+            width="1220"
             height="800"
             src={movie.trailerUrl}
             title="Trailer"
@@ -30,7 +51,8 @@ function MovieInfo({ movies }) {
           ></iframe>
         </div>
       </div>
-      <div className="movie">
+      <div>
+      <div className="movie-text">
         <h1 className="movie-title ">{movie.title}</h1>
         <p className="description">{movie.description}</p>
         <div className="info">
@@ -40,11 +62,11 @@ function MovieInfo({ movies }) {
           <p className="duration">{movie.duration} Min</p>
         </div>
         <p className="director">Director: {movie.director}</p>
-        <p className="type">Tipo: {movie.type}</p>
-
+        <p className="type">Tipo: {movie.type.join(", ")}</p>
         <div className="format">
-          <div className="movie-format">{movie.format}</div>
+          <div className="movie-format">{movie.format.join(", ")}</div>
         </div>
+        
         <div>
           <Link to='/login'>
             <Button className="bg-black border border-whiter buttonComprar">
@@ -53,13 +75,10 @@ function MovieInfo({ movies }) {
             </Button>
           </Link>
         </div>
+        </div>
       </div>
     </div>
   );
 }
-
-MovieInfo.propTypes = {
-  movies: PropTypes.array.isRequired,
-};
 
 export default MovieInfo;
