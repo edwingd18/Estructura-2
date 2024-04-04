@@ -1,15 +1,77 @@
 import { Button, TextInput } from "flowbite-react";
-import { GoogleLogin, GoogleOAuthProvider} from '@react-oauth/google';
+import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 
 function Login() {
 
-  const handleSuccess = (response) => {
-    console.log(response);
-  };
+  async function handleSuccess(response) {
+    try {
+      const tokenId = response.tokenId;
+      // const user = response.profileObj;
 
-  const handleError = (error) => {
-    console.log(error);
-    // Aquí puedes manejar el error
+      // Aquí puedes enviar el tokenId al servidor para verificarlo y autenticar al usuario
+      const serverResponse = await fetch('http://localhost:8000/user/google-login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          tokenId: tokenId
+        })
+      });
+
+      if (!serverResponse.ok) {
+        throw new Error('Error al iniciar sesión con Google');
+      }
+
+      const data = await serverResponse.json();
+
+      // Si la respuesta es exitosa, guarda el token en el almacenamiento local
+      localStorage.setItem('token', data.token);
+
+      // Redirige al usuario a la página de boletas
+      window.location.href = '/selectTickets';
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  function handleError(response) {
+    console.error('Error al iniciar sesión con Google: ', response);
+  }
+
+  async function handleLogin(event) {
+    event.preventDefault();
+
+    const email = document.getElementById('email1').value;
+    const passwd = document.getElementById('password1').value;
+
+    try {
+      console.log('contando');
+      const response = await fetch('http://localhost:8000/user/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email,
+          password: passwd
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al iniciar sesión');
+      }
+
+      const data = await response.json();
+      console.log(data);
+
+      localStorage.setItem('token', data.token);
+
+      window.location.href = '/selectTickets';
+    } catch (error) {
+      // Si hay un error, muestra el mensaje de error
+      console.error(error);
+    }
   }
 
   return (
@@ -29,7 +91,7 @@ function Login() {
           />
           <div className="text-center mt-4 text-gray-500">or</div>
           <div>
-            <div className="mb-2 block"></div>  
+            <div className="mb-2 block"></div>
             <TextInput
               id="email1"
               type="email"
@@ -48,7 +110,7 @@ function Login() {
               className="w-full"
             />
           </div>
-          <Button type="submit" gradient="tealToLime" className="w-full">
+          <Button onClick={handleLogin} type="submit" gradient="tealToLime" className="w-full">
             Iniciar sesión
           </Button>
           <div className="flex justify-between mt-4">

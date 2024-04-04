@@ -46,7 +46,7 @@ function MovieInfo({ movies }) {
           <div className="movie-format">{movie.format}</div>
         </div>
         <div>
-          <Link to='/selecttickets'>
+          <Link to='/login'>
             <Button className="bg-black border border-whiter buttonComprar">
               <HiShoppingCart className="mr-2 h-5 w-5" />
               Adquiere tus entradas

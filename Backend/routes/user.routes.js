@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { showUsers, showUser, createUser, loginUser } from '../controllers/user.controller.js'
+import { showUsers, showUser, createUser, loginUser, loginUserGoogle } from '../controllers/user.controller.js'
 import { verifyToken } from '../middleware/token.JWT.js'
 
 const router = Router();
@@ -15,5 +15,8 @@ router.post('/', createUser);
 
 // Ruta para iniciar sesion de un usuario
 router.post('/login', loginUser);
+
+// Ruta para iniciar sesion de un usuario con google
+router.post('/google-login', loginUserGoogle);
 
 export default router;

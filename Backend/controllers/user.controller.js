@@ -1,6 +1,9 @@
 import User from '../models/User.model.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { OAuth2Client } from 'google-auth-library';
+
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 export const showUsers = async (req, res) => {
     try {
@@ -79,6 +82,35 @@ export const loginUser = async (req, res) => {
         res.json({ token });
 
         console.log(token);
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: 'Error en el servidor' });
+    }
+}
+
+export const loginUserGoogle = async (req, res) => {
+    try {
+        const { tokenId } = req.body;
+
+        // Verificar el token de id de Google
+        const ticket = await client.verifyIdToken({
+            idToken: tokenId,
+            audience: process.env.GOOGLE_CLIENT_ID,
+        });
+
+        const { email, name, picture } = ticket.getPayload();
+
+        // Aquí puedes buscar al usuario en tu base de datos por su correo electrónico
+        // Si no existe, puedes crear un nuevo usuario con los datos proporcionados por Google
+
+        // Generar un token JWT
+        const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY, {
+            expiresIn: '1h', // El token expirará en 1 hora
+        });
+
+        // Enviar el token en la respuesta
+        res.json({ token });
 
     } catch (error) {
         console.log(error);
