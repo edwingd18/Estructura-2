@@ -4,7 +4,7 @@
   top: 0;
   width: 100px;
   height: 100%;
-  transition: width 1s ease-in-out;
+  transition: width 0.3s ease-in-out;
   z-index: 199999;
 }
 
@@ -40,8 +40,8 @@
 }
 
 .icon-label {
-  position: absolute;
-  left: 70px;
+  
+  margin-left: 40px;
   opacity: 0;
   font-size: 20px;
   color: transparent;

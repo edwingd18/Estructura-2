@@ -63,7 +63,7 @@ function Sidebar() {
       },
     },
     item: {
-      base: "flex items-center justify-center rounded-lg p-2 text-base font-normal text-white hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700",
+      base: "flex items-center justify-center rounded-lg p-2 text-base font-normal text-white hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 my-3",
       active: "bg-gray-100 dark:bg-white",
       collapsed: {
         insideCollapse: "group w-full pl-8 transition duration-75",
@@ -108,16 +108,16 @@ function Sidebar() {
         <FlowbiteSidebar.Items>
           <FlowbiteSidebar.ItemGroup>
             <FlowbiteSidebar.Item
-              className="hover:text-black icon"
-              
+              className="hover:text-black icon hover:bg-gray-100"
             >
               <HiUser />
               <span className="icon-label "  >Perfil</span>
+
             </FlowbiteSidebar.Item>
             <FlowbiteSidebar.Item
               href="#"
               
-              className="hover:text-black icon"
+              className="hover:text-black icon "  
             >
               <HiTicket  />
               <span className="icon-label " >Boletas</span>
