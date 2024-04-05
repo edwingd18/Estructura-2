@@ -52,26 +52,29 @@ function MovieInfo() {
         </div>
       </div>
       <div>
-      <div className="movie-text text-lg">
-        <h1 className="movie-title text-7xl font-bold mb-9">{movie.title}</h1>
-        <p className="description text-lg mb-7">{movie.description}</p>
-          <p className="edadRango mb-7 bg-white text-black py-2 px-4 rounded-full inline-block">
-            Recomendada para Mayores de {movie.ageRange} años
-          </p>
-          <p className="duration mb-7 bg-white text-black py-2 px-4 rounded-full">{movie.duration} Min</p>
-
-        <p className="director mb-7 bg-white text-black py-2 px-4 rounded-full">Director: {movie.director}</p>
-        <p className="type mb-7 bg-white text-black py-2 px-4 rounded-full">Tipo: {movie.type.join(", ")}</p>
+      <div className="movie-text text-lg"> 
+        <h1 className="movie-title text-7xl font-bold mb-9 max-w-screen-lg">{movie.title}</h1>
+        <p className="description text-lg mb-7 max-w-screen-lg">{movie.description}</p>
+        <div className="mt-6">
+          <p className="edadRango mb-7 bg-white text-black py-2 px-4 rounded-full inline-block">Recomendada para Mayores de {movie.ageRange} años</p>
+        </div>
+        <div>
+          <p className="duration mb-7 bg-white text-black py-2 px-4 rounded-full inline-block">{movie.duration} Min</p>
+        </div>
+        <div>
+        <p className="director mb-7 bg-white text-black py-2 px-4 rounded-full inline-block">Director: {movie.director}</p>
+        </div>
+        <p className="type mb-7 bg-white text-black py-2 px-4 rounded-full inline-block">Tipo: {movie.type.join(", ")}</p>
         <div className="format">
           <div className="movie-format">{movie.format.join(", ")}</div>
         </div>
         
-        <div>
+        <div className="bg-centerflex justify-center items-center h-screen">
           <Link to='/login'>
-            <Button className="bg-black border border-whiter buttonComprar">
-              <HiShoppingCart className="mr-2 h-5 w-5" />
+            <button className="buttonComprar bg-black border border-whiter rounded-xl h-11 w-80 m-52 hover:hover:bg-blue-800">
+              <HiShoppingCart className="mr-2 h-5 w-5 inline-block hover:bg" />
               Adquiere tus entradas
-            </Button>
+            </button>
           </Link>
         </div>
         </div>
