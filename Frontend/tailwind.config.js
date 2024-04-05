@@ -12,7 +12,8 @@ export default {
     },
     fontFamily:{
       'titles': ["Quattrocento Sans", "sans-serif"]
-      
+      ,
+      'titulo':["Outfit", "sans-serif"]
     }
   },
 },

@@ -76,8 +76,8 @@ const Carousel = () => {
       />
     </div>
     <div className="movie-texto">
-      <h2 className='title-overlay font-bold text-5xl font-titles uppercase'>{movie.title}</h2>
-      <p className='description-overlay text-2xl font-titles font-medium'>{movie.description}</p>
+      <h2 className='title-overlay font-bold text-7xl pb-5 font-titulo'>{movie.title}</h2>
+      <p className='description-overlay text-xl font-titles font-medium'>{movie.description}</p>
     </div>
   </Link>
 </div>

@@ -12,6 +12,14 @@
 
 }
 
+/* mr-5,
+flex,
+items-start,
+text-white,
+p-5
+rounded-md,
+ml */
+
 .movie-text{
   margin-left: 100px;
 }
@@ -77,7 +85,7 @@ p {
   background-color: #ffffff;
   /* Fondo rojo para el formato */
   color: rgb(0, 0, 0);
-  padding: 5px 10px;
+  padding: 10px 20px;
   margin-top: 10px;
 
   border-radius: 50px; /* Bordes redondeados */
