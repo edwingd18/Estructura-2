@@ -1,14 +1,8 @@
-
-import { useState, useEffect } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/effect-coverflow';
-import 'swiper/css/pagination';
-import { EffectCoverflow, Navigation, Autoplay} from 'swiper/modules';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import MainCarousel from './MainCarousel';
+import ThumbnailCarousel from './ThumbnailCarousel';
 import './Carousel.css';
-
 
 const URI = 'http://localhost:8000/api/movies/';
 
@@ -35,99 +29,16 @@ const Carousel = () => {
 
   return (
     <div className="carousel">
-
-      <div className="main-slide" style={{ marginTop: '20px' }}>
-        <Swiper
-          effect={'coverflow'}
-          grabCursor={true}
-          loop= {true}
-          centeredSlides={true}
-          autoplay={{ delay: 5000, disableOnInteraction: false }}
-          slidesPerView={'auto'}
-          coverflowEffect={{
-            rotate: 70,
-            stretch: 0,
-            depth: 100,
-            modifier: 1,
-            slideShadows: true,
-          }}
-          modules={[EffectCoverflow, Autoplay]}
-          className="mySwiper main-swiper"
-          style={{ width: '1370px', height: '675px' }}
-        >
-          {carouselItems.map((movie, index) => (
-            <SwiperSlide key={index}>
-<div className="movie-item">
-  <Link
-    to={`/movie/${movie._id}`}
-    className={`thumbnail ${index === selectedThumbnailIndex ? 'active' : ''}`}
-    onClick={() => handleMovieClick(index)}
-  >
-    <div className="image-container">
-      <img
-        src={movie.bannerUrl}
-        alt={movie.title}
-        onError={(e) => {
-          e.target.onerror = null;
-          e.target.src = 'https://via.placeholder.com/100x150?text=No+Image';
-        }}
-        style={{ borderRadius: '10px' }}
-        className="main-slide-image"
+      <MainCarousel
+        carouselItems={carouselItems}
+        selectedThumbnailIndex={selectedThumbnailIndex}
+        handleMovieClick={handleMovieClick}
       />
-    </div>
-    <div className="movie-texto">
-      <h2 className='title-overlay font-bold text-7xl pb-5 font-titulo'>{movie.title}</h2>
-      <p className='description-overlay text-xl font-titles font-medium'>{movie.description}</p>
-    </div>
-  </Link>
-</div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
-      <div className="thumbnails" style={{ marginTop: '20px' }}>
-        <Swiper
-          spaceBetween={20}
-          slidesPerView={5}
-          loop= {true}
-          pagination={{
-            dynamicBullets: true,
-            clickable: true,
-          }}
-          navigation={{
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-
-          }}
-          autoplay={{ delay: 2500, disableOnInteraction: false }}
-          modules={[Autoplay, Navigation]}
-          className="mySwiper thumbnail-swiper"
-          style={{ width: '1370px', height: '420px' }}
-        >
-          {carouselItems.map((movie, index) => (
-            <SwiperSlide key={index}>
-              <Link
-                to={`/movie/${movie._id}`}
-                className={`thumbnail ${index === selectedThumbnailIndex ? 'active' : ''}`}
-                onClick={() => handleMovieClick(index)}
-              >
-                <img
-                  src={movie.imageUrl}
-                  alt={movie.title}
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = 'https://via.placeholder.com/100x150?text=No+Image';
-                  }}
-                  style={{ borderRadius: '10px' }}
-                  className="thumbnail-image"
-                />
-              </Link>
-            </SwiperSlide>
-          ))}
-          <div className="swiper-button-prev"></div>
-          <div className="swiper-button-next"></div>
-        </Swiper>
-      </div>
+      <ThumbnailCarousel
+        carouselItems={carouselItems}
+        selectedThumbnailIndex={selectedThumbnailIndex}
+        handleMovieClick={handleMovieClick}
+      />
     </div>
   );
 };
