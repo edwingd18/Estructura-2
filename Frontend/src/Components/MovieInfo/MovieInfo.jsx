@@ -35,8 +35,8 @@ function MovieInfo() {
 
   return (
     <div className="flex sm:flex-col flex-row ">
-      <div className="flex sm:flex-col  xl:flex-row 2xl:flex-row mr-5 ml-32 text-white p-5 rounded-md h-full ">
-        <img className="movie-poster sm:w-96 sm:mb-7  md:w-full  lg:w-10/12 lg:ml-12 xl:w-1/2 xl:h-1/3 xl:ml-10 xl:mr-6  2xl:w-2/5 2xl:mr-32 2xl:ml-28 rounded-2xl" src={movie.imageUrl} alt="Imagen" />
+      <div className="flex sm:flex-col  xl:flex-row 2xl:flex-row mr-5 ml-9 text-white p-5 rounded-md h-full ">
+        <img className="movie-poster sm:w-96 sm:mb-7  md:w-full  lg:w-10/12 lg:ml-12 xl:w-1/2 xl:h-1/3 xl:ml-10 xl:mr-6  2xl:w-2/5 2xl:mr-20 2xl:ml-28 rounded-2xl" src={movie.imageUrl} alt="Imagen" />
 
         <div className=" text-lg self-center h-full sm:flex-col">
           <h1 className="movie-title sm:text-4xl  md:text-4xl lg:text-5xl xl:text-5xl 2xl:text-7xl font-bold mb-9 max-w-screen-sm">
@@ -72,7 +72,7 @@ function MovieInfo() {
           </Link>
         </div>
       </div>
-        <iframe className="sm:w-8/12 sm:h-80 sm:ml-36 sm:mt-5 sm:mb-5  lg:w-9/12 lg:ml-40 xl:ml-3   2xl:w-9/12 2xl:h-screen 2xl:ml-64"
+        <iframe className="sm:w-8/12 sm:h-80 sm:ml-36 sm:mt-5 sm:mb-5  lg:w-9/12 lg:ml-40 xl:ml-3   2xl:w-10/12 2xl:h-screen 2xl:ml-40"
   
           src={movie.trailerUrl}
           title="Trailer"
