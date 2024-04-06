@@ -46,33 +46,33 @@ function MovieInfo() {
             {movie.description}
           </p>
           <div className="mt-6">
-            <p className="edadRango  sm:text-xs sm:mb-2  lg:text-sm  2xl:mb-7 2xl:text-sm bg-white text-black py-2 px-4 rounded-full inline-block">
+            <p className="edadRango  sm:text-xs sm:mb-2  lg:text-sm  2xl:mb-7 2xl:text-lg bg-white text-black py-2 px-4 rounded-full inline-block">
               Recomendada para Mayores de {movie.ageRange} años
             </p>
           </div>
           <div>
-            <p className="duration sm:text-xs sm:mb-1  lg:text-sm   2xl:mb-7 2xl:text-sm bg-white text-black py-2 px-4 rounded-full inline-block">
+            <p className="duration sm:text-xs sm:mb-1  lg:text-sm   2xl:mb-7 2xl:text-lg bg-white text-black py-2 px-4 rounded-full inline-block">
               {movie.duration} Min
             </p>
           </div>
           <div>
-            <p className="director sm:text-xs sm:mb-2 lg:text-sm 2xl:mb-7 2xl:text-sm rounded-full inline-block">
+            <p className="director sm:text-xs sm:mb-2 lg:text-sm 2xl:mb-7 2xl:text-lg rounded-full inline-block">
               Director: {movie.director}
             </p>
           </div>
-          <p className="type sm:text-xs sm:mb-2  lg:text-sm 2xl:text-sm rounded-full ">Tipo: {movie.type.join(", ")}</p>
-          <div className="movie-format sm:text-xs sm:mb-2 lg:text-sm inline-block rounded-full bg-red-600 text-white py-2 px-4 uppercase mr-4 2xl:mt-7">
+          <p className="type sm:text-xs sm:mb-2  lg:text-sm 2xl:text-lg rounded-full ">Tipo: {movie.type.join(", ")}</p>
+          <div className="movie-format sm:text-xs sm:mb-2 lg:text-sm 2xl:py-2 2xl:text-lg inline-block rounded-full bg-red-600 text-white py-2 px-4 uppercase mr-4 2xl:mt-7">
             {movie.format.join(", ")}
           </div>
           <Link to="/login">
-            <button className="buttonComprar sm:text-sm sm:flex-col sm:h-9  md:text-xs md:h-auto md:py-1.5 lg:text-sm lg:py-2 2xl:text-lg 2xl:h-11    items-center bg-blue-800 border rounded-full border-whiter  h-11 w-91  hover:hover:bg-blue-800 py-2 px-4">
+            <button className="buttonComprar sm:text-sm sm:flex-col sm:h-9  md:text-xs md:h-auto md:py-1.5 lg:text-sm lg:py-2 2xl:text-lg 2xl:h-11 2xl:py-2  items-center bg-blue-800 border rounded-full border-whiter  h-11 w-91  hover:hover:bg-blue-800 py-2 px-4">
               <HiShoppingCart className="  md:w-4 mr-2 h-5 w-5 inline-block rounded-full hover:bg" />
               Adquiere tus entradas
             </button>
           </Link>
         </div>
       </div>
-        <iframe className="sm:w-8/12 sm:h-80 sm:ml-36 sm:mt-5 sm:mb-5  lg:w-9/12 lg:ml-40 xl:ml-3   2xl:w-10/12 2xl:h-screen 2xl:ml-40"
+        <iframe className="sm:w-8/12 sm:h-80 sm:ml-36 sm:mt-5 sm:mb-5  lg:w-9/12 lg:ml-40 xl:ml-3    2xl:w-10/12 2xl:h-screen 2xl:ml-40"
   
           src={movie.trailerUrl}
           title="Trailer"
