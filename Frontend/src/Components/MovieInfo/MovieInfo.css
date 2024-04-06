@@ -1,7 +1,3 @@
-.movie-info {
-  display: flex;
-}
-
 /* mr-5,
 flex,
 items-start,
@@ -12,15 +8,6 @@ ml */
 
 
 
-.trailer,
-.movie-poster {
-  width: 600px;
-  /* Ajusta el ancho del póster */
-  height: 900px;
-  margin-right: 90px; /* Asegúrate de que no haya un espacio entre '100' y 'px' */
-  margin-left: 11px; /* Empuja el póster hacia la derecha */
-  border-radius: 20px; /* Bordes redondeados para la imagen */
-}
   
 
 
@@ -28,10 +15,7 @@ ml */
 
 
 
-.trailer-container {
-  margin-top: 100px;
-  /* Ajusta según sea necesario para el espacio que desees */
-}
+
 
 
 
@@ -45,29 +29,14 @@ ml */
 
 }
 
-.movie-format {
-  display: inline-block;
-  background-color: #e50914;
-  /* Fondo rojo para el formato */
-  color: white;
+/* .movie-format {
+
   padding: 5px 10px;
-  margin-top: 10px;
-  border-radius: 5px;
-  /* Bordes redondeados */
-}
+
+} */
 
 .movie-button {
-  display: inline-block;
-  background-color: #e50914;
-  /* Fondo rojo para el botón */
-  color: white;
-  text-decoration: none;
   padding: 10px 20px;
-  margin-top: 20px;
-  border-radius: 5px;
-  /* Bordes redondeados */
-  font-weight: bold;
-  text-transform: uppercase;
 }
 
 
