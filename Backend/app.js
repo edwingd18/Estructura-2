@@ -11,6 +11,7 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use('/movies', MovieRoutes)
+app.use('/users', userRoutes);
 
 //Ruta de bienvenida
 app.listen(8000, () => {
