@@ -62,11 +62,11 @@ function MovieInfo() {
             </p>
           </div>
           <p className="type rounded-full ">Tipo: {movie.type.join(", ")}</p>
-          <div className="movie-format inline-block rounded-full bg-red-600 text-white py-2 px-4 uppercase mr-4">
+          <div className="movie-format inline-block rounded-full bg-red-600 text-white py-2 px-4 uppercase mr-4 mt-7">
             {movie.format.join(", ")}
           </div>
           <Link to="/login">
-            <button className="buttonComprar items-center bg-blue-800 border rounded-full border-whiter  h-11 w-80 m-52 hover:hover:bg-blue-800 py-2 px-4">
+            <button className="buttonComprar items-center bg-blue-800 border rounded-full border-whiter  h-11 w-96  hover:hover:bg-blue-800 py-2 px-4">
               <HiShoppingCart className="mr-2 h-5 w-5 inline-block rounded-full hover:bg" />
               Adquiere tus entradas
             </button>
