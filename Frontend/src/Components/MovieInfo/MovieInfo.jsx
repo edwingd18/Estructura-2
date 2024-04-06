@@ -37,7 +37,7 @@ function MovieInfo() {
   return (
     <div className="sm:flex-col-reverse">
       <div className="flex mr-5 ml-32 text-white p-5 rounded-md h-full ">
-        <img className="movie-poster sm:w-60 sm:h-1  md:w-32  xl:w-1/2 xl:h-1/3 xl:ml-10 xl:mr-6  2xl:w-2/5 2xl:mr-32 2xl:ml-28 rounded-2xl" src={movie.imageUrl} alt="Imagen" />
+        <img className="movie-poster sm:w-60 sm:h-1 md:w-32  xl:w-1/2 xl:h-1/3 xl:ml-10 xl:mr-6  2xl:w-2/5 2xl:mr-32 2xl:ml-28 rounded-2xl" src={movie.imageUrl} alt="Imagen" />
 
         <div className="text-lg self-center h-full sm:flex-col">
           <h1 className="movie-title sm:text-xl xl:text-5xl 2xl:text-7xl font-bold mb-9 max-w-screen-sm">
