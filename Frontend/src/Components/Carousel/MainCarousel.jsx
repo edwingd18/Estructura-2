@@ -1,4 +1,4 @@
-import React from 'react';
+import PropTypes from 'prop-types';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 const MainCarousel = ({ carouselItems, selectedThumbnailIndex, handleMovieClick }) => {
   return (
-    <div className="main-slide" style={{ marginTop: '20px' }}>
+    <div className=" sm:w" style={{ marginTop: '20px' }}>
       <Swiper
         effect={'coverflow'}
         grabCursor={true}
@@ -29,13 +29,13 @@ const MainCarousel = ({ carouselItems, selectedThumbnailIndex, handleMovieClick 
       >
         {carouselItems.map((movie, index) => (
           <SwiperSlide key={index}>
-            <div className="movie-item">
+            <div className="movie-item relative">
               <Link
                 to={`/movie/${movie._id}`}
                 className={`thumbnail ${index === selectedThumbnailIndex ? 'active' : ''}`}
                 onClick={() => handleMovieClick(index)}
               >
-                <div className="image-container">
+                <div className="group relative">
                   <img
                     src={movie.bannerUrl}
                     alt={movie.title}
@@ -44,12 +44,18 @@ const MainCarousel = ({ carouselItems, selectedThumbnailIndex, handleMovieClick 
                       e.target.src = 'https://via.placeholder.com/100x150?text=No+Image';
                     }}
                     style={{ borderRadius: '10px' }}
-                    className="main-slide-image"
+                    className="main-slide-image opacity-50"
                   />
-                </div>
-                <div className="movie-texto">
-                  <h2 className='title-overlay font-bold text-7xl pb-5 font-titulo'>{movie.title}</h2>
-                  <p className='description-overlay text-xl font-titles font-medium'>{movie.description}</p>
+                   <div className="movie-texto opacity-0 transition-opacity duration-300 absolute bottom-40  hover:opacity-100 group-hover:opacity-100">
+                    <div className=" ml-28 mr-32">
+                      <h2 className="title-overlay font-bold text-7xl pb-5 font-titulo text-white ">
+                        {movie.title}
+                      </h2>
+                      <p className="description-overlay text-xl font-titles  w-full font-medium text-white">
+                        {movie.description}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </Link>
             </div>
@@ -58,6 +64,20 @@ const MainCarousel = ({ carouselItems, selectedThumbnailIndex, handleMovieClick 
       </Swiper>
     </div>
   );
+};
+
+// Definición de propTypes
+MainCarousel.propTypes = {
+  carouselItems: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      bannerUrl: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  selectedThumbnailIndex: PropTypes.number.isRequired,
+  handleMovieClick: PropTypes.func.isRequired,
 };
 
 export default MainCarousel;

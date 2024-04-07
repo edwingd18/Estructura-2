@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import axios from 'axios';
 import MainCarousel from './MainCarousel';
 import ThumbnailCarousel from './ThumbnailCarousel';
-import './Carousel.css';
 
 const URI = 'http://localhost:8000/api/movies/';
 
 const Carousel = () => {
   const [carouselItems, setCarouselItems] = useState([]);
-  const [selectedThumbnailIndex, setSelectedThumbnailIndex] = useState(null);
+  const [selectedThumbnailIndex, setSelectedThumbnailIndex] = useState(0); // Inicializado con 0
 
   useEffect(() => {
     fetchCarouselItems();
@@ -28,12 +27,14 @@ const Carousel = () => {
   };
 
   return (
-    <div className="carousel">
-      <MainCarousel
-        carouselItems={carouselItems}
-        selectedThumbnailIndex={selectedThumbnailIndex}
-        handleMovieClick={handleMovieClick}
-      />
+    <div className="carousel 2xl:ml-9 2xl:mb-2">
+      {carouselItems.length > 0 && ( 
+        <MainCarousel
+          carouselItems={carouselItems}
+          selectedThumbnailIndex={selectedThumbnailIndex}
+          handleMovieClick={handleMovieClick}
+        />
+      )}
       <ThumbnailCarousel
         carouselItems={carouselItems}
         selectedThumbnailIndex={selectedThumbnailIndex}
