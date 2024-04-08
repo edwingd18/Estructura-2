@@ -2,6 +2,7 @@ import  { useState, useEffect } from 'react';
 import axios from 'axios';
 import MainCarousel from './MainCarousel';
 import ThumbnailCarousel from './ThumbnailCarousel';
+import CreateMovie from './Administrador/Movies/ModalCrearPelicula/CreateMovie';
 
 const URI = 'http://localhost:8000/api/movies/';
 
@@ -40,7 +41,9 @@ const Carousel = () => {
         selectedThumbnailIndex={selectedThumbnailIndex}
         handleMovieClick={handleMovieClick}
       />
+        <CreateMovie/>
     </div>
+  
   );
 };
 
