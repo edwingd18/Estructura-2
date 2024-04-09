@@ -1,5 +1,8 @@
 import  { useState } from 'react';
 import { Modal, TextInput, Textarea, Button } from 'flowbite-react';
+import { HiOutlinePlus } from "react-icons/hi";
+
+
 
 const CreateMovie = () => {
  const [showModal, setShowModal] = useState(false);
@@ -87,7 +90,9 @@ const customtema = {
  return (
    <>
    <div className='bg-black'>
-     <Button onClick={() => setShowModal(true)}>Abrir Modal</Button>
+     <Button onClick={() => setShowModal(true)}>
+     <HiOutlinePlus className="  md:w-4 mr-2 h-5 w-5 inline-block rounded-full hover:bg" />
+     </Button>
      <Modal show={showModal} theme={customtema} size="7xl" onClose={() => setShowModal(false)}>
        <Modal.Header>Agregar nueva pelicula</Modal.Header>
        <Modal.Body>

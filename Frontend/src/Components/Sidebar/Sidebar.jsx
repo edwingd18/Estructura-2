@@ -123,7 +123,7 @@ function Sidebar() {
               <span className="icon-label " style={{ marginLeft: '60px' }}>Boletas</span>
             </FlowbiteSidebar.Item>
             <FlowbiteSidebar.Item
-              href="#"
+              href="/allmovies"
               style={{ fontSize: 20 }}
               className="hover:text-black icon"
             >
