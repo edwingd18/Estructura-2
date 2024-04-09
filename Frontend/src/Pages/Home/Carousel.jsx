@@ -29,7 +29,7 @@ const Carousel = () => {
   };
 
   return (
-    <div className="carousel 2xl:ml-9 2xl:mb-2">
+    <div className="carousel 2xl:ml-24 2xl:mb-2">
       {carouselItems.length > 0 && ( 
         <MainCarousel
           carouselItems={carouselItems}
