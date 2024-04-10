@@ -29,7 +29,7 @@ const ThumbnailCarousel = ({ carouselItems, handleMovieClick }) => {
           <SwiperSlide key={index}>
             <Link
               to={`/movie/${movie._id}`}
-              className="opacity-50 hover:opacity-100 transition-opacity duration-300 ease-linear"
+              className="opacity-50 hover:opacity-100 transition-opacity duration-300 "
               onClick={() => handleMovieClick(index)}
             >
               <img

@@ -1,32 +1,14 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { Modal, TextInput, Textarea, Button } from 'flowbite-react';
 import { HiOutlinePlus } from "react-icons/hi";
 
 
-
 const CreateMovie = () => {
- const [showModal, setShowModal] = useState(false);
- const [imageLink, setImageLink] = useState(''); // Estado para almacenar el enlace de la imagen
- const [bannerLink, setbannerLink]= useState('')
+  const [showModal, setShowModal] = useState(false);
+  const [imageLink, setImageLink] = useState('');
+  const [bannerLink, setbannerLink] = useState('');
 
-//  const genres = [
-//    'Acción',
-//    'Aventura',
-//    'Ciencia Ficción',
-//    'Comedia',
-//    'Drama',
-//    'Terror',
-//    // Agrega más géneros según tus necesidades
-//  ];
-
-//  const formats = [
-//    '2D',
-//    '3D',
-//    'IMAX',
-//    // Agrega más formatos según tus necesidades
-//  ];
-//re
-const customtema = {
+  const customtema = {
     "root": {
       "base": "fixed inset-x-0 top-0 z-50 h-screen overflow-y-auto overflow-x-hidden md:inset-0 md:h-full",
       "show": {
@@ -58,7 +40,7 @@ const customtema = {
       }
     },
     "content": {
-      "base": "relative h-full w-full p-4 md:h-auto",
+      "base": "relative h-full w-full p-4 md:w-auto",
       "inner": "relative flex max-h-[90dvh] flex-col rounded-lg bg-agua shadow dark:bg-gray-700"
     },
     "body": {
@@ -68,7 +50,7 @@ const customtema = {
     "header": {
       "base": "flex items-start justify-between rounded-t border-b p-5 dark:border-gray-600",
       "popup": "border-b-0 p-2",
-      "title": "text-xl font-medium text-gray-900 dark:text-white",
+      "title": "text-xl font-medium text-white dark:text-white",
       "close": {
         "base": "ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white",
         "icon": "h-5 w-5"
@@ -80,57 +62,63 @@ const customtema = {
     }
   };
 
- const handleSubmit = (e) => {
-   e.preventDefault();
-   // Aquí puedes agregar la lógica para enviar los datos al servidor
-   console.log('Datos enviados');
-   setShowModal(false);
- };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Datos enviados');
+    setShowModal(false);
+  };
 
- return (
-   <>
-   <div className='bg-black'>
-     <Button onClick={() => setShowModal(true)}>
-     <HiOutlinePlus className="  md:w-4 mr-2 h-5 w-5 inline-block rounded-full hover:bg" />
-     </Button>
-     <Modal show={showModal} theme={customtema} size="7xl" onClose={() => setShowModal(false)}>
-       <Modal.Header>Agregar nueva pelicula</Modal.Header>
-       <Modal.Body>
-         <div className="  grid grid-cols-2 gap-4  ">
-           
-           <div>
-             <TextInput id="title" placeholder="Título" className="mb-4" />
-             <Textarea id="description" placeholder="Descripción" rows={4} className="mb-4" />
-             <TextInput id="director" placeholder="Director" className="mb-4" />
-             <TextInput id="duration" placeholder="Duración" className="mb-4" />
-             <TextInput id="age" placeholder="Edad" className="mb-4" />
-             <TextInput id="bannerUrl"
-            placeholder="Banner url" 
-            className="mb-4" 
-            value={bannerLink}
-            onChange={(e)=> setbannerLink(e.target.value)}/>
-            {bannerLink && <img src={bannerLink} alt="Preview"/>}
-           </div>
-           <div className='inset-3'>
-
-             <TextInput
-               id="imageLink"
-               placeholder="Link de la imagen"
-               className="mt-4 2xl:w-[500px]"
-               value={imageLink}
-               onChange={(e) => setImageLink(e.target.value)}
-             />
-             {imageLink && <img src={imageLink} alt="Preview" className="mt-4 2xl:w-[500px] 2xl:h-[750px]" />}
-           </div>
-         </div>
-       </Modal.Body>
-       <Modal.Footer>
-         <Button onClick={handleSubmit}>Enviar</Button>
-       </Modal.Footer>
-     </Modal>
-     </div>
-   </>
- );
+  return (
+    <>
+      <div>
+        <Button className='bg-purple-800 h-[55px] rounded-2xl' onClick={() => setShowModal(true)}>
+          <HiOutlinePlus className="inline-block rounded-full hover:bg 
+          " />
+        </Button>
+        <Modal
+          show={showModal}
+          theme={customtema}
+          size="7xl"
+          onClose={() => setShowModal(false)}
+          className="fixed inset-0 z-50 overflow-y-auto" // Clase añadida
+        >
+          <Modal.Header >Agregar nueva pelicula</Modal.Header>
+          <Modal.Body>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <TextInput id="title" placeholder="Título" className="mb-4" />
+                <Textarea id="description" placeholder="Descripción" rows={4} className="mb-4" />
+                <TextInput id="director" placeholder="Director" className="mb-4" />
+                <TextInput id="duration" placeholder="Duración" className="mb-4" />
+                <TextInput id="age" placeholder="Edad" className="mb-4" />
+                <TextInput
+                  id="bannerUrl"
+                  placeholder="Banner url"
+                  className="mb-4"
+                  value={bannerLink}
+                  onChange={(e) => setbannerLink(e.target.value)}
+                />
+                {bannerLink && <img src={bannerLink} alt="Preview" className='w-[500px]' />}
+              </div>
+              <div className='inset-3'>
+                <TextInput
+                  id="imageLink"
+                  placeholder="Link de la imagen"
+                  className="mt-4 2xl:w-[500px]"
+                  value={imageLink}
+                  onChange={(e) => setImageLink(e.target.value)}
+                />
+                {imageLink && <img src={imageLink} alt="Preview" className="mt-4 2xl:w-[500px] 2xl:h-[650px]" />}
+                </div>
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={handleSubmit}>Enviar</Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
+    </>
+  );
 };
 
-export default CreateMovie; 
+export default CreateMovie;

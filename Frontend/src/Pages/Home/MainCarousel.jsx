@@ -44,14 +44,14 @@ const MainCarousel = ({ carouselItems, selectedThumbnailIndex, handleMovieClick 
                       e.target.src = 'https://via.placeholder.com/100x150?text=No+Image';
                     }}
                     style={{ borderRadius: '10px' }}
-                    className="main-slide-image opacity-50"
+                    className="main-slide-image opacity-100 group-hover:opacity-50 transition-opacity duration-300"
                   />
-                   <div className="movie-texto opacity-0 transition-opacity duration-300 absolute bottom-40  hover:opacity-100 group-hover:opacity-100">
+                  <div className="movie-texto opacity-0 transition-opacity duration-300 ease-linear absolute bottom-40 hover:opacity-100 group-hover:opacity-100">
                     <div className=" ml-28 mr-32">
                       <h2 className="title-overlay font-bold text-7xl pb-5 font-titulo text-white ">
                         {movie.title}
                       </h2>
-                      <p className="description-overlay text-xl font-titles  w-full font-medium text-white">
+                      <p className="description-overlay text-xl font-titles w-full font-medium text-white">
                         {movie.description}
                       </p>
                     </div>
