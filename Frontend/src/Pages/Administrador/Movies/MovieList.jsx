@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import CreateMovie from './ModalCrearPelicula/CreateMovie';
 import { HiOutlineTrash, HiPencil } from "react-icons/hi";
+import EditMovie from './ModalEditarPelicula/EditMovie';
 
 const URI = 'http://localhost:8000/api/movies/';
 
@@ -15,6 +16,8 @@ const MovieList = ({ movies, handleMovieClick }) => {
       <input className='w-5/12 h-[55px] rounded-2xl' type="text" placeholder="Filtro" />
       <div className='inline-block  ml-7'>
       <CreateMovie />
+      <EditMovie/>
+
       </div>
       <div className='grid grid-cols-4 gap-4 mt-5'>
         {movies.map((movie, index) => (
