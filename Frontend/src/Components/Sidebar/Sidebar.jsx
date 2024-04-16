@@ -7,7 +7,8 @@ import {
   HiTicket,
 } from "react-icons/hi";
 import { FaBars } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+
+
 
 import "./Sidebar.css"; // Importa tu archivo de estilos CSS para el Sidebar si lo tienes
 
@@ -83,7 +84,7 @@ function Sidebar() {
       base: "",
     },
     itemGroup: {
-      base: "mt-4 space-y-2 border-t border-gray-200 pt-4 first:mt-0 first:border-t-0 first:pt-0 dark:border-gray-700",
+      base: "space-y-2 border-t border-gray-200 pt-4 first:mt-0 first:border-t-0 first:pt-0 dark:border-gray-700",
     },
     logo: {
       base: "mb-5 flex items-center pl-2.5",
@@ -98,48 +99,44 @@ function Sidebar() {
   // Función para abrir/cerrar el Sidebar al hacer clic en la hamburguesa
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
+
+    
   };
   return (
-    <div className={`sidebar-container ${isOpen ? "open" : "close"}`}>
-      <FlowbiteSidebar aria-label="Menu de Cine" theme={customtema} className="Sidebar">
-        <button className="hamburger" onClick={toggleSidebar}>
-          <FaBars />
-        </button>
+    <div className={`sidebar-container ${isOpen ? "open" : "close"} flex flex-col top-0 w-[100px] h-full transition-[width_0.3s_ease-in-out] z-[199999] `}>
+      <FlowbiteSidebar aria-label="Menu de Cine" theme={customtema} class="Sidebar fixed top-0 w-[100px] h-full transition-[width_0.5s_ease-in-out] z-[199999]">
+        <div className="flex items-center justify-start">
+          <button className="hamburger" onClick={toggleSidebar}>
+            <FaBars />
+          </button>
+          {isOpen && (
+            <span className={`text-white font-semibold overflow-hidden text-ellipsis whitespace-nowrap ${!isOpen && 'hidden'}`}>Cine Magic</span>
+          )}
+        </div>
         <FlowbiteSidebar.Items>
           <FlowbiteSidebar.ItemGroup>
-            <FlowbiteSidebar.Item
-              className="hover:text-black icon hover:bg-gray-100"
-            >
-              <HiUser />
-              <span className="icon-label "  >Perfil</span>
-
+            <FlowbiteSidebar.Item href="#" className="hover:text-black icon">
+              <HiTicket />
+              <span className="icon-label">Boletas</span>
             </FlowbiteSidebar.Item>
-            <FlowbiteSidebar.Item
-              href="#"
-              
-              className="hover:text-black icon "  
-            >
-              <HiTicket  />
-              <span className="icon-label " >Boletas</span>
-            </FlowbiteSidebar.Item>
-            <FlowbiteSidebar.Item
-              href="#"
-              
-              className="hover:text-black icon"
-            >
+            <FlowbiteSidebar.Item href="#" className="hover:text-black icon">
               <HiShoppingCart />
-              <span className="icon-label ">Carrito</span>
+              <span className="icon-label">Carrito</span>
             </FlowbiteSidebar.Item>
-            <FlowbiteSidebar.Item
-              href="#"
-              
-              className="hover:text-black icon"
-            >
-              <HiOutlineChatAlt2  />
-              <span className="icon-label "  >Chat</span>
+            <FlowbiteSidebar.Item href="#" className="hover:text-black icon">
+              <HiOutlineChatAlt2 />
+              <span className="icon-label">Chat</span>
             </FlowbiteSidebar.Item>
           </FlowbiteSidebar.ItemGroup>
         </FlowbiteSidebar.Items>
+        <div className="flex items-center mb-4  w-full" style={{ paddingLeft: '25px', marginTop: "46vh" }}>
+      <div className="icon-container">
+        <HiUser className="text-white" style={{width:"40px", height:"40px"}} />
+      </div>
+      {isOpen && (
+        <span className="text-white font-semibold ml-2 overflow-hidden text-ellipsis whitespace-nowrap">Edwin Guerrero</span>
+      )}
+    </div>
       </FlowbiteSidebar>
     </div>
   );

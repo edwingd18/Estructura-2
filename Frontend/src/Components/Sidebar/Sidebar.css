@@ -1,23 +1,10 @@
-/* Sidebar.css */
-.sidebar-container .Sidebar {
-  position: fixed;
-  top: 0;
-  width: 100px;
-  height: 100%;
-  transition: width 0.3s ease-in-out;
-  z-index: 199999;
-}
 
 .hamburger {
   color: white;
-  font-size: 30px;
-  padding: 20px;
-  z-index: 1; /* Asegura que la hamburguesa esté por encima de los iconos */
+  font-size: 25px;
+  padding: 30px;
 }
 
-.slidebar-container .icon {
-  align-items: flex-end;
-}
 
 .sidebar-container.open .Sidebar {
   left: 0;
@@ -27,26 +14,24 @@
 .icon {
   justify-content: flex-start;
   position: relative;
-  margin-bottom: 20px;
-  transition: color 0.3s ease-in-out; /* Agrega transición al color */
-  color: white; /* Color inicial de los iconos y etiquetas */
-  pointer-events: none; /* Desactiva la interacción con los iconos cuando el sidebar está cerrado */
+  transition: color 0.3s ease-in-out;
+  color: white;
+  pointer-events: none;
 }
 
 .icon svg {
   position: fixed;
-  left: 32px;
+  left: 40px;
   font-size: 30px;
 }
 
 .icon-label {
-  
   margin-left: 40px;
   opacity: 0;
   font-size: 20px;
   color: transparent;
-  transition: opacity 0.1s ease-in-out, color 0.3s ease-in-out; /* Agrega transición al color */
-  pointer-events: none; /* El texto no interfiere con el hover */
+  transition: opacity 0.1s ease-in-out, color 0.3s ease-in-out;
+  pointer-events: none;
 }
 
 .sidebar-container.open .icon-label {
@@ -59,13 +44,6 @@
   color: transparent;
 }
 
-.sidebar-container.open .icon:hover {
-  color: black; /* Color al hacer hover */
-}
-
-.sidebar-container.open .icon:hover svg {
-  fill: black;
-}
 
 .sidebar-container.open .icon:hover .icon-label {
   color: black;
@@ -77,14 +55,8 @@
   font-style: medium;
 }
 
-/* Habilitar eventos del ratón para iconos y etiquetas cuando el sidebar esté abierto */
 .sidebar-container.open .icon,
 .sidebar-container.open .icon-label {
   pointer-events: auto;
 }
 
-/* Agregar hover al label cuando el sidebar está abierto */
-.sidebar-container.open .icon:hover .icon-label {
-  color: black; /* Cambia #tuColorDeHover por el color que prefieras para el hover */
-  cursor: pointer; /* Cambia el cursor para indicar que es un elemento interactivo */
-}
