@@ -9,20 +9,38 @@ import EditMovie from './ModalEditarPelicula/EditMovie';
 const URI = 'http://localhost:8000/api/movies/';
 
 const MovieList = ({ movies, handleMovieClick }) => {
+  const handleEditClick = (e) => {
+    e.stopPropagation(); // Evita que el evento se propague hacia el enlace
+    // Aquí puedes agregar la lógica para editar la película
+    console.log('Clic en el botón de edición');
+  };
+
+  const handleDeleteClick = (e) => {
+    e.stopPropagation(); // Evita que el evento se propague hacia el enlace
+    // Aquí puedes agregar la lógica para eliminar la película
+    console.log('Clic en el botón de eliminación');
+  };
+
+  const handleLinkClick = (e, index) => {
+    e.preventDefault(); // Evita la navegación por defecto
+    handleMovieClick(index); // Maneja el clic en el enlace
+  };
+
   return (
     <div className='text-white ml-32 mr-10'>
-
       <h1 className=' mt-5 mb-5 text-4xl'>Películas</h1>
       <input className='w-5/12 h-[55px] rounded-2xl' type="text" placeholder="Filtro" />
-      <div className='inline-block  ml-7'>
-      <CreateMovie />
-      <EditMovie/>
-
+      <div className='inline-block ml-7'>
+        <CreateMovie />
+        
       </div>
       <div className='grid grid-cols-4 gap-4 mt-5'>
         {movies.map((movie, index) => (
           <div key={index} className='mb-4 group relative'>
-            <Link to={`/movie/${movie._id}`} onClick={() => handleMovieClick(index)}>
+            <Link
+              to={`/movie/${movie._id}`}
+              onClick={(e) => handleLinkClick(e, index)}
+            >
               <img
                 src={movie.imageUrl}
                 alt={movie.title}
@@ -34,11 +52,11 @@ const MovieList = ({ movies, handleMovieClick }) => {
                 className="movie-image shadow-md opacity-100 group-hover:opacity-50 transition-opacity duration-300 ease-linear"
               />
               <div className='absolute flex flex-col top-72 left-52 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
-                <button className='btn-editar bg-blue-600 text-white w-14 h-14 rounded-md hover:bg-blue-700
-                mb-2'>
-                  <HiPencil className='w-10 h-5 mx-auto' />
-                </button>
-                <button className='btn-eliminar bg-red-600 text-white w-14 h-14 rounded-md hover:bg-red-700 '>
+              <EditMovie />
+                <button
+                  className='btn-eliminar bg-red-600 text-white w-14 h-14 rounded-md hover:bg-red-700'
+                  onClick={handleDeleteClick}
+                >
                   <HiOutlineTrash className='w-5 h-5 mx-auto' />
                 </button>
               </div>
@@ -80,6 +98,7 @@ const MovieListContainer = () => {
 
   const handleMovieClick = (index) => {
     console.log('Clic en la película:', movies[index].title);
+    // Aquí puedes agregar la lógica para navegar a la página de detalles de la película
   };
 
   return <MovieList movies={movies} handleMovieClick={handleMovieClick} />;
