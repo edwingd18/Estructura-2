@@ -3,11 +3,14 @@ import { FaTicketSimple } from "react-icons/fa6";
 import { PiArmchairFill } from "react-icons/pi";
 import { GiPopcorn } from "react-icons/gi";
 import { HiCash } from "react-icons/hi";
-import React, { useState } from "react";
+import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import { Button } from "flowbite-react";
 
 function SeatMap() {
   const [selectedSeats, setSelectedSeats] = useState([]);
-  const maxSeats = 5; 
+  const maxSeats = 5;
+  const navigate = useNavigate();
 
   const handleSeatClick = (seatId) => {
     setSelectedSeats((prevSelectedSeats) => {
@@ -44,16 +47,19 @@ function SeatMap() {
             {Array.from({ length: 90 }, (_, i) => (
               <div
                 key={i}
-                className={`seat ${
-                  selectedSeats.includes(`seat${i + 1}`) ? "selected" : ""
-                }`}
+                className={`seat ${selectedSeats.includes(`seat${i + 1}`) ? "selected" : ""
+                  }`}
                 id={`seat${i + 1}`}
                 onClick={() => handleSeatClick(`seat${i + 1}`)}
               ></div>
             ))}
           </div>
         </div>
-        <button className="btn-Siguiente">Siguiente</button>
+
+        <Button className="bg-black border border-whiter btn-Siguiente" onClick={() => navigate('/selectFood')}>
+          Siguiente
+        </Button>
+
         <h1 id="AvailableSeatsText">Disponibles</h1>
         <div id="availableSeatMark"></div>
         <h1 id="SpecialSeatsText">Discapacitados</h1>

@@ -29,28 +29,28 @@ body {
     box-shadow: 0 3px 13px 1px rgb(0, 0, 0, 9%);
 }
 
-.icon-ticket {
+.icon-ticket-1 {
     width: 25px;
     height: auto;
     margin-right: 10px;
     color: #1C64F2;
 }
 
-.icon-chair {
+.icon-chair-1 {
     width: 25px;
     height: auto;
     margin-right: 10px;
     color: #fff;
 }
 
-.icon-popcorn {
+.icon-popcorn-1 {
     width: 25px;
     height: auto;
     margin-right: 10px;
     color: #fff;
 }
 
-.icon-cash {
+.icon-cash-1 {
     width: 25px;
     height: auto;
     margin-right: 10px;
@@ -112,4 +112,4 @@ body {
 .btn-Siguiente:hover {
     background-color: #fdfdfd;
     color: #000;
-}
+} 

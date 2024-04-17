@@ -6,13 +6,17 @@ import { GiPopcorn } from "react-icons/gi";
 import { HiCash } from "react-icons/hi";
 import Combos from './Combos';
 import { Button } from "flowbite-react";
+import { useNavigate } from 'react-router-dom';
 
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 
 
 function Food() {
+
+    const navigate = useNavigate();
+
     return (
-        <div className="contenedor-select-comida">
+        < div className="contenedor-select-comida" >
             <div className="contenedor-comida">
                 <div className="contenedor-iconos">
                     <FaTicketSimple className="icon-ticket" />
@@ -76,12 +80,12 @@ function Food() {
                             </SplideSlide>
                         </Splide>
                     </div>
-                    <Button className="bg-black border border-whiter buttonComidaSiguiente">
+                    <Button className="bg-black border border-whiter buttonComidaSiguiente" onClick={() => navigate('/checkout')}>
                         Siguiente
                     </Button>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

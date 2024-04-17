@@ -12,8 +12,16 @@ export default {
     },
     fontFamily:{
       'titles': ["Quattrocento Sans", "sans-serif"]
-      
-    }
+      ,
+      'titulo':["Outfit", "sans-serif"]
+    },
+    height: {
+      '128': '56rem',
+    },
+
+      width: {
+        '128': '38rem',
+      }
   },
 },
   plugins: [require('flowbite/plugin')],
