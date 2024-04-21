@@ -1,3 +1,4 @@
+//appq.js
 import express from "express"
 import cors from 'cors'
 //importamos la conexión a la DB
@@ -24,6 +25,6 @@ app.use('/payment', PaymentRoutes)
 app.use('/user', userRouter)
 
 //Ruta de bienvenida
-app.listen(8000, () => {
-    console.log('Server UP running in http://localhost:', 8000)
-})
+app.listen(process.env.PORT || 8000, () => {
+    console.log('Server UP running in http://localhost:', process.env.PORT || 8000);
+  });
