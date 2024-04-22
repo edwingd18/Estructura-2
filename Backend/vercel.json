@@ -2,13 +2,8 @@
   "version": 2,
   "routes": [
     {
-      "src": "/",
-      "dest": "/"
-    },
-    {
-      "src": "/api/movies",
-      "dest": "/"
-
+      "src": "/api/(.*)",
+      "dest": "/app.js"
     }
   ]
 }
