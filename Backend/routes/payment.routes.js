@@ -1,11 +1,5 @@
 import { Router } from "express";
-import mercadopago from 'mercadopago';
 import { createOrder } from '../controllers/payment.controller.js'
-
-// Configura tus credenciales de Mercado Pago
-mercadopago.configure({
-    access_token: 'TU_ACCESS_TOKEN'
-});
 
 const router = Router()
 
