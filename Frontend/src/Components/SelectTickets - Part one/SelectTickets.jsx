@@ -8,7 +8,7 @@ import { Button, Datepicker } from 'flowbite-react';
 import { useNavigate } from 'react-router-dom';
 import { addDays } from 'flowbite-react/lib/esm/components/Datepicker/helpers.js';
 import { HiShoppingCart } from "react-icons/hi";
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 function SelectTickets() {
 
@@ -22,7 +22,7 @@ function SelectTickets() {
 
     // Fecha 7 días después de la fecha actual
     const nextWeek = addDays(today, 7);
-    
+
 
     return (
         <div className="contenedor-select-tickets">
@@ -45,21 +45,21 @@ function SelectTickets() {
                             nombre="SILLA GENERAL"
                             precio='13,350'
                             nombreTipo="GENERAL"
-                            imagen='general' 
+                            imagen='general'
                             selected={generalSelected}
                             setSelected={setGeneralSelected}
-                            otherSelected ={preferencialSelected}
-                            />
+                            otherSelected={preferencialSelected}
+                        />
 
                         <SelectChairPreferencial
                             nombre="SILLA PREFERENCIAL"
                             precio='20,000'
                             nombreTipo="PREFERENCIAL"
-                            imagen='preferencial' 
+                            imagen='preferencial'
                             selected={preferencialSelected}
                             setSelected={setPreferencialSelected}
-                            otherSelected ={generalSelected}
-                            />
+                            otherSelected={generalSelected}
+                        />
 
                         <Button className="bg-black border border-whiter buttonComprar" onClick={() => navigate('/selectSeat')}>
                             <HiShoppingCart className="mr-2 h-5 w-5" />

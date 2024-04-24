@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Modal, TextInput, Button, Checkbox, Label } from 'flowbite-react';
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
-
+import PropTypes from 'prop-types';
 
 export function ModalLogin({ showModal, toggleModal }) {
   const [email, setEmail] = useState('');
@@ -59,8 +59,6 @@ export function ModalLogin({ showModal, toggleModal }) {
       "popup": "border-t"
     }
   };
-
-
 
   async function handleSuccess(response) {
     console.log("Login Successful:", response);
@@ -124,5 +122,10 @@ export function ModalLogin({ showModal, toggleModal }) {
     </GoogleOAuthProvider>
   );
 }
+
+ModalLogin.propTypes = {
+  showModal: PropTypes.bool.isRequired,
+  toggleModal: PropTypes.func.isRequired,
+};
 
 export default ModalLogin;
