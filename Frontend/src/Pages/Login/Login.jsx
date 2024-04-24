@@ -1,10 +1,28 @@
 import { useState } from 'react';
 import { Modal, TextInput, Button, Checkbox, Label } from 'flowbite-react';
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
+import { createPortal } from 'react-dom';
+import { Link } from 'react-router-dom';
+import { ModalForm } from './ModalForm';
 
 export function ModalLogin({ showModal, toggleModal }) {
   const [email, setEmail] = useState('');
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  // const [isCreateAccountModalOpen, setIsCreateAccountModalOpen] = useState(false);
+
+  function handleLoginClick() {
+    setIsLoginModalOpen(true);
+  }
+
+  function handleCloseLoginModal() {
+    setIsLoginModalOpen(false);
+  }
+
+  // function handleCreateAccountClick() {
+  //   toggleModal(); // Cierra el modal de inicio de sesión
+  //   setIsCreateAccountModalOpen(true); // Abre el modal de "Create account"
+  // }
 
   const customtema = {
     "root": {
@@ -112,11 +130,17 @@ export function ModalLogin({ showModal, toggleModal }) {
             </div>
             <div className="flex justify-between text-sm font-medium text-white mt-4">
               Not registered?&nbsp;
-              <a href="#" className="text-cyan-700 hover:underline dark:text-cyan-500 ml-4">
-                Create account
-              </a>
+              <Link to={"#"}>
+                <a onClick={handleLoginClick} className="text-cyan-700 hover:underline dark:text-cyan-500 ml-4">
+                  Create account
+                </a>
+              </Link>
             </div>
           </div>
+          {isLoginModalOpen && createPortal(
+            <ModalForm showModal={isLoginModalOpen} toggleModal={handleCloseLoginModal} />,
+            document.body
+          )}
         </Modal.Body>
       </Modal>
     </GoogleOAuthProvider>
