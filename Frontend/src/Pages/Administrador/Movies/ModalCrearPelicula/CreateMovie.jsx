@@ -71,7 +71,7 @@ const CreateMovie = () => {
   return (
     <>
       <div>
-        <Button className='bg-purple-800 h-[55px] rounded-2xl' onClick={() => setShowModal(true)}>
+        <Button className='bg-blue-800 w-14 h-14 rounded-md hover:bg-black' onClick={() => setShowModal(true)}>
           <HiOutlinePlus className="inline-block rounded-full hover:bg 
           " />
         </Button>
@@ -86,7 +86,7 @@ const CreateMovie = () => {
           <Modal.Body>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <TextInput id="title" placeholder="Título" className="mb-4" />
+                <TextInput id="title" placeholder="Título" className="mb-4 " />
                 <Textarea id="description" placeholder="Descripción" rows={4} className="mb-4" />
                 <TextInput id="director" placeholder="Director" className="mb-4" />
                 <TextInput id="duration" placeholder="Duración" className="mb-4" />

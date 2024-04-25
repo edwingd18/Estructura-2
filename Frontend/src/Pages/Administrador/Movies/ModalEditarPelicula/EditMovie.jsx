@@ -71,18 +71,17 @@ const EditMovie = () => {
   return (
     <>
       <div>
-        <Button className='bg-purple-800 h-[55px] rounded-2xl' onClick={() => setShowModal(true)}>
-          <HiPencil className="inline-block rounded-full hover:bg 
-          " />
+        <Button className='bg-blue-800 w-14 h-14 rounded-md hover:bg-black' onClick={() => setShowModal(true)}>
+          <HiPencil className="inline-block rounded-full hover:bg" />
         </Button>
         <Modal
           show={showModal}
           theme={customtema}
           size="7xl"
           onClose={() => setShowModal(false)}
-          className="fixed inset-0 z-50 overflow-y-auto" // Clase añadida
+          className="fixed inset-0 z-50 overflow-y-auto" 
         >
-          <Modal.Header >Agregar nueva pelicula</Modal.Header>
+          <Modal.Header >Editar nueva pelicula</Modal.Header>
           <Modal.Body>
             <div className="grid grid-cols-2 gap-4">
               <div>
