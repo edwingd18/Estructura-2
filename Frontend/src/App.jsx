@@ -7,6 +7,8 @@ import SeatMap from "./Components/SeatSelection/SeatMap";
 import CheckOut from "./Components/Checkout/Checkout";
 import LoginForm from './Pages/Login/LoginForm'
 import MovieList from "./Pages/Administrador/Movies/MovieList";
+import MovieChat from "./Pages/Usuario/ChatUsuario/Chat";
+
 
 const App = () => {
   return (
@@ -19,6 +21,9 @@ const App = () => {
       <Route path="/checkout" element={<CheckOut />}></Route>
       <Route path="/login" element={<LoginForm />}></Route>
       <Route path="/allmovies" element={<MovieList />}></Route>
+      <Route path="/chat" element={<MovieChat />}></Route>
+
+      
 
     </Routes>
   );

@@ -131,12 +131,14 @@ function Sidebar() {
               <span className="icon-label " style={{ marginLeft: '60px' }}>Carrito</span>
             </FlowbiteSidebar.Item>
             <FlowbiteSidebar.Item
-              href="#"
+              href="/Chat"
               style={{ fontSize: 20 }}
               className="hover:text-black icon"
             >
               <HiOutlineChatAlt2 style={{ fontSize: '30px' }} />
-              <span className="icon-label " style={{ marginLeft: '60px' }} >Chat</span>
+              <span className="icon-label "
+              
+               style={{ marginLeft: '60px' }} >Chat</span>
             </FlowbiteSidebar.Item>
           </FlowbiteSidebar.ItemGroup>
         </FlowbiteSidebar.Items>
