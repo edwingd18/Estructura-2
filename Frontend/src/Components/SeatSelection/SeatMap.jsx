@@ -51,7 +51,9 @@ function SeatMap() {
                   }`}
                 id={`seat${i + 1}`}
                 onClick={() => handleSeatClick(`seat${i + 1}`)}
-              ></div>
+              >
+                {/* {i + 1} {  } */}
+              </div>
             ))}
           </div>
         </div>
