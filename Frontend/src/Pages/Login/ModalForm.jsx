@@ -8,12 +8,12 @@ import { Link } from 'react-router-dom';
 export function ModalForm({ showModal, toggleModal }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
+    const [lastname, setLastName] = useState('');
+
+    const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
     const [isCreateAccountModalOpen, setIsCreateAccountModalOpen] = useState(false);
-
-    // function handleLoginClick() {
-    //     setIsLoginModalOpen(true);
-    // }
 
     function handleCloseLoginModal() {
         setIsLoginModalOpen(false);
@@ -25,7 +25,14 @@ export function ModalForm({ showModal, toggleModal }) {
     }
 
     function handleRegisterClick() {
+        if (!isCheckboxChecked) {
+            alert('Por favor, confirma el tratamiento de datos');
+            return;
+        }
+
         const userData = {
+            name: name,
+            lastname: lastname,
             email: email,
             password: password,
         };
@@ -135,7 +142,31 @@ export function ModalForm({ showModal, toggleModal }) {
                             />
 
                             <div className="text-white text-center mt-4 mb-4">or</div>
+                        </div>
 
+                        <div>
+                            <TextInput
+                                id="name"
+                                type="name"
+                                value={name}
+                                onChange={(event) => setName(event.target.value)}
+                                placeholder="Name"
+                                required
+                            />
+                        </div>
+
+                        <div>
+                            <TextInput
+                                id="lastname"
+                                type="lastname"
+                                value={lastname}
+                                onChange={(event) => setLastName(event.target.value)}
+                                placeholder="Lastname"
+                                required
+                            />
+                        </div>
+
+                        <div>
                             <TextInput
                                 id="email"
                                 placeholder="Email"
@@ -158,7 +189,7 @@ export function ModalForm({ showModal, toggleModal }) {
 
                         <div className="flex justify-between">
                             <div className="flex items-center gap-2">
-                                <Checkbox id="remember" />
+                                <Checkbox id="remember" onChange={(event) => setIsCheckboxChecked(event.target.checked)} />
                                 <Label className="text-white" htmlFor="remember">Confirmar Tratamiento de Datos</Label>
                             </div>
                         </div>

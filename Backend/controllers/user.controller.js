@@ -31,7 +31,7 @@ export const showUser = async (req, res) => {
 
 export const createUser = async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const { name, lastname, email, password } = req.body;
 
         // Verificar si el usuario ya existe
         const existingUser = await User.findOne({ email });
@@ -44,7 +44,7 @@ export const createUser = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, salt);
 
         // Crear un nuevo usuario con la contraseña hasheada
-        const newUser = new User({ email, password: hashedPassword });
+        const newUser = new User({ name, lastname, email, password: hashedPassword });
         await newUser.save();
 
         res.status(201).json({ message: 'Usuario registrado exitosamente' });
@@ -80,8 +80,6 @@ export const loginUser = async (req, res) => {
 
         // Enviar el token en la respuesta
         res.json({ token });
-
-        console.log(token);
 
     } catch (error) {
         console.log(error);
