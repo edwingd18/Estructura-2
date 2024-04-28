@@ -7,11 +7,12 @@ import SeatMap from "./Components/SeatSelection/SeatMap";
 import CheckOut from "./Components/Checkout/Checkout";
 import LoginForm from './Pages/Login/LoginForm'
 import MovieList from "./Pages/Administrador/Movies/MovieList";
-
+import ResumenCompra from "./Components/ResumenCompra/Resumen";
 const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Carousel />} />
+      <Route path="/purchase-summary" element={<ResumenCompra />} />
       <Route path="/movie/:id" element={<MovieInfo />} />
       <Route path="/selectTickets" element={<SelectTickets />} />
       <Route path="/selectSeat" element={<SeatMap />}></Route>

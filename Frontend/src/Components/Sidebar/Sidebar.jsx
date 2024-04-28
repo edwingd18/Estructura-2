@@ -9,11 +9,22 @@ import {
 import { FaBars } from 'react-icons/fa';
 import ModalLogin from "../../Pages/Login/Login";
 
+
 import "./Sidebar.css"; // Importa tu archivo de estilos CSS para el Sidebar si lo tienes
 
 function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const [showModal, setShowModal] = useState(false); // Estado para controlar el modal
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userName, setUserName] = useState("");
+  
+  const login = (name) => {
+    setUserName(name);
+    setIsAuthenticated(true);
+  };
+  
+
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -103,12 +114,11 @@ function Sidebar() {
       img: "mr-3 h-6 sm:h-7",
     },
   };
-
   return (
     <div className={`sidebar-container ${isOpen ? "open" : "close"} flex flex-col top-0 w-[100px] h-full transition-[width_0.3s_ease-in-out] z-[199999] `}>
       <FlowbiteSidebar aria-label="Menu de Cine" theme={customtema} class="Sidebar fixed top-0 w-[110px] h-full transition-[width_0.5s_ease-in-out] z-[199999]">
-        <div className="flex items-center justify-start">
-          <button className="hamburger" onClick={toggleSidebar}>
+        <div className="flex items-center justify-start ">
+          <button className="hamburger text-white text-2xl p-6" onClick={toggleSidebar}>
             <FaBars />
           </button>
           {isOpen && (
@@ -117,11 +127,11 @@ function Sidebar() {
         </div>
         <FlowbiteSidebar.Items>
           <FlowbiteSidebar.ItemGroup>
-            <FlowbiteSidebar.Item href="#" className="hover:text-black icon">
+            <FlowbiteSidebar.Item href="#" className="hover:text-black  icon">
               <HiTicket />
               <span className="icon-label">Boletas</span>
             </FlowbiteSidebar.Item>
-
+  
             <FlowbiteSidebar.Item href="#" className="hover:text-black icon">
               <HiShoppingCart />
               <span className="icon-label">Carrito</span>
@@ -132,14 +142,19 @@ function Sidebar() {
             </FlowbiteSidebar.Item>
           </FlowbiteSidebar.ItemGroup>
         </FlowbiteSidebar.Items>
-        <div className="flex items-center mb-4 w-full" style={{ paddingLeft: '25px', marginTop: "46vh" ,cursor: "pointer"}} onClick={toggleModal}>
-          <div className="icon-container">
-            <HiUser className="text-white" style={{ width: "40px", height: "40px" }} />
-          </div>
-          {isOpen && (
-            <span className="text-white font-semibold ml-2 overflow-hidden text-ellipsis whitespace-nowrap">Edwin Guerrero</span>
-          )}
-        </div>
+        <div className="flex items-center mb-4 w-full" style={{ paddingLeft: '25px', marginTop: "46vh", cursor: "pointer"}} onClick={toggleModal}>
+  <div className="icon-container">
+    <HiUser className="text-white" style={{ width: "40px", height: "40px" }} />
+  </div>
+  {isAuthenticated ? (
+    <span className="text-white font-semibold ml-2 overflow-hidden text-ellipsis whitespace-nowrap">{userName}</span>
+  ) : null}
+</div>
+{isAuthenticated && (
+  <div className="flex items-center mb-4 w-full" style={{ paddingLeft: '25px', cursor: "pointer" }} onClick={() => { setIsAuthenticated(false); setUserName(""); }}>
+    <span className="text-yellow-300 font-semibold ml-center overflow-hidden text-ellipsis whitespace-nowrap">Cerrar sesión</span>
+  </div>
+        )}
       </FlowbiteSidebar>
       <ModalLogin showModal={showModal} toggleModal={toggleModal} />
     </div>
