@@ -2,11 +2,14 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { HiShoppingCart } from "react-icons/hi";
+import { createPortal } from 'react-dom';
+import { ModalLogin } from '../../Pages/Login/Login'
 
 const URI = "http://localhost:8000/api/movies/";
 
 function MovieInfo() {
   const [movie, setMovie] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
@@ -31,6 +34,14 @@ function MovieInfo() {
 
   if (!movie) {
     return <div>Loading...</div>;
+  }
+
+  const handleBuyClick = () => {
+    setIsModalOpen(true);
+  }
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   }
 
   return (
@@ -64,22 +75,26 @@ function MovieInfo() {
           <div className="movie-format sm:text-xs sm:mb-2 lg:text-sm 2xl:py-2 2xl:text-lg inline-block rounded-full bg-red-600 text-white py-2 px-4 uppercase mr-4 2xl:mt-7">
             {movie.format.join(", ")}
           </div>
-          <Link to="/login">
-            <button className="buttonComprar sm:text-sm sm:flex-col sm:h-9  md:text-xs md:h-auto md:py-1.5 lg:text-sm lg:py-2 2xl:text-lg 2xl:h-11 2xl:py-2  items-center bg-blue-800 border rounded-full border-whiter  h-11 w-91  hover:hover:bg-blue-800 py-2 px-4">
+          <Link to="#">
+            <button onClick={handleBuyClick} className="buttonComprar sm:text-sm sm:flex-col sm:h-9  md:text-xs md:h-auto md:py-1.5 lg:text-sm lg:py-2 2xl:text-lg 2xl:h-11 2xl:py-2  items-center bg-blue-800 border rounded-full border-whiter  h-11 w-91  hover:hover:bg-blue-800 py-2 px-4">
               <HiShoppingCart className="  md:w-4 mr-2 h-5 w-5 inline-block rounded-full hover:bg" />
               Adquiere tus entradas
             </button>
           </Link>
         </div>
       </div>
-        <iframe className="sm:w-8/12 sm:h-80 sm:ml-36 sm:mt-5 sm:mb-5  lg:w-9/12 lg:ml-40 xl:w-10/12 xl:h-screen  xl:ml-40x  2xl:w-10/12 2xl:h-screen 2xl:ml-40"
-  
-          src={movie.trailerUrl}
-          title="Trailer"
-          frameBorder=""
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
+      <iframe className="sm:w-8/12 sm:h-80 sm:ml-36 sm:mt-5 sm:mb-5  lg:w-9/12 lg:ml-40 xl:w-10/12 xl:h-screen  xl:ml-40x  2xl:w-10/12 2xl:h-screen 2xl:ml-40"
+
+        src={movie.trailerUrl}
+        title="Trailer"
+        frameBorder=""
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen></iframe>
+
+      {isModalOpen && createPortal(
+        <ModalLogin showModal={isModalOpen} toggleModal={handleCloseModal} />,
+        document.body
+      )}
     </div>
   );
 }

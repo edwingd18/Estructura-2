@@ -18,12 +18,12 @@ function Sidebar() {
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userName, setUserName] = useState("");
-  
+
   const login = (name) => {
     setUserName(name);
     setIsAuthenticated(true);
   };
-  
+
 
 
   const toggleSidebar = () => {
@@ -131,29 +131,37 @@ function Sidebar() {
               <HiTicket />
               <span className="icon-label">Boletas</span>
             </FlowbiteSidebar.Item>
-  
+
             <FlowbiteSidebar.Item href="#" className="hover:text-black icon">
               <HiShoppingCart />
               <span className="icon-label">Carrito</span>
             </FlowbiteSidebar.Item>
-            <FlowbiteSidebar.Item href="#" className="hover:text-black icon">
-              <HiOutlineChatAlt2 />
-              <span className="icon-label">Chat</span>
+
+            <FlowbiteSidebar.Item
+              href="/Chat"
+              style={{ fontSize: 20 }}
+              className="hover:text-black icon"
+            >
+              <HiOutlineChatAlt2 style={{ fontSize: '30px' }} />
+              <span className="icon-label "
+
+                style={{ marginLeft: '40px' }} >Chat</span>
+
             </FlowbiteSidebar.Item>
           </FlowbiteSidebar.ItemGroup>
         </FlowbiteSidebar.Items>
-        <div className="flex items-center mb-4 w-full" style={{ paddingLeft: '25px', marginTop: "46vh", cursor: "pointer"}} onClick={toggleModal}>
-  <div className="icon-container">
-    <HiUser className="text-white" style={{ width: "40px", height: "40px" }} />
-  </div>
-  {isAuthenticated ? (
-    <span className="text-white font-semibold ml-2 overflow-hidden text-ellipsis whitespace-nowrap">{userName}</span>
-  ) : null}
-</div>
-{isAuthenticated && (
-  <div className="flex items-center mb-4 w-full" style={{ paddingLeft: '25px', cursor: "pointer" }} onClick={() => { setIsAuthenticated(false); setUserName(""); }}>
-    <span className="text-yellow-300 font-semibold ml-center overflow-hidden text-ellipsis whitespace-nowrap">Cerrar sesión</span>
-  </div>
+        <div className="flex items-center mb-4 w-full" style={{ paddingLeft: '25px', marginTop: "55vh", cursor: "pointer" }} onClick={toggleModal}>
+          <div className="icon-container">
+            <HiUser className="text-white" style={{ width: "40px", height: "40px" }} />
+          </div>
+          {isAuthenticated ? (
+            <span className="text-white font-semibold ml-2 overflow-hidden text-ellipsis whitespace-nowrap">{userName}</span>
+          ) : null}
+        </div>
+        {isAuthenticated && (
+          <div className="flex items-center mb-4 w-full" style={{ paddingLeft: '25px', cursor: "pointer" }} onClick={() => { setIsAuthenticated(false); setUserName(""); }}>
+            <span className="text-yellow-300 font-semibold ml-center overflow-hidden text-ellipsis whitespace-nowrap">Cerrar sesión</span>
+          </div>
         )}
       </FlowbiteSidebar>
       <ModalLogin showModal={showModal} toggleModal={toggleModal} />

@@ -1,10 +1,57 @@
 import { useState } from 'react';
 import { Modal, TextInput, Button, Checkbox, Label } from 'flowbite-react';
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
-
+import PropTypes from 'prop-types'
+import { createPortal } from 'react-dom';
+import { Link } from 'react-router-dom';
+import { ModalForm } from './ModalForm';
+import { Navigate } from 'react-router-dom';
 
 export function ModalLogin({ showModal, toggleModal }) {
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  function handleLoginClick() {
+    setIsLoginModalOpen(true);
+  }
+
+  function handleCloseLoginModal() {
+    setIsLoginModalOpen(false);
+  }
+
+  function handleLogin() {
+    const userData = {
+      email: email,
+      password: password,
+    };
+
+    fetch('http://localhost:8000/api/user/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userData)
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.token) {
+          localStorage.setItem('jwt', data.token);
+          alert('Inicio de sesión exitoso. Token: ' + data.token);
+          setIsLoggedIn(true); // Asegúrate de que esta línea esté después de guardar el token en el almacenamiento local
+        } else {
+          alert('Error al iniciar sesión: ' + data.error);
+        }
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }
+
+  if (isLoggedIn) {
+    return <Navigate to="/selectTickets" />;
+  }
 
   const customtema = {
     "root": {
@@ -60,8 +107,6 @@ export function ModalLogin({ showModal, toggleModal }) {
     }
   };
 
-
-
   async function handleSuccess(response) {
     console.log("Login Successful:", response);
   }
@@ -98,7 +143,13 @@ export function ModalLogin({ showModal, toggleModal }) {
               />
             </div>
             <div>
-              <TextInput id="password" type="password" placeholder="Password" required />
+              <TextInput
+                id="password"
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                required />
             </div>
             <div className="flex justify-between">
               <div className="flex items-center gap-2">
@@ -110,19 +161,30 @@ export function ModalLogin({ showModal, toggleModal }) {
               </a>
             </div>
             <div className="w-full flex justify-center">
-              <Button className="px-8">Log in</Button>
+              <Button onClick={handleLogin} className="px-8">Log in</Button>
             </div>
             <div className="flex justify-between text-sm font-medium text-white mt-4">
               Not registered?&nbsp;
-              <a href="#" className="text-cyan-700 hover:underline dark:text-cyan-500 ml-4">
-                Create account
-              </a>
+              <Link to={"#"}>
+                <a onClick={handleLoginClick} className="text-cyan-700 hover:underline dark:text-cyan-500 ml-4">
+                  Create account
+                </a>
+              </Link>
             </div>
           </div>
+          {isLoginModalOpen && createPortal(
+            <ModalForm showModal={isLoginModalOpen} toggleModal={handleCloseLoginModal} />,
+            document.body
+          )}
         </Modal.Body>
       </Modal>
     </GoogleOAuthProvider>
   );
 }
+
+ModalLogin.propTypes = {
+  showModal: PropTypes.bool.isRequired,
+  toggleModal: PropTypes.func.isRequired,
+};
 
 export default ModalLogin;
