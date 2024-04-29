@@ -9,11 +9,15 @@ import { useNavigate } from 'react-router-dom';
 import { addDays } from 'flowbite-react/lib/esm/components/Datepicker/helpers.js';
 import { HiShoppingCart } from "react-icons/hi";
 import { useState } from 'react';
+import ConfirmTickets from '../Modals/ConfirmTickets.jsx';
 
 function SelectTickets() {
-
-    const [generalSelected, setGeneralSelected] = useState(false);
-    const [preferencialSelected, setPreferencialSelected] = useState(false);
+    const [generalSelected, setGeneralSelected] = useState(0);
+    const [preferencialSelected, setPreferencialSelected] = useState(0);
+    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [openModal, setOpenModal] = useState(false);
+    const [modalMessage, setModalMessage] = useState('');
+    const [isError, setIsError] = useState(false);
 
     const navigate = useNavigate();
 
@@ -23,6 +27,39 @@ function SelectTickets() {
     // Fecha 7 días después de la fecha actual
     const nextWeek = addDays(today, 7);
 
+    const handleContinue = () => {
+        let isError = false;
+        if (generalSelected > 0 && preferencialSelected > 0) {
+            setModalMessage('Solo puedes comprar un tipo de boleta a la vez.');
+            setOpenModal(true);
+            isError = true;
+        } else if (generalSelected > 0 || preferencialSelected > 0) {
+            const ticketType = generalSelected > 0 ? 'general' : 'preferencial';
+            const ticketQuantity = generalSelected > 0 ? generalSelected : preferencialSelected;
+
+            setModalMessage(`Has seleccionado ${ticketQuantity} boletas de tipo ${ticketType}. ¿Deseas continuar o editar tu selección?`);
+            setOpenModal(true);
+        } else {
+            setModalMessage('Por favor selecciona al menos una boleta.');
+            setOpenModal(true);
+            isError = true;
+        }
+
+        setIsError(isError);
+    };
+
+    const handleConfirm = () => {
+        const ticketType = generalSelected > 0 ? 'general' : 'preferencial';
+        const ticketQuantity = generalSelected > 0 ? generalSelected : preferencialSelected;
+
+        // Guardar la fecha seleccionada, la cantidad de boletas y el tipo de boleta en localStorage
+        localStorage.setItem('date', JSON.stringify(selectedDate));
+        localStorage.setItem('ticketQuantity', JSON.stringify(ticketQuantity));
+        localStorage.setItem('ticketType', JSON.stringify(ticketType));
+
+        // Navegar a la siguiente página
+        navigate('/selectSeat');
+    };
 
     return (
         <div className="contenedor-select-tickets">
@@ -46,9 +83,7 @@ function SelectTickets() {
                             precio='13,350'
                             nombreTipo="GENERAL"
                             imagen='general'
-                            selected={generalSelected}
                             setSelected={setGeneralSelected}
-                            otherSelected={preferencialSelected}
                         />
 
                         <SelectChairPreferencial
@@ -56,12 +91,12 @@ function SelectTickets() {
                             precio='20,000'
                             nombreTipo="PREFERENCIAL"
                             imagen='preferencial'
-                            selected={preferencialSelected}
                             setSelected={setPreferencialSelected}
-                            otherSelected={generalSelected}
                         />
 
-                        <Button className="bg-black border border-whiter buttonComprar" onClick={() => navigate('/selectSeat')}>
+                        <ConfirmTickets openModal={openModal} setOpenModal={setOpenModal} modalMessage={modalMessage} handleConfirm={handleConfirm} isError={isError} />
+
+                        <Button className="bg-black border border-whiter buttonComprar" onClick={handleContinue}>
                             <HiShoppingCart className="mr-2 h-5 w-5" />
                             Siguiente
                         </Button>

@@ -16,6 +16,7 @@ function MovieInfo() {
     fetchMovie();
   }, [id]);
 
+
   const fetchMovie = async () => {
     try {
       const response = await axios.get(URI);
@@ -23,6 +24,9 @@ function MovieInfo() {
         const selectedMovie = response.data.find((m) => m._id === id);
         if (selectedMovie) {
           setMovie(selectedMovie);
+          // Guardar el ID y el nombre de la película en localStorage
+          localStorage.setItem('movieId', JSON.stringify(selectedMovie._id));
+          localStorage.setItem('movieName', JSON.stringify(selectedMovie.title));
         } else {
           setMovie(null);
         }

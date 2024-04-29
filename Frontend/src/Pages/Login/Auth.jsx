@@ -8,7 +8,7 @@ function withAuth(Component) {
 
         if (!token) {
             // Si no hay token, redirige al usuario a la página de inicio de sesión
-            return <Navigate to="/allmovies" replace />;
+            return <Navigate to="/" replace />;
         }
 
         // Si hay un token, renderiza el componente
