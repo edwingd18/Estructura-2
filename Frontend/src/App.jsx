@@ -7,16 +7,21 @@ import SeatMap from "./Components/SeatSelection/SeatMap";
 import CheckOut from "./Components/Checkout/Checkout";
 import MovieList from "./Pages/Administrador/Movies/MovieList";
 
+import ResumenCompra from "./Components/ResumenCompra/Resumen";
+
+
 import MovieChat from "./Pages/Usuario/ChatUsuario/Chat";
 import withAuth from "./Pages/Login/Auth";
 
 const ProtectedSelectTickets = withAuth(SelectTickets);
 
 
+
 const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Carousel />} />
+      <Route path="/purchase-summary" element={<ResumenCompra />} />
       <Route path="/movie/:id" element={<MovieInfo />} />
       <Route path="/selectTickets" element={<ProtectedSelectTickets />} />
       <Route path="/selectSeat" element={<SeatMap />}></Route>
