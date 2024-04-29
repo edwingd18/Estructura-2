@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 
 const Combos = ({ nombre, descripcion, precio, seleccionado }) => {
     return (
-        <div className="card card-hover" onClick={() => seleccionado(nombre, precio)}>
+        <div className="card card-hover" onClick={() => seleccionado(nombre, descripcion, precio)}>
             <div className="contenedor-imagen">
                 <img src={Combo_1}
                     alt="Combo 1"

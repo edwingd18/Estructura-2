@@ -10,7 +10,6 @@ import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import ConfirmFood from '../Modals/ConfirmFood';
 import { useState } from 'react';
-import ConfirmTickets from '../Modals/ConfirmTickets';
 
 function Food() {
     const [modalMessage, setModalMessage] = useState('');
@@ -20,8 +19,8 @@ function Food() {
 
     const navigate = useNavigate();
 
-    const handleComboClick = (nombre, precio) => {
-        setSelectedCombo({ nombre, precio });
+    const handleComboClick = (nombre, descripcion, precio) => {
+        setSelectedCombo({ nombre, descripcion, precio });
         setModalMessage(`Has seleccionado el ${nombre} por un valor de ${precio}. ¿Deseas continuar o editar tu selección?`);
         setOpenModal(true);
         setIsError(false);
@@ -33,9 +32,10 @@ function Food() {
         } else {
             window.localStorage.setItem('comboNombre', selectedCombo.nombre);
             window.localStorage.setItem('comboPrecio', selectedCombo.precio);
+            window.localStorage.setItem('comboDescripcion', selectedCombo.descripcion)
         }
         setOpenModal(false);
-        navigate('/checkout');
+        navigate('/purchase-summary');
     };
 
     const handleNextClick = () => {
@@ -44,7 +44,7 @@ function Food() {
             setOpenModal(true);
             setIsError(false);
         } else {
-            navigate('/checkout');
+            navigate('/purchase-summary');
         }
     };
 
@@ -54,6 +54,7 @@ function Food() {
         setIsError(true);
         window.localStorage.removeItem('comboNombre');
         window.localStorage.removeItem('comboPrecio');
+        window.localStorage.removeItem('comboDescripcion');
     };
 
     return (
@@ -81,35 +82,35 @@ function Food() {
                                 <Combos
                                     nombre={'Combo 1'}
                                     descripcion={'1 Crispetas mediana de sal o caramelo 250 g'}
-                                    precio={'20.000'}
+                                    precio={'20000'}
                                     seleccionado={handleComboClick} />
                             </SwiperSlide>
                             <SwiperSlide>
                                 <Combos
                                     nombre={'Combo 2'}
                                     descripcion={'2 Crispetas mediana de sal o caramelo 250 g'}
-                                    precio={'35.000'}
+                                    precio={'35000'}
                                     seleccionado={handleComboClick} />
                             </SwiperSlide>
                             <SwiperSlide>
                                 <Combos
                                     nombre={'Combo 3'}
                                     descripcion={'3 Crispetas mediana de sal o caramelo 250 g'}
-                                    precio={'50.000'}
+                                    precio={'50000'}
                                     seleccionado={handleComboClick} />
                             </SwiperSlide>
                             <SwiperSlide>
                                 <Combos
                                     nombre={'Combo 4'}
                                     descripcion={'4 Crispetas mediana de sal o caramelo 250 g'}
-                                    precio={'60.000'}
+                                    precio={'60000'}
                                     seleccionado={handleComboClick} />
                             </SwiperSlide>
                             <SwiperSlide>
                                 <Combos
                                     nombre={'Combo 5'}
                                     descripcion={'5 Crispetas mediana de sal o caramelo 250 g'}
-                                    precio={'70.000'}
+                                    precio={'70000'}
                                     seleccionado={handleComboClick} />
                             </SwiperSlide>
                         </Swiper>
