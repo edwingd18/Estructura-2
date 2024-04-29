@@ -111,6 +111,7 @@ export function ModalLogin({ showModal, toggleModal }) {
 
   async function handleSuccess(response) {
     console.log("Login Successful:", response);
+    setIsLoggedIn(true);
   }
 
   function handleError(error) {
@@ -118,7 +119,7 @@ export function ModalLogin({ showModal, toggleModal }) {
   }
 
   return (
-    <GoogleOAuthProvider clientId="tu-client-id-de-google">
+    <GoogleOAuthProvider clientId="529115021260-4lnijtikuumje6jkeo2i0pjiagn5i6o8.apps.googleusercontent.com">
       <Modal show={showModal} size="lg" onClose={toggleModal} theme={customtema} popup>
         <Modal.Header />
         <Modal.Body>
