@@ -40,6 +40,8 @@ export function ModalLogin({ showModal, toggleModal }) {
           localStorage.setItem('jwt', data.token);
           alert('Inicio de sesión exitoso. Token: ' + data.token);
           setIsLoggedIn(true); // Asegúrate de que esta línea esté después de guardar el token en el almacenamiento local
+
+          console.log(data);
         } else {
           alert('Error al iniciar sesión: ' + data.error);
         }
