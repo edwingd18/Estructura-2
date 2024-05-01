@@ -11,8 +11,7 @@ const ResumenCompra = () => {
     total: ''
   });
 
-  const navigate = useNavigate(); // Importar useNavigate
-
+  const navigate = useNavigate(); 
   useEffect(() => {
     // Aquí puedes reemplazar esto con la lógica para obtener tus datos de la fuente deseada
     const staticData = {

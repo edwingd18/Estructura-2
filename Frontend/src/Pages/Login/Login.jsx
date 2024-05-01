@@ -7,12 +7,13 @@ import { Link } from 'react-router-dom';
 import { ModalForm } from './ModalForm';
 import { Navigate } from 'react-router-dom';
 
+
 export function ModalLogin({ showModal, toggleModal }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+ 
   function handleLoginClick() {
     setIsLoginModalOpen(true);
   }
@@ -21,12 +22,13 @@ export function ModalLogin({ showModal, toggleModal }) {
     setIsLoginModalOpen(false);
   }
 
+
   function handleLogin() {
     const userData = {
       email: email,
       password: password,
     };
-
+  
     fetch('http://localhost:8000/api/user/login', {
       method: 'POST',
       headers: {
@@ -39,7 +41,8 @@ export function ModalLogin({ showModal, toggleModal }) {
         if (data.token) {
           localStorage.setItem('jwt', data.token);
           alert('Inicio de sesión exitoso. Token: ' + data.token);
-          setIsLoggedIn(true); // Asegúrate de que esta línea esté después de guardar el token en el almacenamiento local
+          setIsLoggedIn(true); 
+          fetchUserInfo(data.token); // Llamada a fetchUserInfo justo después de obtener el token
         } else {
           alert('Error al iniciar sesión: ' + data.error);
         }
@@ -48,6 +51,31 @@ export function ModalLogin({ showModal, toggleModal }) {
         console.error('Error:', error);
       });
   }
+
+  async function fetchUserInfo(token) {
+    try {
+      const response = await fetch('http://localhost:8000/api/user/details', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to fetch user details. Status: ' + response.status);
+      }
+  
+      const userInfo = await response.json();
+      console.log('User Info:', userInfo);
+      localStorage.setItem('userDetails', JSON.stringify(userInfo));
+      setIsLoggedIn(true); // Actualizar el estado para reflejar que el usuario ha iniciado sesión
+      alert('Detalles del usuario obtenidos: ' + JSON.stringify(userInfo)); // Muestra un alert con la información del usuario
+    } catch (error) {
+      console.error('Failed to fetch user details:', error);
+      alert('Error al obtener detalles del usuario: ' + error.message); // Muestra un alert en caso de error
+    }
+  }
+  
 
   if (isLoggedIn) {
     return <Navigate to="/selectTickets" />;
