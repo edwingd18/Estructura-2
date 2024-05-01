@@ -24,11 +24,8 @@ const App = () => {
       <Route path="/selectFood" element={<Food />} />
       <Route path="/checkout" element={<CheckOut />}></Route>
       <Route path="/allmovies" element={<MovieList />}></Route>
-<<<<<<< Updated upstream
 
-=======
       <Route path="/allcombos" element={<ComboList />}></Route>
->>>>>>> Stashed changes
       <Route path="/chat" element={<MovieChat />}></Route>
 
       
