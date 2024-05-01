@@ -6,6 +6,7 @@ import Food from "./Components/SelectFood/Food";
 import SeatMap from "./Components/SeatSelection/SeatMap";
 import CheckOut from "./Components/Checkout/Checkout";
 import MovieList from "./Pages/Administrador/Movies/MovieList";
+import ComboList from "./Pages/Administrador/Combos/ComboList"
 
 import MovieChat from "./Pages/Usuario/ChatUsuario/Chat";
 import withAuth from "./Pages/Login/Auth";
@@ -23,7 +24,11 @@ const App = () => {
       <Route path="/selectFood" element={<Food />} />
       <Route path="/checkout" element={<CheckOut />}></Route>
       <Route path="/allmovies" element={<MovieList />}></Route>
+<<<<<<< Updated upstream
 
+=======
+      <Route path="/allcombos" element={<ComboList />}></Route>
+>>>>>>> Stashed changes
       <Route path="/chat" element={<MovieChat />}></Route>
 
       
