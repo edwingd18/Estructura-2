@@ -5,7 +5,7 @@ import { HiShoppingCart } from "react-icons/hi";
 import { createPortal } from 'react-dom';
 import { ModalLogin } from '../../Pages/Login/Login'
 
-const URI = "http://localhost:8000/api/movies/";
+const URI = "http://localhost:8000/api/allMovies";
 
 function MovieInfo() {
   const [movie, setMovie] = useState(null);
