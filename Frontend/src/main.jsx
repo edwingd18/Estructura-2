@@ -1,9 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
 import Sidebar from "./Components/Sidebar/Sidebar.jsx";
+import "./main.css";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
+
 // import SeatMap from "./Components/SeatSelection/SeatMap.jsx";
 // import Food from "./Components/SelectFood/Food.jsx";
 

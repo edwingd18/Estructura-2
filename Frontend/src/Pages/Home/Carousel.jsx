@@ -1,4 +1,4 @@
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import MainCarousel from './MainCarousel';
 import ThumbnailCarousel from './ThumbnailCarousel';
@@ -28,7 +28,7 @@ const Carousel = () => {
 
   return (
     <div className="carousel 2xl:ml-24 2xl:mb-2">
-      {carouselItems.length > 0 && ( 
+      {carouselItems.length > 0 && (
         <MainCarousel
           carouselItems={carouselItems}
           selectedThumbnailIndex={selectedThumbnailIndex}
@@ -40,9 +40,9 @@ const Carousel = () => {
         selectedThumbnailIndex={selectedThumbnailIndex}
         handleMovieClick={handleMovieClick}
       />
-      
+
     </div>
-  
+
   );
 };
 

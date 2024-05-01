@@ -13,6 +13,7 @@
     "@mercadopago/sdk-react": "^0.0.19",
     "@react-oauth/google": "^0.12.1",
     "@splidejs/react-splide": "^0.7.12",
+    "@splidejs/splide": "^4.1.4",
     "axios": "^1.6.8",
     "bcrypt": "^5.1.1",
     "express": "^4.19.2",

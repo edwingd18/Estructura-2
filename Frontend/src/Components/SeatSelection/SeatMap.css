@@ -9,6 +9,16 @@ body {
     font-size: 18px;
 }
 
+.seat {
+    /* otras propiedades... */
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+}
+
 .SeatMapWholeContainer {
     display: flex;
     align-items: center;
@@ -70,7 +80,7 @@ body {
     color: #fff;
 }
 
-.SeatMap{
+.SeatMap {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -81,7 +91,7 @@ body {
     box-shadow: 0 3px 13px 1px rgb(0, 0, 0, 9%);
 }
 
-.screen{
+.screen {
     width: 30%;
     height: 3vw;
     background-color: #000000;
@@ -98,33 +108,51 @@ body {
 .seats {
     margin-top: 50px;
     display: grid;
-    grid-template-columns: repeat(12, 1fr); /* Esto crea una grilla con 5 columnas de igual tamaño */
-    gap: 10px; /* Esto añade un espacio de 10px entre cada asiento */
+    grid-template-columns: repeat(12, 1fr);
+    /* Esto crea una grilla con 5 columnas de igual tamaño */
+    gap: 10px;
+    /* Esto añade un espacio de 10px entre cada asiento */
 }
 
 .seat {
-    width: 1.5vw; 
-    height: 1.5vw; 
+    width: 1.5vw;
+    height: 1.5vw;
     background-color: white;
     border-radius: 20px;
     transition: .5s;
+}
+
+.seat.disabled {
+    background-color: yellow;
+}
+
+.seat.selected {
+    color: white;
 }
 
 .seat:hover {
     background-color: #31c50b;
 }
 
-#seat1, #seat2, #seat3, #seat4, #seat5 {
+#seat1,
+#seat2,
+#seat3,
+#seat4,
+#seat5 {
 
-    background-color: rgb(238, 255, 0); 
+    background-color: rgb(238, 255, 0);
 }
 
-#seat1:hover, #seat2:hover, #seat3:hover, #seat4:hover, #seat5:hover {
+#seat1:hover,
+#seat2:hover,
+#seat3:hover,
+#seat4:hover,
+#seat5:hover {
 
-    background-color: #31c50b; 
+    background-color: #31c50b;
 }
 
-#AvailableSeatsText{
+#AvailableSeatsText {
     position: absolute;
     color: white;
     font-size: .7vw;
@@ -133,9 +161,9 @@ body {
     top: 17.5vw;
 }
 
-#availableSeatMark{
+#availableSeatMark {
     position: absolute;
-    width: 1.5vw; 
+    width: 1.5vw;
     height: 1.5vw;
     background-color: white;
     border-radius: 20px;
@@ -144,7 +172,7 @@ body {
 
 }
 
-#SpecialSeatsText{
+#SpecialSeatsText {
     position: absolute;
     color: white;
     font-size: .7vw;
@@ -153,17 +181,18 @@ body {
     top: 21vw;
 }
 
-#SpecialSeatsMark{
+#SpecialSeatsMark {
     position: absolute;
-    width: 1.5vw; 
+    width: 1.5vw;
     height: 1.5vw;
-    background-color: rgb(238, 255, 0);;
+    background-color: rgb(238, 255, 0);
+    ;
     border-radius: 20px;
     top: 23vw;
     left: 30vw;
 }
 
-#SelectedSeatsText{
+#SelectedSeatsText {
     position: absolute;
     color: white;
     font-size: .7vw;
@@ -172,18 +201,18 @@ body {
     top: 24.5vw;
 }
 
-#SelectedSeatsMark{
+#SelectedSeatsMark {
     position: absolute;
     width: 1.5vw;
-    height: 1.5vw; 
-    background-color: #31c50b; 
+    height: 1.5vw;
+    background-color: #31c50b;
     border-radius: 20px;
     top: 26.5vw;
     left: 30vw;
 }
 
 
-#OcuSeatsText{
+#OcuSeatsText {
     position: absolute;
     color: white;
     font-size: .7vw;
@@ -192,11 +221,11 @@ body {
     top: 28vw;
 }
 
-#OcuSeatsMark{
+#OcuSeatsMark {
     position: absolute;
     width: 1.5vw;
-    height: 1.5vw; 
-    background-color: #ff0000; 
+    height: 1.5vw;
+    background-color: #ff0000;
     border-radius: 20px;
     top: 30vw;
     left: 30vw;

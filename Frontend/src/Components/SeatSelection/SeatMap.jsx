@@ -6,24 +6,45 @@ import { HiCash } from "react-icons/hi";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { Button } from "flowbite-react";
+import ConfirmSeats from "../Modals/ConfirmSeats";
 
 function SeatMap() {
   const [selectedSeats, setSelectedSeats] = useState([]);
-  const maxSeats = 5;
+  const [openModal, setOpenModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
+  const [isError, setIsError] = useState(false);
+
   const navigate = useNavigate();
 
+  const rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+  const columns = 12;
+
+  const ticketQuantity = Number(window.localStorage.getItem('ticketQuantity'));
+
   const handleSeatClick = (seatId) => {
-    setSelectedSeats((prevSelectedSeats) => {
-      if (prevSelectedSeats.includes(seatId)) {
-        return prevSelectedSeats.filter((id) => id !== seatId);
+    if (selectedSeats.includes(seatId)) {
+      setSelectedSeats(selectedSeats.filter(seat => seat !== seatId));
+      window.localStorage.setItem('selectedSeats', JSON.stringify(selectedSeats.filter(seat => seat !== seatId)));
+    } else {
+      if (selectedSeats.length < ticketQuantity) {
+        setSelectedSeats([...selectedSeats, seatId]);
+        window.localStorage.setItem('selectedSeats', JSON.stringify([...selectedSeats, seatId]));
       } else {
-        if (prevSelectedSeats.length < maxSeats) {
-          return [...prevSelectedSeats, seatId];
-        } else {
-          return [...prevSelectedSeats.slice(1), seatId];
-        }
+        setModalMessage('Ya has seleccionado el número máximo de asientos');
+        setOpenModal(true);
+        setIsError(true);
       }
-    });
+    }
+  };
+
+  const handleNextClick = () => {
+    if (selectedSeats.length === ticketQuantity) {
+      navigate('/selectFood');
+    } else {
+      setModalMessage('Por favor, selecciona la cantidad correcta de asientos');
+      setOpenModal(true);
+      setIsError(true);
+    }
   };
 
   return (
@@ -44,21 +65,28 @@ function SeatMap() {
             <h1>Pantalla</h1>
           </div>
           <div className="seats">
-            {Array.from({ length: 90 }, (_, i) => (
-              <div
-                key={i}
-                className={`seat ${selectedSeats.includes(`seat${i + 1}`) ? "selected" : ""
-                  }`}
-                id={`seat${i + 1}`}
-                onClick={() => handleSeatClick(`seat${i + 1}`)}
-              >
-                {/* {i + 1} {  } */}
-              </div>
+            {rows.map((row) => (
+              Array.from({ length: columns }, (_, j) => {
+                const seatId = `${row}${j + 1}`;
+                const isDisabledSeat = row === 'A' && j < 6;
+                return (
+                  <div
+                    key={seatId}
+                    className={`seat ${selectedSeats.includes(seatId) ? "selected" : ""} ${isDisabledSeat ? "disabled" : ""}`}
+                    id={seatId}
+                    onClick={() => handleSeatClick(seatId)}
+                  >
+                    {seatId}
+                  </div>
+                );
+              })
             ))}
           </div>
         </div>
 
-        <Button className="bg-black border border-whiter btn-Siguiente" onClick={() => navigate('/selectFood')}>
+        <ConfirmSeats openModal={openModal} setOpenModal={setOpenModal} modalMessage={modalMessage} isError={isError} />
+
+        <Button className="bg-black border border-whiter btn-Siguiente" onClick={handleNextClick}>
           Siguiente
         </Button>
 

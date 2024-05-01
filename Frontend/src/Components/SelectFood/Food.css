@@ -72,15 +72,27 @@ body {
     box-shadow: 0 3px 13px 1px rgb(0, 0, 0, 9%);
 }
 
+.buttons-food {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 20px 0;
+}
+
+.buttons-food Button {
+    margin-left: 30px;
+}
+
 .contenedor-seleccionar-combo {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
     width: 100%;
-    /* background-color: #212032; */
+    padding: 0 20px;
+    /* Añade esto */
     margin-bottom: 50px;
-
 }
 
 .splide__pagination {
