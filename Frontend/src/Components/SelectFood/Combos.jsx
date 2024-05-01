@@ -1,34 +1,59 @@
-import './Combos.css'
-
-import Combo_1 from '../SelectFood/Imagenes/Combo-1.png'
-// import Combo_2 from '../SelectFood/Imagenes/Combo-1.png'
-// import Combo_3 from '../SelectFood/Imagenes/Combo-1.png'
-// import Combo_4 from '../SelectFood/Imagenes/Combo-1.png'
-
+import { Component } from 'react';
+import './Combos.css';
 import PropTypes from 'prop-types';
 
-const Combos = ({ nombre, descripcion, precio, seleccionado }) => {
+const URI = 'http://localhost:8000/api/combos';
+
+class Combos extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      combos: [],
+    };
+  }
+
+  componentDidMount() {
+    fetch(URI)
+      .then(response => response.json())
+      .then(data => {
+        // Filtrar elementos duplicados
+        const uniqueCombos = data.filter(
+          (combo, index, self) =>
+            index === self.findIndex(c => c.id === combo.id)
+        );
+        this.setState({ combos: uniqueCombos });
+      })
+      .catch(error => console.error('Error fetching combos:', error));
+  }
+
+  render() {
+    const { combos } = this.state;
+
     return (
-        <div className="card card-hover" onClick={seleccionado}>
+      <div>
+        {combos.map(combo => (
+          <div
+            key={combo.id}
+            className="card card-hover"
+            onClick={() => this.props.seleccionado(combo.title, combo.description, combo.price)}
+          >
             <div className="contenedor-imagen">
-                <img src={Combo_1}
-                    alt="Combo 1"
-                    className='imagen-combo-1' />
+              <img src={combo.imageUrl} alt={combo.title} className="imagen-combo-1" />
             </div>
             <div className="contenedor-informacion-imagen">
-                <h2>{nombre}</h2>
-                <p>{descripcion}</p>
-                <h3>${precio}</h3>
+              <h2>{combo.title}</h2>
+              <p>{combo.description}</p>
+              <h3>${combo.price}</h3>
             </div>
-        </div>
-    )
+          </div>
+        ))}
+      </div>
+    );
+  }
 }
 
 Combos.propTypes = {
-    nombre: PropTypes.string,
-    descripcion: PropTypes.string,
-    precio: PropTypes.number,
-    seleccionado: PropTypes.func
-}
+  seleccionado: PropTypes.func.isRequired,
+};
 
 export default Combos;
