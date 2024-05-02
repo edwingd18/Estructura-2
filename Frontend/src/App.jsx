@@ -5,6 +5,7 @@ import SelectTickets from "./Components/SelectTickets - Part one/SelectTickets";
 import Food from "./Components/SelectFood/Food";
 import SeatMap from "./Components/SeatSelection/SeatMap";
 import MovieList from "./Pages/Administrador/Movies/MovieList";
+import ComboList from "./Pages/Administrador/Combos/ComboList"
 
 import ResumenCompra from "./Components/ResumenCompra/Resumen";
 
@@ -24,6 +25,8 @@ const App = () => {
       <Route path="/selectSeat" element={<SeatMap />}></Route>
       <Route path="/selectFood" element={<Food />} />
       <Route path="/allmovies" element={<MovieList />}></Route>
+      <Route path="/allcombos" element={<ComboList />}></Route>
+
       <Route path="/chat" element={<MovieChat />}></Route>
     </Routes>
   );
