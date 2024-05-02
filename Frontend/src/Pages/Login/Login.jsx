@@ -27,6 +27,8 @@ export function ModalLogin({ showModal, toggleModal }) {
       password: password,
     };
 
+    console.log(email)
+  
     fetch('http://localhost:8000/api/user/login', {
       method: 'POST',
       headers: {
@@ -40,8 +42,36 @@ export function ModalLogin({ showModal, toggleModal }) {
           localStorage.setItem('jwt', data.token);
           alert('Inicio de sesión exitoso. Token: ' + data.token);
           setIsLoggedIn(true); // Asegúrate de que esta línea esté después de guardar el token en el almacenamiento local
+  
+          // Aquí haces la solicitud GET para obtener la información del usuario
+          fetch(`http://localhost:8000/api/user/${email}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': localStorage.getItem('jwt')
+            },
+          })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
 
-          console.log(data);
+          })
+          .then(userData => {
+            console.log("User data:", userData);
+
+            if (userData.isAdmin){
+              localStorage.setItem('isAdmin', true);
+              console.log('isAdmin: ', true)
+            }else{
+              localStorage.setItem('isAdmin', false);
+              console.log('isAdmin: ', false)
+            }
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
         } else {
           alert('Error al iniciar sesión: ' + data.error);
         }
@@ -111,6 +141,7 @@ export function ModalLogin({ showModal, toggleModal }) {
 
   async function handleSuccess(response) {
     console.log("Login Successful:", response);
+
     setIsLoggedIn(true);
   }
 
