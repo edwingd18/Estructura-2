@@ -3,7 +3,7 @@ import axios from 'axios';
 import MainCarousel from './MainCarousel';
 import ThumbnailCarousel from './ThumbnailCarousel';
 
-const URI = 'http://localhost:8000/api/movies/';
+const URI = 'http://localhost:8000/api/allMovies';
 
 const Carousel = () => {
   const [carouselItems, setCarouselItems] = useState([]);

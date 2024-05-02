@@ -123,7 +123,7 @@ export function ModalForm({ showModal, toggleModal }) {
     }
 
     return (
-        <GoogleOAuthProvider clientId="tu-client-id-de-google">
+        <GoogleOAuthProvider clientId="529115021260-4lnijtikuumje6jkeo2i0pjiagn5i6o8.apps.googleusercontent.com">
             <Modal show={showModal} size="lg" onClose={toggleModal} theme={customtema} popup>
                 <Modal.Header />
                 <Modal.Body>

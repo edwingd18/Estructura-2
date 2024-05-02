@@ -13,9 +13,10 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // Rutas
-app.use('/api/movies', MovieRoutes)
+app.use('/api', MovieRoutes)
 app.use('/api/payment', PaymentRoutes)
 app.use('/api/user', userRouter)
+
 
 // Ruta de bienvenida
 app.listen(process.env.PORT || 8000, () => {

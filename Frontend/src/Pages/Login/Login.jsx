@@ -13,7 +13,7 @@ export function ModalLogin({ showModal, toggleModal }) {
   const [password, setPassword] = useState('');
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
- 
+
   function handleLoginClick() {
     setIsLoginModalOpen(true);
   }
@@ -26,7 +26,9 @@ export function ModalLogin({ showModal, toggleModal }) {
       email: email,
       password: password,
     };
-  
+
+    console.log(email);
+
     fetch('http://localhost:8000/api/user/login', {
       method: 'POST',
       headers: {
@@ -39,9 +41,40 @@ export function ModalLogin({ showModal, toggleModal }) {
         if (data.token) {
           localStorage.setItem('jwt', data.token);
           alert('Inicio de sesión exitoso. Token: ' + data.token);
+
           setIsLoggedIn(true);
+
           fetchUserInfo(email, data.token).then(user => {
-            localStorage.setItem('username', user.name); // Almacena el nombre del usuario en localStorage
+            localStorage.setItem('username', user.name);
+
+            // Solicitud GET para obtener la información del usuario
+            fetch(`http://localhost:8000/api/user/${email}`, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('jwt')
+              },
+            })
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+              })
+              .then(userData => {
+                console.log("User data:", userData);
+
+                if (userData.isAdmin) {
+                  localStorage.setItem('isAdmin', true);
+                  console.log('isAdmin: ', true)
+                } else {
+                  localStorage.setItem('isAdmin', false);
+                  console.log('isAdmin: ', false)
+                }
+              })
+              .catch((error) => {
+                console.error('Error:', error);
+              });
           });
         } else {
           alert('Error al iniciar sesión: ' + data.error);
@@ -51,7 +84,7 @@ export function ModalLogin({ showModal, toggleModal }) {
         console.error('Error:', error);
       });
   }
-  
+
   async function fetchUserInfo(email, token) {
     try {
       const response = await fetch(`http://localhost:8000/api/user/${email}`, {
@@ -59,23 +92,23 @@ export function ModalLogin({ showModal, toggleModal }) {
         headers: {
           'authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
-       
+
         }
       });
       const userData = await response.json();
       console.log('Información del usuario:', userData);
-     
+
       return userData;
     } catch (error) {
       console.error('Error al obtener la información del usuario:', error);
     }
   }
-  
-  
 
-  
-  
-  
+
+
+
+
+
 
   if (isLoggedIn) {
     return <Navigate to="/selectTickets" />;
@@ -137,6 +170,8 @@ export function ModalLogin({ showModal, toggleModal }) {
 
   async function handleSuccess(response) {
     console.log("Login Successful:", response);
+
+    setIsLoggedIn(true);
   }
 
   function handleError(error) {
@@ -144,7 +179,7 @@ export function ModalLogin({ showModal, toggleModal }) {
   }
 
   return (
-    <GoogleOAuthProvider clientId="tu-client-id-de-google">
+    <GoogleOAuthProvider clientId="529115021260-4lnijtikuumje6jkeo2i0pjiagn5i6o8.apps.googleusercontent.com">
       <Modal show={showModal} size="lg" onClose={toggleModal} theme={customtema} popup>
         <Modal.Header />
         <Modal.Body>
