@@ -21,8 +21,6 @@ export function ModalLogin({ showModal, toggleModal }) {
   function handleCloseLoginModal() {
     setIsLoginModalOpen(false);
   }
-
-
   function handleLogin() {
     const userData = {
       email: email,
@@ -41,8 +39,10 @@ export function ModalLogin({ showModal, toggleModal }) {
         if (data.token) {
           localStorage.setItem('jwt', data.token);
           alert('Inicio de sesión exitoso. Token: ' + data.token);
-          setIsLoggedIn(true); 
-          fetchUserInfo(data.token); // Llamada a fetchUserInfo justo después de obtener el token
+          setIsLoggedIn(true);
+          fetchUserInfo(email, data.token).then(user => {
+            localStorage.setItem('username', user.name); // Almacena el nombre del usuario en localStorage
+          });
         } else {
           alert('Error al iniciar sesión: ' + data.error);
         }
@@ -51,30 +51,30 @@ export function ModalLogin({ showModal, toggleModal }) {
         console.error('Error:', error);
       });
   }
-
-  async function fetchUserInfo(token) {
+  
+  async function fetchUserInfo(email, token) {
     try {
-      const response = await fetch('http://localhost:8000/api/user/details', {
+      const response = await fetch(`http://localhost:8000/api/user/${email}`, {
         method: 'GET',
         headers: {
-          'Authorization': `Bearer ${token}`
+          'authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+       
         }
       });
-  
-      if (!response.ok) {
-        throw new Error('Failed to fetch user details. Status: ' + response.status);
-      }
-  
-      const userInfo = await response.json();
-      console.log('User Info:', userInfo);
-      localStorage.setItem('userDetails', JSON.stringify(userInfo));
-      setIsLoggedIn(true); // Actualizar el estado para reflejar que el usuario ha iniciado sesión
-      alert('Detalles del usuario obtenidos: ' + JSON.stringify(userInfo)); // Muestra un alert con la información del usuario
+      const userData = await response.json();
+      console.log('Información del usuario:', userData);
+     
+      return userData;
     } catch (error) {
-      console.error('Failed to fetch user details:', error);
-      alert('Error al obtener detalles del usuario: ' + error.message); // Muestra un alert en caso de error
+      console.error('Error al obtener la información del usuario:', error);
     }
   }
+  
+  
+
+  
+  
   
 
   if (isLoggedIn) {

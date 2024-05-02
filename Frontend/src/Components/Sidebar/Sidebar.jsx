@@ -9,7 +9,6 @@ import {
 import { FaBars } from 'react-icons/fa';
 import ModalLogin from "../../Pages/Login/Login";
 
-
 import "./Sidebar.css";
 
 function Sidebar() {
@@ -22,7 +21,6 @@ function Sidebar() {
     const token = localStorage.getItem('jwt');
     if (token) {
       setIsLoggedIn(true);
-      // Asumimos que también guardas el username en el localStorage o lo obtienes desde la API
       const storedUsername = localStorage.getItem('username');
       setUsername(storedUsername);
     }
@@ -33,7 +31,7 @@ function Sidebar() {
     localStorage.removeItem('username'); // Asegúrate de limpiar el nombre de usuario también
     setIsLoggedIn(false);
     setUsername("");
-    alert('Sesión cerrada correctamente');
+    
   };
 
   const toggleSidebar = () => {
@@ -141,7 +139,7 @@ function Sidebar() {
               <HiTicket />
               <span className="icon-label">Boletas</span>
             </FlowbiteSidebar.Item>
-  
+
             <FlowbiteSidebar.Item href="#" className="hover:text-black icon">
               <HiShoppingCart />
               <span className="icon-label">Carrito</span>
@@ -152,19 +150,31 @@ function Sidebar() {
             </FlowbiteSidebar.Item>
           </FlowbiteSidebar.ItemGroup>
         </FlowbiteSidebar.Items>
-        <div className="flex items-center mb-4 w-full" style={{ paddingLeft: '25px', marginTop:"44vh", cursor: "pointer" }} onClick={isLoggedIn ? logout : toggleModal}>
-        <div className="icon-container">
+        <div className="flex items-center mb-4 w-full" style={{ paddingLeft: '25px', marginTop: "44vh" }}>
+          <div className="icon-container">
             <HiUser className="text-white" style={{ width: "40px", height: "40px" }} />
           </div>
           {isOpen && (
             <div>
               {isLoggedIn ? (
-                <> 
+                <>
                   <span className="text-white font-semibold ml-2 overflow-hidden text-ellipsis whitespace-nowrap">{username || "Usuario"}</span>
-                  <div className="text-white font-semibold ml-2 overflow-hidden text-ellipsis whitespace-nowrap">Cerrar sesión</div>
+                  <div
+                    className="text-white font-semibold ml-2 overflow-hidden text-ellipsis whitespace-nowrap"
+                    onClick={logout}
+                    style={{ cursor: "pointer" }}
+                  >
+                    Cerrar sesión
+                  </div>
                 </>
               ) : (
-                <span className="text-white font-semibold ml-2 overflow-hidden text-ellipsis whitespace-nowrap">Iniciar sesión</span>
+                <span
+                  className="text-white font-semibold ml-2 overflow-hidden text-ellipsis whitespace-nowrap"
+                  onClick={toggleModal}
+                  style={{ cursor: "pointer" }}
+                >
+                  Iniciar sesión
+                </span>
               )}
             </div>
           )}
