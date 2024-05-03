@@ -1,12 +1,17 @@
 import { useState, useEffect } from "react";
-import { Sidebar as FlowbiteSidebar } from "flowbite-react";
+import { Sidebar as FlowbiteSidebar } from "flowbite-react"
+import { MdMovie } from 'react-icons/md'
 import {
   HiOutlineChatAlt2,
   HiShoppingCart,
   HiUser,
   HiTicket,
+
 } from "react-icons/hi";
+import { GiHotMeal } from 'react-icons/gi';
 import { FaBars } from 'react-icons/fa';
+
+
 import ModalLogin from "../../Pages/Login/Login";
 
 import "./Sidebar.css";
@@ -16,12 +21,22 @@ function Sidebar() {
   const [showModal, setShowModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState(""); // Estado para guardar el nombre de usuario
+  const [isAdmin, setisAdmin] = useState(false);
+
+
+  useEffect(() => {
+
+
+  }, [])
+
 
   useEffect(() => {
     const token = localStorage.getItem('jwt');
     if (token) {
-      setIsLoggedIn(true);
+      setIsLoggedIn(true)
       const storedUsername = localStorage.getItem('username');
+      const storedIsAdmin = localStorage.getItem('isAdmin') == 'true';
+      setisAdmin(storedIsAdmin);
       setUsername(storedUsername);
     }
   }, []);
@@ -29,9 +44,11 @@ function Sidebar() {
   const logout = () => {
     localStorage.removeItem('jwt');
     localStorage.removeItem('username'); // Asegúrate de limpiar el nombre de usuario también
+    localStorage.removeItem('isAdmin');
     setIsLoggedIn(false);
     setUsername("");
-    
+    setisAdmin(false);
+
   };
 
   const toggleSidebar = () => {
@@ -122,32 +139,55 @@ function Sidebar() {
       img: "mr-3 h-6 sm:h-7",
     },
   };
+
   return (
-    <div className={`sidebar-container ${isOpen ? "open" : "close"} flex flex-col top-0 w-[100px] h-full transition-[width_0.3s_ease_in_out] z-[199999] `}>
+    <div className={`sidebar-container ${isOpen ? "open" : "close"} flex flex-col top-0 w-[100px] h-full transition-[width_0.3s_ease_in_out] z-[199999]`}>
       <FlowbiteSidebar aria-label="Menu de Cine" theme={customtema} class="Sidebar fixed top-0 w-[110px] h-full transition-[width_0.5s_ease_in_out] z-[199999]">
-        <div className="flex items-center justify-start ">
+        <div className="flex items-center justify-start">
           <button className="hamburger text-white text-2xl p-6" onClick={toggleSidebar}>
             <FaBars />
           </button>
+
           {isOpen && (
             <span className={`text-white font-semibold overflow-hidden text-ellipsis whitespace-nowrap ${!isOpen && 'hidden'}`}>Cine Magic</span>
           )}
         </div>
         <FlowbiteSidebar.Items>
           <FlowbiteSidebar.ItemGroup>
-            <FlowbiteSidebar.Item href="#" className="hover:text-black  icon">
-              <HiTicket />
-              <span className="icon-label">Boletas</span>
-            </FlowbiteSidebar.Item>
 
-            <FlowbiteSidebar.Item href="#" className="hover:text-black icon">
-              <HiShoppingCart />
-              <span className="icon-label">Carrito</span>
-            </FlowbiteSidebar.Item>
-            <FlowbiteSidebar.Item href="#" className="hover:text-black icon">
-              <HiOutlineChatAlt2 />
-              <span className="icon-label">Chat</span>
-            </FlowbiteSidebar.Item>
+            {isAdmin && (
+
+              <FlowbiteSidebar.Item href="#" className="hover:text-black icon">
+                <GiHotMeal />
+                <span className="icon-label">Combos</span>
+              </FlowbiteSidebar.Item>
+            )}
+            {isAdmin && (
+
+              <FlowbiteSidebar.Item href="#" className="hover:text-black icon">
+                <MdMovie />
+                <span className="icon-label">peliculas</span>
+              </FlowbiteSidebar.Item>
+            )}
+            {!isAdmin && (
+              <>
+                <FlowbiteSidebar.Item href="#" className="hover:text-black icon">
+                  <HiTicket />
+                  <span className="icon-label">Boletas</span>
+                </FlowbiteSidebar.Item>
+                <FlowbiteSidebar.Item href="#" className="hover:text-black icon">
+                  <HiShoppingCart />
+                  <span className="icon-label">Carrito</span>
+                </FlowbiteSidebar.Item>
+
+              </>
+            )}
+               <FlowbiteSidebar.Item href="#" className="hover:text-black icon">
+                  <HiOutlineChatAlt2 />
+                  <span className="icon-label">Chat</span>
+                </FlowbiteSidebar.Item>
+
+
           </FlowbiteSidebar.ItemGroup>
         </FlowbiteSidebar.Items>
         <div className="flex items-center mb-4 w-full" style={{ paddingLeft: '25px', marginTop: "44vh" }}>

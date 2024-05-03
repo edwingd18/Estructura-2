@@ -13,6 +13,7 @@ export function ModalLogin({ showModal, toggleModal }) {
   const [password, setPassword] = useState('');
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+ 
 
   function handleLoginClick() {
     setIsLoginModalOpen(true);
@@ -21,61 +22,56 @@ export function ModalLogin({ showModal, toggleModal }) {
   function handleCloseLoginModal() {
     setIsLoginModalOpen(false);
   }
+  
   function handleLogin() {
     const userData = {
       email: email,
       password: password,
     };
-
+  
     console.log(email);
-
-    fetch('http://localhost:8000/api/user/login', {
+  
+    fetch('http://localhost:8000/api/user/login',{
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(userData)
+      body: JSON.stringify(userData),
     })
       .then(response => response.json())
       .then(data => {
         if (data.token) {
           localStorage.setItem('jwt', data.token);
           alert('Inicio de sesión exitoso. Token: ' + data.token);
-
+  
           setIsLoggedIn(true);
-
-          fetchUserInfo(email, data.token).then(user => {
-            localStorage.setItem('username', user.name);
-
-            // Solicitud GET para obtener la información del usuario
-            fetch(`http://localhost:8000/api/user/${email}`, {
-              method: 'GET',
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem('jwt')
-              },
+  
+          
+          fetch(`http://localhost:8000/api/user/${email}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'authorization': `Bearer ${data.token}`,
+            },
+          })
+            .then(response => {
+              if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+              }
+              return response.json();
             })
-              .then(response => {
-                if (!response.ok) {
-                  throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-              })
-              .then(userData => {
-                console.log("User data:", userData);
-
-                if (userData.isAdmin) {
-                  localStorage.setItem('isAdmin', true);
-                  console.log('isAdmin: ', true)
-                } else {
-                  localStorage.setItem('isAdmin', false);
-                  console.log('isAdmin: ', false)
-                }
-              })
-              .catch((error) => {
-                console.error('Error:', error);
-              });
-          });
+            .then(userData => {
+              console.log("User data:", userData);
+  
+              localStorage.setItem('username', userData.name);
+  
+              const isAdmin = userData.isAdmin || false;
+              localStorage.setItem('isAdmin', isAdmin);
+              console.log('isAdmin: ', isAdmin);
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+            });
         } else {
           alert('Error al iniciar sesión: ' + data.error);
         }
@@ -84,31 +80,6 @@ export function ModalLogin({ showModal, toggleModal }) {
         console.error('Error:', error);
       });
   }
-
-  async function fetchUserInfo(email, token) {
-    try {
-      const response = await fetch(`http://localhost:8000/api/user/${email}`, {
-        method: 'GET',
-        headers: {
-          'authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
-
-        }
-      });
-      const userData = await response.json();
-      console.log('Información del usuario:', userData);
-
-      return userData;
-    } catch (error) {
-      console.error('Error al obtener la información del usuario:', error);
-    }
-  }
-
-
-
-
-
-
 
   if (isLoggedIn) {
     return <Navigate to="/selectTickets" />;
