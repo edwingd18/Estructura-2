@@ -1,0 +1,8 @@
+{
+    "redirects": [
+      {
+        "source": "/(.*)",
+        "destination": "http://$DEFAULT_DOMAIN_ALIAS/$1"
+      }
+    ]
+  }
