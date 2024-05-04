@@ -2,19 +2,14 @@ import './SelectTickets.css';
 import { FaTicketSimple } from "react-icons/fa6";
 import { PiArmchairFill } from "react-icons/pi";
 import { GiPopcorn } from "react-icons/gi";
-import { HiCash, HiShoppingCart } from "react-icons/hi";
+import { HiCash } from "react-icons/hi";
 import { SelectChair, SelectChairPreferencial } from './SelectChair.jsx';
 import { Button, Datepicker } from 'flowbite-react';
 import { useNavigate } from 'react-router-dom';
+import { addDays } from 'flowbite-react/lib/esm/components/Datepicker/helpers.js';
+import { HiShoppingCart } from "react-icons/hi";
 import { useState } from 'react';
 import ConfirmTickets from '../Modals/ConfirmTickets.jsx';
-
-// Función personalizada para agregar días a una fecha
-const addDays = (date, days) => {
-  const result = new Date(date);
-  result.setDate(result.getDate() + days);
-  return result;
-};
 
 function SelectTickets() {
     const [generalSelected, setGeneralSelected] = useState(0);
