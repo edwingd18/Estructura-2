@@ -6,7 +6,7 @@ import CreateMovie from './ModalCrearPelicula/CreateMovie';
 import EditMovie from './ModalEditarPelicula/EditMovie';
 import DeleteMovie from './ModalElimarPelicula/DeleteMovie'
 
-const URI = 'http://localhost:8000/api/allMovies';
+const URI = 'http://backend.ftfjfagraqa2hwfs.eastus.azurecontainer.io:8000/api/allMovies';
 
 const MovieList = ({ movies, handleMovieClick }) => {
 

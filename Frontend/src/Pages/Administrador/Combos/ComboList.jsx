@@ -3,7 +3,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-const URI = 'http://localhost:8000/api/combos/';
+const URI = 'http://backend.ftfjfagraqa2hwfs.eastus.azurecontainer.io:8000/api/combos/';
 
 const ComboList = ({ combos, handleComboClick }) => {
 
