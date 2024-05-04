@@ -6,5 +6,10 @@ export default defineConfig({
   plugins: [react()],
   server: {
     historyApiFallback: true,
+    open: true,
+  },
+  mime: {
+    '.jsx': 'text/jsx',
+    '.js': 'text/javascript'
   },
 })
