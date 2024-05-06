@@ -3,7 +3,9 @@ import axios from 'axios';
 import MainCarousel from './MainCarousel';
 import ThumbnailCarousel from './ThumbnailCarousel';
 
-const URI = 'http://backend.ftfjfagraqa2hwfs.eastus.azurecontainer.io:8000/api/allMovies';
+// const URI = 'http://backend.ftfjfagraqa2hwfs.eastus.azurecontainer.io:8000/api/allMovies';
+
+const URI = 'http://localhost:8000/api/allMovies';
 
 const Carousel = () => {
   const [carouselItems, setCarouselItems] = useState([]);

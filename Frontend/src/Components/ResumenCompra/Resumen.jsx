@@ -1,8 +1,20 @@
 import { useState, useEffect } from 'react';
 import { Card, Button } from 'flowbite-react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
+
 
 const ResumenCompra = () => {
+
+  const [preferenceId, setPreferenceId] = useState(null)
+
+  initMercadoPago('YOUR_PUBLIC_KEY', {
+    locale: 'es-CO',
+
+  });
+
   const [Resumen, setResumen] = useState({
     movieName: '',
     date: '',
@@ -10,8 +22,25 @@ const ResumenCompra = () => {
     ticketQuantity: '',
     selectedSeats: [],
     foodDetails: [],
+    boletas: '',
     total: ''
   });
+
+  const createPreference = async () => {
+    try {
+      const response = await axios.post("http://localhost:8000/api/create_preference", {
+        title: "Compra de boletas de cine",
+        quantity: 1,
+        total: 10000,
+      });
+
+      const { id } = response.data;
+      return id;
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const navigate = useNavigate();
 
@@ -23,7 +52,7 @@ const ResumenCompra = () => {
     const comboDescription = window.localStorage.getItem('comboDescripcion').replace(/"/g, '').trim();
     const ticketType = window.localStorage.getItem('ticketType').replace(/"/g, '').trim();
     const comboNombre = window.localStorage.getItem('comboNombre').replace(/"/g, '').trim();
-    const comboPrecio = window.localStorage.getItem('comboPrecio');
+    const comboPrecio = window.localStorage.getItem('comboPrecio').replace(/"/g, '').trim();
 
     const movieDate = new Date(date);
 
@@ -32,8 +61,6 @@ const ResumenCompra = () => {
     const year = movieDate.getFullYear();
 
     const formattedDate = `${day}/${month}/${year}`;
-
-    console.log('Fecha:', formattedDate);
 
     let ticketPrice = 0;
 
@@ -60,6 +87,7 @@ const ResumenCompra = () => {
           price: comboPrecio
         }
       ],
+      boletas: ticketPrice * ticketQuantity,
       total: total
     });
   }, []);
@@ -87,6 +115,7 @@ const ResumenCompra = () => {
                   <span>{Resumen.movieName}</span>
                   <span>{Resumen.date}</span>
                   <span>{Resumen.ticketType}</span>
+                  <span>{Resumen.ticketQuantity}</span>
                   <span>{Resumen.selectedSeats}</span>
                 </div>
               </div>
@@ -102,11 +131,17 @@ const ResumenCompra = () => {
               ))}
             </div>
             <div className="flex justify-between items-center pt-4">
+              <span className="text-lg font-bold">Precio boletas</span>
+              <span className="text-lg font-bold">{Resumen.boletas.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</span>
+            </div>
+            <div className="flex justify-between items-center pt-4">
               <span className="text-lg font-bold">Total</span>
               <span className="text-lg font-bold">{Resumen.total.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</span>
             </div>
+
             <div className="flex justify-center pt-4">
-              <Button onClick={() => navigate('/')}>Pagar</Button> {/* Agregar evento onClick */}
+              <Button className='btn-pagar'>Pagar</Button>
+              <Wallet initialization={{ preferenceId: '<PREFERENCE_ID>' }} />
             </div>
           </div>
         </Card>
