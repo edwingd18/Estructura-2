@@ -4,7 +4,7 @@ const client = new MercadoPagoConfig({
     accessToken: "TEST-3087996574051523-050621-045a009784e5e20aeabed9dbb753356a-1686118927",
 })
 
-export default async function createPreference(req, res) {
+export async function createPreference(req, res) {
     try {
         const body = {
             items: [
@@ -16,9 +16,9 @@ export default async function createPreference(req, res) {
                 },
             ],
             back_urls: {
-                success: 'http://localhost:3000/@onthecode',
-                failure: 'http://localhost:3000/@onthecode',
-                pending: 'http://localhost:3000/@onthecode',
+                success: 'http://localhost:8000/api/payment/',
+                failure: 'http://localhost:5173/',
+                pending: 'http://localhost:5173/',
             },
             auto_return: 'approved',
         };
@@ -36,4 +36,10 @@ export default async function createPreference(req, res) {
             error: 'Error al cargar la preferencia de pago :('
         });
     }
+}
+
+export async function showInfo(req, res) {
+    res.json({
+        message: 'Bienvenido a la API de pagos de Cinepolis',
+    });
 }

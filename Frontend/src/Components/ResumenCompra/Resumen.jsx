@@ -12,7 +12,6 @@ const ResumenCompra = () => {
 
   initMercadoPago('TEST-bf107dd8-2b1a-4fc1-a249-b816c7d45c2d', {
     locale: 'es-CO',
-
   });
 
   const [Resumen, setResumen] = useState({
