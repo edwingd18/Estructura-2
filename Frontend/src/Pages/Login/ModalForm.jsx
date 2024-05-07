@@ -12,7 +12,6 @@ export function ModalForm({ showModal, toggleModal }) {
     const [password, setPassword] = useState('');
     const [phone, setPhone] = useState('');
     const [address, setAddress] = useState('');
-    const [photo, setPhoto] = useState('');
 
     // Estado para controlar qué grupo de campos de entrada se muestra
     const [step, setStep] = useState(1);
@@ -20,42 +19,6 @@ export function ModalForm({ showModal, toggleModal }) {
     const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
     const [isCreateAccountModalOpen, setIsCreateAccountModalOpen] = useState(false);
-
-    function validateForm() {
-        if (!name.trim()) {
-            alert('El campo nombre no puede estar vacío');
-            return false;
-        }
-
-        if (!lastname.trim()) {
-            alert('El campo apellido no puede estar vacío');
-            return false;
-        }
-
-        if (!email.trim()) {
-            alert('El campo email no puede estar vacío');
-            return false;
-        }
-
-        if (!password.trim()) {
-            alert('El campo contraseña no puede estar vacío');
-            return false;
-        }
-
-        if (step === 2) {
-            if (!phone.trim()) {
-                alert('El campo teléfono no puede estar vacío');
-                return false;
-            }
-
-            if (!address.trim()) {
-                alert('El campo dirección no puede estar vacío');
-                return false;
-            }
-        }
-
-        return true;
-    }
 
     function handleCloseLoginModal() {
         setIsLoginModalOpen(false);
@@ -72,19 +35,22 @@ export function ModalForm({ showModal, toggleModal }) {
             return;
         }
 
-        const formData = new FormData();
-        formData.append('name', name);
-        formData.append('lastname', lastname);
-        formData.append('email', email);
-        formData.append('password', password);
-        formData.append('phone', phone);
-        formData.append('address', address);
-        formData.append('photo', photo);
+        const userData = {
+            name: name,
+            lastname: lastname,
+            email: email,
+            password: password,
+            phone: phone,
+            address: address,
+        };
 
         // fetch('http://backend.ftfjfagraqa2hwfs.eastus.azurecontainer.io:8000/api/user', {
         fetch('http://localhost:8000/api/user', {
             method: 'POST',
-            body: formData
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userData)
         })
             .then(response => response.json())
             .then(data => {
@@ -281,16 +247,6 @@ export function ModalForm({ showModal, toggleModal }) {
                                         required
                                     />
                                 </div>
-
-                                <div>
-                                    <TextInput
-                                        id="photo"
-                                        type="file"
-                                        onChange={(event) => setPhoto(event.target.files[0])}
-                                        placeholder="Photo"
-                                    />
-                                </div>
-
                                 <div className="flex justify-between">
                                     <div className="flex items-center gap-2">
                                         <Checkbox id="remember" onChange={(event) => setIsCheckboxChecked(event.target.checked)} />
@@ -304,7 +260,6 @@ export function ModalForm({ showModal, toggleModal }) {
                                     <div className="w-full flex justify-center">
                                         <Button onClick={handleRegisterClick} className="px-8">Register</Button>
                                     </div>
-
                                 </div>
                                 <div className="flex justify-between text-sm font-medium text-white mt-4">
                                     Sign in?&nbsp;

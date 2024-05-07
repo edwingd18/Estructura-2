@@ -32,7 +32,6 @@ export const showUser = async (req, res) => {
 export const createUser = async (req, res) => {
     try {
         const { name, lastname, email, password, phone, address } = req.body;
-        const photo = req.file.buffer;
 
         // Verificar si el usuario ya existe
         const existingUser = await User.findOne({ email });
