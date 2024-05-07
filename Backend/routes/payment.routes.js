@@ -1,12 +1,9 @@
-import { Router } from "express";
-import { createOrder } from '../controllers/payment.controller.js'
+import { Router } from 'express';
+import { createPreference, showInfo } from '../controllers/payment.controller.js'
 
-const router = Router()
+const routes = Router();
 
-router.post('/create-order', createOrder);
+routes.get('/', showInfo)
+routes.post('/create_preference', createPreference)
 
-router.get('/success', (req, res) => {
-    // Aquí puedes manejar la respuesta de éxito de Mercado Pago
-})
-
-export default router;
+export default routes;

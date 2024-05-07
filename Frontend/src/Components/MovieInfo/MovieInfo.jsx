@@ -5,7 +5,9 @@ import { HiShoppingCart } from "react-icons/hi";
 import { createPortal } from 'react-dom';
 import { ModalLogin } from '../../Pages/Login/Login'
 
-const URI = "http://backend.ftfjfagraqa2hwfs.eastus.azurecontainer.io:8000/api/allMovies";
+// const URI = "http://backend.ftfjfagraqa2hwfs.eastus.azurecontainer.io:8000/api/allMovies";
+
+const URI = 'http://localhost:8000/api/allMovies';
 
 function MovieInfo() {
   const [movie, setMovie] = useState(null);
