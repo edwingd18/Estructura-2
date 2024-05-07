@@ -12,7 +12,7 @@ router.get('/', showUsers);
 router.get('/:email',/* verifyToken,*/ showUser);
 
 // Ruta para registrar un usuario NO CAMBIAR EDWIN POR FAVOR CREASTE LAS COSAS QUE YO YA HABIA CREADO
-router.post('/', upload.single('photo'), createUser);
+router.post('/', createUser);
 
 // Ruta para iniciar sesion de un usuario
 router.post('/login', loginUser);

@@ -32,7 +32,6 @@ export const showUser = async (req, res) => {
 export const createUser = async (req, res) => {
     try {
         const { name, lastname, email, password, phone, address } = req.body;
-        const photo = req.file.buffer;
 
         // Verificar si el usuario ya existe
         const existingUser = await User.findOne({ email });
@@ -45,7 +44,7 @@ export const createUser = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, salt);
 
         // Crear un nuevo usuario con la contraseña hasheada
-        const newUser = new User({ name, lastname, email, password: hashedPassword, phone, address, photo });
+        const newUser = new User({ name, lastname, email, password: hashedPassword, phone, address });
         await newUser.save();
 
         res.status(201).json({ message: 'Usuario registrado exitosamente' });
