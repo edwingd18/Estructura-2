@@ -10,7 +10,7 @@ const ResumenCompra = () => {
 
   const [preferenceId, setPreferenceId] = useState(null)
 
-  initMercadoPago('YOUR_PUBLIC_KEY', {
+  initMercadoPago('TEST-bf107dd8-2b1a-4fc1-a249-b816c7d45c2d', {
     locale: 'es-CO',
 
   });
@@ -28,7 +28,7 @@ const ResumenCompra = () => {
 
   const createPreference = async () => {
     try {
-      const response = await axios.post("http://localhost:8000/api/create_preference", {
+      const response = await axios.post("http://localhost:8000/api/payment/create_preference", {
         title: "Compra de boletas de cine",
         quantity: 1,
         total: 10000,
@@ -40,7 +40,14 @@ const ResumenCompra = () => {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
+
+  const handleBuy = async () => {
+    const id = await createPreference();
+    if (id) {
+      setPreferenceId(id);
+    }
+  };
 
   const navigate = useNavigate();
 
@@ -139,9 +146,9 @@ const ResumenCompra = () => {
               <span className="text-lg font-bold">{Resumen.total.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</span>
             </div>
 
-            <div className="flex justify-center pt-4">
-              <Button className='btn-pagar'>Pagar</Button>
-              <Wallet initialization={{ preferenceId: '<PREFERENCE_ID>' }} />
+            <div className="flex flex-col justify-center items-center pt-4">
+              <Button onClick={handleBuy} className='btn-pagar'>Pagar</Button>
+              {preferenceId && <Wallet initialization={{ preferenceId: preferenceId }} />}
             </div>
           </div>
         </Card>

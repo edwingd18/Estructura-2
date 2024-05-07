@@ -20,7 +20,7 @@
     "express": "^4.19.1",
     "google-auth-library": "^9.7.0",
     "jsonwebtoken": "^9.0.2",
-    "mercadopago": "^2.0.8",
+    "mercadopago": "^2.0.9",
     "mongoose": "^8.2.4",
     "morgan": "^1.10.0",
     "vercel": "^34.1.1"
