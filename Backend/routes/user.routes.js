@@ -1,7 +1,8 @@
 import { Router } from "express";
 import { showUsers, showUser, createUser, loginUser, loginUserGoogle } from '../controllers/user.controller.js'
-import { verifyToken } from '../middleware/token.JWT.js'
+import multer from 'multer';
 
+const upload = multer();
 const router = Router();
 
 // Ruta para mostrar todos los usuarios

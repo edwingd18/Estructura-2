@@ -1,12 +1,19 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .card {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 250px;
+    width: 260px;
     border-radius: 15px;
     background-color: #9592b4;
     padding: 15px;
+    flex-wrap: wrap;
 }
 
 .contenedor-imagen {
@@ -27,11 +34,12 @@
 .contenedor-informacion-imagen {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 
 .contenedor-informacion-imagen h2 {
-    font-size: 20px;
+    font-size: 17px;
     font-weight: 500;
     margin: 10px 0;
 }
@@ -41,10 +49,11 @@
     margin: 0 10px;
     text-align: center;
     margin-bottom: 10px;
+    font-weight: 500;
 }
 
 .contenedor-informacion-imagen h3 {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 500;
     margin: 10px 0;
 }
