@@ -1,0 +1,3 @@
+backend.ftfjfagraqa2hwfs.eastus.azurecontainer.io {
+    reverse_proxy localhost:8000
+}
