@@ -1,36 +1,45 @@
-import mercadopago from 'mercadopago';
+import { MercadoPagoConfig, Preference } from 'mercadopago'
 
-export const createOrder = async (req, res) => {
+const client = new MercadoPagoConfig({
+    accessToken: "TEST-3087996574051523-050621-045a009784e5e20aeabed9dbb753356a-1686118927",
+})
 
-    mercadopago.configure({
-        access_token: 'TEST-7657111617572725-040210-4d168afb539a4921a02aa3649ea03e48-319035764'
-    });
-
+export async function createPreference(req, res) {
     try {
         const body = {
             items: [
                 {
                     title: req.body.title,
                     quantity: Number(req.body.quantity),
-                    unit_price: Number(req.body.price),
+                    unit_price: Number(req.body.total),
                     currency_id: 'COP',
-                }
+                },
             ],
             back_urls: {
-                success: 'https://github.com/mercadopago/checkout-payment-sample/tree/master/client/reactjs',
-                failure: 'https://github.com/mercadopago/checkout-payment-sample/tree/master/client/reactjs',
-                pending: 'https://github.com/mercadopago/checkout-payment-sample/tree/master/client/reactjs'
+                success: 'http://localhost:8000/api/payment/',
+                failure: 'http://localhost:5173/',
+                pending: 'http://localhost:5173/',
             },
-            auto_return: "approved"
+            auto_return: 'approved',
         };
 
-        const preference = await mercadopago.preferences.create(body);
+        const preference = new Preference(client);
+        const result = await preference.create({ body });
 
         res.json({
-            preferenceId: preference.body.id
+            id: result.id
         });
+
     } catch (error) {
-        console.error(error);
-        res.status(500).send('Hubo un error al procesar el pago');
+        console.log(error);
+        res.status(500).json({
+            error: 'Error al cargar la preferencia de pago :('
+        });
     }
+}
+
+export async function showInfo(req, res) {
+    res.json({
+        message: 'Bienvenido a la API de pagos de Cinepolis',
+    });
 }

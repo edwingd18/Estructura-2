@@ -1,7 +1,8 @@
-import  { Component } from 'react';
+import { Component } from 'react';
 import './Combos.css';
 import PropTypes from 'prop-types';
 
+// const URI = 'http://backend.ftfjfagraqa2hwfs.eastus.azurecontainer.io:8000/api/combos';
 const URI = 'http://localhost:8000/api/combos';
 
 class Combos extends Component {

@@ -28,10 +28,12 @@ export function ModalLogin({ showModal, toggleModal }) {
       email: email,
       password: password,
     };
+
   
     console.log(email);
   
     fetch('http://localhost:8000/api/user/login',{
+
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -46,7 +48,7 @@ export function ModalLogin({ showModal, toggleModal }) {
   
           setIsLoggedIn(true);
   
-          
+
           fetch(`http://localhost:8000/api/user/${email}`, {
             method: 'GET',
             headers: {
@@ -59,6 +61,7 @@ export function ModalLogin({ showModal, toggleModal }) {
                 throw new Error(`HTTP error! status: ${response.status}`);
               }
               return response.json();
+
             })
             .then(userData => {
               console.log("User data:", userData);
@@ -68,6 +71,9 @@ export function ModalLogin({ showModal, toggleModal }) {
               const isAdmin = userData.isAdmin || false;
               localStorage.setItem('isAdmin', isAdmin);
               console.log('isAdmin: ', isAdmin);
+
+
+
             })
             .catch((error) => {
               console.error('Error:', error);

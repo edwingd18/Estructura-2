@@ -6,10 +6,15 @@ import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 
 export function ModalForm({ showModal, toggleModal }) {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [lastname, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [phone, setPhone] = useState('');
+    const [address, setAddress] = useState('');
+
+    // Estado para controlar qué grupo de campos de entrada se muestra
+    const [step, setStep] = useState(1);
 
     const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -35,8 +40,11 @@ export function ModalForm({ showModal, toggleModal }) {
             lastname: lastname,
             email: email,
             password: password,
+            phone: phone,
+            address: address,
         };
 
+        // fetch('http://backend.ftfjfagraqa2hwfs.eastus.azurecontainer.io:8000/api/user', {
         fetch('http://localhost:8000/api/user', {
             method: 'POST',
             headers: {
@@ -123,95 +131,155 @@ export function ModalForm({ showModal, toggleModal }) {
     }
 
     return (
-        <GoogleOAuthProvider clientId="529115021260-4lnijtikuumje6jkeo2i0pjiagn5i6o8.apps.googleusercontent.com">
-            <Modal show={showModal} size="lg" onClose={toggleModal} theme={customtema} popup>
-                <Modal.Header />
-                <Modal.Body>
-                    <div className="space-y-6">
-                        <h3 className="text-xl font-medium text-white text-center">Register in our plataform</h3>
-                        <div>
-                            <GoogleLogin
-                                onSuccess={handleSuccess}
-                                onFailure={handleError}
-                                render={renderProps => (
-                                    <Button onClick={renderProps.onClick} disabled={renderProps.disabled} className="w-full mt-4">
-                                        <img src="https://i.ibb.co/8PtwPGS/image-removebg-preview.png" alt="Google" className="mr-2 h-6" />
-                                        Register with Google
-                                    </Button>
+        <div>
+            {step === 1 && (
+                <>
+                    <GoogleOAuthProvider clientId="529115021260-4lnijtikuumje6jkeo2i0pjiagn5i6o8.apps.googleusercontent.com">
+                        <Modal show={showModal} size="lg" onClose={toggleModal} theme={customtema} popup>
+                            <Modal.Header />
+                            <Modal.Body>
+                                <div className="space-y-6">
+                                    <h3 className="text-xl font-medium text-white text-center">Register in our plataform</h3>
+                                    <div>
+                                        <GoogleLogin
+                                            onSuccess={handleSuccess}
+                                            onFailure={handleError}
+                                            render={renderProps => (
+                                                <Button onClick={renderProps.onClick} disabled={renderProps.disabled} className="w-full mt-4">
+                                                    <img src="https://i.ibb.co/8PtwPGS/image-removebg-preview.png" alt="Google" className="mr-2 h-6" />
+                                                    Register with Google
+                                                </Button>
+                                            )}
+                                        />
+
+                                        <div className="text-white text-center mt-4 mb-4">or</div>
+                                    </div>
+
+                                    <div>
+                                        <TextInput
+                                            id="name"
+                                            type="name"
+                                            value={name}
+                                            onChange={(event) => setName(event.target.value)}
+                                            placeholder="Name"
+                                            required
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <TextInput
+                                            id="lastname"
+                                            type="lastname"
+                                            value={lastname}
+                                            onChange={(event) => setLastName(event.target.value)}
+                                            placeholder="Lastname"
+                                            required
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <TextInput
+                                            id="email"
+                                            placeholder="Email"
+                                            value={email}
+                                            onChange={(event) => setEmail(event.target.value)}
+                                            required
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <TextInput
+                                            id="password"
+                                            type="password"
+                                            value={password}
+                                            onChange={(event) => setPassword(event.target.value)}
+                                            placeholder="Password"
+                                            required
+                                        />
+                                    </div>
+                                    <div className="w-full flex justify-center">
+                                        <Button onClick={() => setStep(2)} className="px-8">Siguiente</Button>
+                                    </div>
+                                    <div className="flex justify-between text-sm font-medium text-white mt-4">
+                                        Sign in?&nbsp;
+                                        <Link to={"#"}>
+                                            <a onClick={handleCreateAccountClick} className="text-cyan-700 hover:underline dark:text-cyan-500 ml-4">
+                                                Sign in
+                                            </a>
+                                        </Link>
+                                    </div>
+                                </div>
+                                {isLoginModalOpen && createPortal(
+                                    <ModalForm showModal={isLoginModalOpen} toggleModal={handleCloseLoginModal} />,
+                                    document.body
                                 )}
-                            />
+                            </Modal.Body>
+                        </Modal>
+                    </GoogleOAuthProvider>
+                </>
+            )}
 
-                            <div className="text-white text-center mt-4 mb-4">or</div>
-                        </div>
+            {step === 2 && (
+                <>
+                    <Modal show={showModal} size="lg" onClose={toggleModal} theme={customtema} popup>
+                        <Modal.Header />
+                        <Modal.Body>
+                            <div className="space-y-6">
+                                <h3 className="text-xl font-medium text-white text-center">Register in our plataform</h3>
+                                <div>
+                                    <TextInput
+                                        id="phone"
+                                        type="tel"
+                                        value={phone}
+                                        onChange={(event) => setPhone(event.target.value)}
+                                        placeholder="Phone"
+                                        required
+                                    />
+                                </div>
 
-                        <div>
-                            <TextInput
-                                id="name"
-                                type="name"
-                                value={name}
-                                onChange={(event) => setName(event.target.value)}
-                                placeholder="Name"
-                                required
-                            />
-                        </div>
-
-                        <div>
-                            <TextInput
-                                id="lastname"
-                                type="lastname"
-                                value={lastname}
-                                onChange={(event) => setLastName(event.target.value)}
-                                placeholder="Lastname"
-                                required
-                            />
-                        </div>
-
-                        <div>
-                            <TextInput
-                                id="email"
-                                placeholder="Email"
-                                value={email}
-                                onChange={(event) => setEmail(event.target.value)}
-                                required
-                            />
-                        </div>
-
-                        <div>
-                            <TextInput
-                                id="password"
-                                type="password"
-                                value={password}
-                                onChange={(event) => setPassword(event.target.value)}
-                                placeholder="Password"
-                                required
-                            />
-                        </div>
-
-                        <div className="flex justify-between">
-                            <div className="flex items-center gap-2">
-                                <Checkbox id="remember" onChange={(event) => setIsCheckboxChecked(event.target.checked)} />
-                                <Label className="text-white" htmlFor="remember">Confirmar Tratamiento de Datos</Label>
+                                <div>
+                                    <TextInput
+                                        id="address"
+                                        type="text"
+                                        value={address}
+                                        onChange={(event) => setAddress(event.target.value)}
+                                        placeholder="Address"
+                                        required
+                                    />
+                                </div>
+                                <div className="flex justify-between">
+                                    <div className="flex items-center gap-2">
+                                        <Checkbox id="remember" onChange={(event) => setIsCheckboxChecked(event.target.checked)} />
+                                        <Label className="text-white" htmlFor="remember">Confirmar Tratamiento de Datos</Label>
+                                    </div>
+                                </div>
+                                <div className="flex justify-center">
+                                    <div className="w-full flex justify-center mr-1">
+                                        <Button onClick={() => setStep(1)} className="px-8">Anterior</Button>
+                                    </div>
+                                    <div className="w-full flex justify-center">
+                                        <Button onClick={handleRegisterClick} className="px-8">Register</Button>
+                                    </div>
+                                </div>
+                                <div className="flex justify-between text-sm font-medium text-white mt-4">
+                                    Sign in?&nbsp;
+                                    <Link to={"#"}>
+                                        <a onClick={handleCreateAccountClick} className="text-cyan-700 hover:underline dark:text-cyan-500 ml-4">
+                                            Sign in
+                                        </a>
+                                    </Link>
+                                </div>
                             </div>
-                        </div>
-                        <div className="w-full flex justify-center">
-                            <Button onClick={handleRegisterClick} className="px-8">Register</Button>
-                        </div>
-                        <div className="flex justify-between text-sm font-medium text-white mt-4">
-                            Sign in?&nbsp;
-                            <Link to={"#"}>
-                                <a onClick={handleCreateAccountClick} className="text-cyan-700 hover:underline dark:text-cyan-500 ml-4">
-                                    Sign in
-                                </a>
-                            </Link>
-                        </div>
-                    </div>
-                    {isLoginModalOpen && createPortal(
-                        <ModalForm showModal={isLoginModalOpen} toggleModal={handleCloseLoginModal} />,
-                        document.body
-                    )}
-                </Modal.Body>
-            </Modal>
-        </GoogleOAuthProvider>
+                            {isLoginModalOpen && createPortal(
+                                <ModalForm showModal={isLoginModalOpen} toggleModal={handleCloseLoginModal} />,
+                                document.body
+                            )}
+                        </Modal.Body>
+                    </Modal>
+                </>
+            )
+            }
+        </div >
     );
 }
 

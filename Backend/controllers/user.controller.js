@@ -31,7 +31,7 @@ export const showUser = async (req, res) => {
 
 export const createUser = async (req, res) => {
     try {
-        const { name, lastname, email, password } = req.body;
+        const { name, lastname, email, password, phone, address } = req.body;
 
         // Verificar si el usuario ya existe
         const existingUser = await User.findOne({ email });
@@ -44,7 +44,7 @@ export const createUser = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, salt);
 
         // Crear un nuevo usuario con la contraseña hasheada
-        const newUser = new User({ name, lastname, email, password: hashedPassword });
+        const newUser = new User({ name, lastname, email, password: hashedPassword, phone, address });
         await newUser.save();
 
         res.status(201).json({ message: 'Usuario registrado exitosamente' });
@@ -75,7 +75,7 @@ export const loginUser = async (req, res) => {
 
         // Generar un token JWT
         const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY, {
-            expiresIn: '1h', // El token expirará en 1 hora
+            expiresIn: '1m',
         });
 
         // Enviar el token en la respuesta
@@ -104,7 +104,7 @@ export const loginUserGoogle = async (req, res) => {
 
         // Generar un token JWT
         const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY, {
-            expiresIn: '1h', // El token expirará en 1 hora
+            expiresIn: '1m', // El token expirará en 1 hora
         });
 
         // Enviar el token en la respuesta
