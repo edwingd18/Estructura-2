@@ -7,11 +7,13 @@ import { Link } from 'react-router-dom';
 import { ModalForm } from './ModalForm';
 import { Navigate } from 'react-router-dom';
 
+
 export function ModalLogin({ showModal, toggleModal }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+ 
 
   function handleLoginClick() {
     setIsLoginModalOpen(true);
@@ -20,35 +22,38 @@ export function ModalLogin({ showModal, toggleModal }) {
   function handleCloseLoginModal() {
     setIsLoginModalOpen(false);
   }
-
+  
   function handleLogin() {
     const userData = {
       email: email,
       password: password,
     };
 
-    console.log(email)
+  
+    console.log(email);
+  
+    fetch('http://localhost:8000/api/user/login',{
 
-    fetch('http://localhost:8000/api/user/login', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(userData)
+      body: JSON.stringify(userData),
     })
       .then(response => response.json())
       .then(data => {
         if (data.token) {
           localStorage.setItem('jwt', data.token);
           alert('Inicio de sesión exitoso. Token: ' + data.token);
-          setIsLoggedIn(true); // Asegúrate de que esta línea esté después de guardar el token en el almacenamiento local
+  
+          setIsLoggedIn(true);
+  
 
-          // Aquí haces la solicitud GET para obtener la información del usuario
           fetch(`http://localhost:8000/api/user/${email}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': localStorage.getItem('jwt')
+              'authorization': `Bearer ${data.token}`,
             },
           })
             .then(response => {
@@ -60,14 +65,15 @@ export function ModalLogin({ showModal, toggleModal }) {
             })
             .then(userData => {
               console.log("User data:", userData);
+  
+              localStorage.setItem('username', userData.name);
+  
+              const isAdmin = userData.isAdmin || false;
+              localStorage.setItem('isAdmin', isAdmin);
+              console.log('isAdmin: ', isAdmin);
 
-              if (userData.isAdmin) {
-                localStorage.setItem('isAdmin', true);
-                console.log('isAdmin: ', true)
-              } else {
-                localStorage.setItem('isAdmin', false);
-                console.log('isAdmin: ', false)
-              }
+
+
             })
             .catch((error) => {
               console.error('Error:', error);

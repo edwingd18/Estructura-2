@@ -48,7 +48,9 @@ const ResumenCompra = () => {
     }
   };
 
+
   const navigate = useNavigate();
+
 
   useEffect(() => {
     const ticketQuantity = window.localStorage.getItem('ticketQuantity');
