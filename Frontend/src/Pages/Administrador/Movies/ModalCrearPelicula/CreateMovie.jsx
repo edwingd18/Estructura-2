@@ -1,14 +1,23 @@
-import { useState } from 'react';
-import { Modal, TextInput, Textarea, Button } from 'flowbite-react';
+import { useState, useRef } from 'react';
+import { Modal, TextInput, Textarea, Button, Alert } from 'flowbite-react';
 import { HiOutlinePlus } from "react-icons/hi";
-
+import axios from 'axios';
 
 const CreateMovie = () => {
   const [showModal, setShowModal] = useState(false);
   const [imageLink, setImageLink] = useState('');
-  const [bannerLink, setbannerLink] = useState('');
+  const [bannerLink, setBannerLink] = useState('');
+  const [showAlert, setShowAlert] = useState(false);
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
 
-  const customtema = {
+  const titleRef = useRef(null);
+  const descriptionRef = useRef(null);
+  const directorRef = useRef(null);
+  const durationRef = useRef(null);
+  const ageRangeRef = useRef(null);
+
+  const customTema = {
+  
     "root": {
       "base": "fixed inset-x-0 top-0 z-50 h-screen overflow-y-auto overflow-x-hidden md:inset-0 md:h-full",
       "show": {
@@ -61,64 +70,108 @@ const CreateMovie = () => {
       "popup": "border-t"
     }
   };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Datos enviados');
-    setShowModal(false);
-  };
-
-  return (
-    <>
-      <div>
-        <Button className='bg-blue-800 w-14 h-14 rounded-md hover:bg-black' onClick={() => setShowModal(true)}>
-          <HiOutlinePlus className="inline-block rounded-full hover:bg 
-          " />
-        </Button>
-        <Modal
-          show={showModal}
-          theme={customtema}
-          size="7xl"
-          onClose={() => setShowModal(false)}
-          className="fixed inset-0 z-50 overflow-y-auto" // Clase añadida
-        >
-          <Modal.Header >Agregar nueva pelicula</Modal.Header>
-          <Modal.Body>
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <TextInput id="title" placeholder="Título" className="mb-4 " />
-                <Textarea id="description" placeholder="Descripción" rows={4} className="mb-4" />
-                <TextInput id="director" placeholder="Director" className="mb-4" />
-                <TextInput id="duration" placeholder="Duración" className="mb-4" />
-                <TextInput id="age" placeholder="Edad" className="mb-4" />
-                <TextInput
-                  id="bannerUrl"
-                  placeholder="Banner url"
-                  className="mb-4"
-                  value={bannerLink}
-                  onChange={(e) => setbannerLink(e.target.value)}
-                />
-                {bannerLink && <img src={bannerLink} alt="Preview" className='w-[500px]' />}
-              </div>
-              <div className='inset-3'>
-                <TextInput
-                  id="imageLink"
-                  placeholder="Link de la imagen"
-                  className="mt-4 2xl:w-[500px]"
-                  value={imageLink}
-                  onChange={(e) => setImageLink(e.target.value)}
-                />
-                {imageLink && <img src={imageLink} alt="Preview" className="mt-4 2xl:w-[500px] 2xl:h-[650px]" />}
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+  
+      // Validación de campos vacíos
+      if (
+        !titleRef.current.value ||
+        !descriptionRef.current.value ||
+        !directorRef.current.value ||
+        !durationRef.current.value ||
+        !ageRangeRef.current.value ||
+        !imageLink ||
+        !bannerLink
+      ) {
+        setShowAlert(true);
+        return;
+      }
+  
+      const formData = {
+        title: titleRef.current.value,
+        description: descriptionRef.current.value,
+        director: directorRef.current.value,
+        duration: durationRef.current.value,
+        ageRange: ageRangeRef.current.value,
+        bannerUrl: bannerLink,
+        imageUrl: imageLink,
+      };
+  
+      try {
+        await axios.post('http://localhost:8000/api/crearPeli', formData);
+        console.log('Película guardada correctamente');
+        setShowModal(false);
+        setShowAlert(false); 
+        setShowSuccessAlert(true);
+        setTimeout(() => {
+          setShowSuccessAlert(false);
+        }, 5000);
+      } catch (error) {
+        console.error('Error al guardar la película:', error);
+      }
+    };
+  
+    return (
+      <>
+        <div>
+          <Button className='bg-blue-800 w-14 h-14 rounded-md hover:bg-black' onClick={() => setShowModal(true)}>
+            <HiOutlinePlus className="inline-block rounded-full hover:bg" />
+          </Button>
+          <Modal
+            show={showModal}
+            theme={customTema}
+            size="7xl"
+            onClose={() => setShowModal(false)}
+            className="fixed inset-0 z-50 overflow-y-auto"
+          >
+            <Modal.Header>Agregar nueva película</Modal.Header>
+            <Modal.Body>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <TextInput id="title" placeholder="Título" className="mb-4" ref={titleRef} />
+                  <Textarea id="description" placeholder="Descripción" rows={4} className="mb-4" ref={descriptionRef} />
+                  <TextInput id="director" placeholder="Director" className="mb-4" ref={directorRef} />
+                  <TextInput id="duration" placeholder="Duración" className="mb-4" ref={durationRef} />
+                  <TextInput id="age" placeholder="Edad" type="number" className="mb-4" ref={ageRangeRef} />
+                  <TextInput
+                    id="bannerUrl"
+                    placeholder="Banner url"
+                    className="mb-4"
+                    value={bannerLink}
+                    onChange={(e) => setBannerLink(e.target.value)}
+                  />
+                  {bannerLink && <img src={bannerLink} alt="Preview" className='w-[500px]' />}
                 </div>
-            </div>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={handleSubmit}>Enviar</Button>
-          </Modal.Footer>
-        </Modal>
-      </div>
-    </>
-  );
-};
-
-export default CreateMovie;
+                <div className='inset-3'>
+                  <TextInput
+                    id="imageLink"
+                    placeholder="Link de la imagen"
+                    className="mt-4 2xl:w-[500px]"
+                    value={imageLink}
+                    onChange={(e) => setImageLink(e.target.value)}
+                  />
+                  {imageLink && <img src={imageLink} alt="Preview" className="mt-4 2xl:w-[500px] 2xl:h-[650px]" />}
+                </div>
+              </div>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button onClick={handleSubmit}>Enviar</Button>
+            </Modal.Footer>
+          </Modal>
+           
+          {showAlert && (
+            <Alert color="failure" onDismiss={() => setShowAlert(false)} className="absolute top-3 right-3">
+              Por favor, complete todos los campos.
+            </Alert>
+          )}
+          {showSuccessAlert && (
+            <Alert color="success" onDismiss={() => setShowSuccessAlert(false)} className="absolute top-3 right-3">
+              La nueva película se agregó exitosamente.
+            </Alert>
+          )}
+        </div>
+      </>
+    );
+  };
+  
+  export default CreateMovie;

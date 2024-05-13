@@ -1,10 +1,13 @@
-import express from "express"
-import { getAllMovies } from "../controllers/MovieController.js";
-import { getAllCombos } from "../controllers/ComboController.js";
+// Importa los controladores necesarios
+import { getAllMovies, createMovie } from "../controllers/MovieController.js";
 
-const router = express.Router()
+// Importa express y crea un router
+import express from "express";
+const router = express.Router();
 
-router.get('/allMovies', getAllMovies)
-router.get('/combos',getAllCombos)
+// Define las rutas
+router.get('/allMovies', getAllMovies);
+router.post('/crearPeli', createMovie); // Ruta para crear una película
 
-export default router
+// Exporta el router
+export default router;
