@@ -6,24 +6,35 @@ import CreateMovie from './ModalCrearPelicula/CreateMovie';
 import EditMovie from './ModalEditarPelicula/EditMovie';
 import DeleteMovie from './ModalElimarPelicula/DeleteMovie'
 
-const URI = 'http://backend.ftfjfagraqa2hwfs.eastus.azurecontainer.io:8000/api/allMovies';
+const URI = 'http://localhost:8000/api/allMovies';
 
 const MovieList = ({ movies, handleMovieClick }) => {
-
-
-
   const handleLinkClick = (e, index) => {
     e.preventDefault(); // Evita la navegación por defecto
     handleMovieClick(index); // Maneja el clic en el enlace
   };
 
   return (
-    <div className='text-white ml-32 mr-10'>
+    <div className='text-black ml-32 mr-10'>
       <h1 className=' mt-5 mb-5 text-4xl'>Películas</h1>
-      <input className='w-[740px] h-14 rounded-md' type="text" placeholder="Filtro" />
-      <div className='inline-block ml-5'>
+      <div className='flex flex-row'>
+      <input className='w-[640px] h-14 rounded-md' type="text" placeholder="Filtro" />
+
+        <select className='ml-3  h-14 rounded-md'
+                    id="format" >
+                     <option value="Todos">Todas</option>
+                     <option value="Comedia">Comedia</option>
+                    <option value="Suspenso">Suspenso</option>
+                    <option value="Acción">Acción</option>
+                    <option value="Drama">Drama</option>
+                    <option value="Ciencia ficción">Ciencia ficción</option>
+                    <option value="Animación">Animación</option>
+                    <option value="Romance">Romance</option>
+                    
+                  </select>
+                  <div className="ml-3">
         <CreateMovie />
-        
+        </div>
       </div>
       <div className='grid grid-cols-4 gap-4 mt-5'>
         {movies.map((movie, index) => (
@@ -39,14 +50,14 @@ const MovieList = ({ movies, handleMovieClick }) => {
                   e.target.onerror = null;
                   e.target.src = 'https://via.placeholder.com/100x150?text=No+Image';
                 }}
-               
                 className="movie-image shadow-md opacity-100 rounded-md group-hover:opacity-50 transition-opacity duration-300 ease-linear"
               />
-              <div className='absolute flex flex-col top-[390px] left-[280px] items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
-              <div className='mb-2'>
-              <EditMovie />
-              </div>
-              <DeleteMovie/>
+              <div className='absolute flex flex-col top-[450px] left-[320px] items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
+                <div className='mb-2'>
+                <EditMovie movieId={movie._id} />
+                </div>
+                <DeleteMovie movieId={movie._id} 
+                />
                 
               </div>
             </Link>
