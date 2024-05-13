@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { Modal, TextInput, Textarea, Button, Alert } from 'flowbite-react';
+import { Modal, TextInput, Textarea, Button, Alert, Select } from 'flowbite-react';
 import { HiOutlinePlus } from "react-icons/hi";
 import axios from 'axios';
 
@@ -7,8 +7,12 @@ const CreateMovie = () => {
   const [showModal, setShowModal] = useState(false);
   const [imageLink, setImageLink] = useState('');
   const [bannerLink, setBannerLink] = useState('');
+  const [trailerLink, setTrailerLink] = useState('');
+  const [type, setType] = useState(["dsadas","asdas"]);
+  const [format, setFormat] = useState("");
   const [showAlert, setShowAlert] = useState(false);
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  
 
   const titleRef = useRef(null);
   const descriptionRef = useRef(null);
@@ -28,13 +32,14 @@ const CreateMovie = () => {
         "sm": "max-w-sm",
         "md": "max-w-md",
         "lg": "max-w-lg",
-        "xl": "max-w-xl",
-        "2xl": "max-w-2xl",
-        "3xl": "max-w-3xl",
-        "4xl": "max-w-4xl",
-        "5xl": "max-w-5xl",
-        "6xl": "max-w-6xl",
-        "7xl": "max-w-7xl"
+        "xl": "max-w-2xl", // Cambiado de max-w-xl a max-w-2xl para hacerlo un poco más ancho
+        "2xl": "max-w-3xl", // Cambiado de max-w-2xl a max-w-3xl para hacerlo un poco más ancho
+        "3xl": "max-w-4xl",
+        "4xl": "max-w-5xl",
+        "5xl": "max-w-6xl",
+        "6xl": "max-w-7xl",
+        "7xl": "max-w-8xl",
+        "8xl": "max-w-1xl"
       },
       "positions": {
         "top-left": "items-start justify-start",
@@ -50,7 +55,7 @@ const CreateMovie = () => {
     },
     "content": {
       "base": "relative h-full w-full p-4 md:w-auto",
-      "inner": "relative flex max-h-[90dvh] flex-col rounded-lg bg-agua shadow dark:bg-gray-700"
+      "inner": "relative flex max-h-full flex-col rounded-lg bg-agua shadow dark:bg-gray-700" // Cambiado max-h-full en lugar de max-h-[90dvh]
     },
     "body": {
       "base": "flex-1 overflow-auto p-6",
@@ -70,108 +75,159 @@ const CreateMovie = () => {
       "popup": "border-t"
     }
   };
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-  
-      // Validación de campos vacíos
-      if (
-        !titleRef.current.value ||
-        !descriptionRef.current.value ||
-        !directorRef.current.value ||
-        !durationRef.current.value ||
-        !ageRangeRef.current.value ||
-        !imageLink ||
-        !bannerLink
-      ) {
-        setShowAlert(true);
-        return;
-      }
-  
-      const formData = {
-        title: titleRef.current.value,
-        description: descriptionRef.current.value,
-        director: directorRef.current.value,
-        duration: durationRef.current.value,
-        ageRange: ageRangeRef.current.value,
-        bannerUrl: bannerLink,
-        imageUrl: imageLink,
-      };
-  
-      try {
-        await axios.post('http://localhost:8000/api/crearPeli', formData);
-        console.log('Película guardada correctamente');
-        setShowModal(false);
-        setShowAlert(false); 
-        setShowSuccessAlert(true);
-        setTimeout(() => {
-          setShowSuccessAlert(false);
-        }, 5000);
-      } catch (error) {
-        console.error('Error al guardar la película:', error);
-      }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Validación de campos vacíos
+    if (
+      !titleRef.current.value ||
+      !descriptionRef.current.value ||
+      !directorRef.current.value ||
+      !durationRef.current.value ||
+      !ageRangeRef.current.value ||
+      !imageLink ||
+      !bannerLink ||
+      !trailerLink ||
+      type.length === 0 ||
+      format.length === 0
+    ) {
+      setShowAlert(true);
+      return;
+    }
+
+    const formData = {
+      title: titleRef.current.value,
+      description: descriptionRef.current.value,
+      director: directorRef.current.value,
+      duration: durationRef.current.value,
+      ageRange: ageRangeRef.current.value,
+      bannerUrl: bannerLink,
+      imageUrl: imageLink,
+      trailerUrl: trailerLink,
+      type: type,
+      format: format
     };
-  
-    return (
-      <>
-        <div>
-          <Button className='bg-blue-800 w-14 h-14 rounded-md hover:bg-black' onClick={() => setShowModal(true)}>
-            <HiOutlinePlus className="inline-block rounded-full hover:bg" />
-          </Button>
-          <Modal
-            show={showModal}
-            theme={customTema}
-            size="7xl"
-            onClose={() => setShowModal(false)}
-            className="fixed inset-0 z-50 overflow-y-auto"
-          >
-            <Modal.Header>Agregar nueva película</Modal.Header>
-            <Modal.Body>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <TextInput id="title" placeholder="Título" className="mb-4" ref={titleRef} />
-                  <Textarea id="description" placeholder="Descripción" rows={4} className="mb-4" ref={descriptionRef} />
-                  <TextInput id="director" placeholder="Director" className="mb-4" ref={directorRef} />
-                  <TextInput id="duration" placeholder="Duración" className="mb-4" ref={durationRef} />
-                  <TextInput id="age" placeholder="Edad" type="number" className="mb-4" ref={ageRangeRef} />
-                  <TextInput
-                    id="bannerUrl"
-                    placeholder="Banner url"
-                    className="mb-4"
-                    value={bannerLink}
-                    onChange={(e) => setBannerLink(e.target.value)}
-                  />
-                  {bannerLink && <img src={bannerLink} alt="Preview" className='w-[500px]' />}
+
+    try {
+      await axios.post('http://localhost:8000/api/crearPeli', formData);
+      console.log('Película guardada correctamente');
+      setShowModal(false);
+      setShowAlert(false);
+      setShowSuccessAlert(true);
+      setTimeout(() => {
+        setShowSuccessAlert(false);
+        // Recargar la página para reflejar los cambios
+        window.location.reload();
+      }, 5000);
+    } catch (error) {
+      console.error('Error al guardar la película:', error);
+    }
+  };
+
+  return (
+    <>
+      <div>
+        <Button className='bg-blue-800 w-14 h-14 rounded-md hover:bg-black' onClick={() => setShowModal(true)}>
+          <HiOutlinePlus className="inline-block rounded-full hover:bg" />
+        </Button>
+        <Modal
+          show={showModal}
+          theme={customTema}
+          size="7xl"
+          onClose={() => setShowModal(false)}
+          className="fixed inset-0 z-50 overflow-y-auto"
+        >
+          <Modal.Header>Agregar nueva película</Modal.Header>
+          <Modal.Body>
+            <div className="grid grid-cols-2 gap-8">
+              {/* Primera columna: campos de texto y selectores */}
+              <div className="flex flex-col">
+                <TextInput id="title" placeholder="Título" className="mb-4" ref={titleRef} />
+                <Textarea id="description" placeholder="Descripción" rows={4} className="mb-4" ref={descriptionRef} />
+                <div className="grid grid-cols-2 gap-4 mb-4">
+                  <TextInput id="director" placeholder="Director" ref={directorRef} />
+                  <TextInput id="duration" placeholder="Duración" ref={durationRef} />
                 </div>
-                <div className='inset-3'>
-                  <TextInput
-                    id="imageLink"
-                    placeholder="Link de la imagen"
-                    className="mt-4 2xl:w-[500px]"
-                    value={imageLink}
-                    onChange={(e) => setImageLink(e.target.value)}
+                <TextInput id="age" placeholder="Edad" type="number" className="mb-4" ref={ageRangeRef} />
+                <div className="grid grid-cols-2 gap-4 mb-4">
+                  <Select
+                    id="type"
+                    placeholder="Selecciona el tipo"
+                    value={type}
+                    onChange={(selected) => setType(selected)}
+                    options={[
+                      { value: 'Drama', label: 'Drama' },
+                      { value: 'Comedia', label: 'Comedia' },
+                      { value: 'Acción', label: 'Acción' },
+                      // Otros tipos de películas
+                    ]}
+                    isMulti
                   />
-                  {imageLink && <img src={imageLink} alt="Preview" className="mt-4 2xl:w-[500px] 2xl:h-[650px]" />}
+                  <Select
+                    id="format"
+                    placeholder="Selecciona el formato"
+                    value={format}
+                    onChange={(selected) => setFormat(selected)}
+                    options={[
+                      { value: 'Blu-ray', label: 'Blu-ray' },
+                      { value: 'DVD', label: 'DVD' },
+                      { value: 'Streaming', label: 'Streaming' },
+                      // Otros formatos de películas
+                    ]}
+                    isMulti
+                  />
+                </div>
+                <TextInput
+                  id="trailerLink"
+                  placeholder="Trailer URL"
+                  className="mb-4"
+                  value={trailerLink}
+                  onChange={(e) => setTrailerLink(e.target.value)}
+                />
+  
+                <TextInput
+                  id="bannerUrl"
+                  placeholder="Banner url"
+                  value={bannerLink}
+                  onChange={(e) => setBannerLink(e.target.value)}
+                />
+                {bannerLink && <img src={bannerLink} alt="Preview Banner" className='w-[500px] pt-4' />}
+              </div>
+
+              {/* Segunda columna: previsualizaciones */}
+              <div className="flex flex-col items-center">
+                <TextInput
+                  id="imageLink"
+                  placeholder="Link de la imagen"
+                  className="mb-4 w-full"
+                  value={imageLink}
+                  onChange={(e) => setImageLink(e.target.value)}
+                />
+                <div className="flex">
+                  {imageLink && <img src={imageLink} alt="Preview Imagen" className=" 2xl:w-[500px] 2xl:h-[750px]" />}
+                  
                 </div>
               </div>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button onClick={handleSubmit}>Enviar</Button>
-            </Modal.Footer>
-          </Modal>
-           
-          {showAlert && (
-            <Alert color="failure" onDismiss={() => setShowAlert(false)} className="absolute top-3 right-3">
-              Por favor, complete todos los campos.
-            </Alert>
-          )}
-          {showSuccessAlert && (
-            <Alert color="success" onDismiss={() => setShowSuccessAlert(false)} className="absolute top-3 right-3">
-              La nueva película se agregó exitosamente.
-            </Alert>
-          )}
-        </div>
-      </>
-    );
-  };
-  
-  export default CreateMovie;
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={handleSubmit}>Enviar</Button>
+          </Modal.Footer>
+        </Modal>
+
+        {showAlert && (
+          <Alert color="failure" onDismiss={() => setShowAlert(false)} className="absolute top-3 right-3">
+            Por favor, complete todos los campos.
+          </Alert>
+        )}
+        {showSuccessAlert && (
+          <Alert color="success" onDismiss={() => setShowSuccessAlert(false)} className="absolute top-3 right-3">
+            La nueva película se agregó exitosamente.
+          </Alert>
+        )}
+      </div>
+    </>
+  );
+};
+
+export default CreateMovie;

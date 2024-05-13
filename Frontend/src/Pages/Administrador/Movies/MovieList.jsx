@@ -39,9 +39,10 @@ const MovieList = ({ movies, handleMovieClick }) => {
               />
               <div className='absolute flex flex-col top-[390px] left-[280px] items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
                 <div className='mb-2'>
-                  <EditMovie />
+                <EditMovie movieId={movie._id} />
                 </div>
                 <DeleteMovie movieId={movie._id} />
+                
               </div>
             </Link>
             <p className='text-xl font-semiboldbold mt-3'>{movie.title}</p>

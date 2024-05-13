@@ -61,3 +61,36 @@ export const deleteMovie = async (req, res) => {
     res.status(500).json({ error: 'Error al eliminar la película' });
   }
 };
+export const updateMovie = async (req, res) => {
+  try {
+    const { id } = req.params; 
+    const updates = req.body; 
+
+    const movie = await MovieModel.findByIdAndUpdate(id, updates, { new: true });
+
+    if (!movie) {
+      return res.status(404).json({ message: "Película no encontrada." });
+    }
+
+    res.status(200).json({ message: "Película actualizada correctamente.", movie });
+  } catch (error) {
+    console.error('Error al actualizar la película:', error);
+    res.status(500).json({ error: 'Error al actualizar la película' });
+  }
+};
+
+export const getMovieById = async (req, res) => {
+  try {
+    const { id } = req.params; // Obtener el ID de la película de los parámetros de la solicitud
+
+    const movie = await MovieModel.findById(id); // Buscar la película en la base de datos por su ID
+    if (!movie) {
+      return res.status(404).json({ message: "Película no encontrada." });
+    }
+
+    res.status(200).json(movie); // Enviar los detalles de la película como respuesta
+  } catch (error) {
+    console.error('Error al obtener los detalles de la película:', error);
+    res.status(500).json({ error: 'Error al obtener los detalles de la película' });
+  }
+};

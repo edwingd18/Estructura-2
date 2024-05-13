@@ -2,6 +2,8 @@ import { Button, Modal, Alert } from "flowbite-react";
 import { useState } from "react";
 import { HiOutlineExclamationCircle, HiOutlineTrash } from "react-icons/hi";
 import axios from 'axios';
+import PropTypes from 'prop-types';
+
 
 export function DeleteMovie({ movieId, onDeleteSuccess, onDeleteError }) {
   const [openModal, setOpenModal] = useState(false);
@@ -79,5 +81,10 @@ export function DeleteMovie({ movieId, onDeleteSuccess, onDeleteError }) {
     </>
   );
 }
+DeleteMovie.propTypes = {
+  movieId: PropTypes.string.isRequired,
+  onDeleteError: PropTypes.string.isRequired,
+  onDeleteSuccess: PropTypes.string.isRequired,
+};
 
 export default DeleteMovie;
