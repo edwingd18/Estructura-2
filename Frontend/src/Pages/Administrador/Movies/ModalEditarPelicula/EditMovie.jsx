@@ -117,7 +117,7 @@ const EditMovie = ({ movieId }) => {
     <>
       <div>
         <Button className='bg-blue-800 w-14 h-14 rounded-md hover:bg-black' onClick={() => setShowModal(true)}>
-          <HiPencil className="inline-block rounded-full hover:bg" />
+          <HiPencil className="inline-block rounded-full hover:bg mt-2" />
         </Button>
         <Modal
           show={showModal}

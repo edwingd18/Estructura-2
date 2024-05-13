@@ -5,7 +5,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 
 
-export function DeleteMovie({ movieId, onDeleteSuccess, onDeleteError }) {
+export function DeleteMovie({ movieId, onDeleteError }) {
   const [openModal, setOpenModal] = useState(false);
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
@@ -13,14 +13,17 @@ export function DeleteMovie({ movieId, onDeleteSuccess, onDeleteError }) {
   const handleDelete = async () => {
     try {
       await axios.delete(`http://localhost:8000/api/${movieId}`);
-      setShowSuccessAlert(true); // Mostrar la alerta de éxito
+      setShowSuccessAlert(true); // Mostrar la alerta de éxito dentro del modal
       setOpenModal(false); // Cerrar el modal después de eliminar la película
-      onDeleteSuccess(); // Actualizar la lista de películas
+      setTimeout(() => {
+        setShowSuccessAlert(false);
+        // Recargar la página para reflejar los cambios
+        window.location.reload();
+      }, 1000);
     } catch (error) {
       console.error('Error al eliminar la película:', error);
       setShowErrorAlert(true); // Mostrar la alerta de error
-      // Lógica adicional para manejar errores de eliminación de películas
-      onDeleteError(); // No necesitas manejar nada especial para el error aquí, pero puedes agregar lógica adicional si es necesario
+      onDeleteError(); // No necesitas manejar nada especial para el error aquí
     }
   };
 
@@ -29,9 +32,9 @@ export function DeleteMovie({ movieId, onDeleteSuccess, onDeleteError }) {
       <div>
         <Button
           onClick={() => setOpenModal(true)}
-          className=" btn-eliminar bg-red-600 text-white w-14 h-14 rounded-md"
+          className="btn-eliminar bg-red-600 text-white w-14 h-14 rounded-md"
         >
-          <HiOutlineTrash className="inline-block rounded-full hover:bg w-20" />
+          <HiOutlineTrash className="inline-block rounded-full hover:bg w-20 mt-2" />
         </Button>
       </div>
       <Modal
@@ -63,8 +66,7 @@ export function DeleteMovie({ movieId, onDeleteSuccess, onDeleteError }) {
         <Alert
           color="success"
           onDismiss={() => setShowSuccessAlert(false)}
-          className="fixed top-3 right-3"
-        >
+          className="absolute top-3 right-3">
           La película se eliminó correctamente.
         </Alert>
       )}
@@ -73,7 +75,7 @@ export function DeleteMovie({ movieId, onDeleteSuccess, onDeleteError }) {
         <Alert
           color="failure"
           onDismiss={() => setShowErrorAlert(false)}
-          className="fixed top-3 right-3"
+          className="fixed top-3 right-3 transition-all duration-300"
         >
           Hubo un error al eliminar la película. Por favor, inténtalo de nuevo más tarde.
         </Alert>
@@ -82,9 +84,9 @@ export function DeleteMovie({ movieId, onDeleteSuccess, onDeleteError }) {
   );
 }
 DeleteMovie.propTypes = {
-  movieId: PropTypes.string.isRequired,
-  onDeleteError: PropTypes.string.isRequired,
-  onDeleteSuccess: PropTypes.string.isRequired,
+  movieId: PropTypes.string,
+  onDeleteError: PropTypes.string,
+  onDeleteSuccess: PropTypes.string,
 };
 
 export default DeleteMovie;

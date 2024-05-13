@@ -25,6 +25,9 @@ export const createMovie = async (req, res) => {
       ageRange,
       bannerUrl,
       imageUrl,
+      trailerUrl,
+      type, 
+      format,
     } = req.body;
 
     const newMovie = new MovieModel({
@@ -35,6 +38,10 @@ export const createMovie = async (req, res) => {
       ageRange,
       bannerUrl,
       imageUrl,
+      trailerUrl,
+      type, 
+      format,
+
     });
 
     await newMovie.save();

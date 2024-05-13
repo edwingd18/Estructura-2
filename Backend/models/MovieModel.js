@@ -10,9 +10,9 @@ const movieSchema = new Schema({
   description: { type: String },
   ageRange: { type: Number },
   duration: { type: String },
-  format: { type: [String] },
+  format: { type: String },
   director: { type: String },
-  type: { type: [String] },
+  type: { type: String },
   trailerUrl: { type: String },
 }, { collection: 'movies' });
 

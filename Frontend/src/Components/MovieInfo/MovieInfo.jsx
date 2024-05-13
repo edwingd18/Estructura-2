@@ -77,9 +77,9 @@ function MovieInfo() {
               Director: {movie.director}
             </p>
           </div>
-          <p className="type sm:text-xs sm:mb-2  lg:text-sm 2xl:text-lg rounded-full ">Tipo: {movie.type.join(", ")}</p>
+          <p className="type sm:text-xs sm:mb-2  lg:text-sm 2xl:text-lg rounded-full ">Tipo: {movie.type}</p>
           <div className="movie-format sm:text-xs sm:mb-2 lg:text-sm 2xl:py-2 2xl:text-lg inline-block rounded-full bg-red-600 text-white py-2 px-4 uppercase mr-4 2xl:mt-7">
-            {movie.format.join(", ")}
+            {movie.format}
           </div>
           <Link to="#">
             <button onClick={handleBuyClick} className="buttonComprar sm:text-sm sm:flex-col sm:h-9  md:text-xs md:h-auto md:py-1.5 lg:text-sm lg:py-2 2xl:text-lg 2xl:h-11 2xl:py-2  items-center bg-blue-800 border rounded-full border-whiter  h-11 w-91  hover:hover:bg-blue-800 py-2 px-4">
