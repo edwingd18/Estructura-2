@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -80,7 +80,7 @@ const MovieList = ({ movies, handleMovieClick }) => {
                 <DeleteMovie movieId={movie._id} />
               </div>
             </Link>
-            <p className='text-xl font-semibold mt-3 text-white'>{movie.title}</p>
+            <p className='text-xl mt-3 text-white'>{movie.title}</p>
           </div>
         ))}
       </div>

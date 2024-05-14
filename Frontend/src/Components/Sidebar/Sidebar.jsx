@@ -158,16 +158,16 @@ function Sidebar() {
 
             {isAdmin && (
 
-              <FlowbiteSidebar.Item href="#" className="hover:text-black icon">
+              <FlowbiteSidebar.Item href="allCombos" className="hover:text-black icon">
                 <GiHotMeal />
                 <span className="icon-label">Combos</span>
               </FlowbiteSidebar.Item>
             )}
             {isAdmin && (
 
-              <FlowbiteSidebar.Item href="#" className="hover:text-black icon">
+              <FlowbiteSidebar.Item href="allMovies" className="hover:text-black icon">
                 <MdMovie />
-                <span className="icon-label">peliculas</span>
+                <span className="icon-label">Peliculas</span>
               </FlowbiteSidebar.Item>
             )}
             {!isAdmin && (
@@ -209,13 +209,13 @@ function Sidebar() {
                   </div>
                 </>
               ) : (
-                <span
-                  className="text-white font-semibold ml-2 overflow-hidden text-ellipsis whitespace-nowrap"
+                <button
+                  className="text-black font-semibold ml-2 overflow-hidden text-ellipsis whitespace-nowrap bg-white rounded-2xl w-[130px] h-[40px]"
                   onClick={toggleModal}
                   style={{ cursor: "pointer" }}
                 >
                   Iniciar sesión
-                </span>
+                </button>
               )}
             </div>
           )}

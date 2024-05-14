@@ -101,3 +101,4 @@ export const getMovieById = async (req, res) => {
     res.status(500).json({ error: 'Error al obtener los detalles de la película' });
   }
 };
+
