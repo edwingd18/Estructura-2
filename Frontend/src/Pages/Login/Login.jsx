@@ -8,12 +8,12 @@ import { ModalForm } from './ModalForm';
 import { Navigate } from 'react-router-dom';
 
 
-export function ModalLogin({ showModal, toggleModal }) {
+export function ModalLogin({ showModal, toggleModal, context }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
- 
+  const [isLoggedIn, setIsLoggedIn] = useState('');
+
 
   function handleLoginClick() {
     setIsLoginModalOpen(true);
@@ -22,17 +22,14 @@ export function ModalLogin({ showModal, toggleModal }) {
   function handleCloseLoginModal() {
     setIsLoginModalOpen(false);
   }
-  
+
   function handleLogin() {
     const userData = {
       email: email,
       password: password,
     };
 
-  
-    console.log(email);
-  
-    fetch('http://localhost:8000/api/user/login',{
+    fetch('http://localhost:8000/api/user/login', {
 
       method: 'POST',
       headers: {
@@ -42,42 +39,73 @@ export function ModalLogin({ showModal, toggleModal }) {
     })
       .then(response => response.json())
       .then(data => {
-        if (data.token) {
-          localStorage.setItem('jwt', data.token);
-          alert('Inicio de sesión exitoso. Token: ' + data.token);
-  
-          setIsLoggedIn(true);
-  
+        if (data.token) { // Si el inicio de sesión es exitoso, se guarda el token en el local storage
+          if (context === 'sidebar') {  // Si el contexto es sidebar, se muestra un mensaje de alerta
+            localStorage.setItem('jwt', data.token);
+            alert('Inicio de sesión exitoso. Token: ' + data.token);
 
-          fetch(`http://localhost:8000/api/user/${email}`, {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-              'authorization': `Bearer ${data.token}`,
-            },
-          })
-            .then(response => {
-              if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-              }
-              return response.json();
+            setIsLoggedIn('sidebar');
 
+            fetch(`http://localhost:8000/api/user/${email}`, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${data.token}`,
+              },
             })
-            .then(userData => {
-              console.log("User data:", userData);
-  
-              localStorage.setItem('username', userData.name);
-  
-              const isAdmin = userData.isAdmin || false;
-              localStorage.setItem('isAdmin', isAdmin);
-              console.log('isAdmin: ', isAdmin);
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
 
+              })
+              .then(userData => {
+                console.log("User data:", userData);
 
+                localStorage.setItem('username', userData.name);
 
+                const isAdmin = userData.isAdmin || false;
+                localStorage.setItem('isAdmin', isAdmin);
+                console.log('isAdmin: ', isAdmin);
+              })
+              .catch((error) => {
+                console.error('Error:', error);
+              });
+
+          } else if (context === 'tickets') { // Si el contexto es ticket, se redirige a la página de inicio
+            localStorage.setItem('jwt', data.token);
+            alert('Inicio de sesión exitoso. Token: ' + data.token);
+
+            setIsLoggedIn('ticket');
+
+            fetch(`http://localhost:8000/api/user/${email}`, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${data.token}`,
+              },
             })
-            .catch((error) => {
-              console.error('Error:', error);
-            });
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+
+              })
+              .then(userData => {
+                console.log("User data:", userData);
+
+                localStorage.setItem('username', userData.name);
+
+                const isAdmin = userData.isAdmin || false;
+                localStorage.setItem('isAdmin', isAdmin);
+                console.log('isAdmin: ', isAdmin);
+              })
+              .catch((error) => {
+                console.error('Error:', error);
+              });
+          }
         } else {
           alert('Error al iniciar sesión: ' + data.error);
         }
@@ -87,7 +115,9 @@ export function ModalLogin({ showModal, toggleModal }) {
       });
   }
 
-  if (isLoggedIn) {
+  if (isLoggedIn === 'sidebar') {
+    return <Navigate to="/" />;
+  } else if (isLoggedIn === 'ticket') {
     return <Navigate to="/selectTickets" />;
   }
 
@@ -147,7 +177,6 @@ export function ModalLogin({ showModal, toggleModal }) {
 
   async function handleSuccess(response) {
     console.log("Login Successful:", response);
-
     setIsLoggedIn(true);
   }
 
@@ -225,6 +254,7 @@ export function ModalLogin({ showModal, toggleModal }) {
 ModalLogin.propTypes = {
   showModal: PropTypes.bool.isRequired,
   toggleModal: PropTypes.func.isRequired,
+  context: PropTypes.string.isRequired,
 };
 
 export default ModalLogin;

@@ -183,10 +183,10 @@ function Sidebar() {
 
               </>
             )}
-               <FlowbiteSidebar.Item href="#" className="hover:text-black icon">
-                  <HiOutlineChatAlt2 />
-                  <span className="icon-label">Chat</span>
-                </FlowbiteSidebar.Item>
+            <FlowbiteSidebar.Item href="#" className="hover:text-black icon">
+              <HiOutlineChatAlt2 />
+              <span className="icon-label">Chat</span>
+            </FlowbiteSidebar.Item>
 
 
           </FlowbiteSidebar.ItemGroup>
@@ -221,7 +221,7 @@ function Sidebar() {
           )}
         </div>
       </FlowbiteSidebar>
-      <ModalLogin showModal={showModal} toggleModal={toggleModal} />
+      <ModalLogin showModal={showModal} toggleModal={toggleModal} context='sidebar' />
     </div>
   );
 }
