@@ -1,25 +1,52 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import CreateMovie from './ModalCrearPelicula/CreateMovie';
 import EditMovie from './ModalEditarPelicula/EditMovie';
-import DeleteMovie from './ModalElimarPelicula/DeleteMovie'
+import DeleteMovie from './ModalElimarPelicula/DeleteMovie';
 
 const URI = 'http://localhost:8000/api/allMovies';
 
 const MovieList = ({ movies, handleMovieClick }) => {
+  const [filter, setFilter] = useState('');
+  const [selectedType, setSelectedType] = useState('Todos');
+
+  const handleFilterChange = (event) => {
+    setFilter(event.target.value);
+  };
+
+  const handleTypeChange = (event) => {
+    setSelectedType(event.target.value);
+  };
+
+  const filteredMovies = movies.filter(movie =>
+    movie.title.toLowerCase().includes(filter.toLowerCase()) &&
+    (selectedType === 'Todos' || movie.type === selectedType)
+  );
+
   const handleLinkClick = (e, index) => {
-    e.preventDefault(); // Evita la navegación por defecto
-    handleMovieClick(index); // Maneja el clic en el enlace
+    e.preventDefault();
+    handleMovieClick(index);
   };
 
   return (
     <div className='text-black ml-32 mr-10'>
       <h1 className=' mt-5 mb-5 text-4xl text-white'>Películas</h1>
       <div className='flex flex-row'>
-        <input className='w-[640px] h-14 rounded-md' type="text" placeholder="Filtro" />
-        <select className='ml-3 h-14 rounded-md' id="format">
+        <input
+          className='w-[640px] h-14 rounded-md'
+          type="text"
+          placeholder="Filtro"
+          value={filter}
+          onChange={handleFilterChange}
+        />
+        <select
+          className='ml-3 h-14 rounded-md'
+          id="format"
+          value={selectedType}
+          onChange={handleTypeChange}
+        >
           <option value="Todos">Todas</option>
           <option value="Comedia">Comedia</option>
           <option value="Suspenso">Suspenso</option>
@@ -34,7 +61,7 @@ const MovieList = ({ movies, handleMovieClick }) => {
         </div>
       </div>
       <div className='grid grid-cols-4 gap-4 mt-5'>
-        {movies.map((movie, index) => (
+        {filteredMovies.map((movie, index) => (
           <div key={index} className='mb-4 group relative'>
             <Link to={`/movie/${movie._id}`} onClick={(e) => handleLinkClick(e, index)}>
               <img
@@ -53,7 +80,7 @@ const MovieList = ({ movies, handleMovieClick }) => {
                 <DeleteMovie movieId={movie._id} />
               </div>
             </Link>
-            <p className='text-xl font-semiboldbold mt-3 text-white'>{movie.title}</p>
+            <p className='text-xl font-semibold mt-3 text-white'>{movie.title}</p>
           </div>
         ))}
       </div>
@@ -67,6 +94,7 @@ MovieList.propTypes = {
       _id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       imageUrl: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
     })
   ).isRequired,
   handleMovieClick: PropTypes.func.isRequired,
@@ -90,7 +118,6 @@ const MovieListContainer = () => {
 
   const handleMovieClick = (index) => {
     console.log('Clic en la película:', movies[index].title);
-    // Aquí puedes agregar la lógica para navegar a la página de detalles de la película
   };
 
   return <MovieList movies={movies} handleMovieClick={handleMovieClick} />;
