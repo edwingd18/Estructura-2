@@ -46,6 +46,11 @@ export function ModalLogin({ showModal, toggleModal, context }) {
 
             setIsLoggedIn('sidebar');
 
+            setTimeout(() => {
+              // Recargar la página para reflejar los cambios
+              window.location.reload();
+            }, 1000);
+
             fetch(`http://localhost:8000/api/user/${email}`, {
               method: 'GET',
               headers: {
@@ -78,6 +83,12 @@ export function ModalLogin({ showModal, toggleModal, context }) {
             alert('Inicio de sesión exitoso. Token: ' + data.token);
 
             setIsLoggedIn('ticket');
+
+            setTimeout(() => {
+              setShowSuccessAlert(false);
+              // Recargar la página para reflejar los cambios
+              window.location.reload();
+            }, 1000);
 
             fetch(`http://localhost:8000/api/user/${email}`, {
               method: 'GET',
@@ -238,6 +249,7 @@ export function ModalLogin({ showModal, toggleModal, context }) {
                 <a onClick={handleLoginClick} className="text-cyan-700 hover:underline dark:text-cyan-500 ml-4">
                   Create account
                 </a>
+
               </Link>
             </div>
           </div>

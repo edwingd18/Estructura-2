@@ -29,8 +29,8 @@ const CreateMovie = () => {
       !directorRef.current.value ||
       !durationRef.current.value ||
       !ageRangeRef.current.value ||
-      !typeRef.current.value||
-      !formatRef.current.value||
+      !typeRef.current.value ||
+      !formatRef.current.value ||
       !imageLink ||
       !bannerLink ||
       !trailerLink
@@ -158,12 +158,12 @@ const CreateMovie = () => {
             Por favor, complete todos los campos.
           </Alert>
         )}
-         {showSuccessAlert && (
+        {showSuccessAlert && (
           <Alert color="success" onDismiss={() => setShowSuccessAlert(false)} className="absolute top-3 right-3">
             La nueva película se agregó exitosamente.
           </Alert>
-         )}
-        
+        )}
+
 
       </div>
     </>

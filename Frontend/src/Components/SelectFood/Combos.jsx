@@ -3,7 +3,7 @@ import './Combos.css';
 import PropTypes from 'prop-types';
 
 // const URI = 'http://backend.ftfjfagraqa2hwfs.eastus.azurecontainer.io:8000/api/combos';
-const URI = 'http://localhost:8000/api/combos';
+const URI = 'http://localhost:8000/api/allCombos';
 
 class Combos extends Component {
   constructor(props) {
