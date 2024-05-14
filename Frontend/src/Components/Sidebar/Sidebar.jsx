@@ -22,12 +22,7 @@ function Sidebar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState(""); // Estado para guardar el nombre de usuario
   const [isAdmin, setisAdmin] = useState(false);
-
-
-  useEffect(() => {
-
-
-  }, [])
+  const [lastname, setLastname] = useState("");
 
 
   useEffect(() => {
@@ -35,18 +30,22 @@ function Sidebar() {
     if (token) {
       setIsLoggedIn(true)
       const storedUsername = localStorage.getItem('username');
+      const storedLastname = localStorage.getItem('lastname'); // Obtener el apellido del almacenamiento local
       const storedIsAdmin = localStorage.getItem('isAdmin') == 'true';
       setisAdmin(storedIsAdmin);
       setUsername(storedUsername);
+      setLastname(storedLastname);
     }
   }, []);
 
   const logout = () => {
     localStorage.removeItem('jwt');
     localStorage.removeItem('username'); // Asegúrate de limpiar el nombre de usuario también
+    localStorage.removeItem('lastname');
     localStorage.removeItem('isAdmin');
     setIsLoggedIn(false);
     setUsername("");
+    setLastname("");
     setisAdmin(false);
 
   };
@@ -199,7 +198,9 @@ function Sidebar() {
             <div>
               {isLoggedIn ? (
                 <>
-                  <span className="text-white font-semibold ml-2 overflow-hidden text-ellipsis whitespace-nowrap">{username || "Usuario"}</span>
+                  <span className="text-white font-semibold ml-2 overflow-hidden text-ellipsis whitespace-nowrap">
+                    {username || ""} {lastname || ""}
+                  </span>
                   <div
                     className="text-white font-semibold ml-2 overflow-hidden text-ellipsis whitespace-nowrap"
                     onClick={logout}

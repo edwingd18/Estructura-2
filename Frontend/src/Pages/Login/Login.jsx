@@ -69,6 +69,7 @@ export function ModalLogin({ showModal, toggleModal, context }) {
                 console.log("User data:", userData);
 
                 localStorage.setItem('username', userData.name);
+                localStorage.setItem('lastname', userData.lastname);
 
                 const isAdmin = userData.isAdmin || false;
                 localStorage.setItem('isAdmin', isAdmin);
@@ -108,6 +109,7 @@ export function ModalLogin({ showModal, toggleModal, context }) {
                 console.log("User data:", userData);
 
                 localStorage.setItem('username', userData.name);
+                localStorage.setItem('lastname', userData.lastname);
 
                 const isAdmin = userData.isAdmin || false;
                 localStorage.setItem('isAdmin', isAdmin);
