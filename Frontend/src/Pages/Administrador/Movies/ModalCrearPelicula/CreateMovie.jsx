@@ -62,7 +62,7 @@ const CreateMovie = () => {
         setShowSuccessAlert(false);
         // Recargar la página para reflejar los cambios
         window.location.reload();
-      }, 1000);
+      }, 2000);
     } catch (error) {
       console.error('Error al guardar la película:', error);
     }
@@ -146,11 +146,7 @@ const CreateMovie = () => {
                   {imageLink && <img src={imageLink} alt="Preview Imagen" className=" 2xl:w-[500px] 2xl:h-[750px]" />}
                 </div>
               </div>
-              {showSuccessAlert && (
-          <Alert color="success" onDismiss={() => setShowSuccessAlert(false)} className="absolute top-3 right-3">
-            La nueva película se agregó exitosamente.
-          </Alert>
-        )}
+
             </div>
           </Modal.Body>
           <Modal.Footer>
@@ -162,6 +158,12 @@ const CreateMovie = () => {
             Por favor, complete todos los campos.
           </Alert>
         )}
+         {showSuccessAlert && (
+          <Alert color="success" onDismiss={() => setShowSuccessAlert(false)} className="absolute top-3 right-3">
+            La nueva película se agregó exitosamente.
+          </Alert>
+         )}
+        
 
       </div>
     </>

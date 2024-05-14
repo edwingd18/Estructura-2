@@ -16,33 +16,27 @@ const MovieList = ({ movies, handleMovieClick }) => {
 
   return (
     <div className='text-black ml-32 mr-10'>
-      <h1 className=' mt-5 mb-5 text-4xl'>Películas</h1>
+      <h1 className=' mt-5 mb-5 text-4xl text-white'>Películas</h1>
       <div className='flex flex-row'>
-      <input className='w-[640px] h-14 rounded-md' type="text" placeholder="Filtro" />
-
-        <select className='ml-3  h-14 rounded-md'
-                    id="format" >
-                     <option value="Todos">Todas</option>
-                     <option value="Comedia">Comedia</option>
-                    <option value="Suspenso">Suspenso</option>
-                    <option value="Acción">Acción</option>
-                    <option value="Drama">Drama</option>
-                    <option value="Ciencia ficción">Ciencia ficción</option>
-                    <option value="Animación">Animación</option>
-                    <option value="Romance">Romance</option>
-                    
-                  </select>
-                  <div className="ml-3">
-        <CreateMovie />
+        <input className='w-[640px] h-14 rounded-md' type="text" placeholder="Filtro" />
+        <select className='ml-3 h-14 rounded-md' id="format">
+          <option value="Todos">Todas</option>
+          <option value="Comedia">Comedia</option>
+          <option value="Suspenso">Suspenso</option>
+          <option value="Acción">Acción</option>
+          <option value="Drama">Drama</option>
+          <option value="Ciencia ficción">Ciencia ficción</option>
+          <option value="Animación">Animación</option>
+          <option value="Romance">Romance</option>
+        </select>
+        <div className="ml-3">
+          <CreateMovie />
         </div>
       </div>
       <div className='grid grid-cols-4 gap-4 mt-5'>
         {movies.map((movie, index) => (
           <div key={index} className='mb-4 group relative'>
-            <Link
-              to={`/movie/${movie._id}`}
-              onClick={(e) => handleLinkClick(e, index)}
-            >
+            <Link to={`/movie/${movie._id}`} onClick={(e) => handleLinkClick(e, index)}>
               <img
                 src={movie.imageUrl}
                 alt={movie.title}
@@ -54,14 +48,12 @@ const MovieList = ({ movies, handleMovieClick }) => {
               />
               <div className='absolute flex flex-col top-[450px] left-[320px] items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
                 <div className='mb-2'>
-                <EditMovie movieId={movie._id} />
+                  <EditMovie movieId={movie._id} />
                 </div>
-                <DeleteMovie movieId={movie._id} 
-                />
-                
+                <DeleteMovie movieId={movie._id} />
               </div>
             </Link>
-            <p className='text-xl font-semiboldbold mt-3'>{movie.title}</p>
+            <p className='text-xl font-semiboldbold mt-3 text-white'>{movie.title}</p>
           </div>
         ))}
       </div>
