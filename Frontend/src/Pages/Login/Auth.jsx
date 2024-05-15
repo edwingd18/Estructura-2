@@ -6,7 +6,7 @@ function withAuth(Component) {
         const token = localStorage.getItem('jwt');
         if (!token) {
             // Si no hay token, redirige al usuario a la página de inicio de sesión
-            alert('No has iniciado sesión. Por favor, inicia sesión.');
+            console.log('No has iniciado sesión. Por favor, inicia sesión.');
             return <Navigate to="/" replace />;
         }
 
