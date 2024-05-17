@@ -133,7 +133,7 @@ export function ModalLogin({ showModal, toggleModal, context }) {
 
   const customtema = {
     "root": {
-      "base": "fixed inset-x-0 top-0 z-50 h-screen overflow-y-auto overflow-x-hidden md:inset-0 md:h-full z-[199999] ",
+      "base": "fixed inset-x-0 top-0 z-50 h-screen overflow-y-auto overflow-x-hidden md:inset-0 md:h-full",
       "show": {
         "on": "flex bg-gray-900 bg-opacity-50 dark:bg-opacity-80",
         "off": "hidden"
@@ -163,8 +163,8 @@ export function ModalLogin({ showModal, toggleModal, context }) {
       }
     },
     "content": {
-      "base": "relative h-full w-full p-4 md:w-auto",
-      "inner": "relative flex max-h-[90dvh] flex-col rounded-lg bg-agua shadow dark:bg-gray-700"
+      "base": "relative h-full w-full p-4 md:h-auto",
+      "inner": "relative flex max-h-[90dvh] flex-col rounded-lg bg-white shadow dark:bg-gray-700"
     },
     "body": {
       "base": "flex-1 overflow-auto p-6",
@@ -173,7 +173,7 @@ export function ModalLogin({ showModal, toggleModal, context }) {
     "header": {
       "base": "flex items-start justify-between rounded-t border-b p-5 dark:border-gray-600",
       "popup": "border-b-0 p-2",
-      "title": "text-xl font-medium text-white dark:text-white",
+      "title": "text-xl font-medium text-gray-900 dark:text-white",
       "close": {
         "base": "ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white",
         "icon": "h-5 w-5"
@@ -183,7 +183,7 @@ export function ModalLogin({ showModal, toggleModal, context }) {
       "base": "flex items-center space-x-2 rounded-b border-gray-200 p-6 dark:border-gray-600",
       "popup": "border-t"
     }
-  };
+  }
 
   async function handleSuccess(response) {
     console.log("Login Successful:", response);
@@ -199,9 +199,9 @@ export function ModalLogin({ showModal, toggleModal, context }) {
       <Modal show={showModal} size="lg" onClose={toggleModal} theme={customtema} popup>
         <Modal.Header />
         <Modal.Body>
-          <div className="space-y-6">
-            <h3 className="text-xl font-medium text-white text-center">Sign in to our platform</h3>
-            <div>
+          <div className="max-w-md mx-auto space-y-6">
+            <h3 className="text-xl font-medium text-black text-center">Sign in to our platform</h3>
+            <div className="flex flex-col items-center">
               <GoogleLogin
                 onSuccess={handleSuccess}
                 onFailure={handleError}
@@ -212,13 +212,14 @@ export function ModalLogin({ showModal, toggleModal, context }) {
                   </Button>
                 )}
               />
-              <div className="text-white text-center mt-4 mb-4">or</div>
+              <div className="text-center mt-4 mb-4">or</div>
               <TextInput
                 id="email"
                 placeholder="Email"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 required
+                className="w-full"
               />
             </div>
             <div>
@@ -228,12 +229,14 @@ export function ModalLogin({ showModal, toggleModal, context }) {
                 placeholder="Password"
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
-                required />
+                required
+                className="w-full"
+              />
             </div>
             <div className="flex justify-between">
               <div className="flex items-center gap-2">
                 <Checkbox id="remember" />
-                <Label className="text-white" htmlFor="remember">Remember me</Label>
+                <Label htmlFor="remember">Remember me</Label>
               </div>
               <a href="#" className="text-sm text-cyan-700 hover:underline dark:text-cyan-500 ml-4">
                 Lost Password?
@@ -242,13 +245,12 @@ export function ModalLogin({ showModal, toggleModal, context }) {
             <div className="w-full flex justify-center">
               <Button onClick={handleLogin} className="px-8">Log in</Button>
             </div>
-            <div className="flex justify-between text-sm font-medium text-white mt-4">
+            <div className="flex justify-between text-sm font-medium mt-4">
               Not registered?&nbsp;
               <Link to={"#"}>
                 <a onClick={handleLoginClick} className="text-cyan-700 hover:underline dark:text-cyan-500 ml-4">
                   Create account
                 </a>
-
               </Link>
             </div>
           </div>
