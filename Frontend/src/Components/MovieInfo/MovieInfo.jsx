@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { HiShoppingCart } from "react-icons/hi";
 import { ModalLogin } from '../../Pages/Login/Login'
 import { useNavigate } from "react-router-dom";
@@ -94,7 +94,6 @@ function MovieInfo() {
 
         src={movie.trailerUrl}
         title="Trailer"
-        frameBorder=""
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen></iframe>
 

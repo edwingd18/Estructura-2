@@ -9,34 +9,37 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 260px;
+    width: 300px; /* Ancho fijo para todas las tarjetas */
+    height: 450px; /* Altura fija para todas las tarjetas */
     border-radius: 15px;
-    background-color: #9592b4;
+    background-color: #e0d9df;
     padding: 15px;
     flex-wrap: wrap;
-}
+  }
 
-.contenedor-imagen {
+  .contenedor-imagen {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0;
     width: 100%;
+    height: 200px; /* Altura fija para el contenedor de la imagen */
     align-self: flex-start;
-}
+  }
 
-.contenedor-imagen img {
-    max-width: 150px;
-    height: auto;
+  .contenedor-imagen img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Ajusta la imagen de manera proporcional dentro del contenedor */
     display: block;
-}
+  }
 
-.contenedor-informacion-imagen {
+  .contenedor-informacion-imagen {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-}
+    flex-grow: 1; /* Permite que el contenedor ocupe el espacio restante */
+  }
 
 .contenedor-informacion-imagen h2 {
     font-size: 17px;
@@ -63,7 +66,7 @@
     transition: all 0.3s ease-in-out;
 }
 
-.card-hover::before {
+ .card-hover::before {
     content: "";
     position: absolute;
     top: 0;
@@ -72,7 +75,7 @@
     height: 100%;
     background: rgba(0, 0, 0, 0);
     transition: background 0.3s ease-in-out;
-}
+ }
 
 .card-hover:hover::before {
     background: rgba(0, 0, 0, 0.2);
