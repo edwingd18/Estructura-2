@@ -23,13 +23,6 @@ function Sidebar() {
   const [username, setUsername] = useState(""); // Estado para guardar el nombre de usuario
   const [isAdmin, setisAdmin] = useState(false);
 
-
-  useEffect(() => {
-
-
-  }, [])
-
-
   useEffect(() => {
     const token = localStorage.getItem('jwt');
     if (token) {
@@ -42,13 +35,16 @@ function Sidebar() {
   }, []);
 
   const logout = () => {
+    setTimeout(() => {
+      // Recargar la página para reflejar los cambios
+      window.location.reload();
+    }, 500);
     localStorage.removeItem('jwt');
     localStorage.removeItem('username'); // Asegúrate de limpiar el nombre de usuario también
     localStorage.removeItem('isAdmin');
     setIsLoggedIn(false);
     setUsername("");
     setisAdmin(false);
-
   };
 
   const toggleSidebar = () => {

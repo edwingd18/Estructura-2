@@ -85,7 +85,6 @@ export function ModalLogin({ showModal, toggleModal, context }) {
             setIsLoggedIn('ticket');
 
             setTimeout(() => {
-              setShowSuccessAlert(false);
               // Recargar la página para reflejar los cambios
               window.location.reload();
             }, 1000);
