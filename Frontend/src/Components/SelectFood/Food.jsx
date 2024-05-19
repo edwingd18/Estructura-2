@@ -1,5 +1,4 @@
 import './Food.css';
-// import { Button } from 'flowbite-react';
 import { FaTicketSimple } from "react-icons/fa6";
 import { PiArmchairFill } from "react-icons/pi";
 import { GiPopcorn } from "react-icons/gi";
@@ -26,13 +25,17 @@ function Food() {
         setIsError(false);
     };
 
+    const handleLocalStorage = (nombre = 'Sin combo', precio = '0', descripcion = 'Sin combo') => {
+        window.localStorage.setItem('comboNombre', nombre);
+        window.localStorage.setItem('comboPrecio', precio);
+        window.localStorage.setItem('comboDescripcion', descripcion);
+    };
+
     const handleConfirm = () => {
         if (modalMessage === 'No has seleccionado un combo. ¿Deseas continuar de todos modos?') {
-            window.localStorage.setItem('comboNombre', 'Sin combo');
+            handleLocalStorage();
         } else {
-            window.localStorage.setItem('comboNombre', selectedCombo.nombre);
-            window.localStorage.setItem('comboPrecio', selectedCombo.precio);
-            window.localStorage.setItem('comboDescripcion', selectedCombo.descripcion)
+            handleLocalStorage(selectedCombo.nombre, selectedCombo.precio, selectedCombo.descripcion);
         }
         setOpenModal(false);
         navigate('/purchase-summary');
@@ -52,13 +55,31 @@ function Food() {
         setModalMessage('Se ha borrado la selección de combo.');
         setOpenModal(true);
         setIsError(true);
-        window.localStorage.removeItem('comboNombre');
-        window.localStorage.removeItem('comboPrecio');
-        window.localStorage.removeItem('comboDescripcion');
+        handleLocalStorage();
+    };
+
+    const combos = [
+        { nombre: 'Combo 1', descripcion: '1 Crispetas mediana de sal o caramelo 250 g', precio: '20000' },
+        { nombre: 'Combo 2', descripcion: '2 Crispetas mediana de sal o caramelo 250 g', precio: '35000' },
+        { nombre: 'Combo 3', descripcion: '3 Crispetas mediana de sal o caramelo 250 g', precio: '50000' },
+        { nombre: 'Combo 4', descripcion: '4 Crispetas mediana de sal o caramelo 250 g', precio: '60000' },
+        { nombre: 'Combo 5', descripcion: '5 Crispetas mediana de sal o caramelo 250 g', precio: '70000' },
+    ];
+
+    const renderSwiperSlides = () => {
+        return combos.map((combo, index) => (
+            <SwiperSlide key={index}>
+                <Combos
+                    nombre={combo.nombre}
+                    descripcion={combo.descripcion}
+                    precio={combo.precio}
+                    seleccionado={handleComboClick} />
+            </SwiperSlide>
+        ));
     };
 
     return (
-        < div className="contenedor-select-comida" >
+        <div className="contenedor-select-comida">
             <div className="contenedor-comida">
                 <div className="contenedor-iconos">
                     <FaTicketSimple className="icon-ticket" />
@@ -78,41 +99,7 @@ function Food() {
                             autoplay={{ delay: 2500, disableOnInteraction: false }}
                             style={{ width: '1000px', height: '327px' }}
                         >
-                            <SwiperSlide>
-                                <Combos
-                                    nombre={'Combo 1'}
-                                    descripcion={'1 Crispetas mediana de sal o caramelo 250 g'}
-                                    precio={'20000'}
-                                    seleccionado={handleComboClick} />
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <Combos
-                                    nombre={'Combo 2'}
-                                    descripcion={'2 Crispetas mediana de sal o caramelo 250 g'}
-                                    precio={'35000'}
-                                    seleccionado={handleComboClick} />
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <Combos
-                                    nombre={'Combo 3'}
-                                    descripcion={'3 Crispetas mediana de sal o caramelo 250 g'}
-                                    precio={'50000'}
-                                    seleccionado={handleComboClick} />
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <Combos
-                                    nombre={'Combo 4'}
-                                    descripcion={'4 Crispetas mediana de sal o caramelo 250 g'}
-                                    precio={'60000'}
-                                    seleccionado={handleComboClick} />
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <Combos
-                                    nombre={'Combo 5'}
-                                    descripcion={'5 Crispetas mediana de sal o caramelo 250 g'}
-                                    precio={'70000'}
-                                    seleccionado={handleComboClick} />
-                            </SwiperSlide>
+                            {renderSwiperSlides()}
                         </Swiper>
                     </div>
                     <div className="buttons-food">
@@ -127,7 +114,7 @@ function Food() {
                     <ConfirmFood openModal={openModal} setOpenModal={setOpenModal} modalMessage={modalMessage} handleConfirm={handleConfirm} isError={isError} />
                 </div>
             </div>
-        </div >
+        </div>
     )
 }
 
