@@ -63,7 +63,7 @@ function Food() {
     };
 
     const handleClearSelection = () => {
-        setModalMessage('Se ha borrado la selección de combo.');
+        setModalMessage('Se ha borrado la selección de combo(s).');
         setOpenModal(true);
         setIsError(true);
         window.localStorage.removeItem('comboNombre');
