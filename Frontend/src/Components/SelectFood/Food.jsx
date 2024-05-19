@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import './Food.css';
+import { motion } from 'framer-motion';
 import { FaTicketSimple } from "react-icons/fa6";
 import { PiArmchairFill } from "react-icons/pi";
 import { GiPopcorn } from "react-icons/gi";
@@ -42,6 +43,8 @@ function Food() {
     const handleConfirm = () => {
         if (modalMessage === 'No has seleccionado un combo. ¿Deseas continuar de todos modos?') {
             window.localStorage.setItem('comboNombre', 'Sin combo');
+            window.localStorage.setItem('comboPrecio', '0');
+            window.localStorage.setItem('comboDescripcion', 'Sin combo');
         } else {
             window.localStorage.setItem('comboNombre', selectedCombo.nombre);
             window.localStorage.setItem('comboPrecio', selectedCombo.precio);
@@ -68,6 +71,9 @@ function Food() {
         window.localStorage.removeItem('comboNombre');
         window.localStorage.removeItem('comboPrecio');
         window.localStorage.removeItem('comboDescripcion');
+        window.localStorage.setItem('comboNombre', 'Sin combo');
+        window.localStorage.setItem('comboPrecio', '0');
+        window.localStorage.setItem('comboDescripcion', 'Sin combo');
     };
 
     return (
