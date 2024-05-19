@@ -1,4 +1,3 @@
-// Food.js
 import { useState, useEffect } from 'react';
 import './Food.css';
 import { FaTicketSimple } from "react-icons/fa6";
