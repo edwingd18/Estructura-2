@@ -31,30 +31,12 @@ const ResumenCompra = () => {
     }
   });
 
-  const createPreference = async () => {
-    try {
-      const response = await axios.post("http://localhost:8000/api/payment/create_preference", {
-        title: "Compra de boletas de cine",
-        quantity: 1,
-        total: 10000,
-      });
-
-      const { id } = response.data;
-      return id;
-
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const handleBuy = async () => {
     const id = await createPreference();
     if (id) {
       setState(prevState => ({ ...prevState, preferenceId: id }));
     }
   };
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     const comboNombre = getLocalStorageItem('comboNombre');
@@ -109,6 +91,23 @@ const ResumenCompra = () => {
       }
     }));
   }, []);
+
+  const createPreference = async () => {
+    try {
+      const { resumen } = state;
+      const response = await axios.post("http://localhost:8000/api/payment/create_preference", {
+        title: resumen.movieName,
+        quantity: resumen.ticketQuantity,
+        total: resumen.total,
+      });
+
+      const { id } = response.data;
+      return id;
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
