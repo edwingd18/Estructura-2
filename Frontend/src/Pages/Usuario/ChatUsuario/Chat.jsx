@@ -1,15 +1,28 @@
-import  { useState } from 'react';
+import { useEffect, useState } from 'react';
+import socketIOClient from 'socket.io-client';
 
 const MovieChat = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
+  const [socket, setSocket] = useState(null);
+  const isAdmin = window.localStorage.getItem('isAdmin') === 'true';
+
+  useEffect(() => {
+    const newSocket = socketIOClient('http://localhost:8000');
+    setSocket(newSocket);
+
+    newSocket.on('chat message', (message) => {
+      setMessages((messages) => [...messages, message]);
+    });
+
+    return () => newSocket.close();
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (newMessage.trim()) {
-      setMessages([...messages, { text: newMessage, sender: 'user' }]);
+      socket.emit('chat message', { text: newMessage, sender: isAdmin ? 'admin' : 'user' });
       setNewMessage('');
-      // Aquí puedes agregar la lógica para enviar el mensaje al servidor
     }
   };
 
@@ -29,18 +42,21 @@ const MovieChat = () => {
             </div>
           </div>
           <div className="flex flex-col space-y-4 overflow-y-auto">
-            <div className="bg-gray-200 rounded-lg p-2 self-start max-w-xs">
-              <p className="text-sm">Mensaje de la otra persona</p>
-            </div>
-            <div className="bg-blue-500 text-white rounded-lg p-2 self-end max-w-xs">
-              <p className="text-sm">Mi mensaje</p>
-            </div>
-            <div className="bg-gray-200 rounded-lg p-2 self-start max-w-xs">
-              <p className="text-sm">Mensaje de la otra persona</p>
-            </div>
+            {messages.map((message, index) => (
+              <div
+                key={index}
+                className={`${
+                  message.sender === 'admin'
+                    ? (isAdmin ? 'bg-blue-500 text-white self-end' : 'bg-gray-200 self-start')
+                    : (isAdmin ? 'bg-gray-200 self-start' : 'bg-blue-500 text-white self-end')
+                } rounded-lg p-2 max-w-xs`}
+              >
+                <p className="text-sm">{message.text}</p>
+              </div>
+            ))}
           </div>
         </div>
-        <div className="mt-4 flex items-center">
+        <form onSubmit={handleSubmit} className="mt-4 flex items-center">
           <input
             type="text"
             placeholder="Escribe tu mensaje"
@@ -50,12 +66,11 @@ const MovieChat = () => {
           />
           <button
             type="submit"
-            onClick={handleSubmit}
             className="bg-blue-500 text-white rounded-r-lg px-4 py-2 focus:outline-none hover:bg-blue-600"
           >
             Enviar
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );
