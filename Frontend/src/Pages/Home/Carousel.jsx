@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import MainCarousel from './MainCarousel';
@@ -31,6 +32,7 @@ const Carousel = () => {
 
   return (
     <motion.div
+    
     className="contenedor-iconos"
     initial={{ opacity: 0, scale: 2 }}
     animate={{ opacity: 1, scale: 1 }}
