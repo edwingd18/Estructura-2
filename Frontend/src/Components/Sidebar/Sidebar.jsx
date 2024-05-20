@@ -216,7 +216,7 @@ function Sidebar() {
                 </FlowbiteSidebar.Item>
               </>
             )}
-            <FlowbiteSidebar.Item href="#" className="hover:text-black icon" onClick={() => handleButtonClick(() => {/* Tu lógica aquí */})}>
+            <FlowbiteSidebar.Item href="/chat" className="hover:text-black icon" onClick={() => handleButtonClick(() => {/* Tu lógica aquí */})}>
               <HiOutlineChatAlt style={{ width: "30px", height: "30px" }} />
               <span className="icon-label ml-10">Chat</span>
             </FlowbiteSidebar.Item>
