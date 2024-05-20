@@ -1,34 +1,34 @@
-import { useState, useEffect } from "react";
-import { Sidebar as FlowbiteSidebar } from "flowbite-react"
-import { MdMovie } from 'react-icons/md'
+import { useState, useEffect, useRef } from "react";
+import { Sidebar as FlowbiteSidebar } from "flowbite-react";
+import { MdOutlineFastfood } from 'react-icons/md';
 import {
-  HiOutlineChatAlt2,
-  HiShoppingCart,
-  HiUser,
-  HiTicket,
-
+  HiOutlineChatAlt,
+  HiOutlineShoppingCart,
+  HiOutlineUser,
+  HiOutlineFilm,
+  HiOutlineMenu,
 } from "react-icons/hi";
-import { GiHotMeal } from 'react-icons/gi';
-import { FaBars } from 'react-icons/fa';
-
-
+import { Link } from "react-router-dom";
 import ModalLogin from "../../Pages/Login/Login";
-
 import "./Sidebar.css";
 
 function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [username, setUsername] = useState(""); // Estado para guardar el nombre de usuario
+  const [username, setUsername] = useState("");
   const [isAdmin, setisAdmin] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
+
+  const sidebarRef = useRef(null);
+  const timeoutRef = useRef(null);
 
   useEffect(() => {
     const token = localStorage.getItem('jwt');
     if (token) {
-      setIsLoggedIn(true)
+      setIsLoggedIn(true);
       const storedUsername = localStorage.getItem('username');
-      const storedIsAdmin = localStorage.getItem('isAdmin') == 'true';
+      const storedIsAdmin = localStorage.getItem('isAdmin') === 'true';
       setisAdmin(storedIsAdmin);
       setUsername(storedUsername);
     }
@@ -36,11 +36,10 @@ function Sidebar() {
 
   const logout = () => {
     setTimeout(() => {
-      // Recargar la página para reflejar los cambios
       window.location.reload();
     }, 500);
     localStorage.removeItem('jwt');
-    localStorage.removeItem('username'); // Asegúrate de limpiar el nombre de usuario también
+    localStorage.removeItem('username');
     localStorage.removeItem('isAdmin');
     setIsLoggedIn(false);
     setUsername("");
@@ -53,6 +52,47 @@ function Sidebar() {
 
   const toggleModal = () => {
     setShowModal(!showModal);
+  };
+
+  const handleClickOutside = (event) => {
+    if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+      setIsClosing(true);
+      setTimeout(() => {
+        setIsOpen(false);
+        setIsClosing(false);
+      }, 500); // El tiempo debe coincidir con la transición CSS de cierre del sidebar
+    }
+  };
+
+  const handleButtonClick = (callback) => {
+    if (!isClosing) {
+      callback();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isOpen) {
+      startCloseTimer();
+    }
+  }, [isOpen]);
+
+  const startCloseTimer = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    timeoutRef.current = setTimeout(() => {
+      setIsOpen(false);
+    }, 5000);
   };
 
   const customtema = {
@@ -137,59 +177,54 @@ function Sidebar() {
   };
 
   return (
-
-    <div className={`sidebar-container ${isOpen ? "open" : "close"} flex flex-col top-0 w-[100px] h-full transition-[width_0.3s_ease_in_out] z-[199999]`}>
+    <div className={`sidebar-container ${isOpen ? "open" : "close"} flex flex-col top-0 w-[100px] h-full transition-[width_0.3s_ease_in_out] z-[199999]`} ref={sidebarRef}>
       <FlowbiteSidebar aria-label="Menu de Cine" theme={customtema} className="Sidebar fixed top-0 w-[110px] h-full transition-[width_0.5s_ease_in_out] z-[199999]">
         <div className="flex items-center justify-start">
-          <button className="hamburger text-white text-2xl p-6" onClick={toggleSidebar}>
-            <FaBars />
+          <button className="hamburger text-white text-2xl p-6" onClick={() => handleButtonClick(toggleSidebar)}>
+            <HiOutlineMenu style={{ width: "30px", height: "30px" }}/>
           </button>
 
           {isOpen && (
-            <span className={`text-white font-semibold overflow-hidden text-ellipsis whitespace-nowrap ${!isOpen && 'hidden'}`}>Cine Magic</span>
-          )}
+          <Link to="/" className={`text-white font-semibold overflow-hidden text-ellipsis whitespace-nowrap ${!isOpen && 'hidden'}`}>
+          Cine Magic
+        </Link>          )}
         </div>
         <FlowbiteSidebar.Items>
           <FlowbiteSidebar.ItemGroup>
 
             {isAdmin && (
-
-              <FlowbiteSidebar.Item href="allCombos" className="hover:text-black icon">
-                <GiHotMeal />
-                <span className="icon-label">Combos</span>
+              <FlowbiteSidebar.Item href="allMovies" className="hover:text-black icon" onClick={() => handleButtonClick(() => {/* Tu lógica aquí */})}>
+                <HiOutlineFilm style={{ width: "30px", height: "30px" }}/>
+                <span className="icon-label ml-10">Peliculas</span>
               </FlowbiteSidebar.Item>
             )}
-            {isAdmin && (
-
-              <FlowbiteSidebar.Item href="allMovies" className="hover:text-black icon">
-                <MdMovie />
-                <span className="icon-label">Peliculas</span>
+                        {isAdmin && (
+              <FlowbiteSidebar.Item href="allCombos" className="hover:text-black icon" onClick={() => handleButtonClick(() => {/* Tu lógica aquí */})}>
+                <MdOutlineFastfood  style={{ width: "30px", height: "30px" }} />
+                <span className="icon-label ml-10">Combos</span>
               </FlowbiteSidebar.Item>
             )}
             {!isAdmin && (
               <>
-                <FlowbiteSidebar.Item href="#" className="hover:text-black icon">
-                  <HiTicket />
-                  <span className="icon-label">Boletas</span>
+                <FlowbiteSidebar.Item href="/listMovies" className="hover:text-black icon" onClick={() => handleButtonClick(() => {/* Tu lógica aquí */})}>
+                  <HiOutlineFilm style={{ width: "30px", height: "30px" }}/>
+                  <span className="icon-label ml-10">Peliculas</span>
                 </FlowbiteSidebar.Item>
-                <FlowbiteSidebar.Item href="#" className="hover:text-black icon">
-                  <HiShoppingCart />
-                  <span className="icon-label">Carrito</span>
+                <FlowbiteSidebar.Item href="#" className="hover:text-black icon" onClick={() => handleButtonClick(() => {/* Tu lógica aquí */})}>
+                  <HiOutlineShoppingCart style={{ width: "30px", height: "30px" }} />
+                  <span className="icon-label ml-10">Carrito</span>
                 </FlowbiteSidebar.Item>
-
               </>
             )}
-            <FlowbiteSidebar.Item href="#" className="hover:text-black icon">
-              <HiOutlineChatAlt2 />
-              <span className="icon-label">Chat</span>
+            <FlowbiteSidebar.Item href="/chat" className="hover:text-black icon" onClick={() => handleButtonClick(() => {/* Tu lógica aquí */})}>
+              <HiOutlineChatAlt style={{ width: "30px", height: "30px" }} />
+              <span className="icon-label ml-10">Chat</span>
             </FlowbiteSidebar.Item>
-
-
           </FlowbiteSidebar.ItemGroup>
         </FlowbiteSidebar.Items>
         <div className="flex items-center mb-4 w-full" style={{ paddingLeft: '25px', marginTop: "44vh" }}>
           <div className="icon-container">
-            <HiUser className="text-white" style={{ width: "40px", height: "40px" }} />
+            <HiOutlineUser  className="text-white" style={{ width: "30px", height: "30px" }} />
           </div>
           {isOpen && (
             <div>
@@ -198,7 +233,7 @@ function Sidebar() {
                   <span className="text-white font-semibold ml-2 overflow-hidden text-ellipsis whitespace-nowrap">{username || "Usuario"}</span>
                   <div
                     className="text-white font-semibold ml-2 overflow-hidden text-ellipsis whitespace-nowrap"
-                    onClick={logout}
+                    onClick={() => handleButtonClick(logout)}
                     style={{ cursor: "pointer" }}
                   >
                     Cerrar sesión
@@ -207,7 +242,7 @@ function Sidebar() {
               ) : (
                 <button
                   className="text-black font-semibold ml-2 overflow-hidden text-ellipsis whitespace-nowrap bg-white rounded-2xl w-[130px] h-[40px]"
-                  onClick={toggleModal}
+                  onClick={() => handleButtonClick(toggleModal)}
                   style={{ cursor: "pointer" }}
                 >
                   Iniciar sesión
@@ -221,4 +256,5 @@ function Sidebar() {
     </div>
   );
 }
+
 export default Sidebar;

@@ -9,6 +9,7 @@ import ComboList from "./Pages/Administrador/Combos/ComboList"
 import ResumenCompra from "./Components/ResumenCompra/Resumen";
 import MovieChat from "./Pages/Usuario/ChatUsuario/Chat";
 import withAuth from "./Pages/Login/Auth";
+import MovieListUser from "./Components/MovieListUser/MovieListUser";
 
 const ProtectedSelectTickets = withAuth(SelectTickets);
 const ProtectedSeatMap = withAuth(SeatMap);
@@ -28,6 +29,8 @@ const App = () => {
       <Route path="/allmovies" element={<ProtectedAdmin />}></Route>
       <Route path="/allcombos" element={<ComboList />}></Route>
       <Route path="/chat" element={<MovieChat />}></Route>
+      <Route path="/listMovies" element={<MovieListUser />}></Route>
+
     </Routes>
   );
 };

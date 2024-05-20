@@ -10,7 +10,7 @@ const ThumbnailCarousel = ({ carouselItems, handleMovieClick }) => {
     <div className="thumbnails mt-5">
       <Swiper
         spaceBetween={20}
-        slidesPerView={5}
+        slidesPerView={5.5}
         loop={true}
         pagination={{
           dynamicBullets: true,

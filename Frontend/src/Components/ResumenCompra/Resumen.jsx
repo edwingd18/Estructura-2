@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Card, Button } from 'flowbite-react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
 
 initMercadoPago('TEST-bf107dd8-2b1a-4fc1-a249-b816c7d45c2d', {
