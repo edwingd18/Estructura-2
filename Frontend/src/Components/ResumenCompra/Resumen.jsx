@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Card, Button } from 'flowbite-react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
 
 
@@ -49,7 +47,6 @@ const ResumenCompra = () => {
   };
 
 
-  const navigate = useNavigate();
 
 
   useEffect(() => {

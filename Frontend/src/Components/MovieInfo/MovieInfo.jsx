@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { HiShoppingCart } from "react-icons/hi";
 import { ModalLogin } from '../../Pages/Login/Login'
 import { useNavigate } from "react-router-dom";
+import backgroundSvg from '../../assets/backgroundSvg.svg';
 
 // const URI = "http://backend.ftfjfagraqa2hwfs.eastus.azurecontainer.io:8000/api/allMovies";
 

@@ -75,7 +75,16 @@ function Food() {
   return (
     <div className="contenedor-select-comida">
       <div className="contenedor-comida">
-        <div className="contenedor-iconos">
+        <motion.div
+  className="contenedor-iconos"
+  initial={{ opacity: 0, scale: 2 }}
+  animate={{ opacity: 1, scale: 1 }}
+  transition={{
+    duration: 1,
+    delay: 0.5,
+    ease: [0, 0.71, 0.2, 1.01]
+  }}
+>
           <FaTicketSimple className="icon-ticket" />
           <div className="linea-separadora"></div>
           <PiArmchairFill className="icon-chair " />
@@ -83,11 +92,11 @@ function Food() {
           <GiPopcorn className="icon-popcorn" />
           <div className="linea-separadora"></div>
           <HiCash className="icon-cash" />
-        </div>
+          </motion.div>
         <div className="contenedor-splide">
         <motion.div
   className="contenedor-seleccionar-combo"
-  initial={{ opacity: 0, scale: 0.5 }}
+  initial={{ opacity: 0, scale: 2 }}
   animate={{ opacity: 1, scale: 1 }}
   transition={{
     duration: 1,
