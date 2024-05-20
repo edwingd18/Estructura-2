@@ -7,13 +7,13 @@ import { Link } from 'react-router-dom';
 import { ModalForm } from './ModalForm';
 import { Navigate } from 'react-router-dom';
 
-
 export function ModalLogin({ showModal, toggleModal, context }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState('');
-
+  const [showAlert, setShowAlert] = useState(false);
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
 
   function handleLoginClick() {
     setIsLoginModalOpen(true);
@@ -47,7 +47,7 @@ export function ModalLogin({ showModal, toggleModal, context }) {
             setIsLoggedIn('sidebar');
 
             setTimeout(() => {
-              // Recargar la página para reflejar los cambios
+              setShowSuccessAlert(false);
               window.location.reload();
             }, 1000);
 
@@ -260,6 +260,16 @@ export function ModalLogin({ showModal, toggleModal, context }) {
           )}
         </Modal.Body>
       </Modal>
+      {showAlert && (
+        <Alert color="failure" onDismiss={() => setShowAlert(false)} className="absolute top-3 right-3">
+          Por favor, complete todos los campos.
+        </Alert>
+      )}
+      {showSuccessAlert && (
+        <Alert color="success" onDismiss={() => setShowSuccessAlert(false)} className="absolute top-3 right-3">
+          La nueva película se agregó exitosamente.
+        </Alert>
+      )}
     </GoogleOAuthProvider>
   );
 }
