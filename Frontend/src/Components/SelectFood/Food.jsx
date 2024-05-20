@@ -1,10 +1,7 @@
 import { useState, useEffect } from 'react';
 import './Food.css';
 import { motion } from 'framer-motion';
-import { FaTicketSimple } from "react-icons/fa6";
-import { PiArmchairFill } from "react-icons/pi";
-import { GiPopcorn } from "react-icons/gi";
-import { HiCash } from "react-icons/hi";
+import ProgressLine from '../ProgressLine/ProgressLine.jsx';
 import Combos from './Combos';
 import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -78,8 +75,7 @@ function Food() {
 
   return (
     <div className="contenedor-select-comida">
-      <div className="contenedor-comida">
-        <motion.div
+       <motion.div
   className="contenedor-iconos"
   initial={{ opacity: 0, scale: 2 }}
   animate={{ opacity: 1, scale: 1 }}
@@ -89,14 +85,12 @@ function Food() {
     ease: [0, 0.71, 0.2, 1.01]
   }}
 >
-          <FaTicketSimple className="icon-ticket" />
-          <div className="linea-separadora"></div>
-          <PiArmchairFill className="icon-chair " />
-          <div className="linea-separadora"></div>
-          <GiPopcorn className="icon-popcorn" />
-          <div className="linea-separadora"></div>
-          <HiCash className="icon-cash" />
+<ProgressLine step={3} />
+
+          
           </motion.div>
+      <div className="contenedor-comida">
+       
         <div className="contenedor-splide">
         <motion.div
   className="contenedor-seleccionar-combo"

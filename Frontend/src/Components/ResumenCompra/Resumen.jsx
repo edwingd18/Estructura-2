@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Card, Button } from 'flowbite-react';
 import axios from 'axios';
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
+import ProgressLine from '../ProgressLine/ProgressLine.jsx';
 
 initMercadoPago('TEST-bf107dd8-2b1a-4fc1-a249-b816c7d45c2d', {
   locale: 'es-CO',
@@ -111,8 +112,11 @@ const ResumenCompra = () => {
 
   return (
     <>
-      <div className="flex justify-center my-10">
-        <Card>
+      <div className="flex justify-start flex-col ">
+        <div>
+          <ProgressLine step={4} />
+        </div>
+        <Card className="flex flex-col gap-4 p-4 ml-[450px] w-[1000px]">
           <div className="flex flex-col gap-4 p-4">
             <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">
               Cine Magic

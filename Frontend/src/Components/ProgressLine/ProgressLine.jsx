@@ -14,12 +14,12 @@ const ProgressLine = ({ step }) => {
   ];
 
   return (
-    <div className="contenedor-iconos">
+    <div className="contenedor-iconos mt-14">
       <FaTicketSimple className={`icon-ticket-1 ${steps[0]}`} />
       <div className={`linea-separadora ${steps[1]}`} />
-      <PiArmchairFill className={`icon-chair-1 ${steps[1]}`} />
+      <PiArmchairFill className={`icon-chair-1 ${steps[2]}`} />
       <div className={`linea-separadora ${steps[2]}`} />
-      <GiPopcorn className={`icon-popcorn-1 ${steps[2]}`} />
+      <GiPopcorn className={`icon-popcorn-1 ${steps[3]}`} />
       <div className={`linea-separadora ${steps[3]}`} />
       <HiCash className={`icon-cash-1 ${steps[3]}`} />
     </div>

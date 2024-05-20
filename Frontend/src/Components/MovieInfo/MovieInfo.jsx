@@ -110,7 +110,7 @@ function MovieInfo() {
               whileTap={{ scale: 1 }}
               transition={{ duration: 0.2 }}
             onClick={handleButtonClick}
-            className="buttonComprar sm:text-sm sm:flex-col sm:h-9 md:text-xs md:h-auto md:py-1.5 lg:text-sm lg:py-2 2xl:text-lg 2xl:h-11 2xl:py-2 items-center bg-blue-800 border rounded-full border-whiter h-11 w-91 hover:bg-blue-800 py-2 px-4"
+            className="bg-blue-800 text-white py-2 px-4 rounded-full inline-block"
           >
             <HiShoppingCart className="md:w-4 mr-2 h-5 w-5 inline-block rounded-full hover:bg" />
             Adquiere tus entradas
