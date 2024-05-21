@@ -43,24 +43,10 @@ html, body {
     color: #1C64F2;
 }
 
-.icon-chair-1, .icon-popcorn-1, .icon-cash-1 {
-    color: #fff;
-}
 
-.linea-separadora {
-    border-top: 5px solid;
-    width: 164px;
-    height: 5px;
-    margin: 0 10px;
-}
 
-.contenedor-iconos {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    margin-bottom: 20px;
-}
+
+
 
 .contenedor-seleccionar {
     display: flex;

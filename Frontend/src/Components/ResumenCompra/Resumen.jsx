@@ -1,8 +1,11 @@
+// ResumenCompra.jsx
 import { useState, useEffect } from 'react';
 import { Card, Button } from 'flowbite-react';
 import axios from 'axios';
-import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
-
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
+import ProgressLine from '../ProgressLine/ProgressLine.jsx';
+import { useLocation } from 'react-router-dom';
+import './ResumenCompra.css';
 initMercadoPago('TEST-bf107dd8-2b1a-4fc1-a249-b816c7d45c2d', {
   locale: 'es-CO',
 });
@@ -15,6 +18,9 @@ const ticketPrices = {
 };
 
 const ResumenCompra = () => {
+  const location = useLocation();
+  const { selectedCombos } = location.state || {};
+
   const [state, setState] = useState({
     preferenceId: null,
     resumen: {
@@ -37,10 +43,6 @@ const ResumenCompra = () => {
   };
 
   useEffect(() => {
-    const comboNombre = getLocalStorageItem('comboNombre');
-    const comboPrecio = getLocalStorageItem('comboPrecio');
-    const comboDescription = getLocalStorageItem('comboDescripcion');
-
     const ticketQuantity = Number(window.localStorage.getItem('ticketQuantity'));
     const date = getLocalStorageItem('date');
     const movieName = getLocalStorageItem('movieName');
@@ -60,20 +62,17 @@ const ResumenCompra = () => {
     const formattedSeats = selectedSeats.join(', ');
 
     let foodDetails = [];
-    let comboPrecioNumber = 0;
 
-    if (comboNombre !== 'Sin combo') {
-      foodDetails = [
-        {
-          combo: comboNombre,
-          description: comboDescription,
-          price: comboPrecio
-        }
-      ];
-      comboPrecioNumber = Number(comboPrecio);
+    if (selectedCombos && selectedCombos.length > 0) {
+      foodDetails = selectedCombos.map(({ nombre, descripcion, precio }) => ({
+        combo: nombre,
+        description: descripcion,
+        price: precio,
+      }));
     }
 
-    const total = (ticketPrice * ticketQuantity) + comboPrecioNumber;
+    const total = (ticketPrice * ticketQuantity) + foodDetails.reduce((acc, item) => acc + item.price, 0);
+    console.log(total);
 
     setState(prevState => ({
       ...prevState,
@@ -88,7 +87,7 @@ const ResumenCompra = () => {
         total: total
       }
     }));
-  }, []);
+  }, [selectedCombos]);
 
   const createPreference = async () => {
     try {
@@ -109,9 +108,18 @@ const ResumenCompra = () => {
 
   return (
     <>
-      <div className="flex justify-center my-10">
-        <Card>
+      <div className="contenedor-select-comida">
+
+        <div>
+          <ProgressLine step={4} />
+        </div>
+        <Card className="flex flex-col  w-[1000px]">
           <div className="flex flex-col gap-4 p-4">
+          <div className="circle-container">
+          {[...Array(20)].map((_, index) => (
+            <div key={index} className="circle"></div>
+          ))}
+        </div>
             <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">
               Cine Magic
             </h5>
@@ -153,7 +161,6 @@ const ResumenCompra = () => {
               <span className="text-lg font-bold">Total</span>
               <span className="text-lg font-bold">{state.resumen.total.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</span>
             </div>
-
             <div className="flex flex-col justify-center items-center pt-4">
               <Button onClick={handleBuy} className='btn-pagar'>Pagar</Button>
               {state.preferenceId && <Wallet initialization={{ preferenceId: state.preferenceId }} />}

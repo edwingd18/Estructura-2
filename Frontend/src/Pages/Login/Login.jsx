@@ -1,11 +1,10 @@
 import { useState } from 'react';
-import { Modal, TextInput, Button, Checkbox, Label } from 'flowbite-react';
+import { Modal, TextInput, Button, Checkbox, Label, Alert } from 'flowbite-react';
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { ModalForm } from './ModalForm';
-import { Navigate } from 'react-router-dom';
 
 export function ModalLogin({ showModal, toggleModal, context }) {
   const [email, setEmail] = useState('');
@@ -13,7 +12,8 @@ export function ModalLogin({ showModal, toggleModal, context }) {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState('');
   const [showAlert, setShowAlert] = useState(false);
-  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+  const [alertType, setAlertType] = useState('failure'); // default alert type
 
   function handleLoginClick() {
     setIsLoginModalOpen(true);
@@ -30,7 +30,6 @@ export function ModalLogin({ showModal, toggleModal, context }) {
     };
 
     fetch('http://localhost:8000/api/user/login', {
-
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -39,85 +38,51 @@ export function ModalLogin({ showModal, toggleModal, context }) {
     })
       .then(response => response.json())
       .then(data => {
-        if (data.token) { // Si el inicio de sesión es exitoso, se guarda el token en el local storage
-          if (context === 'sidebar') {  // Si el contexto es sidebar, se muestra un mensaje de alerta
-            localStorage.setItem('jwt', data.token);
-            alert('Inicio de sesión exitoso. Token: ' + data.token);
+        if (data.token) { 
+          localStorage.setItem('jwt', data.token);
+          setAlertMessage('Inicio de sesión exitoso.');
+          setAlertType('success');
+          setShowAlert(true);
 
+          setTimeout(() => {
+            setShowAlert(false);
+            window.location.reload();
+          }, 1000);
+
+          fetch(`http://localhost:8000/api/user/${email}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'authorization': `Bearer ${data.token}`,
+            },
+          })
+            .then(response => {
+              if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+              }
+              return response.json();
+            })
+            .then(userData => {
+              console.log("User data:", userData);
+              localStorage.setItem('username', userData.name);
+              const isAdmin = userData.isAdmin || false;
+              localStorage.setItem('isAdmin', isAdmin);
+              console.log('isAdmin: ', isAdmin);
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+            });
+
+          if (context === 'sidebar') {
             setIsLoggedIn('sidebar');
-
-            setTimeout(() => {
-              setShowSuccessAlert(false);
-              window.location.reload();
-            }, 1000);
-
-            fetch(`http://localhost:8000/api/user/${email}`, {
-              method: 'GET',
-              headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${data.token}`,
-              },
-            })
-              .then(response => {
-                if (!response.ok) {
-                  throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-
-              })
-              .then(userData => {
-                console.log("User data:", userData);
-
-                localStorage.setItem('username', userData.name);
-
-                const isAdmin = userData.isAdmin || false;
-                localStorage.setItem('isAdmin', isAdmin);
-                console.log('isAdmin: ', isAdmin);
-              })
-              .catch((error) => {
-                console.error('Error:', error);
-              });
-
-          } else if (context === 'tickets') { // Si el contexto es ticket, se redirige a la página de inicio
-            localStorage.setItem('jwt', data.token);
-            alert('Inicio de sesión exitoso. Token: ' + data.token);
-
+          } else if (context === 'tickets') {
             setIsLoggedIn('ticket');
-
-            setTimeout(() => {
-              // Recargar la página para reflejar los cambios
-              window.location.reload();
-            }, 1000);
-
-            fetch(`http://localhost:8000/api/user/${email}`, {
-              method: 'GET',
-              headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${data.token}`,
-              },
-            })
-              .then(response => {
-                if (!response.ok) {
-                  throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-
-              })
-              .then(userData => {
-                console.log("User data:", userData);
-
-                localStorage.setItem('username', userData.name);
-
-                const isAdmin = userData.isAdmin || false;
-                localStorage.setItem('isAdmin', isAdmin);
-                console.log('isAdmin: ', isAdmin);
-              })
-              .catch((error) => {
-                console.error('Error:', error);
-              });
           }
+
         } else {
-          alert('Error al iniciar sesión: ' + data.error);
+          setAlertMessage('Error al iniciar sesión: ' + data.error);
+          setAlertType('failure');
+          setShowAlert(true);
         }
       })
       .catch((error) => {
@@ -183,7 +148,7 @@ export function ModalLogin({ showModal, toggleModal, context }) {
       "base": "flex items-center space-x-2 rounded-b border-gray-200 p-6 dark:border-gray-600",
       "popup": "border-t"
     }
-  }
+  };
 
   async function handleSuccess(response) {
     console.log("Login Successful:", response);
@@ -261,14 +226,11 @@ export function ModalLogin({ showModal, toggleModal, context }) {
         </Modal.Body>
       </Modal>
       {showAlert && (
-        <Alert color="failure" onDismiss={() => setShowAlert(false)} className="absolute top-3 right-3">
-          Por favor, complete todos los campos.
-        </Alert>
-      )}
-      {showSuccessAlert && (
-        <Alert color="success" onDismiss={() => setShowSuccessAlert(false)} className="absolute top-3 right-3">
-          La nueva película se agregó exitosamente.
-        </Alert>
+        <div className="fixed top-0 right-0 mt-4 mr-4 z-50">
+          <Alert color={alertType} onDismiss={() => setShowAlert(false)}>
+            {alertMessage}
+          </Alert>
+        </div>
       )}
     </GoogleOAuthProvider>
   );

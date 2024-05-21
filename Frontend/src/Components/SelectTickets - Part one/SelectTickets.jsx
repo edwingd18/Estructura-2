@@ -1,5 +1,5 @@
 import './SelectTickets.css';
-import { HiCash, HiShoppingCart } from "react-icons/hi";
+import { HiShoppingCart } from "react-icons/hi";
 import { SelectChair, SelectChairPreferencial } from './SelectChair.jsx';
 import { Button, Datepicker } from 'flowbite-react';
 import { useNavigate } from 'react-router-dom';
@@ -61,8 +61,8 @@ function SelectTickets() {
 
     return (
         <div className="contenedor-select-tickets">
-            <div className="progress-line-container">
-                <ProgressLine step={4} />
+            <div className="contenedor-iconos">
+                <ProgressLine step={1} />
             </div>
             <div className="contenedor-tickets">
                 <div className="contenedor-seleccionar">
