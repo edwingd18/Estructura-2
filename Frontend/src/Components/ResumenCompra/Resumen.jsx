@@ -5,10 +5,12 @@ import axios from 'axios';
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 import ProgressLine from '../ProgressLine/ProgressLine.jsx';
 import { useLocation } from 'react-router-dom';
-
+import './ResumenCompra.css';
 initMercadoPago('TEST-bf107dd8-2b1a-4fc1-a249-b816c7d45c2d', {
   locale: 'es-CO',
 });
+
+const getLocalStorageItem = (key) => window.localStorage.getItem(key).replace(/"/g, '').trim();
 
 const ticketPrices = {
   general: 13550,
@@ -58,10 +60,10 @@ const ResumenCompra = () => {
 
   useEffect(() => {
     const ticketQuantity = Number(window.localStorage.getItem('ticketQuantity'));
-    const date = window.localStorage.getItem('date');
-    const movieName = window.localStorage.getItem('movieName');
+    const date = getLocalStorageItem('date');
+    const movieName = getLocalStorageItem('movieName');
     const selectedSeats = JSON.parse(window.localStorage.getItem('selectedSeats'));
-    const ticketType = window.localStorage.getItem('ticketType');
+    const ticketType = getLocalStorageItem('ticketType');
 
     const movieDate = new Date(date);
 
@@ -86,6 +88,7 @@ const ResumenCompra = () => {
     }
 
     const total = (ticketPrice * ticketQuantity) + foodDetails.reduce((acc, item) => acc + item.price, 0);
+    console.log(total);
 
     setState(prevState => ({
       ...prevState,
@@ -102,16 +105,20 @@ const ResumenCompra = () => {
     }));
   }, [selectedCombos]);
 
-
-
   return (
     <>
-      <div className="contenedor-select-comida ">
+      <div className="contenedor-select-comida">
+
         <div>
           <ProgressLine step={4} />
         </div>
-        <Card className="flex flex-col gap-4 p-4 ml-[] w-[1000px]">
+        <Card className="flex flex-col  w-[1000px]">
           <div className="flex flex-col gap-4 p-4">
+          <div className="circle-container">
+          {[...Array(20)].map((_, index) => (
+            <div key={index} className="circle"></div>
+          ))}
+        </div>
             <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">
               Cine Magic
             </h5>
@@ -153,7 +160,6 @@ const ResumenCompra = () => {
               <span className="text-lg font-bold">Total</span>
               <span className="text-lg font-bold">{state.resumen.total.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</span>
             </div>
-
             <div className="flex flex-col justify-center items-center pt-4">
               <Button onClick={handleBuy} className='btn-pagar'>Pagar</Button>
               {state.preferenceId && <Wallet initialization={{ preferenceId: state.preferenceId }} />}
