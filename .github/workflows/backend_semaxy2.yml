@@ -53,4 +53,4 @@ jobs:
           app-name: 'Semaxy2'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_2BE3CB2544D24A70BA7053394F64B511 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F45E4E9AA4444DE3B9D26FF93B5BBB54 }}
