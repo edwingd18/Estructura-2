@@ -5,6 +5,7 @@
 }
 
 .card {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -15,6 +16,16 @@
     background-color: #e0d9df;
     padding: 15px;
     flex-wrap: wrap;
+  }
+  .checkbox-cantidad {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    align-items: center;
+  }
+  .checkbox-cantidad input[type="checkbox"] {
+    margin-right: 5px;
   }
 
   .contenedor-imagen {

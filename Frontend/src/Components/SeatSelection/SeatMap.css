@@ -80,10 +80,10 @@ body {
     border-radius: 10px;
     justify-content: center;
     align-items: center;
-    font-size: .5vw;
+    font-size: 20px;
     color: white;
     position: absolute;
-    top: 13vw;
+    top: 11vw;
 }
 
 /* Grilla de asientos */
@@ -110,7 +110,7 @@ body {
 }
 
 .seat.disabled {
-    background-color: yellow;
+    background-color: #0857ff;
 }
 
 .seat.selected {

@@ -1,27 +1,47 @@
-import { FaTicketSimple } from 'react-icons/fa6';
-import { PiArmchairFill } from 'react-icons/pi';
-import { GiPopcorn } from 'react-icons/gi';
-import { HiCash } from 'react-icons/hi';
-import './ProgressLine.css'; // Asegúrate de definir tus estilos CSS aquí
+import { motion } from 'framer-motion';
+import { MdOutlineEventSeat } from "react-icons/md";
+import { PiPopcorn } from "react-icons/pi";
+import { HiOutlineCash,HiOutlineTicket } from 'react-icons/hi';
+import './ProgressLine.css';
 
 const ProgressLine = ({ step }) => {
-  // Define un array con las clases de color según el estado del progreso
   const steps = [
-    step >= 1 ? 'text-blue-800' : 'text-gray-400',
-    step >= 2 ? 'text-blue-800' : 'text-gray-400',
-    step >= 3 ? 'text-blue-800' : 'text-gray-400',
-    step >= 4 ? 'text-blue-800' : 'text-gray-400',
+    step >= 1 ? 'text-blue-800' : 'text-black',
+    step >= 2 ? 'text-blue-800' : 'text-black',
+    step >= 3 ? 'text-blue-800' : 'text-black',
+    step >= 4 ? 'text-blue-800' : 'text-black',
   ];
 
+  const lineVariants = {
+    initial: { width: 0 },
+    animate: { width: '270px', transition: { duration: 0.2 } },
+  };
+
   return (
-    <div className="contenedor-iconos mt-14">
-      <FaTicketSimple className={`icon-ticket-1 ${steps[0]}`} />
-      <div className={`linea-separadora ${steps[1]}`} />
-      <PiArmchairFill className={`icon-chair-1 ${steps[2]}`} />
-      <div className={`linea-separadora ${steps[2]}`} />
-      <GiPopcorn className={`icon-popcorn-1 ${steps[3]}`} />
-      <div className={`linea-separadora ${steps[3]}`} />
-      <HiCash className={`icon-cash-1 ${steps[3]}`} />
+    
+    <div className="contenedor-iconos flex items-center content-center bottom-[20px] mb-5 mt-14 bg-white w-[1020px] h-[30px] justify-center rounded-xl">
+      <HiOutlineTicket className={`icon-ticket-1 ${steps[0]}`} />
+      <motion.div
+        className={`linea-separadora ${steps[1]}`}
+        variants={lineVariants}
+        initial="initial"
+        animate={step >= 2 ? "animate" : "initial"}
+      />
+      <MdOutlineEventSeat className={`icon-chair-1 ${steps[2]}`} />
+      <motion.div
+        className={`linea-separadora ${steps[2]}`}
+        variants={lineVariants}
+        initial="initial"
+        animate={step >= 3 ? "animate" : "initial"}
+      />
+      <PiPopcorn className={`icon-popcorn-1 ${steps[3]}`} />
+      <motion.div
+        className={`linea-separadora ${steps[3]}`}
+        variants={lineVariants}
+        initial="initial"
+        animate={step >= 4 ? "animate" : "initial"}
+      />
+      <HiOutlineCash  className={`icon-cash-1 ${steps[3]}`} />
     </div>
   );
 };

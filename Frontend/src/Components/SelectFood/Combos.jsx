@@ -22,7 +22,7 @@ Combos.propTypes = {
   nombre: PropTypes.string.isRequired,
   img: PropTypes.string.isRequired,
   descripcion: PropTypes.string.isRequired,
-  precio: PropTypes.string.isRequired,
+  precio: PropTypes.number.isRequired,
   seleccionado: PropTypes.func.isRequired,
 };
 
