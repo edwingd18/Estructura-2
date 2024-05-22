@@ -1,69 +1,53 @@
-import express from "express";
-import cors from 'cors';
-import db from "./database/db.js";
-import MovieRoutes from './routes/routes.js';
-import userRouter from "./routes/user.routes.js";
-import paymentRouter from './routes/payment.routes.js';
-import { Server as SocketServer } from "socket.io";
-import http from 'http';
+import express from "express"
+import cors from 'cors'
+import db from "./database/db.js"
+import MovieRoutes from './routes/routes.js'
+import userRouter from "./routes/user.routes.js"
+import paymentRouter from './routes/payment.routes.js'
+import { createServer } from 'http';
+import { Server } from 'socket.io';
 
-const app = express();
-const server = http.createServer(app);
-const io = new SocketServer(server, {
+const app = express()
+const server = createServer(app);
+
+
+const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173"
+    origin: "*", // Permitir todos los orígenes
+    methods: ["GET", "POST"] // Permitir métodos GET y POST
   }
 });
 
-const users = {}; // Objeto para almacenar los usuarios conectados
+// Middleware
+app.use(cors())
+app.use(cors({ origin: '*' }));
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
-io.on("connection", (socket) => {
-  console.log(`New client connected: ${socket.id}`);
+io.on('connection', (socket) => {
+  console.log('New client connected');
 
-  // Escuchar cuando un usuario se une
-  socket.on('join', (userId) => {
-    users[userId] = socket.id;
-    console.log(`${userId} joined with socket ID ${socket.id}`);
+  socket.on('chat message', (msg) => {
+    io.emit('chat message', msg);
   });
 
-  // Escuchar eventos de "message" desde los clientes
-  socket.on("message", (message) => {
-    const { userId, text } = message;
-    console.log(`Message from ${userId}: ${text}`);
-
-    // Enviar mensaje al administrador
-    if (users['admin']) {
-      io.to(users['admin']).emit('message', { userId, text });
-    }
-
-    // Enviar mensaje al usuario
-    if (users[userId]) {
-      io.to(users[userId]).emit('message', { userId: 'admin', text });
-    }
-  });
-
-  // Manejar la desconexión
   socket.on('disconnect', () => {
-    console.log(`Client disconnected: ${socket.id}`);
-    for (const userId in users) {
-      if (users[userId] === socket.id) {
-        delete users[userId];
-        break;
-      }
-    }
+    console.log('Client disconnected');
   });
 });
-
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 // Rutas
-app.use('/api', MovieRoutes);
-app.use('/api/user', userRouter);
-app.use('/api/payment', paymentRouter);
+app.use('/api', MovieRoutes)
+app.use('/api/user', userRouter)
+app.use('/api/payment', paymentRouter)
 
-const PORT = process.env.PORT || 8000;
-server.listen(PORT, () => {
-  console.log(`Server UP running in http://localhost:${PORT}`);
-});
+
+// // Ruta de bienvenida
+// app.listen(process.env.PORT || 8000, () => {
+//   console.log('Server UP running in http://localhost:', process.env.PORT || 8000);
+// });
+ 
+// Ruta de bienvenida
+server.listen(process.env.PORT || 8000, () => {
+  console.log('Server UP running in http://localhost:', process.env.PORT || 8000)
+})

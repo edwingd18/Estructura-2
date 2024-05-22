@@ -1,55 +1,28 @@
-import { Component } from 'react';
-import './Combos.css';
+// Combos.js
 import PropTypes from 'prop-types';
+import './Combos.css';
 
-// const URI = 'http://backend.ftfjfagraqa2hwfs.eastus.azurecontainer.io:8000/api/combos';
-const URI = 'http://localhost:8000/api/allCombos';
-
-class Combos extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      combo: null,
-    };
-  }
-
-  componentDidMount() {
-    fetch(URI)
-      .then(response => response.json())
-      .then(data => {
-        // Asumir que la API devuelve un arreglo de combos
-        const combo = data[0];
-        this.setState({ combo });
-      })
-      .catch(error => console.error('Error fetching combo:', error));
-  }
-
-  render() {
-    const { combo } = this.state;
-
-    if (!combo) {
-      return <div>Cargando...</div>;
-    }
-
-    return (
-      <div
-        className="card card-hover"
-        onClick={() => this.props.seleccionado(combo.title, combo.description, combo.price)}
-      >
-        <div className="contenedor-imagen">
-          <img src={combo.imageUrl} alt={combo.title} className="imagen-combo-1" />
-        </div>
-        <div className="contenedor-informacion-imagen">
-          <h2>{combo.title}</h2>
-          <p>{combo.description}</p>
-          <h3>${combo.price}</h3>
-        </div>
+function Combos({ nombre,img, descripcion, precio, seleccionado }) {
+  return (
+    <div
+      className="card card-hover"
+      onClick={() => seleccionado(nombre, descripcion, precio)}
+    >
+      <div className="contenedor-informacion-imagen">
+        <img src={img} alt="" />
+        <h2>{nombre}</h2>
+        <p>{descripcion}</p>
+        <h3>${precio}</h3>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 Combos.propTypes = {
+  nombre: PropTypes.string.isRequired,
+  img: PropTypes.string.isRequired,
+  descripcion: PropTypes.string.isRequired,
+  precio: PropTypes.number.isRequired,
   seleccionado: PropTypes.func.isRequired,
 };
 

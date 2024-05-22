@@ -1,19 +1,19 @@
 import { useState } from 'react';
-import { Modal, TextInput, Button, Checkbox, Label } from 'flowbite-react';
+import { Modal, TextInput, Button, Checkbox, Label, Alert } from 'flowbite-react';
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { ModalForm } from './ModalForm';
-import { Navigate } from 'react-router-dom';
-
 
 export function ModalLogin({ showModal, toggleModal, context }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState('');
-
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+  const [alertType, setAlertType] = useState('failure'); // default alert type
 
   function handleLoginClick() {
     setIsLoginModalOpen(true);
@@ -30,7 +30,6 @@ export function ModalLogin({ showModal, toggleModal, context }) {
     };
 
     fetch('http://localhost:8000/api/user/login', {
-
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -39,88 +38,51 @@ export function ModalLogin({ showModal, toggleModal, context }) {
     })
       .then(response => response.json())
       .then(data => {
-        if (data.token) { // Si el inicio de sesión es exitoso, se guarda el token en el local storage
-          if (context === 'sidebar') {  // Si el contexto es sidebar, se muestra un mensaje de alerta
-            localStorage.setItem('jwt', data.token);
-            alert('Inicio de sesión exitoso. Token: ' + data.token);
+        if (data.token) { 
+          localStorage.setItem('jwt', data.token);
+          setAlertMessage('Inicio de sesión exitoso.');
+          setAlertType('success');
+          setShowAlert(true);
 
+          setTimeout(() => {
+            setShowAlert(false);
+            window.location.reload();
+          }, 1000);
+
+          fetch(`http://localhost:8000/api/user/${email}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'authorization': `Bearer ${data.token}`,
+            },
+          })
+            .then(response => {
+              if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+              }
+              return response.json();
+            })
+            .then(userData => {
+              console.log("User data:", userData);
+              localStorage.setItem('username', userData.name);
+              const isAdmin = userData.isAdmin || false;
+              localStorage.setItem('isAdmin', isAdmin);
+              console.log('isAdmin: ', isAdmin);
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+            });
+
+          if (context === 'sidebar') {
             setIsLoggedIn('sidebar');
-
-            setTimeout(() => {
-              // Recargar la página para reflejar los cambios
-              window.location.reload();
-            }, 1000);
-
-            fetch(`http://localhost:8000/api/user/${email}`, {
-              method: 'GET',
-              headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${data.token}`,
-              },
-            })
-              .then(response => {
-                if (!response.ok) {
-                  throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-
-              })
-              .then(userData => {
-                console.log("User data:", userData);
-
-                localStorage.setItem('username', userData.name);
-                localStorage.setItem('lastname', userData.lastname);
-
-                const isAdmin = userData.isAdmin || false;
-                localStorage.setItem('isAdmin', isAdmin);
-                console.log('isAdmin: ', isAdmin);
-              })
-              .catch((error) => {
-                console.error('Error:', error);
-              });
-
-          } else if (context === 'tickets') { // Si el contexto es ticket, se redirige a la página de inicio
-            localStorage.setItem('jwt', data.token);
-            alert('Inicio de sesión exitoso. Token: ' + data.token);
-
+          } else if (context === 'tickets') {
             setIsLoggedIn('ticket');
-
-            setTimeout(() => {
-              setShowSuccessAlert(false);
-              // Recargar la página para reflejar los cambios
-              window.location.reload();
-            }, 1000);
-
-            fetch(`http://localhost:8000/api/user/${email}`, {
-              method: 'GET',
-              headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${data.token}`,
-              },
-            })
-              .then(response => {
-                if (!response.ok) {
-                  throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-
-              })
-              .then(userData => {
-                console.log("User data:", userData);
-
-                localStorage.setItem('username', userData.name);
-                localStorage.setItem('lastname', userData.lastname);
-
-                const isAdmin = userData.isAdmin || false;
-                localStorage.setItem('isAdmin', isAdmin);
-                console.log('isAdmin: ', isAdmin);
-              })
-              .catch((error) => {
-                console.error('Error:', error);
-              });
           }
+
         } else {
-          alert('Error al iniciar sesión: ' + data.error);
+          setAlertMessage('Error al iniciar sesión: ' + data.error);
+          setAlertType('failure');
+          setShowAlert(true);
         }
       })
       .catch((error) => {
@@ -136,7 +98,7 @@ export function ModalLogin({ showModal, toggleModal, context }) {
 
   const customtema = {
     "root": {
-      "base": "fixed inset-x-0 top-0 z-50 h-screen overflow-y-auto overflow-x-hidden md:inset-0 md:h-full z-[199999] ",
+      "base": "fixed inset-x-0 top-0 z-50 h-screen overflow-y-auto overflow-x-hidden md:inset-0 md:h-full",
       "show": {
         "on": "flex bg-gray-900 bg-opacity-50 dark:bg-opacity-80",
         "off": "hidden"
@@ -166,8 +128,8 @@ export function ModalLogin({ showModal, toggleModal, context }) {
       }
     },
     "content": {
-      "base": "relative h-full w-full p-4 md:w-auto",
-      "inner": "relative flex max-h-[90dvh] flex-col rounded-lg bg-agua shadow dark:bg-gray-700"
+      "base": "relative h-full w-full p-4 md:h-auto",
+      "inner": "relative flex max-h-[90dvh] flex-col rounded-lg bg-white shadow dark:bg-gray-700"
     },
     "body": {
       "base": "flex-1 overflow-auto p-6",
@@ -176,7 +138,7 @@ export function ModalLogin({ showModal, toggleModal, context }) {
     "header": {
       "base": "flex items-start justify-between rounded-t border-b p-5 dark:border-gray-600",
       "popup": "border-b-0 p-2",
-      "title": "text-xl font-medium text-white dark:text-white",
+      "title": "text-xl font-medium text-gray-900 dark:text-white",
       "close": {
         "base": "ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white",
         "icon": "h-5 w-5"
@@ -202,9 +164,9 @@ export function ModalLogin({ showModal, toggleModal, context }) {
       <Modal show={showModal} size="lg" onClose={toggleModal} theme={customtema} popup>
         <Modal.Header />
         <Modal.Body>
-          <div className="space-y-6">
-            <h3 className="text-xl font-medium text-white text-center">Sign in to our platform</h3>
-            <div>
+          <div className="max-w-md mx-auto space-y-6">
+            <h3 className="text-xl font-medium text-black text-center">Sign in to our platform</h3>
+            <div className="flex flex-col items-center">
               <GoogleLogin
                 onSuccess={handleSuccess}
                 onFailure={handleError}
@@ -215,13 +177,14 @@ export function ModalLogin({ showModal, toggleModal, context }) {
                   </Button>
                 )}
               />
-              <div className="text-white text-center mt-4 mb-4">or</div>
+              <div className="text-center mt-4 mb-4">or</div>
               <TextInput
                 id="email"
                 placeholder="Email"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 required
+                className="w-full"
               />
             </div>
             <div>
@@ -231,12 +194,14 @@ export function ModalLogin({ showModal, toggleModal, context }) {
                 placeholder="Password"
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
-                required />
+                required
+                className="w-full"
+              />
             </div>
             <div className="flex justify-between">
               <div className="flex items-center gap-2">
                 <Checkbox id="remember" />
-                <Label className="text-white" htmlFor="remember">Remember me</Label>
+                <Label htmlFor="remember">Remember me</Label>
               </div>
               <a href="#" className="text-sm text-cyan-700 hover:underline dark:text-cyan-500 ml-4">
                 Lost Password?
@@ -245,13 +210,12 @@ export function ModalLogin({ showModal, toggleModal, context }) {
             <div className="w-full flex justify-center">
               <Button onClick={handleLogin} className="px-8">Log in</Button>
             </div>
-            <div className="flex justify-between text-sm font-medium text-white mt-4">
+            <div className="flex justify-between text-sm font-medium mt-4">
               Not registered?&nbsp;
               <Link to={"#"}>
                 <a onClick={handleLoginClick} className="text-cyan-700 hover:underline dark:text-cyan-500 ml-4">
                   Create account
                 </a>
-
               </Link>
             </div>
           </div>
@@ -261,6 +225,13 @@ export function ModalLogin({ showModal, toggleModal, context }) {
           )}
         </Modal.Body>
       </Modal>
+      {showAlert && (
+        <div className="fixed top-0 right-0 mt-4 mr-4 z-50">
+          <Alert color={alertType} onDismiss={() => setShowAlert(false)}>
+            {alertMessage}
+          </Alert>
+        </div>
+      )}
     </GoogleOAuthProvider>
   );
 }

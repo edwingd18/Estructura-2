@@ -1,12 +1,10 @@
 import "./SeatMap.css";
-import { FaTicketSimple } from "react-icons/fa6";
-import { PiArmchairFill } from "react-icons/pi";
-import { GiPopcorn } from "react-icons/gi";
-import { HiCash } from "react-icons/hi";
+
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { Button } from "flowbite-react";
 import ConfirmSeats from "../Modals/ConfirmSeats";
+import ProgressLine from '../ProgressLine/ProgressLine.jsx';
 
 function SeatMap() {
   const [selectedSeats, setSelectedSeats] = useState([]);
@@ -49,16 +47,11 @@ function SeatMap() {
 
   return (
     <div className="SeatMapWholeContainer">
-      <div className="SeatMapContainer">
-        <div className="contenedor-iconos">
-          <FaTicketSimple className="icon-ticket" />
-          <div className="linea-separadora"></div>
-          <PiArmchairFill className="icon-chair" />
-          <div className="linea-separadora"></div>
-          <GiPopcorn className="icon-popcorn" />
-          <div className="linea-separadora"></div>
-          <HiCash className="icon-cash" />
+              <div className="contenedor-iconos">
+              <ProgressLine step={2} />
         </div>
+      <div className="SeatMapContainer">
+
 
         <div className="SeatMap">
           <div className="screen">

@@ -1,3 +1,4 @@
+/* Estilos globales */
 * {
     padding: 0;
     margin: 0;
@@ -9,77 +10,55 @@ body {
     font-size: 18px;
 }
 
-.seat {
-    /* otras propiedades... */
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 14px;
-    font-weight: 600;
-}
-
+/* Contenedor principal */
 .SeatMapWholeContainer {
     display: flex;
+    flex-direction: column; /* Cambia a columna */
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start; /* Alinea al inicio */
     min-height: 100vh;
 }
 
+/* Contenedor de la línea de progreso */
+.progress-line-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+/* Contenedor principal del mapa de asientos */
 .SeatMapContainer {
-    width: 1000px;
-    min-height: 630px;
+    height: 630px;
+    width: 1600px;
     display: flex;
-    flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: #181725;
     border-radius: 25px;
-    box-shadow: 0 3px 13px 1px rgb(0, 0, 0, 9%);
+    box-shadow: 0 3px 13px 1px rgba(0, 0, 0, 0.09);
 }
 
-.contenedor-tickets {
-    width: 1000px;
-    min-height: 630px;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #181725;
-    border-radius: 25px;
-    box-shadow: 0 3px 13px 1px rgb(0, 0, 0, 9%);
-}
-
-.icon-ticket {
-    width: 25px;
-    height: auto;
-    margin-right: 10px;
-    color: #1C64F2;
-}
-
-.icon-chair {
-    width: 25px;
-    height: auto;
-    margin-right: 10px;
-    color: #1C64F2;
-}
-
-.icon-popcorn {
-    width: 25px;
-    height: auto;
-    margin-right: 10px;
-    color: #fff;
-}
-
+/* Iconos */
+.icon-ticket,
+.icon-chair,
+.icon-popcorn,
 .icon-cash {
     width: 25px;
     height: auto;
     margin-right: 10px;
+}
+
+.icon-ticket, .icon-chair {
+    color: #1C64F2;
+}
+
+.icon-popcorn, .icon-cash {
     color: #fff;
 }
 
+/* Mapa de asientos */
 .SeatMap {
     display: flex;
     justify-content: center;
@@ -89,8 +68,10 @@ body {
     background-color: #474747;
     border-radius: 25px;
     box-shadow: 0 3px 13px 1px rgb(0, 0, 0, 9%);
+    margin-bottom: 20px; /* Añadido para separar de los botones y textos de estado */
 }
 
+/* Pantalla */
 .screen {
     width: 30%;
     height: 3vw;
@@ -99,34 +80,41 @@ body {
     border-radius: 10px;
     justify-content: center;
     align-items: center;
-    font-size: .5vw;
+    font-size: 20px;
     color: white;
     position: absolute;
-    top: 13vw;
+    top: 11vw;
 }
 
+/* Grilla de asientos */
 .seats {
     margin-top: 50px;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    /* Esto crea una grilla con 5 columnas de igual tamaño */
     gap: 10px;
-    /* Esto añade un espacio de 10px entre cada asiento */
 }
 
+/* Asientos */
 .seat {
     width: 1.5vw;
     height: 1.5vw;
     background-color: white;
     border-radius: 20px;
     transition: .5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
 }
 
 .seat.disabled {
-    background-color: yellow;
+    background-color: #0857ff;
 }
 
 .seat.selected {
+    background-color: green !important;
     color: white;
 }
 
@@ -134,31 +122,19 @@ body {
     background-color: #31c50b;
 }
 
-#seat1,
-#seat2,
-#seat3,
-#seat4,
-#seat5 {
-
-    background-color: rgb(238, 255, 0);
-}
-
-#seat1:hover,
-#seat2:hover,
-#seat3:hover,
-#seat4:hover,
-#seat5:hover {
-
-    background-color: #31c50b;
-}
-
-#AvailableSeatsText {
+/* Marcadores y textos */
+#AvailableSeatsText,
+#SpecialSeatsText,
+#SelectedSeatsText,
+#OcuSeatsText {
     position: absolute;
     color: white;
     font-size: .7vw;
-    margin-top: 10px;
-    left: 30vw;
+}
+
+#AvailableSeatsText {
     top: 17.5vw;
+    left: 30vw;
 }
 
 #availableSeatMark {
@@ -169,16 +145,11 @@ body {
     border-radius: 20px;
     top: 19.5vw;
     left: 30vw;
-
 }
 
 #SpecialSeatsText {
-    position: absolute;
-    color: white;
-    font-size: .7vw;
-    margin-top: 10px;
-    left: 30vw;
     top: 21vw;
+    left: 30vw;
 }
 
 #SpecialSeatsMark {
@@ -186,19 +157,14 @@ body {
     width: 1.5vw;
     height: 1.5vw;
     background-color: rgb(238, 255, 0);
-    ;
     border-radius: 20px;
     top: 23vw;
     left: 30vw;
 }
 
 #SelectedSeatsText {
-    position: absolute;
-    color: white;
-    font-size: .7vw;
-    margin-top: 10px;
-    left: 30vw;
     top: 24.5vw;
+    left: 30vw;
 }
 
 #SelectedSeatsMark {
@@ -211,14 +177,9 @@ body {
     left: 30vw;
 }
 
-
 #OcuSeatsText {
-    position: absolute;
-    color: white;
-    font-size: .7vw;
-    margin-top: 10px;
-    left: 30vw;
     top: 28vw;
+    left: 30vw;
 }
 
 #OcuSeatsMark {
@@ -229,8 +190,4 @@ body {
     border-radius: 20px;
     top: 30vw;
     left: 30vw;
-}
-
-.seat.selected {
-    background-color: green !important;
 }

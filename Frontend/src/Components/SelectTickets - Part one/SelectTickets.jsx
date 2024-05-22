@@ -1,13 +1,11 @@
 import './SelectTickets.css';
-import { FaTicketSimple } from "react-icons/fa6";
-import { PiArmchairFill } from "react-icons/pi";
-import { GiPopcorn } from "react-icons/gi";
-import { HiCash, HiShoppingCart } from "react-icons/hi";
+import { HiShoppingCart } from "react-icons/hi";
 import { SelectChair, SelectChairPreferencial } from './SelectChair.jsx';
 import { Button, Datepicker } from 'flowbite-react';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import ConfirmTickets from '../Modals/ConfirmTickets.jsx';
+import ProgressLine from '../ProgressLine/ProgressLine.jsx';
 
 // Función personalizada para agregar días a una fecha
 const addDays = (date, days) => {
@@ -26,10 +24,7 @@ function SelectTickets() {
 
     const navigate = useNavigate();
 
-    // Fecha actual
     const today = new Date();
-
-    // Fecha 7 días después de la fecha actual
     const nextWeek = addDays(today, 7);
 
     const handleContinue = () => {
@@ -57,27 +52,19 @@ function SelectTickets() {
         const ticketType = generalSelected > 0 ? 'general' : 'preferencial';
         const ticketQuantity = generalSelected > 0 ? generalSelected : preferencialSelected;
 
-        // Guardar la fecha seleccionada, la cantidad de boletas y el tipo de boleta en localStorage
         localStorage.setItem('date', JSON.stringify(selectedDate));
         localStorage.setItem('ticketQuantity', JSON.stringify(ticketQuantity));
         localStorage.setItem('ticketType', JSON.stringify(ticketType));
 
-        // Navegar a la siguiente página
         navigate('/selectSeat');
     };
 
     return (
         <div className="contenedor-select-tickets">
+            <div className="contenedor-iconos">
+                <ProgressLine step={1} />
+            </div>
             <div className="contenedor-tickets">
-                <div className="contenedor-iconos">
-                    <FaTicketSimple className="icon-ticket-1" />
-                    <div className="linea-separadora"></div>
-                    <PiArmchairFill className="icon-chair-1" />
-                    <div className="linea-separadora"></div>
-                    <GiPopcorn className="icon-popcorn-1" />
-                    <div className="linea-separadora"></div>
-                    <HiCash className="icon-cash-1" />
-                </div>
                 <div className="contenedor-seleccionar">
                     <div className="contenedor-fecha">
                         <Datepicker className='datepicker' minDate={today} maxDate={nextWeek} />
@@ -90,7 +77,6 @@ function SelectTickets() {
                             imagen='general'
                             setSelected={setGeneralSelected}
                         />
-
                         <SelectChairPreferencial
                             nombre="SILLA PREFERENCIAL"
                             precio='20,000'
@@ -98,15 +84,12 @@ function SelectTickets() {
                             imagen='preferencial'
                             setSelected={setPreferencialSelected}
                         />
-
                         <ConfirmTickets openModal={openModal} setOpenModal={setOpenModal} modalMessage={modalMessage} handleConfirm={handleConfirm} isError={isError} />
-
                         <Button className="bg-black border border-whiter buttonComprar" onClick={handleContinue}>
                             <HiShoppingCart className="mr-2 h-5 w-5" />
                             Siguiente
                         </Button>
                     </div>
-
                 </div>
             </div>
         </div>

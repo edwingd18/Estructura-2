@@ -4,73 +4,49 @@
     box-sizing: border-box;
 }
 
-html,
-body {
+html, body {
     font-size: 18px;
 }
 
 .contenedor-select-tickets {
     display: flex;
+    flex-direction: column; /* Cambia a columna */
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start; /* Alinea al inicio */
     min-height: 100vh;
 }
 
 .contenedor-tickets {
-    width: 1000px;
-    min-height: 630px;
+    height: 630px;
+    width: 1600px;
     display: flex;
-    flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: #181725;
     border-radius: 25px;
-    box-shadow: 0 3px 13px 1px rgb(0, 0, 0, 9%);
+    box-shadow: 0 3px 13px 1px rgba(0, 0, 0, 0.09);
+}
+
+.progress-line-container {
+    width: 100%;
+    margin-bottom: 20px; /* Agrega margen para separación */
+}
+
+.icon-ticket-1, .icon-chair-1, .icon-popcorn-1, .icon-cash-1 {
+    width: 25px;
+    height: auto;
+    margin-right: 10px;
 }
 
 .icon-ticket-1 {
-    width: 25px;
-    height: auto;
-    margin-right: 10px;
     color: #1C64F2;
 }
 
-.icon-chair-1 {
-    width: 25px;
-    height: auto;
-    margin-right: 10px;
-    color: #fff;
-}
 
-.icon-popcorn-1 {
-    width: 25px;
-    height: auto;
-    margin-right: 10px;
-    color: #fff;
-}
 
-.icon-cash-1 {
-    width: 25px;
-    height: auto;
-    margin-right: 10px;
-    color: #fff;
-}
 
-.linea-separadora {
-    border-top: 5px solid #979797;
-    width: 164px;
-    height: 5px;
-    margin: 0 10px;
-}
 
-.contenedor-iconos {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    margin-bottom: 20px;
-}
 
 .contenedor-seleccionar {
     display: flex;
@@ -78,7 +54,6 @@ body {
     align-items: center;
     justify-content: space-around;
     width: 100%;
-    /* background-color: #1C64F2; */
 }
 
 .contenedor-fecha {
@@ -90,13 +65,13 @@ body {
 }
 
 .contenedor-sillas {
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.btn-Siguiente {
+.buttonComprar {
     width: 142px;
     height: 45px;
     background-color: #1C64F2;
@@ -109,7 +84,7 @@ body {
     transition: all 0.3s;
 }
 
-.btn-Siguiente:hover {
+.buttonComprar:hover {
     background-color: #fdfdfd;
     color: #000;
-} 
+}
