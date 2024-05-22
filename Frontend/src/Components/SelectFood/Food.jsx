@@ -1,4 +1,3 @@
-// Food.jsx
 import { useState, useEffect } from 'react';
 import './Food.css';
 import { motion } from 'framer-motion';
@@ -8,72 +7,74 @@ import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import ConfirmFood from '../Modals/ConfirmFood';
 
-
 function Food() {
-    const [combos, setCombos] = useState([]);
-    const [modalMessage, setModalMessage] = useState('');
-    const [openModal, setOpenModal] = useState(false);
-    const [selectedCombos, setSelectedCombos] = useState([]); // Estado para almacenar los combos seleccionados
-    const [isError, setIsError] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
+  const [combos, setCombos] = useState([]);
+  const [modalMessage, setModalMessage] = useState('');
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedCombos, setSelectedCombos] = useState([]); // Estado para almacenar los combos seleccionados
+  const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        fetch('http://localhost:8000/api/allCombos')
-            .then(response => response.json())
-            .then(data => {
-                setCombos(data);
-                setIsLoading(false);
-            })
-            .catch(error => {
-                console.error('Error fetching combos:', error);
-                setIsLoading(false);
-            });
-    }, []);
+  useEffect(() => {
+    const storedCombos = JSON.parse(window.localStorage.getItem('selectedCombos')) || [];
+    setSelectedCombos(storedCombos);
 
-    const handleComboClick = (nombre, descripcion, precio) => {
-        setSelectedCombos(prevSelectedCombos => [...prevSelectedCombos, { nombre, descripcion, precio }]); // Agregar combo al arreglo selectedCombos
+    fetch('http://localhost:8000/api/allCombos')
+      .then(response => response.json())
+      .then(data => {
+        setCombos(data);
+        setIsLoading(false);
+      })
+      .catch(error => {
+        console.error('Error fetching combos:', error);
+        setIsLoading(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      window.localStorage.setItem('selectedCombos', JSON.stringify(selectedCombos));
     };
+  }, [selectedCombos]);
 
-    const handleConfirm = () => {
-        setOpenModal(false);
-        navigate('/purchase-summary', { state: { selectedCombos } });
-    };
+  const handleComboClick = (nombre, descripcion, precio) => {
+    setSelectedCombos(prevSelectedCombos => [...prevSelectedCombos, { nombre, descripcion, precio }]); // Agregar combo al arreglo selectedCombos
+  };
 
-    const handleNextClick = () => {
-        if (selectedCombos.length === 0) {
-            setModalMessage('No has seleccionado un combo. ¿Deseas continuar de todos modos?');
-            setOpenModal(true);
-            setIsError(false);
-        } else {
-            setModalMessage(`Has seleccionado ${selectedCombos.length} combo(s). ¿Deseas continuar o editar tu selección?`);
-            setOpenModal(true);
-            setIsError(false);
-        }
-    };
+  const handleConfirm = () => {
+    setOpenModal(false);
+    navigate('/purchase-summary', { state: { selectedCombos } });
+  };
 
-    const handleClearSelection = () => {
-        setSelectedCombos([]); // Limpiar el arreglo selectedCombos
-        setModalMessage('Se ha borrado la selección de combo(s).');
-        setOpenModal(true);
-        setIsError(true);
-    };
+  const handleNextClick = () => {
+    if (selectedCombos.length === 0) {
+      setModalMessage('No has seleccionado un combo. ¿Deseas continuar de todos modos?');
+      setOpenModal(true);
+      setIsError(false);
+    } else {
+      setModalMessage(`Has seleccionado ${selectedCombos.length} combo(s). ¿Deseas continuar o editar tu selección?`);
+      setOpenModal(true);
+      setIsError(false);
+    }
+  };
 
-    return (
+  const handleClearSelection = () => {
+    setSelectedCombos([]); // Limpiar el arreglo selectedCombos
+    setModalMessage('Se ha borrado la selección de combo(s).');
+    setOpenModal(true);
+    setIsError(true);
+  };
+
+
+   return (
         <div className="contenedor-select-comida">
-            <motion.div
-                className="contenedor-iconos"
-                initial={{ opacity: 0, scale: 2 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{
-                    duration: 1,
-                    delay: 0.5,
-                    ease: [0, 0.71, 0.2, 1.01]
-                }}
+            <div
+
             >
                 <ProgressLine step={3} />
-            </motion.div>
+            </div>
             <div className="contenedor-comida">
                 <div className="contenedor-splide">
                     <motion.div

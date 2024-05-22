@@ -210,7 +210,7 @@ function Sidebar() {
                   <HiOutlineFilm style={{ width: "30px", height: "30px" }}/>
                   <span className="icon-label ml-10">Peliculas</span>
                 </FlowbiteSidebar.Item>
-                <FlowbiteSidebar.Item href="#" className="hover:text-black icon" onClick={() => handleButtonClick(() => {/* Tu lógica aquí */})}>
+                <FlowbiteSidebar.Item href="/purchase-summary" className="hover:text-black icon" onClick={() => handleButtonClick(() => {/* Tu lógica aquí */})}>
                   <HiOutlineShoppingCart style={{ width: "30px", height: "30px" }} />
                   <span className="icon-label ml-10">Carrito</span>
                 </FlowbiteSidebar.Item>
