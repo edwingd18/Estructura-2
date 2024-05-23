@@ -144,7 +144,7 @@ const ShoppingCart = () => {
 
   return (
     <>
-      <div className="contenedor-select-comida">
+      <div className="contenedor-select-comida font-title">
         <div>
           <ProgressLine step={4} />
         </div>
@@ -159,7 +159,7 @@ const ShoppingCart = () => {
             cartItems.map((item, index) => (
               <div key={index} className="flex justify-between items-center">
                 <div className="flex flex-col">
-                  <span>{item.combo}</span>
+                  <span className='text-lg font-bold'>{item.combo}</span>
                   <span>{item.description}</span>
                   <span>
                     Precio: {Number(item.price).toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}
@@ -173,7 +173,7 @@ const ShoppingCart = () => {
                     onChange={(e) => handleQuantityChange(index, parseInt(e.target.value))}
                     className="w-12 text-center"
                   />
-                  <Button onClick={() => handleRemoveItem(index)} className="ml-4">
+                  <Button onClick={() => handleRemoveItem(index)} className="ml-4 bg-agua">
                     Eliminar
                   </Button>
                 </div>
