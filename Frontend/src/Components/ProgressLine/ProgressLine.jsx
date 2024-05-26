@@ -6,11 +6,13 @@ import './ProgressLine.css';
 
 const ProgressLine = ({ step }) => {
   const steps = [
-    step >= 1 ? 'text-blue-800' : 'text-black',
-    step >= 2 ? 'text-blue-800' : 'text-black',
-    step >= 3 ? 'text-blue-800' : 'text-black',
-    step >= 4 ? 'text-blue-800' : 'text-black',
+    step >= 1 ? 'text-red-600' : 'text-black',
+    step >= 2 ? 'text-red-600' : 'text-black',
+    step >= 3 ? 'text-red-600' : 'text-black',
+    step >= 4 ? 'text-red-600' : 'text-black',
+
   ];
+
 
   const lineVariants = {
     initial: { width: 0 },

@@ -5,7 +5,8 @@ import MainCarousel from './MainCarousel';
 import ThumbnailCarousel from './ThumbnailCarousel';
 import { motion } from 'framer-motion';
 
-// const URI = 'http://backend.ftfjfagraqa2hwfs.eastus.azurecontainer.io:8000/api/allMovies';
+// const URI = 'http://backend.ftfjfagraqa2hwfs.eastus.azurecontainer.io:8000/api/allMovies'; const URI = '/api/allMovies';
+
 
 const URI = 'http://localhost:8000/api/allMovies';
 

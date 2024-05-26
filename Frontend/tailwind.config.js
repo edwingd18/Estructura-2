@@ -6,7 +6,7 @@ export default {
 ],theme:{
   extend: {
     colors: {
-      'agua': '#181725',
+      'agua': '#a31915',
       'icon': '#E5E5EB'
 
     },

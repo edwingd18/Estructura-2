@@ -1,6 +1,16 @@
 import { useState, useEffect, useRef } from "react";
 import { Sidebar as FlowbiteSidebar } from "flowbite-react";
 import { MdOutlineFastfood } from 'react-icons/md';
+import { BiSolidCameraMovie } from "react-icons/bi";
+import { FaShoppingCart } from "react-icons/fa";
+import { IoChatbox } from "react-icons/io5";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { FaUserLarge } from "react-icons/fa6";
+
+
+
+
+
 import {
   HiOutlineChatAlt,
   HiOutlineShoppingCart,
@@ -181,7 +191,7 @@ function Sidebar() {
       <FlowbiteSidebar aria-label="Menu de Cine" theme={customtema} className="Sidebar fixed top-0 w-[110px] h-full transition-[width_0.5s_ease_in_out] z-[199999]">
         <div className="flex items-center justify-start">
           <button className="hamburger text-white text-2xl p-6" onClick={() => handleButtonClick(toggleSidebar)}>
-            <HiOutlineMenu style={{ width: "30px", height: "30px" }}/>
+            <GiHamburgerMenu style={{ width: "30px", height: "30px" }}/>
           </button>
 
           {isOpen && (
@@ -194,7 +204,7 @@ function Sidebar() {
 
             {isAdmin && (
               <FlowbiteSidebar.Item href="allMovies" className="hover:text-black icon" onClick={() => handleButtonClick(() => {/* Tu lógica aquí */})}>
-                <HiOutlineFilm style={{ width: "30px", height: "30px" }}/>
+                <BiSolidCameraMovie style={{ width: "30px", height: "30px" }}/>
                 <span className="icon-label ml-10">Peliculas</span>
               </FlowbiteSidebar.Item>
             )}
@@ -207,24 +217,24 @@ function Sidebar() {
             {!isAdmin && (
               <>
                 <FlowbiteSidebar.Item href="/listMovies" className="hover:text-black icon" onClick={() => handleButtonClick(() => {/* Tu lógica aquí */})}>
-                  <HiOutlineFilm style={{ width: "30px", height: "30px" }}/>
+                  <BiSolidCameraMovie style={{ width: "30px", height: "30px" }}/>
                   <span className="icon-label ml-10">Peliculas</span>
                 </FlowbiteSidebar.Item>
-                <FlowbiteSidebar.Item href="#" className="hover:text-black icon" onClick={() => handleButtonClick(() => {/* Tu lógica aquí */})}>
-                  <HiOutlineShoppingCart style={{ width: "30px", height: "30px" }} />
+                <FlowbiteSidebar.Item href="/purchase-summary" className="hover:text-black icon" onClick={() => handleButtonClick(() => {/* Tu lógica aquí */})}>
+                  <FaShoppingCart style={{ width: "30px", height: "30px" }} />
                   <span className="icon-label ml-10">Carrito</span>
                 </FlowbiteSidebar.Item>
               </>
             )}
             <FlowbiteSidebar.Item href="/chat" className="hover:text-black icon" onClick={() => handleButtonClick(() => {/* Tu lógica aquí */})}>
-              <HiOutlineChatAlt style={{ width: "30px", height: "30px" }} />
+              <IoChatbox style={{ width: "30px", height: "30px" }} />
               <span className="icon-label ml-10">Chat</span>
             </FlowbiteSidebar.Item>
           </FlowbiteSidebar.ItemGroup>
         </FlowbiteSidebar.Items>
         <div className="flex items-center mb-4 w-full" style={{ paddingLeft: '25px', marginTop: "44vh" }}>
           <div className="icon-container">
-            <HiOutlineUser  className="text-white" style={{ width: "30px", height: "30px" }} />
+            <FaUserLarge  className="text-white" style={{ width: "30px", height: "30px" }} />
           </div>
           {isOpen && (
             <div>
