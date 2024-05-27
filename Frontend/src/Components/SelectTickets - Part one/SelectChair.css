@@ -6,13 +6,9 @@ body {
 }
 
 .contenedor-silla {
-    min-width: 830px;
     height: auto;
-    margin: 10px 10px;
-    display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
     box-shadow: 0 3px 13px 1px rgb(0, 0, 0, 9%);
 }
 
@@ -36,18 +32,18 @@ body {
 .contenedor-imagen-silla {
     display: block;
     width: auto;
-    margin-left: 20px;
+    margin-left: 60px;
     margin-right: 60px;
 }
 
 .imagen-silla {
-    height: 130px;
+    height: 180px;
     width: 200px;
 }
 
 .contenedor-informacion {
     display: flex;
-    width: 100%;
+    flex-direction: column;
     justify-content: space-between;
     background-color: #fff;
 }
@@ -55,20 +51,17 @@ body {
 .contenedor-informacion2 {
     width: 100%;
     display: flex;
+    
     align-items: center;
     justify-content: space-between;
     margin-right: 30px;
 }
 
 .precio-silla h2 {
-    font-size: 16px;
     font-weight: 500
 }
 
-.precio-silla h3 {
-    font-size: 14px;
-    font-weight: 500
-}
+
 
 .cantidad-sillas select {
     font-size: 12px;

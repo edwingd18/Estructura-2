@@ -44,22 +44,16 @@ html, body {
 }
 
 
-
-
-
-
 .contenedor-seleccionar {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    width: 100%;
 }
 
 .contenedor-fecha {
     display: flex;
     align-items: center;
-    justify-content: center;
     width: 100%;
     margin-bottom: 20px;
 }
@@ -72,6 +66,8 @@ html, body {
 }
 
 .buttonComprar {
+    
+    display: flex;
     width: 142px;
     height: 45px;
     background-color: #1C64F2;
