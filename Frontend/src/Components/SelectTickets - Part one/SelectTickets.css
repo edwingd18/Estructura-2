@@ -42,6 +42,20 @@ html, body {
 .icon-ticket-1 {
     color: #ee0e0e;
 }
+/* Contenedor del botón */
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  /* Botón siguiente */
+  .btn-Siguiente {
+    margin-top: 0; /* Ajustar el margen superior si es necesario */
+  }
+  
 
 
 .contenedor-seleccionar {

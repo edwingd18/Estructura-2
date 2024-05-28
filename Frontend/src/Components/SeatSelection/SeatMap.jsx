@@ -1,5 +1,4 @@
 import "./SeatMap.css";
-
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { Button } from "flowbite-react";
@@ -47,12 +46,11 @@ function SeatMap() {
 
   return (
     <div className="SeatMapWholeContainer">
-              <div className="contenedor-iconos">
-              <ProgressLine step={2} />
-        </div>
-      <div className="SeatMapContainer">
-
-
+      <div className="contenedor-iconos">
+        <ProgressLine step={2} />
+      </div>
+      <div className="SeatMapContainerxd">
+        <div className="SeatMapContainer">
         <div className="SeatMap">
           <div className="screen">
             <h1>Pantalla</h1>
@@ -76,22 +74,33 @@ function SeatMap() {
             ))}
           </div>
         </div>
-
-        <ConfirmSeats openModal={openModal} setOpenModal={setOpenModal} modalMessage={modalMessage} isError={isError} />
-
-        <Button className="bg-black border border-whiter btn-Siguiente" onClick={handleNextClick}>
-          Siguiente
-        </Button>
-
-        <h1 id="AvailableSeatsText">Disponibles</h1>
-        <div id="availableSeatMark"></div>
-        <h1 id="SpecialSeatsText">Discapacitados</h1>
-        <div id="SpecialSeatsMark"></div>
-        <h1 id="SelectedSeatsText">Seleccionadas</h1>
-        <div id="SelectedSeatsMark"></div>
-        <h1 id="OcuSeatsText">Ocupadas</h1>
-        <div id="OcuSeatsMark"></div>
+        <div className="seatTypes">
+          <div className="seatType">
+            <div className="seatMark available"></div>
+            <span>Disponibles</span>
+          </div>
+          <div className="seatType">
+            <div className="seatMark disabled"></div>
+            <span>Discapacitados</span>
+          </div>
+          <div className="seatType">
+            <div className="seatMark selected"></div>
+            <span>Seleccionadas</span>
+          </div>
+          <div className="seatType">
+            <div className="seatMark occupied"></div>
+            <span>Ocupadas</span>
+          </div>
+        </div>
+        </div>
+        <div className="buttonContainer">
+          <Button className="bg-black border border-whiter btn-Siguiente" onClick={handleNextClick}>
+            Siguiente
+          </Button>
+        </div>
       </div>
+      <ConfirmSeats openModal={openModal} setOpenModal={setOpenModal} modalMessage={modalMessage} isError={isError} />
+     
     </div>
   );
 }
