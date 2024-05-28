@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Carousel from "./Pages/Home/Carousel";
 import MovieInfo from "./Components/MovieInfo/MovieInfo";
@@ -11,7 +11,6 @@ import ResumenCompra from "./Components/ResumenCompra/Resumen";
 import MovieChat from "./Pages/Usuario/ChatUsuario/Chat";
 import withAuth from "./Pages/Login/Auth";
 import MovieListUser from "./Components/MovieListUser/MovieListUser";
-import axios from 'axios';
 
 const ProtectedSelectTickets = withAuth(SelectTickets);
 const ProtectedSeatMap = withAuth(SeatMap);
@@ -22,20 +21,7 @@ const ProtectedAdmin = withAuth(MovieList);
 const App = () => {
   const [cartItems, setCartItems] = useState([]);
 
-  const fetchCartItems = async () => {
-    try {
-      const response = await axios.get("http://localhost:8000/api/cart");
-      // const response = await axios.get("/api/cart");
 
-      setCartItems(response.data);
-    } catch (error) {
-      console.error("Error fetching cart items:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchCartItems();
-  }, []);
 
   const handleCartUpdate = (newCartItems) => {
     setCartItems(newCartItems);
