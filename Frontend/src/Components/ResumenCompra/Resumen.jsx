@@ -101,6 +101,13 @@ const ResumenCompra = () => {
   const createPreference = async () => {
     try {
       const { resumen } = state;
+
+      console.log("Enviando los siguientes datos:", {
+        title: resumen.movieName,
+        quantity: resumen.ticketQuantity,
+        total: resumen.total,
+      });
+
       const response = await axios.post("http://localhost:8000/api/payment/create_preference", {
         title: resumen.movieName,
         quantity: resumen.ticketQuantity,
