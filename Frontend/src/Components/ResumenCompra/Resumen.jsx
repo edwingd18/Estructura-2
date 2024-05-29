@@ -6,7 +6,9 @@ import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 import ProgressLine from '../ProgressLine/ProgressLine.jsx';
 import { useLocation } from 'react-router-dom';
 import './ResumenCompra.css';
-initMercadoPago('TEST-bf107dd8-2b1a-4fc1-a249-b816c7d45c2d', {
+import { InfoPayment } from '../Info Payment/InfoPaymen.jsx';
+
+initMercadoPago('TEST-10a245c7-62ee-4f1f-aaaf-44390a520d67', {
   locale: 'es-CO',
 });
 
@@ -18,8 +20,11 @@ const ticketPrices = {
 };
 
 const ResumenCompra = () => {
+  const [showModal, setShowModal] = useState(false);
   const location = useLocation();
+  const { from } = location.state || {};
   const { selectedCombos } = location.state || {};
+
 
   const [state, setState] = useState({
     preferenceId: null,
@@ -86,8 +91,12 @@ const ResumenCompra = () => {
         boletas: ticketPrice * ticketQuantity,
         total: total
       }
-    }));
-  }, [selectedCombos]);
+    }))
+    // Verifica si el usuario viene de Mercado Pago
+    if (from === 'Resumen') {
+      setShowModal(true);
+    }
+  }, [selectedCombos, from]);
 
   const createPreference = async () => {
     try {
@@ -99,6 +108,7 @@ const ResumenCompra = () => {
       });
 
       const { id } = response.data;
+
       return id;
 
     } catch (error) {
@@ -109,17 +119,16 @@ const ResumenCompra = () => {
   return (
     <>
       <div className="contenedor-select-comida">
-
         <div>
           <ProgressLine step={4} />
         </div>
         <Card className="flex flex-col  w-[1000px]">
           <div className="flex flex-col gap-4 p-4">
-          <div className="circle-container">
-          {[...Array(20)].map((_, index) => (
-            <div key={index} className="circle"></div>
-          ))}
-        </div>
+            <div className="circle-container">
+              {[...Array(20)].map((_, index) => (
+                <div key={index} className="circle"></div>
+              ))}
+            </div>
             <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">
               Cine Magic
             </h5>
@@ -167,6 +176,7 @@ const ResumenCompra = () => {
             </div>
           </div>
         </Card>
+        <InfoPayment showModal={showModal} toggleModal={() => setShowModal(!showModal)} />
       </div>
     </>
   );
