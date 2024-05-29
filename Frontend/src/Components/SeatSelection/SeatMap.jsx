@@ -59,7 +59,7 @@ function SeatMap() {
             {rows.map((row) => (
               Array.from({ length: columns }, (_, j) => {
                 const seatId = `${row}${j + 1}`;
-                const isDisabledSeat = row === 'A' && j < 6;
+                const isDisabledSeat = row === 'A' && j < 8;
                 return (
                   <div
                     key={seatId}
