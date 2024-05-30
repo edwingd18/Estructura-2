@@ -42,10 +42,20 @@ html, body {
 .icon-ticket-1 {
     color: #ee0e0e;
 }
-
-
-
-
+/* Contenedor del botón */
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  /* Botón siguiente */
+  .btn-Siguiente {
+    margin-top: 0; /* Ajustar el margen superior si es necesario */
+  }
+  
 
 
 .contenedor-seleccionar {
@@ -53,13 +63,11 @@ html, body {
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    width: 100%;
 }
 
 .contenedor-fecha {
     display: flex;
     align-items: center;
-    justify-content: center;
     width: 100%;
     margin-bottom: 20px;
 }
@@ -72,6 +80,8 @@ html, body {
 }
 
 .buttonComprar {
+    
+    display: flex;
     width: 142px;
     height: 45px;
     background-color: #1C64F2;

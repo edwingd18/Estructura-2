@@ -13,9 +13,9 @@ body {
 /* Contenedor principal */
 .SeatMapWholeContainer {
     display: flex;
-    flex-direction: column; /* Cambia a columna */
+    flex-direction: column;
     align-items: center;
-    justify-content: flex-start; /* Alinea al inicio */
+    justify-content: flex-start;
     min-height: 100vh;
 }
 
@@ -29,8 +29,20 @@ body {
 
 /* Contenedor principal del mapa de asientos */
 .SeatMapContainer {
+    display: flex;
+    margin: 0px 0px 0px 200px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #181725;
+    border-radius: 25px;
+    padding: 20px;
+    gap: 20px;
+    width: 1000px;
     height: 630px;
-    width: 1600px;
+    position: relative;
+}
+.SeatMapContainerxd {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -38,42 +50,28 @@ body {
     background-color: #181725;
     border-radius: 25px;
     box-shadow: 0 3px 13px 1px rgba(0, 0, 0, 0.09);
+    padding: 20px;
+    gap: 20px;
+    width: 1600px;
+    height: 630px;
+    position: relative;
 }
 
-/* Iconos */
-.icon-ticket,
-.icon-chair,
-.icon-popcorn,
-.icon-cash {
-    width: 25px;
-    height: auto;
-    margin-right: 10px;
-}
-
-.icon-ticket, .icon-chair {
-    color: #1C64F2;
-}
-
-.icon-popcorn, .icon-cash {
-    color: #fff;
-}
 
 /* Mapa de asientos */
 .SeatMap {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    width: 80%;
-    height: 25vw;
     background-color: #474747;
     border-radius: 25px;
-    box-shadow: 0 3px 13px 1px rgb(0, 0, 0, 9%);
-    margin-bottom: 20px; /* Añadido para separar de los botones y textos de estado */
+    box-shadow: 0 3px 13px 1px rgba(0, 0, 0, 0.09);
+    padding: 20px;
 }
 
 /* Pantalla */
 .screen {
-    width: 30%;
+    width: 80%;
     height: 3vw;
     background-color: #000000;
     display: flex;
@@ -82,13 +80,11 @@ body {
     align-items: center;
     font-size: 20px;
     color: white;
-    position: absolute;
-    top: 11vw;
+    margin-bottom: 20px;
 }
 
 /* Grilla de asientos */
 .seats {
-    margin-top: 50px;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     gap: 10px;
@@ -99,7 +95,7 @@ body {
     width: 1.5vw;
     height: 1.5vw;
     background-color: white;
-    border-radius: 20px;
+    border-radius: 50%;
     transition: .5s;
     display: flex;
     justify-content: center;
@@ -122,72 +118,51 @@ body {
     background-color: #31c50b;
 }
 
-/* Marcadores y textos */
-#AvailableSeatsText,
-#SpecialSeatsText,
-#SelectedSeatsText,
-#OcuSeatsText {
-    position: absolute;
+/* Tipos de asientos */
+.seatTypes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.seatType {
+    display: flex;
+    align-items: center;
     color: white;
-    font-size: .7vw;
+    gap: 10px;
 }
 
-#AvailableSeatsText {
-    top: 17.5vw;
-    left: 30vw;
-}
-
-#availableSeatMark {
-    position: absolute;
+.seatMark {
     width: 1.5vw;
     height: 1.5vw;
+    border-radius: 50%;
+}
+
+.seatMark.available {
     background-color: white;
-    border-radius: 20px;
-    top: 19.5vw;
-    left: 30vw;
 }
 
-#SpecialSeatsText {
-    top: 21vw;
-    left: 30vw;
+.seatMark.disabled {
+    background-color: #0857ff;
 }
 
-#SpecialSeatsMark {
-    position: absolute;
-    width: 1.5vw;
-    height: 1.5vw;
-    background-color: rgb(238, 255, 0);
-    border-radius: 20px;
-    top: 23vw;
-    left: 30vw;
+.seatMark.selected {
+    background-color: green;
 }
 
-#SelectedSeatsText {
-    top: 24.5vw;
-    left: 30vw;
+.seatMark.occupied {
+    background-color: red;
 }
 
-#SelectedSeatsMark {
-    position: absolute;
-    width: 1.5vw;
-    height: 1.5vw;
-    background-color: #31c50b;
-    border-radius: 20px;
-    top: 26.5vw;
-    left: 30vw;
+/* Contenedor del botón */
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: auto;
 }
 
-#OcuSeatsText {
-    top: 28vw;
-    left: 30vw;
-}
-
-#OcuSeatsMark {
-    position: absolute;
-    width: 1.5vw;
-    height: 1.5vw;
-    background-color: #ff0000;
-    border-radius: 20px;
-    top: 30vw;
-    left: 30vw;
+/* Botón siguiente */
+.btn-Siguiente {
+    margin-top: 20px; /* Puedes ajustar este valor según sea necesario */
 }
