@@ -11,6 +11,8 @@ import ResumenCompra from "./Components/ResumenCompra/Resumen";
 import MovieChat from "./Pages/Usuario/ChatUsuario/Chat";
 import withAuth from "./Pages/Login/Auth";
 import MovieListUser from "./Components/MovieListUser/MovieListUser";
+import { InfoPayment } from "./Components/Info Payment/InfoPaymen";
+import { CreditCard } from "./Components/paymentPage/CreditCart";
 
 const ProtectedSelectTickets = withAuth(SelectTickets);
 const ProtectedSeatMap = withAuth(SeatMap);
@@ -18,6 +20,7 @@ const ProtectedFood = withAuth(Food);
 const ProtectedResumen = withAuth(ResumenCompra);
 const ProtectedAdmin = withAuth(MovieList);
 const ProtectedChat = withAuth(MovieChat);
+const ProtectedCardPage = withAuth(CreditCard)
 const ProtectedInfoPayment = withAuth(InfoPayment)
 
 const App = () => {
@@ -46,6 +49,7 @@ const App = () => {
         path="/shopping-cart"
         element={<ResumenCompra items={cartItems} onUpdate={handleCartUpdate} />}
       />
+      <Route path="/paymant" element={<ProtectedCardPage />} />
       <Route path="/infoPage" element={<ProtectedInfoPayment />} />
     </Routes>
   );
