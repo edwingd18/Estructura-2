@@ -18,7 +18,6 @@ const ProtectedFood = withAuth(Food);
 const ProtectedResumen = withAuth(ResumenCompra);
 const ProtectedAdmin = withAuth(MovieList);
 const ProtectedChat = withAuth(MovieChat);
-const ProtectedInfoPayment = withAuth(InfoPayment)
 
 const App = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -46,7 +45,6 @@ const App = () => {
         path="/shopping-cart"
         element={<ResumenCompra items={cartItems} onUpdate={handleCartUpdate} />}
       />
-      <Route path="/infoPage" element={<ProtectedInfoPayment />} />
     </Routes>
   );
 };
