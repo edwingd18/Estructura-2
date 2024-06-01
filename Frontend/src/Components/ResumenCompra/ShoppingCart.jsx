@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Card, Button } from 'flowbite-react';
 import axios from 'axios';
-import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
+import { initMercadoPago } from '@mercadopago/sdk-react';
 import { useLocation } from 'react-router-dom';
 import ProgressLine from '../ProgressLine/ProgressLine.jsx';
 import { Spinner } from "flowbite-react";
+import { useNavigate } from 'react-router-dom';
 
 initMercadoPago('TEST-bf107dd8-2b1a-4fc1-a249-b816c7d45c2d', {
  locale: 'es-CO',
@@ -34,8 +35,13 @@ const ShoppingCart = () => {
      total: ''
    }
  });
-
+ const navigate = useNavigate();
  const [cartItems, setCartItems] = useState([]);
+
+
+ const handleBuy = async () => {
+  navigate('/paymant');
+};
 
  const createPreference = async (total) => {
    try {
@@ -189,7 +195,7 @@ const ShoppingCart = () => {
          </div>
          <div className="flex flex-col justify-center items-center pt-4">
            {state.preferenceId ? (
-             <Wallet initialization={{ preferenceId: state.preferenceId }} />
+             <Button onClick={handleBuy} className='btn-pagar'>Pagar</Button>
            ) : (
              <Spinner aria-label="Default status example" />
            )}
