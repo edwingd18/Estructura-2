@@ -6,6 +6,8 @@ import userRouter from "./routes/user.routes.js"
 import paymentRouter from './routes/payment.routes.js'
 import { createServer } from 'http';
 import { Server } from 'socket.io';
+import transactionRouter from './routes/transaction.routes.js'
+
 
 const app = express()
 const server = createServer(app);
@@ -40,13 +42,13 @@ io.on('connection', (socket) => {
 app.use('/api', MovieRoutes)
 app.use('/api/user', userRouter)
 app.use('/api/payment', paymentRouter)
-
+app.use('/api/transaction', transactionRouter)
 
 // // Ruta de bienvenida
 // app.listen(process.env.PORT || 8000, () => {
 //   console.log('Server UP running in http://localhost:', process.env.PORT || 8000);
 // });
- 
+
 // Ruta de bienvenida
 server.listen(process.env.PORT || 8000, () => {
   console.log('Server UP running in http://localhost:', process.env.PORT || 8000)

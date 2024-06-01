@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Carousel from "./Pages/Home/Carousel";
 import MovieInfo from "./Components/MovieInfo/MovieInfo";
@@ -8,32 +8,24 @@ import SeatMap from "./Components/SeatSelection/SeatMap";
 import MovieList from "./Pages/Administrador/Movies/MovieList";
 import ComboList from "./Pages/Administrador/Combos/ComboList";
 import ResumenCompra from "./Components/ResumenCompra/Resumen";
+import ShoppingCart from "./Components/ResumenCompra/ShoppingCart";
 import MovieChat from "./Pages/Usuario/ChatUsuario/Chat";
 import withAuth from "./Pages/Login/Auth";
 import MovieListUser from "./Components/MovieListUser/MovieListUser";
-import axios from 'axios';
+import { InfoPayment } from "./Components/Info Payment/InfoPaymen";
+import { CreditCard } from "./Components/paymentPage/CreditCart";
 
 const ProtectedSelectTickets = withAuth(SelectTickets);
 const ProtectedSeatMap = withAuth(SeatMap);
 const ProtectedFood = withAuth(Food);
-const ProtectedResumen = withAuth(ResumenCompra);
+const ProtectedResumen = withAuth(ShoppingCart);
 const ProtectedAdmin = withAuth(MovieList);
+const ProtectedChat = withAuth(MovieChat);
+const ProtectedCardPage = withAuth(CreditCard)
+const ProtectedInfoPayment = withAuth(InfoPayment)
 
 const App = () => {
   const [cartItems, setCartItems] = useState([]);
-
-  const fetchCartItems = async () => {
-    try {
-      const response = await axios.get("http://localhost:8000/api/cart");
-      setCartItems(response.data);
-    } catch (error) {
-      console.error("Error fetching cart items:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchCartItems();
-  }, []);
 
   const handleCartUpdate = (newCartItems) => {
     setCartItems(newCartItems);
@@ -46,20 +38,24 @@ const App = () => {
       <Route path="/selectTickets" element={<ProtectedSelectTickets />} />
       <Route path="/selectSeat" element={<ProtectedSeatMap />} />
       <Route path="/selectFood" element={<ProtectedFood />} />
-      <Route 
-        path="/purchase-summary" 
-        element={<ProtectedResumen selectedCombos={cartItems} />} 
+      <Route
+        path="/purchase-summary"
+        element={<ProtectedResumen selectedCombos={cartItems} />}
       />
       <Route path="/allmovies" element={<ProtectedAdmin />} />
       <Route path="/allcombos" element={<ComboList />} />
-      <Route path="/chat" element={<MovieChat />} />
+      <Route path="/chat" element={<ProtectedChat />} />
       <Route path="/listMovies" element={<MovieListUser />} />
-      <Route 
-        path="/shopping-cart" 
-        element={<ResumenCompra items={cartItems} onUpdate={handleCartUpdate} />} 
+      <Route
+        path="/shopping-cart"
+        element={<ShoppingCart items={cartItems} onUpdate={handleCartUpdate} />}
       />
+      <Route path="/paymant" element={<ProtectedCardPage />} />
+      <Route path="/infoPage" element={<ProtectedInfoPayment />} />
     </Routes>
   );
 };
+
+
 
 export default App;

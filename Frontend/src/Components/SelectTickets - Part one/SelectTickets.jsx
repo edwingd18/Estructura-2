@@ -64,12 +64,14 @@ function SelectTickets() {
             <div className="contenedor-iconos">
                 <ProgressLine step={1} />
             </div>
-            <div className="contenedor-tickets">
-                <div className="contenedor-seleccionar">
-                    <div className="contenedor-fecha">
-                        <Datepicker className='datepicker' minDate={today} maxDate={nextWeek} />
+            <div className="contenedor-tickets ">
+                <div className="contenedor-seleccionar class">
+                    <div className="contenedor-fecha ">
+                        <Datepicker className='datepicker object-right' minDate={today} maxDate={nextWeek} />
                     </div>
                     <div className="contenedor-sillas">
+
+                        <div className='flex flex-row'>
                         <SelectChair
                             nombre="SILLA GENERAL"
                             precio='13,350'
@@ -84,8 +86,9 @@ function SelectTickets() {
                             imagen='preferencial'
                             setSelected={setPreferencialSelected}
                         />
+                        </div>
                         <ConfirmTickets openModal={openModal} setOpenModal={setOpenModal} modalMessage={modalMessage} handleConfirm={handleConfirm} isError={isError} />
-                        <Button className="bg-black border border-whiter buttonComprar" onClick={handleContinue}>
+                        <Button className="bg-black border border-whiter object-right buttonComprar" onClick={handleContinue}>
                             <HiShoppingCart className="mr-2 h-5 w-5" />
                             Siguiente
                         </Button>
