@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import './Team.css';
 import carlos from './carlos.png';
 import leon from './Leon.png';
+import cristian from './Cristian1.png';
 
 const members = [
     {
@@ -12,7 +13,7 @@ const members = [
     {
         name: 'Cristian Camilo Domínguez Gutiérrez',
         role: 'Backend Trainer',
-        photo: 'ruta_de_la_foto_2',
+        photo: cristian,
     },
     {
         name: 'Carlos Alzate',
