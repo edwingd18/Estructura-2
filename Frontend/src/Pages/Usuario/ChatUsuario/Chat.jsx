@@ -32,10 +32,10 @@ const MovieChat = () => {
 
   return (
     <div className="flex items-center justify-center h-screen">
-      <div className="bg-white rounded-lg shadow-lg p-4 h-[700px] w-[1000px] mx-4 flex flex-col">
+      <div className="bg-white rounded-lg shadow-lg p-4 h-[600px] w-[1000px] mx-4 flex flex-col">
         <div className="flex-1 flex flex-col justify-between">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold">Chat de Cine</h2>
+            <h2 className="text-lg font-semibold">Chat</h2>
             <div className="flex items-center">
               <img src="https://icons.veryicon.com/png/o/miscellaneous/standard/avatar-15.png" alt="Avatar" className="w-8 h-8 rounded-full mr-2" />
               <span>Administrador</span>

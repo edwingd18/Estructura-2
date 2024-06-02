@@ -9,10 +9,7 @@ const chatData = [
   { id: 5, name: 'Chat 2' },
   { id: 6, name: 'Chat 3' },
   { id: 7, name: 'Chat 1' },
-  { id: 8, name: 'Chat 2' },
-  { id: 9, name: 'Chat 3' },
-  { id: 10, name: 'Chat 1' },
-  { id: 11, name: 'Chat 2' },
+
 ];
 
 const ChatList = () => {
@@ -56,7 +53,7 @@ const MovieChat = () => {
         <div className="w-64 mr-4">
           <ChatList />
         </div>
-        <div className="bg-white rounded-lg shadow-lg p-4 h-[700px] w-full flex flex-col">
+        <div className="bg-white rounded-lg shadow-lg p-4 h-[600px] w-[1000px] flex flex-col overflow-y-auto">
           <div className="flex-1 flex flex-col justify-between">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-semibold">Chat de Cine</h2>
