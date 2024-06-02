@@ -24,7 +24,7 @@ body {
 
 .contenedor-comida {
     width: 1020px;
-    height: 700px;
+    height: 600px;
     min-height: 630px;
     display: flex;
     flex-direction: column;

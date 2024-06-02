@@ -55,6 +55,12 @@ const Carousel = () => {
           handleMovieClick={handleMovieClick}
         />
       </div>
+
+      <div className='bg-zinc-800 w-full h-[200px] opacity-50 hover:opacity-100 transition-all'>
+        <h1>About</h1>
+<h1 className='ml-[150px] text-white w-60 text-2xl'>Sobre nosotros</h1>
+<p className='text-white ml-[150px] normal-case text-wrap'>Somos un grupo de estudiantes de la universidad Autonoma de Occidente, nos dedicamos durante todos este semestre para poder sacar este proyecto adelante, si nos quieren conocer de <a  className ="normal-case text-sky-400" href="" target="_blank"> Click Aqui</a> .</p>
+</div>
     </motion.div>
   );
 };
