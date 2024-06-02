@@ -92,10 +92,10 @@ function Food() {
                         ) : (
                             <Swiper
                                 spaceBetween={20}
-                                slidesPerView={3.5}
+                                slidesPerView={2.5}
                                 centeredSlides={false}
                                 autoplay={{ delay: 2500, disableOnInteraction: false }}
-                                style={{ width: '1300px', height: '487px' }}
+                                style={{ width: '900px', height: '487px' }}
                             >
                                 {combos.map((combo, index) => (
                                     <SwiperSlide key={index}>

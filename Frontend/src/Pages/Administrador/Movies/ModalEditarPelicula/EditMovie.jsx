@@ -68,7 +68,7 @@ const EditMovie = ({ movieId }) => {
         </Button>
         <Modal
           show={showModal}
-          size="7xl"
+          size="5xl"
           onClose={() => setShowModal(false)}
           className="fixed inset-0 z-50 overflow-y-auto"
         >

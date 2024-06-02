@@ -57,7 +57,7 @@ const ComboList = ({ combos, handleComboClick }) => {
                   }}
                   className="combo-image shadow-md opacity-100 rounded-md group-hover:opacity-50 transition-opacity w-[400px] duration-300 ease-linear"
                 />
-                <div className='absolute flex flex-col top-[250px] left-[325px] items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
+                <div className='absolute flex flex-col top-[160px] left-[235px] items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
                   <div className='mb-2'>
                     <EditCombo comboId={combo._id} />
                   </div>

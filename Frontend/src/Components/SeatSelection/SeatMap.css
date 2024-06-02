@@ -38,7 +38,6 @@ body {
     border-radius: 25px;
     padding: 20px;
     gap: 20px;
-    width: 1000px;
     height: 630px;
     position: relative;
 }
@@ -52,7 +51,7 @@ body {
     box-shadow: 0 3px 13px 1px rgba(0, 0, 0, 0.09);
     padding: 20px;
     gap: 20px;
-    width: 1600px;
+    width: 1020px;
     height: 630px;
     position: relative;
 }

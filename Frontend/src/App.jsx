@@ -9,7 +9,7 @@ import MovieList from "./Pages/Administrador/Movies/MovieList";
 import ComboList from "./Pages/Administrador/Combos/ComboList";
 import ResumenCompra from "./Components/ResumenCompra/Resumen";
 import ShoppingCart from "./Components/ResumenCompra/ShoppingCart";
-import MovieChat from "./Pages/Usuario/ChatUsuario/Chat";
+import MovieChat from "./Pages/Administrador/ChatAdministrador/Chat";
 import withAuth from "./Pages/Login/Auth";
 import MovieListUser from "./Components/MovieListUser/MovieListUser";
 import { InfoPayment } from "./Components/Info Payment/InfoPaymen";
