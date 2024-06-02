@@ -21,7 +21,7 @@ const ProgressLine = ({ step }) => {
 
   return (
     
-    <div className="contenedor-iconos flex items-center content-center bottom-[20px] mb-5 mt-14 bg-white w-[1020px] h-[30px] justify-center rounded-xl">
+    <div className="contenedor-iconos flex items-center content-center bottom-[20px] mb-5 mt-5 bg-white w-[1020px] h-[30px] justify-center rounded-xl">
       <HiOutlineTicket className={`icon-ticket-1 ${steps[0]}`} />
       <motion.div
         className={`linea-separadora ${steps[1]}`}

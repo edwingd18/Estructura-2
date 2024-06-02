@@ -3,6 +3,7 @@ import './Food.css';
 import { motion } from 'framer-motion';
 import ProgressLine from '../ProgressLine/ProgressLine.jsx';
 import Combos from './Combos';
+import { Button } from 'flowbite-react';
 import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import ConfirmFood from '../Modals/ConfirmFood';
@@ -92,10 +93,10 @@ function Food() {
                         ) : (
                             <Swiper
                                 spaceBetween={20}
-                                slidesPerView={2.5}
+                                slidesPerView={3.2}
                                 centeredSlides={false}
                                 autoplay={{ delay: 2500, disableOnInteraction: false }}
-                                style={{ width: '900px', height: '487px' }}
+                                style={{ width: '900px', height: '380px' }}
                             >
                                 {combos.map((combo, index) => (
                                     <SwiperSlide key={index}>
@@ -109,9 +110,9 @@ function Food() {
                                     </SwiperSlide>
                                 ))}
                             </Swiper>
+
                         )}
-                    </motion.div>
-                    <motion.div
+                        <motion.div
                         className="buttons-food"
                         initial={{ opacity: 0, scale: 0.5 }}
                         animate={{ opacity: 1, scale: 1 }}
@@ -121,26 +122,31 @@ function Food() {
                             ease: [0, 0.71, 0.2, 1.01]
                         }}
                     >
-                        <motion.button
-                            className="sm:text-sm sm:flex-col sm:h-9 text-white md:text-xs md:h-auto md:py-1.5 lg:text-sm lg:py-2 2xl:text-lg 2xl:h-11 2xl:py-2  items-center bg-red-800 border rounded-full border-white h-11 w-91  hover:bg-white hover:text-black hover:border-black py-2 px-4 buttonComidaSiguiente"
+                        <Button
+                            className=" buttonComidaSiguiente"
+                            color="failure" pill
                             onClick={handleClearSelection}
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
                             transition={{ duration: 0.2 }}
                         >
                             Borrar
-                        </motion.button>
-                        <motion.button
-                            className="buttonComidaSiguiente sm:text-sm sm:flex-col sm:h-9 text-white md:text-xs md:h-auto md:py-1.5 lg:text-sm lg:py-2 2xl:text-lg 2xl:h-11 2xl:py-2  items-center bg-blue-800 border rounded-full border-whiter  h-11 w-91  hover:bg-white hover:text-black hover:border-black py-2 px-4"
+                        </Button>
+                        <Button
+                            className="buttonComidaSiguiente "
+                            
                             onClick={handleNextClick}
+                            color="blue" pill
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
                             transition={{ duration: 0.2 }}
                         >
                             Siguiente
-                        </motion.button>
+                        </Button>
                     </motion.div>
                     <ConfirmFood openModal={openModal} setOpenModal={setOpenModal} modalMessage={modalMessage} handleConfirm={handleConfirm} isError={isError} />
+                    </motion.div>
+
                 </div>
             </div>
         </div>

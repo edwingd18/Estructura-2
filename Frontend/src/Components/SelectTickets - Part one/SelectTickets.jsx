@@ -88,7 +88,10 @@ function SelectTickets() {
                         />
                         </div>
                         <ConfirmTickets openModal={openModal} setOpenModal={setOpenModal} modalMessage={modalMessage} handleConfirm={handleConfirm} isError={isError} />
-                        <Button className="bg-black border border-whiter object-right buttonComprar" onClick={handleContinue}>
+                        <Button
+                        color="blue" pill
+                         className="mt-4" onClick={handleContinue}
+                        >
                             <HiShoppingCart className="mr-2 h-5 w-5" />
                             Siguiente
                         </Button>

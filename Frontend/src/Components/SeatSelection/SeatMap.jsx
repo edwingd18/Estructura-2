@@ -94,7 +94,8 @@ function SeatMap() {
         </div>
         </div>
         <div className="buttonContainer">
-          <Button className="bg-black border border-whiter btn-Siguiente" onClick={handleNextClick}>
+          <Button className=" btn-Siguiente" onClick={handleNextClick}
+          color={"blue"} pill>
             Siguiente
           </Button>
         </div>

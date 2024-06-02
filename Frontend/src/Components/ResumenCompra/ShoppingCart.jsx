@@ -180,7 +180,10 @@ const ShoppingCart = () => {
                    onChange={(e) => handleQuantityChange(index, parseInt(e.target.value))}
                    className="w-12 text-center"
                  />
-                 <Button onClick={() => handleRemoveItem(index)} className="ml-4 bg-agua">
+                 <Button onClick={() => handleRemoveItem(index)}
+                 color="failure"
+                 pill
+                  className="ml-4 ">
                    Eliminar
                  </Button>
                </div>
@@ -195,7 +198,9 @@ const ShoppingCart = () => {
          </div>
          <div className="flex flex-col justify-center items-center pt-4">
            {state.preferenceId ? (
-             <Button onClick={handleBuy} className='btn-pagar'>Pagar</Button>
+             <Button onClick={handleBuy} 
+             color="blue" pill
+             className='btn-pagar'>Pagar</Button>
            ) : (
              <Spinner aria-label="Default status example" />
            )}

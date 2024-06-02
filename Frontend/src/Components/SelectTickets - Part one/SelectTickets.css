@@ -17,7 +17,7 @@ html, body {
 }
 
 .contenedor-tickets {
-    height: 630px;
+    height: 500px;
     width: 1020px;
     display: flex;
     flex-direction: column;
@@ -94,7 +94,3 @@ html, body {
     transition: all 0.3s;
 }
 
-.buttonComprar:hover {
-    background-color: #fdfdfd;
-    color: #000;
-}
