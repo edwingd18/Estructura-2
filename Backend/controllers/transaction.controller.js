@@ -15,14 +15,3 @@ export async function createTransaction(req, res) {
         res.status(500).json({ message: "Internal server error" });
     }
 }
-
-export async function getReservedSeats(req, res) {
-    try {
-        const transactions = await Transaction.find();
-        const reservedSeats = transactions.flatMap(transaction => transaction.selectedSeats);
-        res.status(200).json(reservedSeats);
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ message: "Internal server error" });
-    }
-}

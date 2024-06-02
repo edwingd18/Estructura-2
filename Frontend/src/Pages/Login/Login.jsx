@@ -151,24 +151,10 @@ export function ModalLogin({ showModal, toggleModal, context }) {
     }
   };
 
-  const handleSuccess = (response) => {
-    const token = response.credential;
-    localStorage.setItem('jwt', token); // Changed 'token' to 'jwt' to match your regular login
-    setShowAlert(true);
-    setAlertMessage('Inicio de sesión exitoso.');
-    setAlertType('success');
-  
-    setTimeout(() => {
-      setShowAlert(false);
-      window.location.reload();
-    }, 1000);
-  
-    if (context === 'sidebar') {
-      setIsLoggedIn('sidebar');
-    } else if (context === 'tickets') {
-      setIsLoggedIn('ticket');
-    }
-  };
+  async function handleSuccess(response) {
+    console.log("Login Successful:", response);
+    setIsLoggedIn(true);
+  }
 
   function handleError(error) {
     console.error("Error al iniciar sesión con Google: ", error);
