@@ -11,7 +11,7 @@ initMercadoPago('TEST-bf107dd8-2b1a-4fc1-a249-b816c7d45c2d', {
  locale: 'es-CO',
 });
 
-const getLocalStorageItem = (key) => window.localStorage.getItem(key).replace(/"/g, '').trim();
+const getLocalStorageItem = (key) => window.localStorage.getItem(key)?.replace(/"/g, '')?.trim();
 
 const ticketPrices = {
  general: 13550,
@@ -93,7 +93,7 @@ const ShoppingCart = () => {
    }
 
    const total = (ticketPrice * ticketQuantity) + foodDetails.reduce((acc, item) => acc + item.price * item.quantity, 0);
-
+localStorage.setItem("total", total)
    const updateStateAndPreference = async () => {
      const preferenceId = await createPreference(total);
      setState(prevState => ({

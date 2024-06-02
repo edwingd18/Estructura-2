@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import * as jwtDecode from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
 import { Alert } from 'flowbite-react';
 
 function withAuth(Component) {
@@ -12,7 +12,7 @@ function withAuth(Component) {
     useEffect(() => {
       const token = localStorage.getItem('jwt');
       if (!token) {
-        console.log('No has iniciado sesión. Por favor, inicia sesión.');
+        alert('No has iniciado sesión. Por favor, inicia sesión.');
         setNoToken(true); // Si no hay token, establece noToken a true
         return;
       }

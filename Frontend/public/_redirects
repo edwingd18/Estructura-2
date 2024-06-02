@@ -1,2 +1,2 @@
-/api/* http://backend.ftfjfagraqa2hwfs.eastus.azurecontainer.io:8000/api/:splat 200
+/api/* http://backend.emaqe8cthgeshhdk.eastus.azurecontainer.io:8000:splat 200
 /* /index.html 200

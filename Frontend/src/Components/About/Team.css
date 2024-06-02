@@ -1,0 +1,41 @@
+.team-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    background-color: #181725;
+    padding: 40px;
+    overflow-y: auto; /* Habilitar scroll vertical si es necesario */
+}
+
+.team-member {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    height: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(0); /* Asegurar que el elemento comience en su posición inicial */
+}
+
+.member-photo {
+    margin-left: 60px;
+    border-radius: 50%;
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+h3 {
+    margin: 10px 0 5px;
+    font-size: 24px;
+    color: #333;
+}
+
+p {
+    margin: 0;
+    font-size: 16px;
+    color: #666;
+}
