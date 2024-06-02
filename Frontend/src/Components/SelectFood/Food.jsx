@@ -92,10 +92,10 @@ function Food() {
                         ) : (
                             <Swiper
                                 spaceBetween={20}
-                                slidesPerView={3.5}
+                                slidesPerView={2.5}
                                 centeredSlides={false}
                                 autoplay={{ delay: 2500, disableOnInteraction: false }}
-                                style={{ width: '1300px', height: '487px' }}
+                                style={{ width: '900px', height: '487px' }}
                             >
                                 {combos.map((combo, index) => (
                                     <SwiperSlide key={index}>
@@ -110,8 +110,7 @@ function Food() {
                                 ))}
                             </Swiper>
                         )}
-                    </motion.div>
-                    <motion.div
+                         <motion.div
                         className="buttons-food"
                         initial={{ opacity: 0, scale: 0.5 }}
                         animate={{ opacity: 1, scale: 1 }}
@@ -126,7 +125,7 @@ function Food() {
                             onClick={handleClearSelection}
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
-                            transition={{ duration: 0.2 }}
+                            transition={{ duration: 0.1 }}
                         >
                             Borrar
                         </motion.button>
@@ -135,12 +134,14 @@ function Food() {
                             onClick={handleNextClick}
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
-                            transition={{ duration: 0.2 }}
+                            transition={{ duration: 0.1 }}
                         >
                             Siguiente
                         </motion.button>
                     </motion.div>
                     <ConfirmFood openModal={openModal} setOpenModal={setOpenModal} modalMessage={modalMessage} handleConfirm={handleConfirm} isError={isError} />
+                    </motion.div>
+                   
                 </div>
             </div>
         </div>

@@ -23,8 +23,8 @@ body {
 
 
 .contenedor-comida {
-    width: 1400px;
-    height: 700px;
+    width: 1020px;
+    height: 600px;
     min-height: 630px;
     display: flex;
     flex-direction: column;

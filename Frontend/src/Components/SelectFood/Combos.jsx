@@ -9,10 +9,12 @@ function Combos({ nombre,img, descripcion, precio, seleccionado }) {
       onClick={() => seleccionado(nombre, descripcion, precio)}
     >
       <div className="contenedor-informacion-imagen">
-        <img src={img} alt="" />
-        <h2>{nombre}</h2>
-        <p>{descripcion}</p>
-        <h3>${precio}</h3>
+        <img className=' rounded-t-[15px] ' src={img} alt="" />
+        <div className='ml-4'>
+        <h2 className='text-[17px] font-semibold mt-3'>{nombre}</h2>
+        <p className='text-[14px] line-clamp-2 text-gray-500'>{descripcion}</p>
+        <h3 className='text-[17px] font-semibold mb-2 mt-4'>${precio}</h3>
+        </div>
       </div>
     </div>
   );

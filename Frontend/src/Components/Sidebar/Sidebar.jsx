@@ -10,14 +10,6 @@ import { FaUserLarge } from "react-icons/fa6";
 
 
 
-
-import {
-  HiOutlineChatAlt,
-  HiOutlineShoppingCart,
-  HiOutlineUser,
-  HiOutlineFilm,
-  HiOutlineMenu,
-} from "react-icons/hi";
 import { Link } from "react-router-dom";
 import ModalLogin from "../../Pages/Login/Login";
 import "./Sidebar.css";
