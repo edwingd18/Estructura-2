@@ -26,6 +26,7 @@ function MovieInfo() {
         const selectedMovie = response.data.find((m) => m._id === id);
         if (selectedMovie) {
           setMovie(selectedMovie);
+          
           localStorage.setItem('movieId', JSON.stringify(selectedMovie._id));
           localStorage.setItem('movieName', JSON.stringify(selectedMovie.title));
         } else {

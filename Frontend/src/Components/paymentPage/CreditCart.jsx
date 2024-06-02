@@ -1,93 +1,81 @@
 import "./CreditCard.css";
 import cards from "./images/card_img.png";
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
-
-export const CreditCard = () => {
-  const [name, setName] = useState("Juan Miguel");
-  const [emailUser, setEmailUser] = useState(localStorage.getItem("email"));
-  const [phone, setPhone] = useState("3154115206");
-  const [city, setCity] = useState("Santiago de Cali");
-  const [state, setState] = useState("Valle del Cauca");
-  const [postalCode, setPostalCode] = useState("713005");
-  const [cardHolder, setCardHolder] = useState("Juan Miguel");
-  const [cardNumber, setCardNumber] = useState("1111222233334444");
-  const [month, setMonth] = useState("30");
-  const [year, setYear] = useState("30");
-  const [cvv, setCvv] = useState("123");
-
-  const getLocalStorageItem = (key) =>
-    window.localStorage.getItem(key).replace(/"/g, "").trim();
-
-  const date = getLocalStorageItem("date");
-  const movieName = getLocalStorageItem("movieName");
-  const selectedSeats = JSON.parse(
-    window.localStorage.getItem("selectedSeats")
-  );
-  const ticketType = getLocalStorageItem("ticketType");
-  const movieDate = new Date(date);
-  const ticketQuantity = Number(localStorage.getItem("ticketQuantity"));
 
 
-  const ticketPrices = {
-    general: 13550,
-    preferencial: 20000,
-  };
+  export const CreditCard = () => {
+    const [name, setName] = useState("Juan Miguel");
+    const [emailUser, setEmailUser] = useState(localStorage.getItem("email"));
+    const [phone, setPhone] = useState("3154115206");
+    const [city, setCity] = useState("Santiago de Cali");
+    const [state, setState] = useState("Valle del Cauca");
+    const [postalCode, setPostalCode] = useState("713005");
+    const [cardHolder, setCardHolder] = useState("Juan Miguel");
+    const [cardNumber, setCardNumber] = useState("1111222233334444");
+    const [month, setMonth] = useState("30");
+    const [year, setYear] = useState("30");
+    const [cvv, setCvv] = useState("123");
+  
+    const getLocalStorageItem = (key) =>
+      window.localStorage.getItem(key)?.replace(/"/g, "")?.trim();
+  
+    const date = getLocalStorageItem("date");
+    const movieName = getLocalStorageItem("movieName");
+    const selectedSeats = JSON.parse(window.localStorage.getItem("selectedSeats"));
+    const ticketType = getLocalStorageItem("ticketType");
+    const movieDate = new Date(date);
+    const ticketQuantity = Number(localStorage.getItem("ticketQuantity"));
+    
+    const total = localStorage.getItem('total')
 
-  const ticketPrice = ticketPrices[ticketType] || 0;
-  const location = useLocation();
-  const { selectedCombos } = location.state || {};
-
-  let foodDetails = [];
-
-  if (selectedCombos && selectedCombos.length > 0) {
-    foodDetails = selectedCombos.map(({ nombre, descripcion, precio }) => ({
-      combo: nombre,
-      description: descripcion,
-      price: precio,
-    }));
-  }
-
-  const total =
-    ticketPrice * ticketQuantity +
-    foodDetails.reduce((acc, item) => acc + item.price, 0);
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    console.log('Entré al handlesubmit')
-
-    const transactionDetails = {
-      emailUser: emailUser,
-      movieName: movieName, 
-      date: movieDate, 
-      ticketType: ticketType, 
-      ticketQuantity: ticketQuantity, 
-      selectedSeats: selectedSeats,
-      foodDetails: [], 
-      boletas: "Boletas", 
-      total: total, 
-    };
-
-    try {
-      const response = await fetch("http://localhost:8000/api/transaction/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(transactionDetails),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+    
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+      const selectedCombos = JSON.parse(localStorage.getItem('selectedCombos')); // Using localStorage
+   
+   
+      let foodDetails = [];
+    
+      if (selectedCombos && selectedCombos.length > 0) {
+     
+        foodDetails = selectedCombos.map(combo => JSON.stringify(combo)); 
       }
-
-      const data = await response.json();
-
-      console.log(data);
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
+    
+      const transactionDetails = {
+        emailUser: emailUser,
+        movieName: movieName,
+        date: movieDate,
+        ticketType: ticketType,
+        ticketQuantity: ticketQuantity,
+        selectedSeats: selectedSeats,
+        foodDetails: foodDetails,
+        boletas: "Boletas",
+        total: total,
+      };
+   
+      try {
+        const response = await fetch("http://localhost:8000/api/transaction/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(transactionDetails),
+        });
+  
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+          
+        }else{
+          alert("tu pago fue exitoso ")
+          window.location.href = "/"
+        }
+  
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
 
   return (
     <>
@@ -317,6 +305,8 @@ export const CreditCard = () => {
 
           <input
             value="Realizar Pago"
+
+
             type="submit"
             className="btn text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
           />
