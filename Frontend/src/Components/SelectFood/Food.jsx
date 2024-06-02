@@ -21,7 +21,7 @@ function Food() {
     const storedCombos = JSON.parse(window.localStorage.getItem('selectedCombos')) || [];
     setSelectedCombos(storedCombos);
 
-    fetch('http://localhost:8000/api/allCombos')
+    fetch('/api/api/allCombos')
       .then(response => response.json())
       .then(data => {
         setCombos(data);

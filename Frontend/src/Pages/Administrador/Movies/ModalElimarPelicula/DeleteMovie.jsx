@@ -10,7 +10,7 @@ export function DeleteMovie({ movieId, onDeleteError }) {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:8000/api/${movieId}`);
+      await axios.delete(`/api/api/${movieId}`);
       setOpenModal(false); // Cerrar el modal después de eliminar la película
       setTimeout(() => {
         // Recargar la página para reflejar los cambios

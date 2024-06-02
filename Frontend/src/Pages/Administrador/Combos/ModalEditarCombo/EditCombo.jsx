@@ -13,7 +13,7 @@ const EditCombo = ({ comboId }) => {
   useEffect(() => {
     if (showModal) {
       // Realizar la solicitud para obtener los detalles de la combo
-      axios.get(`http://localhost:8000/api/combos/${comboId}`)
+      axios.get(`/api/api/combos/${comboId}`)
         .then(response => {
           setFormData(response.data); // Establecer los detalles de la combo en el estado del formulario
           setImageUrl(response.data.imageUrl); // Establecer imageUrl del estado
@@ -36,7 +36,7 @@ const EditCombo = ({ comboId }) => {
     e.preventDefault();
     try {
       // Realizar la solicitud de actualización con el ID de la combo
-      await axios.put(`http://localhost:8000/api/combos/${comboId}`, {
+      await axios.put(`/api/api/combos/${comboId}`, {
         ...formData,
         imageUrl,
       });

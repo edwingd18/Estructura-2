@@ -6,7 +6,7 @@ import { ModalLogin } from '../../Pages/Login/Login';
 import { useNavigate } from "react-router-dom";
 import { motion } from 'framer-motion';
 
-const URI = 'http://localhost:8000/api/allMovies';
+const URI = '/api/api/allMovies';
 
 function MovieInfo() {
   const [movie, setMovie] = useState(null);

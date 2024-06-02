@@ -29,7 +29,7 @@ export function ModalLogin({ showModal, toggleModal, context }) {
       password: password,
     };
 
-    fetch('http://localhost:8000/api/user/login', {
+    fetch('/api/api/user/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ export function ModalLogin({ showModal, toggleModal, context }) {
             window.location.reload();
           }, 1000);
 
-          fetch(`http://localhost:8000/api/user/${email}`, {
+          fetch(`/api/api/user/${email}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',

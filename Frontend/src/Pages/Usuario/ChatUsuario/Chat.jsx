@@ -8,7 +8,7 @@ const MovieChat = () => {
   const isAdmin = window.localStorage.getItem('isAdmin') === 'true';
 
   useEffect(() => {
-    const newSocket = socketIOClient('http://localhost:8000');
+    const newSocket = socketIOClient('/api/');
     setSocket(newSocket);
 
     newSocket.on('chat message', (message) => {

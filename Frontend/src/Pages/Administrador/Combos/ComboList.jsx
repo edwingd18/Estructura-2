@@ -7,7 +7,7 @@ import DeleteCombo from './ModalEliminarCombo/DeleteCombo';
 import EditCombo from './ModalEditarCombo/EditCombo';
 
 // const URI = 'http://backend.ftfjfagraqa2hwfs.eastus.azurecontainer.io:8000/api/combos/';
-const URI = 'http://localhost:8000/api/allCombos/';
+const URI = '/api/api/allCombos/';
 
 const ComboList = ({ combos, handleComboClick }) => {
   const [filter, setFilter] = useState('');

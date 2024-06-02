@@ -55,7 +55,7 @@ import { useState } from "react";
       };
    
       try {
-        const response = await fetch("http://localhost:8000/api/transaction/", {
+        const response = await fetch("/api/api/transaction/", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

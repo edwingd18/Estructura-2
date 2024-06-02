@@ -19,7 +19,7 @@ function SeatMap() {
   const columns = 12;
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/transaction/reservedSeats")
+    fetch("/api/api/transaction/reservedSeats")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");

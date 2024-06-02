@@ -10,7 +10,7 @@ export function DeleteCombo({ comboId, onDeleteError }) {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:8000/api/combo/${comboId}`);
+      await axios.delete(`/api/api/combo/${comboId}`);
       setOpenModal(false); // Cerrar el modal después de eliminar la película
       setTimeout(() => {
         // Recargar la página para reflejar los cambios

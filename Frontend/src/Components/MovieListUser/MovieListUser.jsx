@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import {motion} from 'framer-motion';
 
-const URI = 'http://localhost:8000/api/allMovies';
+const URI = '/api/api/allMovies';
 
 const MovieListUser = ({ movies, handleMovieClick }) => {
   const [filter, setFilter] = useState('');

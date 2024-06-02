@@ -53,7 +53,7 @@ const CreateMovie = () => {
     };
 
     try {
-      await axios.post('http://localhost:8000/api/crearPeli', formData);
+      await axios.post('/api/api/crearPeli', formData);
       console.log('Película guardada correctamente');
       setShowModal(false);
       setShowAlert(false);

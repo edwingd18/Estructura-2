@@ -45,7 +45,7 @@ const ShoppingCart = () => {
 
  const createPreference = async (total) => {
    try {
-     const response = await axios.post("http://localhost:8000/api/payment/create_preference", {
+     const response = await axios.post("/api/api/payment/create_preference", {
        title: "Compra de boletas de cine",
        quantity: 1,
        total: total,
@@ -59,7 +59,6 @@ const ShoppingCart = () => {
  };
 
  useEffect(() => {
-   const storedCombos = JSON.parse(window.localStorage.getItem('selectedCombos')) || [];
    const ticketQuantity = Number(window.localStorage.getItem('ticketQuantity'));
    const date = getLocalStorageItem('date');
    const movieName = getLocalStorageItem('movieName');
@@ -115,7 +114,6 @@ localStorage.setItem("total", total)
    updateStateAndPreference();
 
    setCartItems([
-     ...storedCombos,
      ...foodDetails,
      {
        combo: `Boleta (${ticketType})`,

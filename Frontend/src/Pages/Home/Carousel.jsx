@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 // const URI = 'http://backend.ftfjfagraqa2hwfs.eastus.azurecontainer.io:8000/api/allMovies'; const URI = '/api/allMovies';
-const URI = 'http://localhost:8000/api/allMovies';
+const URI = '/api/api/allMovies';
 
 const Carousel = () => {
   const [carouselItems, setCarouselItems] = useState([]);

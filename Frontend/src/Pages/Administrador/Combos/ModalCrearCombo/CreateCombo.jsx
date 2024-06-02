@@ -39,7 +39,7 @@ const CreateCombo
     };
 
     try {
-      await axios.post('http://localhost:8000/api/crearCombo', formData);
+      await axios.post('/api/api/crearCombo', formData);
       console.log('Combo guardado correctamente');
       setShowModal(false);
       setShowAlert(false);

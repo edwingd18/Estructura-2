@@ -45,7 +45,7 @@ export function ModalForm({ showModal, toggleModal }) {
         };
 
         // fetch('http://backend.ftfjfagraqa2hwfs.eastus.azurecontainer.io:8000/api/user', {
-        fetch('http://localhost:8000/api/user', {
+        fetch('/api/api/user', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

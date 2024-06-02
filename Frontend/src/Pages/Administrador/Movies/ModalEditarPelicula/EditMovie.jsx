@@ -18,7 +18,7 @@ const EditMovie = ({ movieId }) => {
     if (showModal) {
       setIsLoading(true);
       // Realizar la solicitud para obtener los detalles de la película
-      axios.get(`http://localhost:8000/api/movies/${movieId}`)
+      axios.get(`/api/api/movies/${movieId}`)
         .then(response => {
           setFormData(response.data); // Establecer los detalles de la película en el estado del formulario
           setImageUrl(response.data.imageUrl); // Establecer imageUrl del estado
@@ -45,7 +45,7 @@ const EditMovie = ({ movieId }) => {
     e.preventDefault();
     try {
       // Realizar la solicitud de actualización con el ID de la película
-      await axios.put(`http://localhost:8000/api/movies/${movieId}`, {
+      await axios.put(`/api/api/movies/${movieId}`, {
         ...formData,
         bannerUrl,
         imageUrl,
