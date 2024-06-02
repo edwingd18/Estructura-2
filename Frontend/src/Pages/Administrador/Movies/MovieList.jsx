@@ -73,7 +73,7 @@ const MovieList = ({ movies, handleMovieClick }) => {
                 }}
                 className="movie-image shadow-md opacity-100 rounded-md group-hover:opacity-50 transition-opacity duration-300 ease-linear"
               />
-              <div className='absolute flex flex-col top-[450px] left-[320px] items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
+              <div className='absolute flex flex-col top-[310px] left-[225px] items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
                 <div className='mb-2'>
                   <EditMovie movieId={movie._id} />
                 </div>
