@@ -118,6 +118,10 @@ body {
     background-color: #31c50b;
 }
 
+.seat.reserved {
+    background-color: red;
+  }
+
 /* Tipos de asientos */
 .seatTypes {
     display: flex;

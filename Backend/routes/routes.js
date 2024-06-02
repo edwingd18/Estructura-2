@@ -14,5 +14,4 @@ router.delete('/:id', deleteMovie);
 router.put('/movies/:id', updateMovie);
 router.get('/movies/:id', getMovieById);
 
-
 export default router;
