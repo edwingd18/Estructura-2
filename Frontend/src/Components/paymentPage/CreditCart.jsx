@@ -1,7 +1,7 @@
 import "./CreditCard.css";
 import cards from "./images/card_img.png";
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const CreditCard = () => {
   const [name, setName] = useState("Juan Miguel");
@@ -15,6 +15,8 @@ export const CreditCard = () => {
   const [month, setMonth] = useState("30");
   const [year, setYear] = useState("30");
   const [cvv, setCvv] = useState("123");
+
+  const navigate = useNavigate();
 
   const getLocalStorageItem = (key) =>
     window.localStorage.getItem(key).replace(/"/g, "").trim();
@@ -58,14 +60,14 @@ export const CreditCard = () => {
 
     const transactionDetails = {
       emailUser: emailUser,
-      movieName: movieName, 
-      date: movieDate, 
-      ticketType: ticketType, 
-      ticketQuantity: ticketQuantity, 
+      movieName: movieName,
+      date: movieDate,
+      ticketType: ticketType,
+      ticketQuantity: ticketQuantity,
       selectedSeats: selectedSeats,
-      foodDetails: [], 
-      boletas: "Boletas", 
-      total: total, 
+      foodDetails: [],
+      boletas: "Boletas",
+      total: total,
     };
 
     try {
@@ -81,7 +83,21 @@ export const CreditCard = () => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
+      setTimeout(() => {
+        alert("Transacción exitosa");
+      }, 2000);
+
       const data = await response.json();
+      // Eliminar los elementos uno por uno del localStorage
+      localStorage.removeItem('Quantity');
+      localStorage.removeItem('date');
+      localStorage.removeItem('movieId');
+      localStorage.removeItem('selectedCombos');
+      localStorage.removeItem('movieName');
+      localStorage.removeItem('ticketType');
+      localStorage.removeItem('selectedSeats');
+
+      navigate("/");
 
       console.log(data);
     } catch (error) {
