@@ -82,7 +82,7 @@ function MovieInfo() {
           <h1 className="movie-title sm:text-4xl md:text-4xl lg:text-5xl xl:text-5xl 2xl:text-7xl font-bold mb-9 max-w-screen-sm">
             {movie.title}
           </h1>
-          <p className="description sm:text-2xs text-lg mb-7 max-w-lg">
+          <p className="description sm:text-2xs text-lg mb-7 max-w-lg text-zinc-400">
             {movie.description}
           </p>
           <div className="mt-6">
@@ -96,11 +96,11 @@ function MovieInfo() {
             </p>
           </div>
           <div>
-            <p className="director sm:text-xs sm:mb-2 lg:text-sm 2xl:mb-7 2xl:text-lg rounded-full inline-block">
+            <p className="director sm:text-xs sm:mb-2 lg:text-sm 2xl:mb-7 2xl:text-lg rounded-full inline-block text-zinc-400">
               Director: {movie.director}
             </p>
           </div>
-          <p className="type sm:text-xs sm:mb-2 lg:text-sm 2xl:text-lg rounded-full">
+          <p className="type sm:text-xs sm:mb-2 lg:text-sm 2xl:text-lg rounded-full text-zinc-400">
             Tipo: {movie.type}
           </p>
           <div className="movie-format sm:text-xs sm:mb-2 lg:text-sm 2xl:py-2 2xl:text-lg inline-block rounded-full bg-red-600 text-white py-2 px-4 uppercase mr-4 2xl:mt-7">

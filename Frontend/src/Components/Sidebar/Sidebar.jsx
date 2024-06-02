@@ -234,7 +234,7 @@ function Sidebar() {
                 <>
                   <span className="text-white font-semibold ml-2 overflow-hidden text-ellipsis whitespace-nowrap">{username || "Usuario"}</span>
                   <div
-                    className="text-white font-semibold ml-2 overflow-hidden text-ellipsis whitespace-nowrap"
+                    className=" font-semibold ml-5 overflow-hidden text-ellipsis whitespace-nowrap bg-white rounded-md w-[129px]  pd-2 h-[30px]"
                     onClick={() => handleButtonClick(logout)}
                     style={{ cursor: "pointer" }}
                   >
@@ -243,7 +243,7 @@ function Sidebar() {
                 </>
               ) : (
                 <button
-                  className="text-black font-semibold ml-2 overflow-hidden text-ellipsis whitespace-nowrap bg-white rounded-2xl w-[130px] h-[40px]"
+                  className="text-black font-semibold ml-5 overflow-hidden text-ellipsis whitespace-nowrap bg-white rounded-md w-[130px] h-[40px]"
                   onClick={() => handleButtonClick(toggleModal)}
                   style={{ cursor: "pointer" }}
                 >

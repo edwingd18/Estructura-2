@@ -3,6 +3,7 @@ import cards from "./images/card_img.png";
 import { useState } from "react";
 
 
+
   export const CreditCard = () => {
     const [name, setName] = useState("Juan Miguel");
     const [emailUser, setEmailUser] = useState(localStorage.getItem("email"));
@@ -76,6 +77,7 @@ import { useState } from "react";
         console.error("Error:", error);
       }
     };
+
 
   return (
     <>
