@@ -38,8 +38,9 @@ export function ModalLogin({ showModal, toggleModal, context }) {
     })
       .then(response => response.json())
       .then(data => {
-        if (data.token) { 
+        if (data.token) {
           localStorage.setItem('jwt', data.token);
+          localStorage.setItem('email', email);
           setAlertMessage('Inicio de sesión exitoso.');
           setAlertType('success');
           setShowAlert(true);

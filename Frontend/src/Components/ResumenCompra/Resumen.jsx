@@ -7,6 +7,7 @@ import ProgressLine from '../ProgressLine/ProgressLine.jsx';
 import { useLocation } from 'react-router-dom';
 import './ResumenCompra.css';
 import { InfoPayment } from '../Info Payment/InfoPaymen.jsx';
+import { useNavigate } from 'react-router-dom';
 
 initMercadoPago('TEST-10a245c7-62ee-4f1f-aaaf-44390a520d67', {
   locale: 'es-CO',
@@ -25,10 +26,12 @@ const ResumenCompra = () => {
   const { from } = location.state || {};
   const { selectedCombos } = location.state || {};
 
+  const navigate = useNavigate();
 
   const [state, setState] = useState({
     preferenceId: null,
     resumen: {
+      emailUser: '',
       movieName: '',
       date: '',
       ticketType: '',
@@ -40,11 +43,40 @@ const ResumenCompra = () => {
     }
   });
 
+  // const handleBuy = async () => {
+  //   const id = await createPreference();
+  //   if (id) {
+  //     setState(prevState => ({ ...prevState, preferenceId: id }));
+  //   }
+  // };
+
+  // const createPreference = async () => {
+  //   try {
+  //     const { resumen } = state;
+
+  //     console.log("Enviando los siguientes datos:", {
+  //       title: resumen.movieName,
+  //       quantity: resumen.ticketQuantity,
+  //       total: resumen.total,
+  //     });
+
+  //     const response = await axios.post("http://localhost:8000/api/payment/create_preference", {
+  //       title: resumen.movieName,
+  //       quantity: resumen.ticketQuantity,
+  //       total: resumen.total,
+  //     });
+
+  //     const { id } = response.data;
+
+  //     return id;
+
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
   const handleBuy = async () => {
-    const id = await createPreference();
-    if (id) {
-      setState(prevState => ({ ...prevState, preferenceId: id }));
-    }
+    navigate('/paymant');
   };
 
   useEffect(() => {
@@ -97,24 +129,6 @@ const ResumenCompra = () => {
       setShowModal(true);
     }
   }, [selectedCombos, from]);
-
-  const createPreference = async () => {
-    try {
-      const { resumen } = state;
-      const response = await axios.post("http://localhost:8000/api/payment/create_preference", {
-        title: resumen.movieName,
-        quantity: resumen.ticketQuantity,
-        total: resumen.total,
-      });
-
-      const { id } = response.data;
-
-      return id;
-
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   return (
     <>
