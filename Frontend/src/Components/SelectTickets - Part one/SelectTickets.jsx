@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import ConfirmTickets from '../Modals/ConfirmTickets.jsx';
 import ProgressLine from '../ProgressLine/ProgressLine.jsx';
-import { motion } from 'framer-motion';
 
 // Función personalizada para agregar días a una fecha
 const addDays = (date, days) => {
@@ -89,16 +88,13 @@ function SelectTickets() {
                         />
                         </div>
                         <ConfirmTickets openModal={openModal} setOpenModal={setOpenModal} modalMessage={modalMessage} handleConfirm={handleConfirm} isError={isError} />
-                        <motion.button
-                                    className="buttonComidaSiguiente sm:text-sm sm:flex-col sm:h-9 text-white md:text-xs md:h-auto md:py-1.5 lg:text-sm lg:py-2 2xl:text-lg 2xl:w-[120px] 2xl:h-11 2xl:py-2  items-center mt-[20px] bg-blue-800 border rounded-full border-whiter  h-11 w-91  hover:bg-white hover:text-black hover:border-black py-2 px-4"
-                                    onClick={handleContinue}
-                                    whileHover={{ scale: 1.1 }}
-                                    whileTap={{ scale: 0.9 }}
-                                    transition={{ duration: 0.1 }}
-                                
-          >
+                        <Button
+                        color="blue" pill
+                         className="mt-4" onClick={handleContinue}
+                        >
+                            <HiShoppingCart className="mr-2 h-5 w-5" />
                             Siguiente
-                        </motion.button>
+                        </Button>
                     </div>
                 </div>
             </div>

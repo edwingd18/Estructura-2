@@ -10,6 +10,8 @@ import { FaUserLarge } from "react-icons/fa6";
 
 
 
+
+
 import { Link } from "react-router-dom";
 import ModalLogin from "../../Pages/Login/Login";
 import "./Sidebar.css";
@@ -224,7 +226,7 @@ function Sidebar() {
             </FlowbiteSidebar.Item>
           </FlowbiteSidebar.ItemGroup>
         </FlowbiteSidebar.Items>
-        <div className="flex items-center mb-4 w-full" style={{ paddingLeft: '25px', marginTop: "44vh" }}>
+        <div className="flex items-center mb-4 w-full" style={{ paddingLeft: '25px', marginTop: "46vh" }}>
           <div className="icon-container">
             <FaUserLarge  className="text-white" style={{ width: "30px", height: "30px" }} />
           </div>
@@ -233,17 +235,17 @@ function Sidebar() {
               {isLoggedIn ? (
                 <>
                   <span className="text-white font-semibold ml-2 overflow-hidden text-ellipsis whitespace-nowrap">{username || "Usuario"}</span>
-                  <div
-                    className=" font-semibold ml-5 overflow-hidden text-ellipsis whitespace-nowrap bg-white rounded-md w-[129px]  pd-2 h-[30px]"
+                  <button
+                    className="text-black bg-white font-semibold ml-3 overflow-hidden text-ellipsis whitespace-nowrap w-[130px] h-[40px] rounded-md "
                     onClick={() => handleButtonClick(logout)}
                     style={{ cursor: "pointer" }}
                   >
                     Cerrar sesión
-                  </div>
+                  </button>
                 </>
               ) : (
                 <button
-                  className="text-black font-semibold ml-5 overflow-hidden text-ellipsis whitespace-nowrap bg-white rounded-md w-[130px] h-[40px]"
+                  className="text-black ml-5 font-semibold soverflow-hidden text-ellipsis whitespace-nowrap  bg-white rounded-lg w-[130px] h-[40px]"
                   onClick={() => handleButtonClick(toggleModal)}
                   style={{ cursor: "pointer" }}
                 >

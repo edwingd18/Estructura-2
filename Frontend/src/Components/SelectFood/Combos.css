@@ -10,8 +10,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 300px; /* Ancho fijo para todas las tarjetas */
-    height: 450px; /* Altura fija para todas las tarjetas */
+    width: 250px; /* Ancho fijo para todas las tarjetas */
+    height: 380px; /* Altura fija para todas las tarjetas */
     border-radius: 15px;
     background-color: #e0d9df;
     flex-wrap: wrap;

@@ -1,10 +1,9 @@
 import "./SeatMap.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Button } from "flowbite-react";
 import ConfirmSeats from "../Modals/ConfirmSeats";
 import ProgressLine from "../ProgressLine/ProgressLine.jsx";
-import { motion } from 'framer-motion';
-
 
 function SeatMap() {
   const [selectedSeats, setSelectedSeats] = useState([]);
@@ -129,16 +128,12 @@ function SeatMap() {
           </div>
         </div>
         <div className="buttonContainer">
-          <motion.button
-                                    className="buttonComidaSiguiente sm:text-sm sm:flex-col sm:h-9 text-white md:text-xs md:h-auto md:py-1.5 lg:text-sm lg:py-2 2xl:text-lg 2xl:h-11 2xl:py-2  items-center bg-blue-800 border rounded-full border-whiter  h-11 w-91  hover:bg-white hover:text-black hover:border-black py-2 px-4"
-                                    onClick={handleNextClick}
-                                    whileHover={{ scale: 1.1 }}
-                                    whileTap={{ scale: 0.9 }}
-                                    transition={{ duration: 0.1 }}
-                                
-          >
+
+          <Button className=" btn-Siguiente" onClick={handleNextClick}
+          color={"blue"} pill>
+
             Siguiente
-          </motion.button>
+          </Button>
         </div>
       </div>
       <ConfirmSeats

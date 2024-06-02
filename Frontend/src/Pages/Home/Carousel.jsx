@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import MainCarousel from './MainCarousel';
@@ -8,6 +7,8 @@ import { Link } from 'react-router-dom';
 
 // const URI = 'http://backend.ftfjfagraqa2hwfs.eastus.azurecontainer.io:8000/api/allMovies'; const URI = '/api/allMovies';
 const URI = '/api/api/allMovies';
+
+
 
 const Carousel = () => {
   const [carouselItems, setCarouselItems] = useState([]);
@@ -32,7 +33,6 @@ const Carousel = () => {
 
   return (
     <motion.div
-
       className="contenedor-iconos"
       initial={{ opacity: 0, scale: 2 }}
       animate={{ opacity: 1, scale: 1 }}

@@ -38,7 +38,7 @@ body {
     border-radius: 25px;
     padding: 20px;
     gap: 20px;
-    height: 630px;
+    height: 500px;
     position: relative;
 }
 .SeatMapContainerxd {
@@ -50,9 +50,8 @@ body {
     border-radius: 25px;
     box-shadow: 0 3px 13px 1px rgba(0, 0, 0, 0.09);
     padding: 20px;
-    gap: 20px;
     width: 1020px;
-    height: 630px;
+    height: 500px;
     position: relative;
 }
 
@@ -66,6 +65,7 @@ body {
     border-radius: 25px;
     box-shadow: 0 3px 13px 1px rgba(0, 0, 0, 0.09);
     padding: 20px;
+    width: 500px;
 }
 
 /* Pantalla */
@@ -91,8 +91,8 @@ body {
 
 /* Asientos */
 .seat {
-    width: 1.5vw;
-    height: 1.5vw;
+    width: 1.7vw;
+    height: 1.7vw;
     background-color: white;
     border-radius: 50%;
     transition: .5s;
@@ -165,7 +165,3 @@ body {
     margin-top: auto;
 }
 
-/* Botón siguiente */
-.btn-Siguiente {
-    margin-top: 20px; /* Puedes ajustar este valor según sea necesario */
-}
