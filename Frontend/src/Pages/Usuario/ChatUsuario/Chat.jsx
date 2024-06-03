@@ -8,7 +8,9 @@ const MovieChat = () => {
   const isAdmin = window.localStorage.getItem('isAdmin') === 'true';
 
   useEffect(() => {
-    const newSocket = socketIOClient('/api/');
+    const newSocket = socketIOClient('http://backend.ftfjfagraqa2hwfs.eastus.azurecontainer.io:8000', {
+  path: '/api/socket.io' // El mismo subpath definido en el servidor
+});
     setSocket(newSocket);
 
     newSocket.on('chat message', (message) => {
